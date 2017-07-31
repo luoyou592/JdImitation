@@ -214,6 +214,7 @@
                 android:text="退换/售后"/>
 
             <TextView
+                android:id="@+id/tv_order"
                 android:textColor="@android:color/black"
 
                 android:textSize="10sp"

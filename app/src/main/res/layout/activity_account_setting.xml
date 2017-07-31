@@ -66,112 +66,282 @@
                     android:background="@mipmap/a5j"/>
             </RelativeLayout>
 
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="20dp"
-                android:drawablePadding="284dp"
-                android:drawableRight="@mipmap/a5j"
-                android:gravity="center_vertical"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"/>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_marginTop="10dp
+"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="会员俱乐部"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
 
-            <TextView
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="PLUS会员"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="292dp"/>
 
-            <TextView
+                <ImageView
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="小白信用"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
-            <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
-            <TextView
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="PLUS会员"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
 
-            <TextView
-                android:layout_marginTop="20dp"
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
 
-            <TextView
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
 
-            <TextView
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
+                <ImageView
+                    android:id="@+id/iv_plus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
 
-            <TextView
-                android:layout_marginTop="20dp"
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_plus"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
-            <TextView
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="小白信用"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
 
-                android:gravity="center_vertical"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="会员俱乐部"
-                android:textColor="@android:color/black"
-                android:layout_centerVertical="true"
-                android:drawableRight="@mipmap/a5j"
-                android:drawablePadding="284dp"/>
+
+
+                <ImageView
+                    android:id="@+id/iv_xb"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_xb"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="地址管理"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="增票资质"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_zp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_zp"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+
+
+
+
+
+
+
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="实名认证"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_sm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_sm"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="账户安全"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_accountSecu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_accountSecu"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="关联账号"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_marginTop="10dp"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="设置"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_setting"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_setting"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="我的定制"
+                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"/>
+
+
+
+                <ImageView
+                    android:id="@+id/iv_myself"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@mipmap/a5j"
+                    android:layout_centerVertical="true"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@id/iv_myself"
+                    android:text="详情"
+                    android:layout_marginRight="10dp"/>
+            </RelativeLayout>
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="退出登录"
+                android:background="@android:color/white"/>
         </LinearLayout>
 
 

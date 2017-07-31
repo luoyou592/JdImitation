@@ -1,5 +1,6 @@
 package com.young.jdmall.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,21 +13,22 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.utils.StreamUtil;
+import com.young.jdmall.bean.LoginInfoBean;
+import com.young.jdmall.network.JDMallService;
+import com.young.jdmall.network.NetworkManage;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
  *  创建者:   tiao
@@ -45,7 +47,8 @@ public class LoginActivity extends AppCompatActivity {
     private BufferedReader bfr;
     private static final String TAG = "LoginActivity";
     private FileOutputStream nameFos;
-    private String baseUrl = "http://localhost:8080/market/login";
+
+//    private String baseUrl = "http://localhost:8080/market/login";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -108,8 +111,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
-
-        //2.登录请求提交
+        loginBy(name, pwd);
+        /*//2.登录请求提交
         final String data = "name="+name+"&pwd="+pwd;
         //3.发起网络请求
         new Thread(new Runnable() {
@@ -141,9 +144,30 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
+
     }
 
+    public void loginBy(final String name, String password){
+        JDMallService jdMallService = NetworkManage.getJDMallService();
+        Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
+        loginCall.enqueue(new Callback<LoginInfoBean>() {
+            @Override
+            public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
+                Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent();
+                intent.putExtra("name", name);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+
+            @Override
+            public void onFailure(Call<LoginInfoBean> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @OnClick({R.id.iv_back, R.id.bt_login})
     public void onClick(View view) {
