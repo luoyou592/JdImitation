@@ -1,4 +1,4 @@
-package com.young.jdmall.ui.adaper;
+package com.young.jdmall.ui.adapter;
 
 import android.app.Activity;
 import android.graphics.Paint;

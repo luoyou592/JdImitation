@@ -14,7 +14,6 @@ import android.view.ViewGroup;
 import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.SettingAdapter;
 
-import net.lucode.hackware.magicindicator.FragmentContainerHelper;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;

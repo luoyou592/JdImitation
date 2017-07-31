@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.adaper.HomeRvAdapter;
+import com.young.jdmall.ui.adapter.HomeRvAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;

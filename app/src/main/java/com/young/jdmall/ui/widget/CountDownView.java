@@ -71,7 +71,12 @@ public class CountDownView extends RelativeLayout {
                     }
                 }
                 if (i == 2) {
-                    mTvtime3.setText(split[2]);
+                    if (split[2].length()==1){
+                        mTvtime3.setText("0"+split[2]);
+                    }else {
+                        mTvtime3.setText(split[2]);
+                    }
+
                 }
             }
             if (mTime > 0) {

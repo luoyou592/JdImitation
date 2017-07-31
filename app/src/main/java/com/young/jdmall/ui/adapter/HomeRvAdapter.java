@@ -1,4 +1,4 @@
-package com.young.jdmall.ui.adaper;
+package com.young.jdmall.ui.adapter;
 
 import android.app.Activity;
 import android.support.v4.view.ViewPager;
@@ -40,14 +40,6 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
     public HomeRvAdapter(Activity activity) {
         mActivity = activity;
     }
-
-    /*NoticeView noticeView = (NoticeView) mHomeView.findViewById(R.id.notice_view);
-            List<String> notices = new ArrayList<>();
-            notices.add("大促销下单拆福袋，亿万新年红包随便拿");
-            notices.add("家电五折团，抢十亿无门槛现金红包");
-            notices.add("星球大战剃须刀首发送200元代金券");
-            noticeView.addNotice(notices);
-            noticeView.startFlipping();*/
 
     @Override
     public int getItemViewType(int position) {

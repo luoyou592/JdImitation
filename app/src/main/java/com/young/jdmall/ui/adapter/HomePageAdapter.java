@@ -1,4 +1,4 @@
-package com.young.jdmall.ui.adaper;
+package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
