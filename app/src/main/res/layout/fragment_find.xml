@@ -7,27 +7,27 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
+        android:layout_height="80dp"
         android:background="@drawable/ano"
         android:orientation="vertical">
 
         <RelativeLayout
             android:id="@+id/container_title"
             android:layout_width="match_parent"
-            android:layout_height="45dp"
+            android:layout_height="40dp"
             android:background="@color/white">
 
 
             <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_centerInParent="true"
                 android:padding="10dp"
                 android:src="@drawable/akz"/>
 
             <ImageView
                 android:layout_width="40dp"
-                android:layout_height="45dp"
+                android:layout_height="40dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:padding="10dp"
@@ -65,13 +65,27 @@
                 android:layout_height="match_parent"
                 android:layout_marginRight="42dp"/>
 
+            <TextView
+                android:id="@+id/tab_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="42dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="10dp"
+                android:text="全部"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:visibility="gone"/>
+
             <RelativeLayout
+                android:id="@+id/select_tab"
                 android:layout_width="55dp"
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/aoj">
 
                 <ImageView
+                    android:id="@+id/tab_select_icon"
                     android:layout_width="18dp"
                     android:layout_height="9dp"
                     android:layout_alignParentRight="true"
@@ -85,9 +99,37 @@
 
     </LinearLayout>
 
-    <android.support.v4.view.ViewPager
-        android:id="@+id/view_pager"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent">
 
+        <android.support.v4.view.ViewPager
+            android:id="@+id/view_pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
+        <LinearLayout
+            android:id="@+id/tab_select_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:visibility="gone">
+
+            <GridView
+                android:id="@+id/tab_select_item_gv"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:numColumns="4"
+                android:padding="5dp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#33FFFFFF"
+                android:clickable="true"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </LinearLayout>
