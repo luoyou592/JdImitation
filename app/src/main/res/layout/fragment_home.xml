@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:orientation="horizontal"
+        android:padding="6dp"
+        android:background="#70ffffff"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="48dp">
+        <TextView
+            android:id="@+id/ib_sweep"
+            android:drawableTop="@mipmap/a9v"
+            android:text="扫啊扫"
+            android:textSize="10sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <EditText
+            android:id="@+id/et_search"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:hint="美的压力锅"
+            android:layout_margin="8dp"
+            android:background="@drawable/home_edti_search_bg"
+            android:paddingLeft="6dp"
+            android:drawableLeft="@mipmap/arp"
+            android:drawablePadding="6dp"
+            android:textSize="16sp"
+            android:layout_height="30dp"/>
+        <TextView
+            android:id="@+id/tv_news"
+            android:drawableTop="@mipmap/a90"
+            android:textSize="10sp"
+            android:text="消息"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+</RelativeLayout>
