@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:padding="2dp"
+              android:background="#ede8e8"
+              android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/left_goods_item"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/iv_left_pic"
+            android:src="@mipmap/goods2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:id="@+id/tv_left_title"
+            android:text="加肥加大身份似懂非懂积分递四方速递打发斯蒂芬发打发斯蒂芬斯蒂芬打发斯蒂"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_left_price"
+            android:textColor="@android:color/holo_red_dark"
+            android:text="￥82.9"
+            android:layout_centerVertical="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iv_left_small_pic"
+                android:src="@mipmap/b3f"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/right_goods_item"
+        android:orientation="vertical"
+        android:layout_width="0dp"
+        android:layout_marginLeft="4dp"
+        android:background="@android:color/white"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+        <ImageView
+            android:id="@+id/iv_right_pic"
+            android:src="@mipmap/goods2"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"/>
+
+        <TextView
+            android:id="@+id/tv_right_title"
+            android:text="加肥加大身份似懂非懂积分递四方速递打发斯蒂芬发打发斯蒂芬斯蒂芬打发斯蒂"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="6dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/tv_right_price"
+                android:textColor="@android:color/holo_red_dark"
+                android:text="￥82.9"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+            <ImageView
+                android:id="@+id/iv_right_small_pic"
+                android:src="@mipmap/b3f"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="8dp"
+                android:layout_alignParentRight="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

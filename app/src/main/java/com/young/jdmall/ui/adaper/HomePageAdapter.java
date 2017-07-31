@@ -2,9 +2,11 @@ package com.young.jdmall.ui.adaper;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+
+import com.young.jdmall.R;
 
 /**
  * Created by 25505 on 2017/7/30.
@@ -12,10 +14,8 @@ import android.widget.ImageView;
 
 public class HomePageAdapter extends PagerAdapter {
     private Context mContext;
-    private int[] mImags;
-    public HomePageAdapter(Context context, int[] imags){
+    public HomePageAdapter(Context context){
         mContext = context;
-        mImags = imags;
     }
     @Override
     public int getCount() {
@@ -30,14 +30,15 @@ public class HomePageAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        //保证条目索引都在0-2
-        position = position%3;
-
-        ImageView imageView = new ImageView(mContext);
-        imageView.setImageResource(mImags[position]);
-        imageView.setScaleType(ImageView.ScaleType.FIT_XY);
-        container.addView(imageView);
-        return imageView;
+        if (position==0){
+            View menu1 = LayoutInflater.from(mContext).inflate(R.layout.item_title_menu1, null);
+            container.addView(menu1);
+            return menu1;
+        }else{
+            View menu2 = LayoutInflater.from(mContext).inflate(R.layout.item_title_menu2, null);
+            container.addView(menu2);
+            return menu2;
+        }
     }
 
     @Override
