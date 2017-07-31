@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+              android:padding="8dp"
+               android:layout_height="match_parent"
+                android:orientation="horizontal">
+
+
+    <RelativeLayout
+        android:padding="8dp"
+        android:background="@android:color/white"
+        android:layout_height="260dp"
+        android:layout_weight="1"
+        android:layout_width="0dp">
+
+    <ImageView
+        android:id="@+id/goaway"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:src="@drawable/shop_car_go_away"
+        />
+    <ImageView
+        android:id="@+id/add"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/small_shopcar"
+        android:layout_marginBottom="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_alignParentBottom="true"
+        />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="4dp">
+
+        <ImageView
+            android:layout_gravity="center"
+            android:id="@+id/item_src"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:src="@mipmap/y5"
+            />
+
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/item_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="2"
+            android:text="啦啦啦啦啦啦大姐夫肯德基啦啦啦啦啦啦大姐夫肯德基阿卡丽阿卡丽房间等的发的发的顺丰"
+            android:textSize="12sp"/>
+
+        <TextView
+            android:id="@+id/item_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="¥139.00"
+            android:layout_marginTop="8dp"
+            android:textColor="@android:color/holo_red_light"
+            />
+    </LinearLayout>
+</RelativeLayout>
+
+    <RelativeLayout
+        android:padding="8dp"
+        android:layout_marginLeft="8dp"
+        android:background="@android:color/white"
+        android:layout_height="260dp"
+        android:layout_weight="1"
+        android:layout_width="0dp">
+
+        <ImageView
+            android:id="@+id/goaway_right"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_alignParentRight="true"
+            android:src="@drawable/shop_car_go_away"
+            />
+        <ImageView
+            android:id="@+id/add_right"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/small_shopcar"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_alignParentBottom="true"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="4dp">
+
+            <ImageView
+                android:layout_gravity="center"
+                android:id="@+id/item_src_right"
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@mipmap/y5"
+                />
+
+            <TextView
+                android:layout_marginTop="8dp"
+                android:id="@+id/item_desc_right"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:lines="2"
+                android:text="啦啦啦啦啦啦大姐夫肯德基啦啦啦啦啦啦大姐夫肯德基阿卡丽阿卡丽房间等的发的发的顺丰"
+                android:textSize="12sp"/>
+
+            <TextView
+                android:id="@+id/item_price_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="¥139.00"
+                android:layout_marginTop="8dp"
+                android:textColor="@android:color/holo_red_light"
+                />
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>

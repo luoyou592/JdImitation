@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent"
+              android:background="@android:color/white"
+              android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:id="@+id/login_item"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp">
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="30dp"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/login_shape"
+            android:gravity="center"
+            android:padding="4dp"
+            android:text="登  录"
+            android:textColor="#A8A8A8"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:layout_marginLeft="25dp"
+            android:layout_weight="3"
+            android:layout_width="0dp"
+            android:textSize="14sp"
+            android:textColor="#A8A8A8"
+            android:text="登录后同步电脑与手机购物车中的商品"
+            android:layout_height="match_parent"/>
+
+    </LinearLayout>
+
+
+    </RelativeLayout>
+    <View
+        android:background="#F1F2F6"
+        android:layout_width="match_parent"
+        android:layout_height="20dp"/>
+
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:padding="12dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:drawablePadding="8dp"
+            android:layout_gravity="center_horizontal"
+            android:drawableLeft="@mipmap/a8h"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="#CBCCCE"
+            android:text="购物车是空的"
+            />
+        <LinearLayout
+            android:layout_marginTop="24dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/sencond_kill"
+                android:padding="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="逛逛秒杀"
+                android:textSize="16sp"
+                android:gravity="center"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/login_shape"
+                />
+            <Button
+                android:id="@+id/check"
+                android:gravity="center"
+                android:padding="8dp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="查看关注"
+                android:textSize="16sp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/button_shape2"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <TextView
+        android:padding="12dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#F3F3F3"
+        android:text="为你推荐"
+        android:textSize="18sp"
+        />
+</LinearLayout>
