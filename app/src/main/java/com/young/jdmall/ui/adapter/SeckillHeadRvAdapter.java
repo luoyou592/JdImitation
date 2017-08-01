@@ -1,12 +1,16 @@
 package com.young.jdmall.ui.adapter;
 
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
+import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.ui.activity.SecKillActivity;
 
 import butterknife.BindView;
@@ -18,9 +22,11 @@ import butterknife.ButterKnife;
 
 public class SeckillHeadRvAdapter extends RecyclerView.Adapter {
     private SecKillActivity mActivity;
+    private BrandInfoBean mBrandInfoBean;
 
-    public SeckillHeadRvAdapter(SecKillActivity activity) {
+    public SeckillHeadRvAdapter(SecKillActivity activity, BrandInfoBean brandInfoBean) {
         mActivity = activity;
+        mBrandInfoBean = brandInfoBean;
     }
 
     @Override
@@ -31,12 +37,15 @@ public class SeckillHeadRvAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        ((SeckillHeadViewHolder)holder).bindView();
+        ((SeckillHeadViewHolder)holder).bindView(position);
     }
 
     @Override
     public int getItemCount() {
-        return 8;
+        if (mBrandInfoBean==null){
+            return 0;
+        }
+        return mBrandInfoBean.brand.get(4).getValue().size();  //取其中一个组图
     }
 
     class SeckillHeadViewHolder extends RecyclerView.ViewHolder {
@@ -48,8 +57,9 @@ public class SeckillHeadRvAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
 
-        public void bindView() {
-            
+        public void bindView(int position) {
+            Log.d("luoyou", "url"+mBrandInfoBean.brand.get(4).getValue().get(position).getPic());
+            Glide.with(mActivity).load(Constant.BASE_URL+mBrandInfoBean.brand.get(4).getValue().get(position).getPic()).into(mIvSeckillHeadImg);
         }
     }
 }

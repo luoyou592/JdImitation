@@ -10,8 +10,10 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.squareup.picasso.Picasso;
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
+import com.young.jdmall.ui.utils.PriceFormater;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -57,11 +59,12 @@ public class GoodsItemView extends RelativeLayout {
 
 
     public void setImagUrl(String url) {
-        Picasso.with(getContext()).load(url).into(mIvPic);
+        Glide.with(getContext()).load(Constant.BASE_URL+url).placeholder(R.mipmap.default_pic).into(mIvPic);
     }
 
-    public void setPrice(String price) {
-        mTvPrice.setText(price);
+    public void setPrice(int price) {
+        String priStr = PriceFormater.format(price);
+        mTvPrice.setText(priStr);
     }
 
 
@@ -71,7 +74,7 @@ public class GoodsItemView extends RelativeLayout {
 
 
     public void setSmallImagUrl(String url) {
-        Picasso.with(getContext()).load(url).into(mIvSmallPic);
+        Glide.with(getContext()).load(Constant.BASE_URL+url).placeholder(R.mipmap.default_pic).into(mIvSmallPic);
     }
 
     @OnClick(R.id.goods_item)

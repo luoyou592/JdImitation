@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.widget.CountDownView;
 
@@ -26,6 +27,7 @@ public class SeckillRvAdapter extends RecyclerView.Adapter {
     private boolean isFirst = true;  //控制重复调用倒计时
     private SecKillActivity mActivity;
     private long mTime;
+    private BrandInfoBean mBrandInfoBean;
 
     public SeckillRvAdapter(SecKillActivity activity, long time) {
         mActivity = activity;
@@ -66,6 +68,10 @@ public class SeckillRvAdapter extends RecyclerView.Adapter {
         return 15;
     }
 
+    public void setBrandData(BrandInfoBean brandInfoBean) {
+        mBrandInfoBean = brandInfoBean;
+    }
+
     class HeadViewHolder extends RecyclerView.ViewHolder {
        @BindView(R.id.seckill_head_recycler_view)
        RecyclerView mSeckillHeadRecyclerView;
@@ -85,7 +91,7 @@ public class SeckillRvAdapter extends RecyclerView.Adapter {
                 isFirst = false;
             }
             mSeckillHeadRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayoutManager.HORIZONTAL,false));
-            SeckillHeadRvAdapter headRvAdapter = new SeckillHeadRvAdapter(mActivity);
+            SeckillHeadRvAdapter headRvAdapter = new SeckillHeadRvAdapter(mActivity,mBrandInfoBean);
             mSeckillHeadRecyclerView.setAdapter(headRvAdapter);
 
         }
