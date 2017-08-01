@@ -1,6 +1,5 @@
 package com.young.jdmall.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +15,8 @@ import com.young.jdmall.R;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.network.JDMallService;
 import com.young.jdmall.network.NetworkManage;
+import com.young.jdmall.ui.fragment.MyFragment;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -47,14 +48,16 @@ public class LoginActivity extends AppCompatActivity {
     private BufferedReader bfr;
     private static final String TAG = "LoginActivity";
     private FileOutputStream nameFos;
-
-//    private String baseUrl = "http://localhost:8080/market/login";
+    public static int LOGIN_STATE = -1;
+    private MyFragment mMyFragment;
+    //    private String baseUrl = "http://localhost:8080/market/login";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        mMyFragment = new MyFragment();
         //设置保存的用户名
         try {
             File nameFile = new File(getFilesDir(), "name.txt");
@@ -155,10 +158,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
                 Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
-
-                Intent intent = new Intent();
-                intent.putExtra("name", name);
-                setResult(RESULT_OK, intent);
+//                Log.d(TAG, "onResponse: " + response.body().getUserInfo().getUserid());
+                PreferenceUtils.setUserName(LoginActivity.this, name);
                 finish();
             }
 

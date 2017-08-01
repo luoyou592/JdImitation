@@ -1,9 +1,13 @@
 package com.young.jdmall.ui.fragment;
 
+import android.animation.ArgbEvaluator;
 import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,17 +16,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.activity.AccountSetting;
+import com.young.jdmall.ui.activity.AccountSettingActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
-import com.young.jdmall.ui.activity.MessageActivity;
-import com.young.jdmall.ui.activity.OrderActivity;
+import com.young.jdmall.ui.adapter.MyRvAdapter;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
 
-import static android.app.Activity.RESULT_OK;
+import static android.content.ContentValues.TAG;
 
 /**
  * Created by 钟志鹏 on 2017/7/30.
@@ -30,33 +34,21 @@ import static android.app.Activity.RESULT_OK;
 
 public class MyFragment extends Fragment {
 
-    private static final int REQUEST = 100;
+
+    @BindView(R.id.rv_user)
+    RecyclerView mRvUser;
+    @BindView(R.id.iv_user)
+    ImageView mIvUser;
     @BindView(R.id.iv_message)
     ImageView mIvMessage;
     @BindView(R.id.iv_setting)
     ImageView mIvSetting;
-    @BindView(R.id.iv_signOrReg)
-    ImageView mIvSignOrReg;
-    @BindView(R.id.rl_signOrReg)
-    RelativeLayout mRlSignOrReg;
+    @BindView(R.id.ll_title_container)
+    RelativeLayout mLlTitleContainer;
     Unbinder unbinder;
-    @BindView(R.id.textView3)
-    TextView mTextView3;
-    @BindView(R.id.textView2)
-    TextView mTextView2;
-    @BindView(R.id.iv_message_sign)
-    ImageView mIvMessageSign;
-    @BindView(R.id.iv_setting_sign)
-    ImageView mIvSettingSign;
-    @BindView(R.id.iv_signOk)
-    ImageView mIvSignOk;
-    @BindView(R.id.tv_username)
-    TextView mTvUsername;
-    @BindView(R.id.rl_signOk)
-    RelativeLayout mRlSignOk;
-    @BindView(R.id.tv_order)
-    TextView mTvOrder;
-
+    @BindView(R.id.tv_myself)
+    TextView mTvMyself;
+    public MyRvAdapter mMyRvAdapter;
 
     @Nullable
     @Override
@@ -65,9 +57,67 @@ public class MyFragment extends Fragment {
 //        textView.setText("我的");
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
+        mRvUser.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mMyRvAdapter = new MyRvAdapter(getActivity());
+        mArgbEvaluator = new ArgbEvaluator();
+        mRvUser.setAdapter(mMyRvAdapter);
         return view;
     }
 
+
+    private void login() {
+        Intent intent = new Intent(getActivity(), LoginActivity.class);
+        startActivity(intent);
+    }
+
+    ArgbEvaluator mArgbEvaluator;
+    int sumY;
+    float distance = 280.0f;
+    int start = 0x00000000;
+    int end = 0X77FFFFFF;
+    int bgColor;
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+//        testData();
+        mRvUser.setOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                sumY += dy;
+//                float percent = sumY / distance;
+
+                if (sumY <= 0) {
+                    bgColor = start;
+                } else if (sumY >= distance) {
+                    bgColor = end;
+                } else {
+
+                    bgColor = (int) mArgbEvaluator.evaluate(sumY / distance, start, end);
+                }
+                mLlTitleContainer.setBackgroundColor(bgColor);
+                if (bgColor == (int) mArgbEvaluator.evaluate(1, start, end)) {
+
+                    mIvSetting.setBackgroundResource(R.mipmap.a93);
+                    mIvMessage.setBackgroundResource(R.mipmap.a90);
+                    mIvUser.setVisibility(View.VISIBLE);
+                    mTvMyself.setVisibility(View.VISIBLE);
+                } else if (sumY >= 0 && sumY < distance) {
+                    mIvSetting.setBackgroundResource(R.mipmap.a95);
+                    mIvMessage.setBackgroundResource(R.mipmap.a92);
+                    mIvUser.setVisibility(View.INVISIBLE);
+                    mTvMyself.setVisibility(View.INVISIBLE);
+                }
+            }
+        });
+    }
 
     @Override
     public void onDestroyView() {
@@ -75,43 +125,43 @@ public class MyFragment extends Fragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.iv_message, R.id.iv_setting, R.id.iv_signOrReg, R.id.rl_signOrReg, R.id.tv_order})
+    @OnClick({R.id.iv_user, R.id.iv_message, R.id.iv_setting})
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.iv_message:
-                Intent intent = new Intent(getActivity(), MessageActivity.class);
+            case R.id.iv_user:
+                Intent intent = new Intent(getActivity(), AccountSettingActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.iv_message:
+                break;
             case R.id.iv_setting:
-                Intent intent2 = new Intent(getActivity(), AccountSetting.class);
-                startActivity(intent2);
-                break;
-            case R.id.iv_signOrReg:
-                break;
-            case R.id.rl_signOrReg:
-                Intent intent4 = new Intent(getActivity(), LoginActivity.class);
-                startActivity(intent4);
-                break;
-            case R.id.tv_order:
-                Intent intent5 = new Intent(getActivity(), OrderActivity.class);
-                startActivity(intent5);
+                Intent intent3 = new Intent(getActivity(), AccountSettingActivity.class);
+                startActivity(intent3);
                 break;
         }
     }
 
-    private void login() {
-        Intent intent = new Intent(getActivity(), LoginActivity.class);
-        startActivityForResult(intent, REQUEST);
-    }
+/*    private List<String> mDatas = new ArrayList<>();
+    private void testData() {
+        for (int i = 0; i < 100; i++) {
+            mDatas.add("我是条目:" + i);
+        }
+        mHomeRvAdapter.setDatas(mDatas);
+//        mHomeFragmentPresenter.loadHomeInfo();
+    }*/
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (resultCode == RESULT_OK && requestCode == REQUEST) {
-            String name = data.getStringExtra("name");
-            mRlSignOrReg.setVisibility(View.GONE);
-            mRlSignOk.setVisibility(View.VISIBLE);
-            mTvUsername.setText(name);
-        }
+    public void onStart() {
+//        if(!"-1".equals(JDMallApplication.sUser.getUserInfo().getUserid())){
+//            mMyRvAdapter.setUserInfoBean(JDMallApplication.sUser.getUserInfo());
+//
+//        }
+        super.onStart();
+        Log.d(TAG, "onStart: ++++++++++++++++++++++++");
+        String userName = PreferenceUtils.getUserName(getActivity());
+
+            mMyRvAdapter.setUsers(userName);
+
     }
+
 }

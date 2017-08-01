@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:padding="14dp">
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/a_8"
@@ -40,7 +41,7 @@
 
 
         <Button
-
+            android:id="@+id/bt_add_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="新建地址"

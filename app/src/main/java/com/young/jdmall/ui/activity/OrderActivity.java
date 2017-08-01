@@ -30,6 +30,10 @@ public class OrderActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         mViewPager.setAdapter(new OrderAdapter(getSupportFragmentManager(), mTitles));
         mTabLayout.setupWithViewPager(mViewPager);
+        initPosition();
+    }
+
+    private void initPosition() {
 
     }
 }

@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:fitsSystemWindows="true"
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
@@ -8,6 +9,7 @@
         android:layout_height="wrap_content"
         android:padding="14dp">
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/a_8"
@@ -24,7 +26,7 @@
     </RelativeLayout>
 
     <ScrollView
-
+        android:background="#E5E5E5"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentTop="true"
@@ -33,45 +35,48 @@
 
         <LinearLayout
             android:orientation="vertical"
-            android:padding="10dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
             <RelativeLayout
-                android:layout_marginTop="60dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:padding="10dp">
 
                 <ImageView
                     android:id="@+id/iv_signOrReg"
-                    android:layout_centerVertical="true"
-                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
                     android:background="@mipmap/b17"/>
 
                 <TextView
-                    android:layout_marginLeft="10dp"
+                    android:id="@+id/tv_user"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="登录/注册"
-                    android:textColor="@android:color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="10dp"
                     android:layout_toRightOf="@id/iv_signOrReg"
-                    android:layout_centerVertical="true"/>
+                    android:text="登录/注册"
+                    android:textColor="@android:color/black"/>
 
                 <ImageView
-                    android:layout_centerVertical="true"
-                    android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@mipmap/a5j"/>
             </RelativeLayout>
 
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
-                    android:layout_marginTop="10dp
-"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="会员俱乐部"
@@ -90,16 +95,21 @@
 
 
             </RelativeLayout>
+
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignParentTop="true"
                     android:text="PLUS会员"
-                    android:textColor="@android:color/black"
-                    android:layout_centerVertical="true"/>
-
+                    android:textColor="@android:color/black"/>
 
 
                 <ImageView
@@ -107,18 +117,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/a5j"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/a5j"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_plus"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -138,18 +145,17 @@
                     android:background="@mipmap/a5j"
                     android:layout_centerVertical="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_xb"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
 
             <RelativeLayout
+                android:id="@+id/rl_address"
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="地址管理"
@@ -169,9 +175,12 @@
 
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
+
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="增票资质"
@@ -188,12 +197,7 @@
                     android:background="@mipmap/a5j"
                     android:layout_centerVertical="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_zp"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
 
 
@@ -204,6 +208,8 @@
 
 
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_marginTop="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -224,14 +230,11 @@
                     android:background="@mipmap/a5j"
                     android:layout_centerVertical="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_sm"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -251,14 +254,11 @@
                     android:background="@mipmap/a5j"
                     android:layout_centerVertical="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_accountSecu"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -275,14 +275,16 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:background="@mipmap/a5j"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:id="@+id/imageView"/>
 
 
             </RelativeLayout>
 
             <RelativeLayout
                 android:layout_marginTop="10dp"
-
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
                 <TextView
@@ -302,23 +304,21 @@
                     android:background="@mipmap/a5j"
                     android:layout_centerVertical="true"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_setting"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
+
             <RelativeLayout
+                android:background="@color/white"
+                android:padding="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="我的定制"
-                    android:textColor="@android:color/black"
-                    android:layout_centerVertical="true"/>
-
+                    android:textColor="@android:color/black"/>
 
 
                 <ImageView
@@ -326,18 +326,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:background="@mipmap/a5j"
-                    android:layout_centerVertical="true"/>
+                    android:layout_centerVertical="true"
+                    android:background="@mipmap/a5j"/>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_toLeftOf="@id/iv_myself"
-                    android:text="详情"
-                    android:layout_marginRight="10dp"/>
+
             </RelativeLayout>
 
             <Button
+                android:id="@+id/bt_unregist"
+                android:visibility="gone"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="退出登录"
@@ -347,4 +346,4 @@
 
     </ScrollView>
 
-</RelativeLayout>
+</LinearLayout>

@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity"/>
-        <activity android:name=".ui.activity.AccountSetting"/>
+        <activity android:name=".ui.activity.AccountSettingActivity"/>
         <activity android:name=".ui.activity.CalendarActivity"/>
         <activity android:name=".ui.activity.MessageActivity"/>
         <activity android:name=".ui.activity.OrderActivity"/>
