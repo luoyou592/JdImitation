@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+                android:padding="6dp"
+              android:layout_height="90dp">
+
+    <ImageView
+        android:id="@+id/iv_seckill_img"
+        android:src="@mipmap/goods1"
+        android:layout_width="90dp"
+        android:layout_height="85dp"/>
+    <LinearLayout
+        android:layout_toRightOf="@id/iv_seckill_img"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <TextView
+        android:layout_toRightOf="@id/iv_seckill_img"
+        android:text="减肥的减肥is东方今典司法解释地方就是的大嫁风尚党风建设"
+        android:ellipsize="end"
+        android:textColor="@android:color/black"
+        android:maxLines="2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+        <TextView
+            android:id="@+id/tv_seckill_price"
+            android:layout_toRightOf="@id/iv_seckill_img"
+            android:layout_marginTop="10dp"
+            android:text="￥118"
+            android:textColor="@android:color/holo_red_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+
+    <TextView
+        android:layout_toRightOf="@id/iv_seckill_img"
+        android:text="￥199"
+        android:textSize="12sp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    </LinearLayout>
+    <TextView
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="6dp"
+        android:layout_marginBottom="6dp"
+        android:text="立即抢购"
+        android:background="@android:color/holo_red_dark"
+        android:textColor="@color/white"
+        android:layout_width="80dp"
+        android:gravity="center"
+        android:layout_height="30dp"/>
+</RelativeLayout>

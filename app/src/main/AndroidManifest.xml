@@ -20,6 +20,8 @@
         <activity android:name=".ui.activity.LoginActivity"/>
         <activity android:name=".ui.activity.AccountSetting"/>
         <activity android:name=".ui.activity.CalendarActivity"/>
+        <activity android:name=".ui.activity.SecKillActivity"/>
+        <activity android:name=".ui.activity.CustomServiceActivity"/>
     </application>
 
 </manifest>

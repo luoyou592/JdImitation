@@ -2,9 +2,10 @@ package com.young.jdmall.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.CustomServiceActivity;
 import com.young.jdmall.ui.adapter.HomeRvAdapter;
 
 import butterknife.BindView;
@@ -57,11 +59,29 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
-        mRvHome.setLayoutManager(new LinearLayoutManager(getActivity()));
+        //mRvHome.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager manager = new GridLayoutManager(getActivity(),2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position>1?1:2;
+            }
+        });
+        mRvHome.setLayoutManager(manager);
+
         mHomeRvAdapter = new HomeRvAdapter(getActivity());
         mRvHome.setAdapter(mHomeRvAdapter);
         mEvaluator = new ArgbEvaluator();
+
         statusBarAplaChange();
+        mTvMsg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), CustomServiceActivity.class);
+                getActivity().startActivity(intent);
+
+            }
+        });
     }
     private void statusBarAplaChange() {
         //监听recyclerview移动距离来设置透明度

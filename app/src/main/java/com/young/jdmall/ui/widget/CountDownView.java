@@ -40,6 +40,10 @@ public class CountDownView extends RelativeLayout {
     }
     //开启
     public void startCountDown() {
+        //防止bindView不断刷新重复启动runnable
+        if (runnable!=null){
+            mHandler.removeCallbacks(runnable);
+        }
         mHandler.postDelayed(runnable, 1000);
     }
     public void stopCountDown(){
@@ -84,6 +88,9 @@ public class CountDownView extends RelativeLayout {
             }
         }
     };
+    public long getTime(){
+        return mTime;
+    }
     public  String formatLongToTimeStr(Long l) {
         int hour = 0;
         int minute = 0;
@@ -100,6 +107,5 @@ public class CountDownView extends RelativeLayout {
         }
         String strtime = hour+"："+minute+"："+second;
         return strtime;
-
     }
 }

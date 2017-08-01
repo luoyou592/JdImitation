@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.SecKillActivity;
+import com.young.jdmall.ui.widget.CountDownView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,11 +26,13 @@ public class FlashRvAdapter extends RecyclerView.Adapter {
     private static final int TYPE_NORMAL = 0;
     private static final int TYPE_LAST = 1;
     private Activity mActivity;
+    private CountDownView mCountDownView;
 
-    public FlashRvAdapter(Activity activity) {
+    //countDownview，為了传当前倒计时
+    public FlashRvAdapter(Activity activity, CountDownView countDownView) {
         mActivity = activity;
+        mCountDownView = countDownView;
     }
-
     @Override
     public int getItemViewType(int position) {
         // TODO: 2017/7/31
@@ -74,6 +79,14 @@ public class FlashRvAdapter extends RecyclerView.Adapter {
         GoodsViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, SecKillActivity.class);
+                    intent.putExtra("time",mCountDownView.getTime());
+                    mActivity.startActivity(intent);
+                }
+            });
         }
 
         public void bindView() {
@@ -89,6 +102,14 @@ public class FlashRvAdapter extends RecyclerView.Adapter {
         LastViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, SecKillActivity.class);
+                    intent.putExtra("time",mCountDownView.getTime());
+                    mActivity.startActivity(intent);
+                }
+            });
         }
 
         public void bindView() {

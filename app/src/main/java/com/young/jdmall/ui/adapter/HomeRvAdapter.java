@@ -1,9 +1,11 @@
 package com.young.jdmall.ui.adapter;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.LinearLayout;
 import com.daimajia.slider.library.SliderLayout;
 import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.widget.CountDownView;
 import com.young.jdmall.ui.widget.CricleIndicatorView;
 import com.young.jdmall.ui.widget.GoodsItemView;
@@ -60,7 +63,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             return new TitleViewHolder(titleView);
         } else if (viewType== TYPE_NORMAL_HEAD){
             ImageView imageView = new ImageView(mActivity);
-            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+            ViewGroup.LayoutParams params = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, 90);
             imageView.setLayoutParams(params);
             imageView.setImageResource(R.mipmap.tuijian);
             return new HeadViewHolder(imageView);
@@ -70,6 +73,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             return new NormalViewHolder(normalView);
         }
     }
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -100,6 +104,8 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
         RecyclerView mFlashRecyclerView;
         @BindView(R.id.count_down_view)
         CountDownView mCountDownView;
+        @BindView(R.id.seckill_container)
+        LinearLayout mSeckillContainer;
 
         TitleViewHolder(View view) {
             super(view);
@@ -126,11 +132,22 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             mIndicatorView.setViewPage(mHomeVp);
             //内嵌recycleview适配器
             mFlashRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayout.HORIZONTAL,false));
-            FlashRvAdapter flashRvAdapter = new FlashRvAdapter(mActivity);
+            FlashRvAdapter flashRvAdapter = new FlashRvAdapter(mActivity,mCountDownView);
             mFlashRecyclerView.setAdapter(flashRvAdapter);
             //倒计时开启
-            mCountDownView.setTime(15000);
+            mCountDownView.setTime(1500);
             mCountDownView.startCountDown();
+            mSeckillContainer.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, SecKillActivity.class);
+                    long time = mCountDownView.getTime();
+                    Log.d("luoyou", "time"+time);
+                    intent.putExtra("time", time);
+                    mActivity.startActivity(intent);
+                }
+            });
+
         }
     }
 

@@ -8,5 +8,12 @@
         <item name="colorAccent">@color/colorAccent</item>
 
     </style>
+    <style name="CustomWindowTitleBackground">
+        <item name="android:background">@mipmap/titlebackground</item>
+    </style>
+    <style name="MyTheme" parent="android:Theme">
+        <item name="android:windowTitleSize">40dp</item>
+        <item  name="android:windowTitleBackgroundStyle">@style/CustomWindowTitleBackground</item>
+    </style>
 
 </resources>
