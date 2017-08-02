@@ -82,8 +82,7 @@
                     android:layout_height="wrap_content"
                     android:background="@null"
                     android:hint="请输入密码"
-                    android:drawableRight="@mipmap/ahg"
-                    android:drawablePadding="150dp"/>
+                    />
 
             </LinearLayout>
 

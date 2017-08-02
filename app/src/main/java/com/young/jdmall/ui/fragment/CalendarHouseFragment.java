@@ -1,4 +1,4 @@
-package com.young.jdmall.ui.adapter;
+package com.young.jdmall.ui.fragment;
 
 import android.support.v4.app.Fragment;
 
@@ -7,5 +7,5 @@ import android.support.v4.app.Fragment;
  *  创建时间:  2017/7/30 0030 21:43
  *  描述：    TODO
  */
-public class CalendarALLFragment extends Fragment {
+public class CalendarHouseFragment extends Fragment {
 }
