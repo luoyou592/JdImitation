@@ -22,7 +22,7 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     // TODO: 2017/7/30 这里是假数据待替换；
-    private String [] mTitle=new String[]{"数码","服装","图书","百货","食品","干货","数码","服装","图书","百货","食品","干货","数码","服装","图书","百货","食品","干货","干货","数码","服装","图书","百货","食品","干货"};
+    private String [] mTitle=new String[]{"妈妈专区","时尚女装","宝宝用品","日常用品","儿童服饰","儿童玩具","妈妈专区","时尚女装","宝宝用品","日常用品","儿童服饰","儿童玩具","妈妈专区","时尚女装","宝宝用品","日常用品","儿童服饰","儿童玩具","妈妈专区","时尚女装","宝宝用品","日常用品","儿童服饰","儿童玩具"};
     private final CategoryFragment mFragment;
     private int mSelectindex;
 
@@ -83,8 +83,6 @@ public class CategoryLeftAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
                     mSelectindex=mPosition;
                    mFragment.selectFragment(mPosition);
-
-
 //                    mFragment.mCategoryLeftList.smoothScrollBy();
 
                     notifyDataSetChanged();

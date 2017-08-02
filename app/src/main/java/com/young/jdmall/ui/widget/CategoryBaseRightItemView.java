@@ -3,6 +3,7 @@ package com.young.jdmall.ui.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,7 +13,7 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
-import com.young.jdmall.bean.TestBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 
 import java.util.List;
 
@@ -46,8 +47,9 @@ public class CategoryBaseRightItemView extends LinearLayout {
 
     }
 
-    public void bind(int position, List<TestBean> dataList) {
+    public void bind(int position, List<CategoryBaseBean> dataList) {
         mViewBaseTitle.setText(dataList.get(position).getTitle());
+
 
         mTableLayout.removeAllViews();
         int tableRowWidth = getResources().getDisplayMetrics().widthPixels - mTableLayout.getPaddingLeft() - mTableLayout.getPaddingRight();
@@ -55,28 +57,32 @@ public class CategoryBaseRightItemView extends LinearLayout {
         int infoItemWidth = tableRowWidth / 4;
         TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(infoItemWidth, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        //遍历数据
-        for (int i = 0; i < dataList.get(position).getNameList().size(); i++) {
-            String name = dataList.get(position).getNameList().get(i).getName();
+        List<CategoryBaseBean.CategoryBean> category = dataList.get(position).getCategory();
 
+
+        //遍历数据
+        for (int i = 0; i < category.size(); i++) {
+            CategoryBaseBean.CategoryBean categoryBean = category.get(i);
+
+            Log.d(TAG, "bind: 添加");
             //创建一行
             TableRow tableRow = new TableRow(getContext());
 
             //添加一个
             CategoryBaseRightItemInfoView baseItemInfoView1 = new CategoryBaseRightItemInfoView(getContext());
-            baseItemInfoView1.bindView(name);
+            baseItemInfoView1.bindView(categoryBean);
             baseItemInfoView1.setLayoutParams(layoutParams);
             tableRow.addView(baseItemInfoView1);
 
             //添加一个
             CategoryBaseRightItemInfoView baseItemInfoView2 = new CategoryBaseRightItemInfoView(getContext());
-            baseItemInfoView2.bindView(name);
+            baseItemInfoView2.bindView(categoryBean);
             baseItemInfoView2.setLayoutParams(layoutParams);
             tableRow.addView(baseItemInfoView2);
 
             //添加一个
             CategoryBaseRightItemInfoView baseItemInfoView3 = new CategoryBaseRightItemInfoView(getContext());
-            baseItemInfoView3.bindView(name);
+            baseItemInfoView3.bindView(categoryBean);
             baseItemInfoView3.setLayoutParams(layoutParams);
             tableRow.addView(baseItemInfoView3);
 

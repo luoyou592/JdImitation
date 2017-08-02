@@ -1,7 +1,7 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
-import com.young.jdmall.bean.CategoryBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
@@ -48,5 +48,5 @@ public interface JDMallService {
     Observable<BrandInfoBean> listBrand();
 
     @GET("category")
-    Observable<CategoryBean> listCategory();
+    Observable<CategoryBaseBean> listCategory();
 }

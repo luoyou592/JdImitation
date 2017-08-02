@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -11,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.ui.activity.TypeListActivity;
 
 import butterknife.BindView;
@@ -43,8 +45,10 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
 
     }
 
-    public void bindView(String dataList) {
-        mItemInfoText.setText(dataList);
+    public void bindView(CategoryBaseBean.CategoryBean data) {
+        Log.d(TAG, "bindView: 跑到这里,有数据?" + data.getName());
+        mItemInfoText.setText(data.getName());
+
 
         mItemInfo.setOnClickListener(new OnClickListener() {
             @Override

@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.young.jdmall.R;
-import com.young.jdmall.bean.CategoryBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.CategoryLeftAdapter;
@@ -41,7 +41,7 @@ public class CategoryFragment extends BaseFragment {
     FrameLayout mCategoryRightContains;
     private Context mContext;
     private CategoryLeftAdapter mCategoryLeftAdapter;
-
+    private CategoryBaseBean mCategoryBean;
     private List<CategoryBaseRightListFragment> fragments = new ArrayList();
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -51,49 +51,21 @@ public class CategoryFragment extends BaseFragment {
         View rootview = LayoutInflater.from(getContext()).inflate(R.layout.catecary_fragment, null);
         ButterKnife.bind(this, rootview);
         mContext = getContext();
-        initFragment();
         init();
-        initRightContains();
         //默认选中第0个
-        selectFragment(0);
+
 
         return rootview;
     }
 
     private void initFragment() {
-        for (int i = 0; i < 25; i++) {
-            fragments.add(new WomanDressFragment(i));
+        //初始化Fragment
+        for (int i = 0; i < 24; i++) {
+            fragments.add(new WomanDressFragment(mCategoryBean,i));
         }
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
-//        fragments.add(new WomanDressFragment());
 
     }
 
-    private void initRightContains() {
-        //  selectFragment();
-    }
 
     private int lastcheck = 0;
 
@@ -122,7 +94,8 @@ public class CategoryFragment extends BaseFragment {
     private void init() {
         //加载网络数据
         loadNetwork();
-        
+
+
         //RecyclerView的初始化
         mCategoryLeftList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -132,11 +105,19 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void loadNetwork() {
-        Observable<CategoryBean> categoryObservable = RetrofitFactory.getInstance().listCategory();
-        categoryObservable.compose(compose(this.<CategoryBean>bindToLifecycle())).subscribe(new BaseObserver<CategoryBean>(getActivity()) {
+        Observable<CategoryBaseBean> categoryObservable = RetrofitFactory.getInstance().listCategory();
+
+        categoryObservable.compose(compose(this.<CategoryBaseBean>bindToLifecycle())).subscribe(new BaseObserver<CategoryBaseBean>(getActivity()) {
+
             @Override
-            protected void onHandleSuccess(CategoryBean categoryBean) {
-                Log.d(TAG, "onHandleSuccess: 加载成功");
+            protected void onHandleSuccess(CategoryBaseBean categoryBean) {
+                Log.d(TAG, "onHandleSuccess: 加载成功" + categoryBean.getCategory().get(6).getTag());
+
+                mCategoryBean = categoryBean;
+
+                //加载成功再添加Fragment
+                initFragment();
+                selectFragment(0);
             }
 
             @Override
@@ -145,6 +126,8 @@ public class CategoryFragment extends BaseFragment {
             }
         });
     }
+
+
 
     @Override
     public void onDestroyView() {
