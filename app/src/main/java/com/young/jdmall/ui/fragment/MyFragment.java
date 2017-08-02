@@ -3,6 +3,7 @@ package com.young.jdmall.ui.fragment;
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -24,6 +25,7 @@ import com.young.jdmall.ui.activity.AccountSettingActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.adapter.MyRvAdapter;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -54,6 +56,8 @@ public class MyFragment extends BaseFragment {
     @BindView(R.id.tv_myself)
     TextView mTvMyself;
     public MyRvAdapter mMyRvAdapter;
+    @BindView(R.id.rv_fresh)
+    RecyclerRefreshLayout mRvFresh;
 
     @Nullable
     @Override
@@ -62,6 +66,23 @@ public class MyFragment extends BaseFragment {
 //        textView.setText("我的");
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
+        mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        mRvFresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRvFresh.closeRefresh();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -79,7 +100,7 @@ public class MyFragment extends BaseFragment {
 
     private void initData() {
         final String userId = PreferenceUtils.getUserId(getActivity());
-        Log.d(TAG, "initData: "+ userId);
+        Log.d(TAG, "initData: " + userId);
        /* if("".equals(userId)){
             return;
         }*/
@@ -87,10 +108,10 @@ public class MyFragment extends BaseFragment {
         usersInfoBeanObservable.compose(compose(this.<UsersInfoBean>bindToLifecycle())).subscribe(new BaseObserver<UsersInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(UsersInfoBean usersInfoBean) {
-                Log.d(TAG, "onHandleSuccess: "+ usersInfoBean.getResponse());
+                Log.d(TAG, "onHandleSuccess: " + usersInfoBean.getResponse());
 
                 //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
-                if("userInfo".equals(usersInfoBean.getResponse())){
+                if ("userInfo".equals(usersInfoBean.getResponse())) {
                     Toast.makeText(getActivity(), "成功获取用户信息", Toast.LENGTH_SHORT).show();
                     mMyRvAdapter.setUserInfoBean(usersInfoBean.getUserInfo());
 
@@ -99,10 +120,11 @@ public class MyFragment extends BaseFragment {
 //                Log.d(TAG, "onHandleSuccess: "+ level);
             }
         });
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
+
                 mMyRvAdapter.setNewsProductData(newsProductInfoBean);
             }
         });
@@ -205,9 +227,9 @@ public class MyFragment extends BaseFragment {
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
 
-            mMyRvAdapter.setUsers(userName);
+        mMyRvAdapter.setUsers(userName);
 //        String userid = JDMallApplication.sLoginInfoBean.getUserInfo().getUserid();
 //        mMyRvAdapter.setUsers(userid);
-}
+    }
 
 }

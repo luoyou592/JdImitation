@@ -1,7 +1,6 @@
 package com.young.jdmall.ui.fragment;
 
 import android.animation.ObjectAnimator;
-import android.app.Fragment;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -20,7 +19,6 @@ import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.SettingAdapter;
 import com.young.jdmall.ui.adapter.SettingGridAdapter;
 import com.young.jdmall.ui.adapter.SettingNavigatorAdapter;
-import com.young.jdmall.ui.view.HideHeadView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -35,7 +33,7 @@ import butterknife.Unbinder;
  * Created by 钟志鹏 on 2017/7/30.
  */
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends BaseFragment {
 
     Unbinder unbinder;
     @BindView(R.id.view_pager)

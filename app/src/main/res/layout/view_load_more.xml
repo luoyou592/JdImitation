@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#F4F5F7">
+
+    <LinearLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="10dp">
+
+        <RelativeLayout
+            android:layout_width="41dp"
+            android:layout_height="60dp">
+
+            <RelativeLayout
+                android:id="@+id/start_load"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/people"
+                    android:layout_width="41dp"
+                    android:layout_height="60dp"
+                    android:background="@drawable/node_modules_jdreactcorelib_libraries_jdscrollview_images_app_refresh_people_0"/>
+
+                <ImageView
+                    android:id="@+id/goods"
+                    android:layout_width="14dp"
+                    android:layout_height="12dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/node_modules_jdreactcorelib_libraries_jdscrollview_images_app_refresh_goods_0"/>
+
+            </RelativeLayout>
+
+            <ImageView
+                android:id="@+id/load_ing"
+                android:layout_width="41dp"
+                android:layout_height="60dp"
+                android:background="@drawable/refresh_animation"
+                android:visibility="gone"/>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="让购物更健康"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/text_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="6dp"
+                android:text="下拉刷新..."
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

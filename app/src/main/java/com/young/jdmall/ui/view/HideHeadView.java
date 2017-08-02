@@ -56,51 +56,50 @@ public class HideHeadView extends RelativeLayout {
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
-
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                mEventY = event.getY();
-                mStartX = event.getX();
-                mStartY = event.getY();
-                return super.dispatchTouchEvent(event);
-            case MotionEvent.ACTION_MOVE:
-                if (((Math.abs(mStartX - event.getX()) > Math.abs(mStartY - event.getY())) && !mIsUndispatch) || mIsDispatch) {
-                    mIsDispatch = true;
-                    mStartX = event.getX();
-                    mStartY = event.getY();
-                    return super.dispatchTouchEvent(event);
-                }
-                if ((Math.abs(mStartX - event.getX()) < Math.abs(mStartY - event.getY())) && !mIsDispatch) {
-                    mIsUndispatch = true;
-                }
-
-                setScrollY(getScrollY() - (int) (event.getY() - mEventY));
-                int scrollY = getScrollY();
-                if (scrollY < 0) {
-                    setScrollY(0);
-                    mEventY = event.getY();
-                    mStartX = event.getX();
-                    mStartY = event.getY();
-                    return super.dispatchTouchEvent(event);
-                }
-                int measuredHeight = getChildAt(0).getMeasuredHeight();
-                if (scrollY >= measuredHeight) {
-                    setScrollY(measuredHeight);
-                    mEventY = event.getY();
-                    mStartX = event.getX();
-                    mStartY = event.getY();
-                    return super.dispatchTouchEvent(event);
-                }
-                mEventY = event.getY();
-                mStartX = event.getX();
-                mStartY = event.getY();
-                return true;
-            case MotionEvent.ACTION_UP:
-                mIsDispatch = false;
-                mIsUndispatch = false;
-                break;
-
-        }
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                mEventY = event.getY();
+//                mStartX = event.getX();
+//                mStartY = event.getY();
+//                return super.dispatchTouchEvent(event);
+//            case MotionEvent.ACTION_MOVE:
+//                if (((Math.abs(mStartX - event.getX()) > Math.abs(mStartY - event.getY())) && !mIsUndispatch) || mIsDispatch) {
+//                    mIsDispatch = true;
+//                    mStartX = event.getX();
+//                    mStartY = event.getY();
+//                    return super.dispatchTouchEvent(event);
+//                }
+//                if ((Math.abs(mStartX - event.getX()) < Math.abs(mStartY - event.getY())) && !mIsDispatch) {
+//                    mIsUndispatch = true;
+//                }
+//
+//                setScrollY(getScrollY() - (int) (event.getY() - mEventY));
+//                int scrollY = getScrollY();
+//                if (scrollY < 0) {
+//                    setScrollY(0);
+//                    mEventY = event.getY();
+//                    mStartX = event.getX();
+//                    mStartY = event.getY();
+//                    return super.dispatchTouchEvent(event);
+//                }
+//                int measuredHeight = getChildAt(0).getMeasuredHeight();
+//                if (scrollY >= measuredHeight) {
+//                    setScrollY(measuredHeight);
+//                    mEventY = event.getY();
+//                    mStartX = event.getX();
+//                    mStartY = event.getY();
+//                    return super.dispatchTouchEvent(event);
+//                }
+//                mEventY = event.getY();
+//                mStartX = event.getX();
+//                mStartY = event.getY();
+//                return true;
+//            case MotionEvent.ACTION_UP:
+//                mIsDispatch = false;
+//                mIsUndispatch = false;
+//                break;
+//
+//        }
         return super.dispatchTouchEvent(event);
     }
 
