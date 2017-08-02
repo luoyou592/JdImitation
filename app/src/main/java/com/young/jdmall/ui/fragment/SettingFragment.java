@@ -20,6 +20,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.SettingAdapter;
 import com.young.jdmall.ui.adapter.SettingGridAdapter;
 import com.young.jdmall.ui.adapter.SettingNavigatorAdapter;
+import com.young.jdmall.ui.view.HideHeadView;
 
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
@@ -52,7 +53,7 @@ public class SettingFragment extends Fragment {
     @BindView(R.id.tab_select_icon)
     ImageView mTabSelectIcon;
 
-    private String[] mTitles = new String[]{"精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选", "精选"};
+    private String[] mTitles = new String[]{"精选", "直播", "订阅", "视频购", "问答", "清单", "好东西", "社区", "生活", "数码", "亲子", "风尚", "美食"};
     private SettingGridAdapter mGridAdapter;
 
     @Nullable
