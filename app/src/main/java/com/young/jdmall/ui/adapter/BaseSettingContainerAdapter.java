@@ -21,12 +21,13 @@ import butterknife.ButterKnife;
 public abstract class BaseSettingContainerAdapter extends RecyclerView.Adapter {
 
     private static final int KEY_ITEM_TYPE_LOADING = 707001;
+    private View mLoadingView;
 
     @Override
     public final RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         if (viewType == KEY_ITEM_TYPE_LOADING) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
-            return new ViewHolderFromLoading(view);
+            mLoadingView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
+            return new ViewHolderFromLoading(mLoadingView);
         }else{
             return getViewHolder(parent, viewType);
         }

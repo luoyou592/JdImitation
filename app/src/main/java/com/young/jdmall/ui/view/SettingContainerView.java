@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.util.AttributeSet;
 
 import com.young.jdmall.ui.adapter.SettingContainerAdapter;
+import com.young.jdmall.ui.adapter.SettingContainerAdapter1;
 
 /**
  * Created by 钟志鹏 on 2017/7/31.
@@ -27,7 +28,7 @@ public class SettingContainerView extends RecyclerView {
 //        RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         mLayoutManager = new LinearLayoutManager(getContext());
         setLayoutManager(mLayoutManager);
-        setAdapter(new SettingContainerAdapter());
+        setAdapter(new SettingContainerAdapter1());
         addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrollStateChanged(RecyclerView recyclerView, int newState) {

@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="45dp">
+                android:layout_height="match_parent"
+                android:background="#F4F5F7">
 
     <LinearLayout
         android:id="@+id/loading"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:gravity="center">
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:orientation="horizontal">
 
         <FrameLayout
             android:layout_width="33dp"
@@ -34,15 +36,5 @@
             android:textSize="14sp"/>
 
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/loaded"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="5dp"
-        android:text="网络错误，点击重新加载"
-        android:textSize="14sp"
-        android:visibility="gone"/>
 
 </RelativeLayout>
