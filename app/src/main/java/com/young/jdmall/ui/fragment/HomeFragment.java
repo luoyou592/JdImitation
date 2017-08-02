@@ -112,6 +112,7 @@ public class HomeFragment extends BaseFragment {
                 //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
                 mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
             }
+
         });
         //请求商品列表
         Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
