@@ -8,6 +8,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
@@ -75,7 +76,9 @@ public class FillingOrderActivity extends AppCompatActivity implements View.OnCl
 
     //初始化
     private void init() {
+        mOrderBackIcon.setOnClickListener(this);
         mOrderCommit.setOnClickListener(this);
+        mOrderMenu.setOnClickListener(this);
 
     }
 
@@ -114,7 +117,11 @@ public class FillingOrderActivity extends AppCompatActivity implements View.OnCl
     @Override
     public void onClick(View v) {
         if(v==mOrderCommit){
-
+            Toast.makeText(this, "点击提交", Toast.LENGTH_SHORT).show();
+        }else if(v==mOrderBackIcon){
+            finish();
+        }else if(v==mOrderMenu){
+            Toast.makeText(this, "点击菜单", Toast.LENGTH_SHORT).show();
         }
     }
 }

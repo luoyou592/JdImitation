@@ -15,6 +15,7 @@ import com.young.jdmall.ui.fragment.HomeFragment;
 import com.young.jdmall.ui.fragment.MyFragment;
 import com.young.jdmall.ui.fragment.SettingFragment;
 import com.young.jdmall.ui.fragment.ShopCartFragment;
+import com.young.jdmall.ui.widget.RedPacketDialog;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -35,6 +36,10 @@ public class MainActivity extends AppCompatActivity {
 
         setListener();
         selectedTab(0);
+
+        RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
+        redPacketDialog.create();
+        redPacketDialog.show();
     }
 
     private void setListener() {
