@@ -1,0 +1,428 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="14dp">
+
+            <ImageView
+                android:id="@+id/order_back_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/a_8"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_centerVertical="true"
+                android:text="填写订单"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"/>
+
+            <ImageView
+                android:id="@+id/order_menu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="@mipmap/bag"/>
+        </RelativeLayout>
+
+        <LinearLayout
+
+            android:id="@+id/ll_address_model"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/a2k"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/order_user_name"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="高波"
+                        android:textSize="14sp"/>
+
+
+                    <TextView
+                        android:id="@+id/order_phone"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="20dp"
+                        android:text="188****1234"
+                        android:textSize="14sp"/>
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/order_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="广东省深圳市宝安区流线二路中粮商务公园3栋17楼黑马程序员"
+                    android:textSize="14sp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_gravity="center"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:src="@mipmap/right"
+                    />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/goods_details"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white"
+            android:orientation="horizontal">
+
+            <HorizontalScrollView
+                android:id="@+id/goods_preview"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="5">
+
+            </HorizontalScrollView>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:paddingLeft="40dp">
+
+                <TextView
+
+                    android:id="@+id/tv_goods_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="共12件"/>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_toRightOf="@id/tv_goods_number"
+                    android:src="@mipmap/right"
+                    />
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginBottom="1dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="支付配送"
+                android:textSize="14sp"
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_right_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@mipmap/right"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/pay_right_icon"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/order_pay_way"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="在线支付"
+                    />
+
+                <TextView
+                    android:id="@+id/seller_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="京东大药房配送"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="发票信息"
+                android:textSize="14sp"
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_right2_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@mipmap/right"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/pay_right2_icon"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/order_invoice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="明细（纸质发票）—个人"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/white">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerVertical="true"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="优惠劵"
+                android:textSize="14sp"
+
+                />
+
+            <ImageView
+                android:id="@+id/pay_right3_icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:paddingRight="10dp"
+                android:src="@mipmap/right"/>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/pay_right3_icon"
+                android:orientation="vertical">
+
+
+                <TextView
+                    android:id="@+id/order_coupon"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="无可用"
+                    />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <LinearLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="商品金额"
+                    />
+
+                <TextView
+                    android:id="@+id/goods_meney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="￥30.00"
+                    android:textColor="@color/red"
+                    android:textSize="10sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="10sp"
+                    android:text="立减"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="-￥6.00"
+                    android:textColor="@color/red"
+                    android:textSize="10sp"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="10dp">
+
+                <TextView
+                    android:textSize="10sp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="运费"
+                    />
+
+                <TextView
+                    android:id="@+id/order_freight"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:text="+￥5.00"
+                    android:textColor="@color/red"
+                    android:textSize="10sp"/>
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/order_all_pay"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/white"
+            android:gravity="center"
+            android:text="合计：￥45.10"
+            android:textColor="@color/red"
+            android:textSize="14sp"/>
+
+        <TextView
+            android:id="@+id/order_commit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@color/red"
+            android:gravity="center"
+            android:text="提交订单"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

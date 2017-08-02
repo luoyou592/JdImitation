@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <attr name="radius" format="dimension" />
+    <declare-styleable name="RotateView">
+        <attr name="radius" />
+    </declare-styleable>
+</resources>
