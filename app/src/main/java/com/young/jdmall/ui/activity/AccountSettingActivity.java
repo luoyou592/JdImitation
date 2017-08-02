@@ -63,6 +63,11 @@ public class AccountSettingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
         ButterKnife.bind(this);
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
         init();
     }
 
@@ -87,8 +92,11 @@ public class AccountSettingActivity extends AppCompatActivity {
                 isUnregist();
                 break;
             case R.id.rl_login:
-                Intent intent2 = new Intent(this, LoginActivity.class);
-                startActivity(intent2);
+                if("".equals(PreferenceUtils.getUserName(this))){
+                    Intent intent2 = new Intent(this, LoginActivity.class);
+                    startActivity(intent2);
+
+                }
                 break;
         }
     }
@@ -100,7 +108,8 @@ public class AccountSettingActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 PreferenceUtils.setUserName(AccountSettingActivity.this, "");
-
+                PreferenceUtils.setUserId(AccountSettingActivity.this, "");
+                PreferenceUtils.setRegistSuccess(AccountSettingActivity.this, false);
                 finish();
             }
         });

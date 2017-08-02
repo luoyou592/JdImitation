@@ -1,11 +1,10 @@
 package com.young.jdmall.ui.fragment;
 
 import android.animation.ArgbEvaluator;
-import android.app.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,8 +13,13 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.UsersInfoBean;
+import com.young.jdmall.network.BaseObserver;
+import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.AccountSettingActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.adapter.MyRvAdapter;
@@ -25,6 +29,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.Observable;
 
 import static android.content.ContentValues.TAG;
 
@@ -32,7 +37,7 @@ import static android.content.ContentValues.TAG;
  * Created by 钟志鹏 on 2017/7/30.
  */
 
-public class MyFragment extends Fragment {
+public class MyFragment extends BaseFragment {
 
 
     @BindView(R.id.rv_user)
@@ -57,11 +62,50 @@ public class MyFragment extends Fragment {
 //        textView.setText("我的");
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
-        mRvUser.setLayoutManager(new LinearLayoutManager(getActivity()));
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position > 1 ? 1 : 2;
+            }
+        });
+        mRvUser.setLayoutManager(manager);
+
         mMyRvAdapter = new MyRvAdapter(getActivity());
         mArgbEvaluator = new ArgbEvaluator();
         mRvUser.setAdapter(mMyRvAdapter);
         return view;
+    }
+
+    private void initData() {
+        final String userId = PreferenceUtils.getUserId(getActivity());
+        Log.d(TAG, "initData: "+ userId);
+       /* if("".equals(userId)){
+            return;
+        }*/
+        Observable<UsersInfoBean> usersInfoBeanObservable = RetrofitFactory.getInstance().listUserInfo(userId);
+        usersInfoBeanObservable.compose(compose(this.<UsersInfoBean>bindToLifecycle())).subscribe(new BaseObserver<UsersInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(UsersInfoBean usersInfoBean) {
+                Log.d(TAG, "onHandleSuccess: "+ usersInfoBean.getResponse());
+
+                //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
+                if("userInfo".equals(usersInfoBean.getResponse())){
+                    Toast.makeText(getActivity(), "成功获取用户信息", Toast.LENGTH_SHORT).show();
+                    mMyRvAdapter.setUserInfoBean(usersInfoBean.getUserInfo());
+
+                }
+//                String level = usersInfoBean.getUserInfo().getLevel();
+//                Log.d(TAG, "onHandleSuccess: "+ level);
+            }
+        });
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
+        newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
+                mMyRvAdapter.setNewsProductData(newsProductInfoBean);
+            }
+        });
     }
 
 
@@ -74,7 +118,7 @@ public class MyFragment extends Fragment {
     int sumY;
     float distance = 280.0f;
     int start = 0x00000000;
-    int end = 0X77FFFFFF;
+    int end = 0X99FFFFFF;
     int bgColor;
 
     @Override
@@ -157,11 +201,13 @@ public class MyFragment extends Fragment {
 //
 //        }
         super.onStart();
+        initData();
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
 
             mMyRvAdapter.setUsers(userName);
-
-    }
+//        String userid = JDMallApplication.sLoginInfoBean.getUserInfo().getUserid();
+//        mMyRvAdapter.setUsers(userid);
+}
 
 }

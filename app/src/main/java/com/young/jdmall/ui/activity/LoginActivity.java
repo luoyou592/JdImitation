@@ -1,42 +1,38 @@
 package com.young.jdmall.ui.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.LoginInfoBean;
-import com.young.jdmall.network.JDMallService;
-import com.young.jdmall.network.NetworkManage;
+import com.young.jdmall.network.BaseObserver;
+import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.fragment.MyFragment;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.IOException;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
+import io.reactivex.Observable;
 
 /*
  *  创建者:   tiao
  *  创建时间:  2017/7/30 0030 19:48
  *  描述：    TODO
  */
-public class LoginActivity extends AppCompatActivity {
+public class LoginActivity extends BaseActivity {
     @BindView(R.id.iv_back)
     ImageView mIvBack;
     @BindView(R.id.et_name)
@@ -45,6 +41,8 @@ public class LoginActivity extends AppCompatActivity {
     EditText mEtPassword;
     @BindView(R.id.bt_login)
     Button mBtLogin;
+    @BindView(R.id.tv_regist)
+    TextView mTvRegist;
     private BufferedReader bfr;
     private static final String TAG = "LoginActivity";
     private FileOutputStream nameFos;
@@ -58,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
         mMyFragment = new MyFragment();
-        //设置保存的用户名
+       /* //设置保存的用户名
         try {
             File nameFile = new File(getFilesDir(), "name.txt");
             bfr = new BufferedReader(new FileReader(nameFile));
@@ -76,13 +74,13 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
+        }*/
     }
 
 
     public void login() {
         //保存账号密码
-        String name = mEtName.getText().toString().trim();
+        final String name = mEtName.getText().toString().trim();
         String pwd = mEtPassword.getText().toString().trim();
         //判断是否为空
         if (TextUtils.isEmpty(name)) {//str == null || str.length() == 0
@@ -93,7 +91,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "密码不能为空", Toast.LENGTH_SHORT).show();
             return;
         }
-        //都不为空  需要首先保存账号 保存到私有目录下面
+      /*  //都不为空  需要首先保存账号 保存到私有目录下面
         try {
             File nameFile = new File(getFilesDir(), "name.txt");
             nameFos = new FileOutputStream(nameFile);
@@ -113,8 +111,50 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }
-        loginBy(name, pwd);
+        }*/
+
+        Observable<LoginInfoBean> loginInfoBeanObservable = RetrofitFactory.getInstance().listLogin(name, pwd);
+        loginInfoBeanObservable.compose(compose(this.<LoginInfoBean>bindToLifecycle())).subscribe(new BaseObserver<LoginInfoBean>(this) {
+            @Override
+            protected void onHandleSuccess(LoginInfoBean loginInfoBean) {
+
+                Log.d(TAG, "onHandleSuccess: "+ loginInfoBean.getResponse());
+/*                if("login".equals(loginInfoBean.getResponse())){
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    PreferenceUtils.setUserName(LoginActivity.this, name);
+//                    JDMallApplication.sLoginInfoBean = loginInfoBean;
+                    PreferenceUtils.setUserId(LoginActivity.this, loginInfoBean.getUserInfo().getUserid());
+                    finish();
+                }
+                if(loginInfoBean.getUserInfo() == null){
+                    String errorCode = loginInfoBean.getErrorCode();
+                    Log.d(TAG, "onHandleSuccess: "+errorCode);
+                }*/
+                if(loginInfoBean.getUserInfo()!=null){
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    PreferenceUtils.setUserName(LoginActivity.this, name);
+                    PreferenceUtils.setUserId(LoginActivity.this, loginInfoBean.getUserInfo().getUserid());
+                    finish();
+                }else {
+                    String errorCode = loginInfoBean.getError();
+                    Toast.makeText(LoginActivity.this, errorCode, Toast.LENGTH_SHORT).show();
+                }
+
+            }
+           /* @Override
+            protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
+                //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
+//                mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
+            }*/
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                Log.e(TAG, "onError: "+ e );
+            }
+        });
+
+//        loginBy(name, pwd);
         /*//2.登录请求提交
         final String data = "name="+name+"&pwd="+pwd;
         //3.发起网络请求
@@ -151,9 +191,11 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-    public void loginBy(final String name, String password){
+
+
+ /*   public void loginBy(final String name, String password) {
         JDMallService jdMallService = NetworkManage.getJDMallService();
-        Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
+       *//* Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
         loginCall.enqueue(new Callback<LoginInfoBean>() {
             @Override
             public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
@@ -167,16 +209,12 @@ public class LoginActivity extends AppCompatActivity {
                 }else if("1533".equals(response.body().getResponse())){
                     Toast.makeText(LoginActivity.this, "没有登录或则需要重新登录", Toast.LENGTH_SHORT).show();
                 }
-            }
+            }*/
 
-            @Override
-            public void onFailure(Call<LoginInfoBean> call, Throwable t) {
-                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
 
-    @OnClick({R.id.iv_back, R.id.bt_login})
+
+
+    @OnClick({R.id.iv_back, R.id.bt_login, R.id.tv_regist})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -185,6 +223,21 @@ public class LoginActivity extends AppCompatActivity {
             case R.id.bt_login:
                 login();
                 break;
+            case R.id.tv_regist:
+                Intent intent = new Intent(this, RegistActivity.class);
+                startActivity(intent);
+                break;
+        }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(!"".equals(PreferenceUtils.getUserName(this))){
+            mEtName.setText(PreferenceUtils.getUserName(this));
+        }
+        if(PreferenceUtils.getRegistSuccess(this)){
+            finish();
         }
     }
 }

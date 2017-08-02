@@ -9,11 +9,16 @@ import com.young.jdmall.network.NetworkManage;
  */
 
 public class JDMallApplication extends Application {
+
+//    public static LoginInfoBean sLoginInfoBean;
+
     @Override
     public void onCreate() {
         super.onCreate();
         NetworkManage.init();
-
-
+/*        sLoginInfoBean = new LoginInfoBean();
+        sLoginInfoBean.getUserInfo().setUserid("-1");*/
     }
+
+
 }

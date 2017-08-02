@@ -7,11 +7,13 @@ import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
+import com.young.jdmall.bean.UsersInfoBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -45,4 +47,11 @@ public interface JDMallService {
     //品牌
     @GET("brand")
     Observable<BrandInfoBean> listBrand();
+    @FormUrlEncoded
+    @POST("register")
+    Observable<LoginInfoBean> listRegister(@Field("username") String username, @Query("password") String password);
+
+    @GET("userinfo")
+    Observable<UsersInfoBean> listUserInfo(@Header("userid") String userid);
+
 }
