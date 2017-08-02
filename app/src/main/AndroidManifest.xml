@@ -33,7 +33,8 @@
         <activity android:name=".ui.activity.RegistActivity"/>
         <activity android:name=".ui.activity.AddRecepitAddressActivity"/>
         <activity android:name=".ui.activity.RecepitAddressActivity"/>
-        <activity android:name=".ui.activity.MainActivity"/>
+
+
     </application>
 
 </manifest>
