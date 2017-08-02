@@ -12,9 +12,11 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.network.JDMallService;
 import com.young.jdmall.network.NetworkManage;
 import com.young.jdmall.ui.fragment.MyFragment;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -25,6 +27,9 @@ import java.io.IOException;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
  *  创建者:   tiao
@@ -148,27 +153,27 @@ public class LoginActivity extends AppCompatActivity {
 
     public void loginBy(final String name, String password){
         JDMallService jdMallService = NetworkManage.getJDMallService();
-//        Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
-//        loginCall.enqueue(new Callback<LoginInfoBean>() {
-//            @Override
-//            public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
-////                Log.d(TAG, "onResponse: " + response.body().getUserInfo().getUserid());
-//                if("login".equals(response.body().getResponse())){
-//                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
-//                    PreferenceUtils.setUserName(LoginActivity.this, name);
-//                    finish();
-//                }else if("1530".equals(response.code())){
-//                    Toast.makeText(LoginActivity.this, "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
-//                }else if("1533".equals(response.body().getResponse())){
-//                    Toast.makeText(LoginActivity.this, "没有登录或则需要重新登录", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call<LoginInfoBean> call, Throwable t) {
-//                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
-//            }
-//        });
+        Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
+        loginCall.enqueue(new Callback<LoginInfoBean>() {
+            @Override
+            public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
+//                Log.d(TAG, "onResponse: " + response.body().getUserInfo().getUserid());
+                if("login".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    PreferenceUtils.setUserName(LoginActivity.this, name);
+                    finish();
+                }else if("1530".equals(response.code())){
+                    Toast.makeText(LoginActivity.this, "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                }else if("1533".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "没有登录或则需要重新登录", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginInfoBean> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @OnClick({R.id.iv_back, R.id.bt_login})
