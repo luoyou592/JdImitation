@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
@@ -40,8 +41,10 @@ public class SettingAdapter extends PagerAdapter {
                 }).start();
             }
         });
-        container.addView(recyclerRefreshLayout);
-        return recyclerRefreshLayout;
+        RelativeLayout relativeLayout = new RelativeLayout(container.getContext());
+        relativeLayout.addView(recyclerRefreshLayout);
+        container.addView(relativeLayout);
+        return relativeLayout;
     }
 
     @Override
@@ -52,7 +55,7 @@ public class SettingAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 10;
+        return 13;
     }
 
     @Override

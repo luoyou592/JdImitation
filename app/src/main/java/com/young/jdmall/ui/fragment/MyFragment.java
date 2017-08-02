@@ -160,7 +160,7 @@ public class MyFragment extends Fragment {
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
 
-            mMyRvAdapter.setUsers(userName);
+        mMyRvAdapter.setUsers(userName);
 
     }
 

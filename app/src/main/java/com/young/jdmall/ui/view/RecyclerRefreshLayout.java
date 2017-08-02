@@ -165,7 +165,9 @@ public class RecyclerRefreshLayout extends RelativeLayout {
                     mLoadIng.setVisibility(View.VISIBLE);
                     mStartLoad.setVisibility(View.GONE);
                     mDrawable.start();
-                    mListener.OnRefresh();
+                    if (mListener != null) {
+                        mListener.OnRefresh();
+                    }
                 }
             }
 
@@ -225,13 +227,9 @@ public class RecyclerRefreshLayout extends RelativeLayout {
         for (int i = 0; i < getChildCount(); i++) {
             childView = getChildAt(i);
             if (childView != mProgressView) {
-                break;
+                childView.layout(l, t, r, b);
             }
         }
-        if (childView != null) {
-            childView.layout(l, t, r, b);
-        }
-
     }
 
 

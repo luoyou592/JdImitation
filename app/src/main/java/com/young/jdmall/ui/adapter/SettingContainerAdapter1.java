@@ -27,7 +27,7 @@ public class SettingContainerAdapter1 extends BaseSettingContainerAdapter {
 
     @Override
     protected int itemCount() {
-        return 20;
+        return 10;
     }
 
     class ViewHolderFormType1 extends RecyclerView.ViewHolder {
