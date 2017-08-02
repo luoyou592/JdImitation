@@ -1,6 +1,5 @@
 package com.young.jdmall.ui.fragment;
 
-import android.app.Fragment;
 import android.content.Context;
 import android.os.Build;
 import android.os.Bundle;
@@ -8,12 +7,16 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.CategoryBean;
+import com.young.jdmall.network.BaseObserver;
+import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.CategoryLeftAdapter;
 
 import java.util.ArrayList;
@@ -21,13 +24,14 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 
 
 /**
  * Created by BjyJyk on 2017/7/30.
  */
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends BaseFragment {
 
     private static final String TAG = "CategoryFragment";
 
@@ -57,31 +61,33 @@ public class CategoryFragment extends Fragment {
     }
 
     private void initFragment() {
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
-        fragments.add(new WomanDressFragment());
+        for (int i = 0; i < 25; i++) {
+            fragments.add(new WomanDressFragment(i));
+        }
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
+//        fragments.add(new WomanDressFragment());
 
     }
 
@@ -114,6 +120,9 @@ public class CategoryFragment extends Fragment {
          */
 
     private void init() {
+        //加载网络数据
+        loadNetwork();
+        
         //RecyclerView的初始化
         mCategoryLeftList.setLayoutManager(new LinearLayoutManager(getActivity()));
 
@@ -122,8 +131,24 @@ public class CategoryFragment extends Fragment {
         mCategoryLeftList.setAdapter(mCategoryLeftAdapter);
     }
 
+    private void loadNetwork() {
+        Observable<CategoryBean> categoryObservable = RetrofitFactory.getInstance().listCategory();
+        categoryObservable.compose(compose(this.<CategoryBean>bindToLifecycle())).subscribe(new BaseObserver<CategoryBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(CategoryBean categoryBean) {
+                Log.d(TAG, "onHandleSuccess: 加载成功");
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                Log.d(TAG, "onHandleError: 加载失败");
+            }
+        });
+    }
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
     }
+    
 }

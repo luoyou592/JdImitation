@@ -22,6 +22,11 @@ public class WomanDressFragment extends CategoryBaseRightListFragment {
 
     private static final String TAG = "WomanDressFragment";
     private List<TestBean> mList;
+    private int mId;
+
+    public WomanDressFragment(int id) {
+        mId = id;
+    }
 
     @Override
     protected BaseAdapter getBaseCategoryAdapter() {
@@ -60,5 +65,6 @@ public class WomanDressFragment extends CategoryBaseRightListFragment {
             }
             mList.add(testBean);
         }
+
     }
 }
