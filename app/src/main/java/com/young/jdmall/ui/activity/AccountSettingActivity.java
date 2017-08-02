@@ -55,6 +55,8 @@ public class AccountSettingActivity extends AppCompatActivity {
     ImageView mIvMyself;
     @BindView(R.id.bt_unregist)
     Button mBtUnregist;
+    @BindView(R.id.rl_login)
+    RelativeLayout mRlLogin;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +73,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_address, R.id.bt_unregist})
+    @OnClick({R.id.iv_back, R.id.rl_address, R.id.bt_unregist, R.id.rl_login})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -84,6 +86,10 @@ public class AccountSettingActivity extends AppCompatActivity {
             case R.id.bt_unregist:
                 isUnregist();
                 break;
+            case R.id.rl_login:
+                Intent intent2 = new Intent(this, LoginActivity.class);
+                startActivity(intent2);
+                break;
         }
     }
 
@@ -93,7 +99,7 @@ public class AccountSettingActivity extends AppCompatActivity {
         builder.setPositiveButton("是的", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                PreferenceUtils.setUserName(AccountSettingActivity.this,"");
+                PreferenceUtils.setUserName(AccountSettingActivity.this, "");
 
                 finish();
             }
@@ -106,4 +112,5 @@ public class AccountSettingActivity extends AppCompatActivity {
         });
         builder.show();
     }
+
 }

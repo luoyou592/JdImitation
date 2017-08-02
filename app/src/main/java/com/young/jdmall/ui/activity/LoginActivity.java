@@ -157,10 +157,16 @@ public class LoginActivity extends AppCompatActivity {
         loginCall.enqueue(new Callback<LoginInfoBean>() {
             @Override
             public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
-                Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
 //                Log.d(TAG, "onResponse: " + response.body().getUserInfo().getUserid());
-                PreferenceUtils.setUserName(LoginActivity.this, name);
-                finish();
+                if("login".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    PreferenceUtils.setUserName(LoginActivity.this, name);
+                    finish();
+                }else if("1530".equals(response.code())){
+                    Toast.makeText(LoginActivity.this, "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                }else if("1533".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "没有登录或则需要重新登录", Toast.LENGTH_SHORT).show();
+                }
             }
 
             @Override
