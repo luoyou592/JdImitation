@@ -11,12 +11,15 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.ui.activity.TypeListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import jp.wasabeef.glide.transformations.CropCircleTransformation;
 
 /**
  * Created by Administrator on 2017/7/30.
@@ -46,8 +49,18 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
     }
 
     public void bindView(CategoryBaseBean.CategoryBean data) {
-        Log.d(TAG, "bindView: 跑到这里,有数据?" + data.getName());
         mItemInfoText.setText(data.getName());
+
+        String imageUrl = Constant.IMAGE_URL + data.getPic();
+        Log.d(TAG, "bindView: " + imageUrl);
+        Glide.with(getContext())
+                .load(imageUrl)
+                .error(R.mipmap.test_image)
+                .fallback( R.mipmap.test_image)
+                .bitmapTransform(new CropCircleTransformation(getContext()))
+                .override(200,200)
+                .dontAnimate()
+                .into(mItemInfoImage);
 
 
         mItemInfo.setOnClickListener(new OnClickListener() {

@@ -19,16 +19,14 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * 时间:2017/7/30
  */
 
-public class WomanDressFragment extends CategoryBaseRightListFragment {
+public class BabyArticlesFragment extends CategoryBaseRightListFragment {
 
-    private static final String TAG = "WomanDressFragment";
+    private static final String TAG = "MomAreaFragment";
     private List<CategoryBaseBean> mList = new ArrayList<>();
     private CategoryBaseBean mData;
-    private int mId;
 
-    public WomanDressFragment(CategoryBaseBean data, int id) {
+    public BabyArticlesFragment(CategoryBaseBean data) {
         mData = data;
-        mId = id;
     }
 
     @Override
@@ -59,89 +57,72 @@ public class WomanDressFragment extends CategoryBaseRightListFragment {
                 //循环遍历找到标题的ID
                 CategoryBaseBean.CategoryBean categoryBean = mData.getCategory().get(i);
                 //找到目标ID,只有第一个时执行
-                if (categoryBean.getId() == 1) {
+                if (categoryBean.getId() == 3) {
                     //设置标题
                     CategoryBaseBean categoryInfoBean = new CategoryBaseBean();
-                    categoryInfoBean.setTitle("孕妇专区");
+                    categoryInfoBean.setTitle("宝宝用品");
                     //添加内容
                     List<CategoryBaseBean.CategoryBean> categoryBeenList = new CopyOnWriteArrayList<>();
                     //在一的里面再次循环,判断是否是需要的ID,如果是,那么添加进去
                     for (int j = 0; j < mData.getCategory().size(); j++) {
                         switch (mData.getCategory().get(j).getId()) {
-                            case 12:
+                            case 3:
                                 categoryBeenList.add(mData.getCategory().get(j));
                                 break;
-                            case 13:
+                            case 21:
                                 categoryBeenList.add(mData.getCategory().get(j));
                                 break;
-                            case 117:
-                                categoryBeenList.add(mData.getCategory().get(j));
-                                break;
-                            case 113:
+                            case 137:
                                 categoryBeenList.add(mData.getCategory().get(j));
                                 break;
                         }
                         categoryInfoBean.setCategory(categoryBeenList);
                     }
                     mList.add(categoryInfoBean);
-                } else if (categoryBean.getId() == 115) {
+                } else if (categoryBean.getId() == 21) {
                     //设置标题
                     CategoryBaseBean categoryInfoBean = new CategoryBaseBean();
-                    categoryInfoBean.setTitle("孕妈用品");
+                    categoryInfoBean.setTitle("幼儿玩具");
                     //添加内容
                     List<CategoryBaseBean.CategoryBean> categoryBeen = new CopyOnWriteArrayList<>();
                     //在一的里面再次循环,判断是否是需要的ID,如果是,那么添加进去
                     for (int j = 0; j < mData.getCategory().size(); j++) {
                         //创建新的对象?
                         switch (mData.getCategory().get(j).getId()) {
-                            case 112:
+                            case 121:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
-                            case 128:
+                            case 136:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
-                            case 130:
+                            case 138:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
-                            case 131:
+                            case 139:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
+
                         }
                         categoryInfoBean.setCategory(categoryBeen);
                     }
                     mList.add(categoryInfoBean);
 
-                } else if (categoryBean.getId() == 11) {
+                } else if (categoryBean.getId() == 5) {
                     //设置标题
                     CategoryBaseBean categoryInfoBean = new CategoryBaseBean();
-                    categoryInfoBean.setTitle("妈妈个人用品");
+                    categoryInfoBean.setTitle("宝宝服饰");
                     //添加内容
                     List<CategoryBaseBean.CategoryBean> categoryBeen = new CopyOnWriteArrayList<>();
                     //在一的里面再次循环,判断是否是需要的ID,如果是,那么添加进去
                     for (int j = 0; j < mData.getCategory().size(); j++) {
                         switch (mData.getCategory().get(j).getId()) {
-                            case 114:
+                            case 5:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
-                            case 118:
+                            case 154:
                                 categoryBeen.add(mData.getCategory().get(j));
                                 break;
-                        }
-                        categoryInfoBean.setCategory(categoryBeen);
-                    }
-                    mList.add(categoryInfoBean);
-                } else if (categoryBean.getId() == 111) {
-                    //设置标题
-                    CategoryBaseBean categoryInfoBean = new CategoryBaseBean();
-                    categoryInfoBean.setTitle("妈妈养生");
-                    //添加内容
-                    List<CategoryBaseBean.CategoryBean> categoryBeen = new CopyOnWriteArrayList<>();
-                    //在一的里面再次循环,判断是否是需要的ID,如果是,那么添加进去
-                    for (int j = 0; j < mData.getCategory().size(); j++) {
-                        switch (mData.getCategory().get(j).getId()) {
-                            case 116:
-                                categoryBeen.add(mData.getCategory().get(j));
-                                break;
+
                         }
                         categoryInfoBean.setCategory(categoryBeen);
                     }

@@ -1,7 +1,6 @@
 package com.young.jdmall.ui.fragment;
 
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -26,6 +25,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import io.reactivex.Observable;
 
+import static android.os.Build.VERSION_CODES.M;
+
 
 /**
  * Created by BjyJyk on 2017/7/30.
@@ -44,7 +45,7 @@ public class CategoryFragment extends BaseFragment {
     private CategoryBaseBean mCategoryBean;
     private List<CategoryBaseRightListFragment> fragments = new ArrayList();
 
-    @RequiresApi(api = Build.VERSION_CODES.M)
+    @RequiresApi(api = M)
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -60,9 +61,15 @@ public class CategoryFragment extends BaseFragment {
 
     private void initFragment() {
         //初始化Fragment
-        for (int i = 0; i < 24; i++) {
-            fragments.add(new WomanDressFragment(mCategoryBean,i));
+        for (int i = 0; i < 4; i++) {
+            fragments.add(new MomAreaFragment(mCategoryBean));
+            fragments.add(new FashionLadiesFragment(mCategoryBean));
+            fragments.add(new BabyArticlesFragment(mCategoryBean));
+            fragments.add(new DailyArticlesFragment(mCategoryBean));
+            fragments.add(new ChildrenClothesFragment(mCategoryBean));
+            fragments.add(new ChildrenToysFragment(mCategoryBean));
         }
+
 
     }
 

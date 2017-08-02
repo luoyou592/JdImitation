@@ -7,4 +7,5 @@ package com.young.jdmall.app;
 public class Constant {
 
     public static String BASE_URL = "http://10.0.2.2:8080/market/";
+    public static String IMAGE_URL = "http://10.0.2.2:8080/market";
 }
