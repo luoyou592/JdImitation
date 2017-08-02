@@ -3,23 +3,26 @@ package com.young.jdmall.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
+import com.young.jdmall.bean.AddressBean;
+import com.young.jdmall.bean.CartInfoBean;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
-
-import static com.young.jdmall.network.NetworkManage.init;
 
 /**
  * Created by BjyJyk on 2017/8/2.
  */
 
-public class FillingOrderActivity extends AppCompatActivity {
+public class FillingOrderActivity extends AppCompatActivity implements View.OnClickListener {
 
     @BindView(R.id.order_back_icon)
     ImageView mOrderBackIcon;
@@ -70,10 +73,48 @@ public class FillingOrderActivity extends AppCompatActivity {
         init();
     }
 
+    //初始化
     private void init() {
-
+        mOrderCommit.setOnClickListener(this);
 
     }
 
+    /**
+     * 设置订单信息
+     * @param data
+     */
+    public void setData(CartInfoBean data) {
+        mTvGoodsNumber.setText("共" + data.getTotalCount() + "件");
+        mOrderAllPay.setText("合计：￥" + (data.getTotalPrice() - 5));
+        mGoodsMeney.setText("￥" + data.getTotalPrice());
+        for (int i = 0; i < data.getCart().size(); i++) {
+            ImageView imageView = new ImageView(this);
+            String pic = Constant.BASE_URL + data.getCart().get(i).getProduct().getPic();
+            Glide.with(this).load(pic).into(imageView);
+            mGoodsPreview.addView(imageView);
+        }
 
+    }
+
+    /**
+     * 设置地址
+     * @param data
+     */
+    public void setAddressData(AddressBean data) {
+        mOrderUserName.setText(data.getUserName());
+        mOrderPhone.setText(data.getPhone());
+        mOrderAddress.setText(data.getAddress());
+    }
+
+
+    /**
+     * 点击跳转到支付界面
+     * @param v 提交按钮
+     */
+    @Override
+    public void onClick(View v) {
+        if(v==mOrderCommit){
+
+        }
+    }
 }
