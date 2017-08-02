@@ -25,6 +25,8 @@
         <activity android:name=".ui.activity.CalendarActivity"/>
         <activity android:name=".ui.activity.SecKillActivity"/>
         <activity android:name=".ui.activity.CustomServiceActivity"/>
+        <activity android:name=".ui.activity.MessageActivity"/>
+        <activity android:name=".ui.activity.OrderActivity"/>
     </application>
 
 </manifest>

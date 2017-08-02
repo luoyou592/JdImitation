@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="40dp"
+              android:orientation="horizontal"
+              android:background="#D8D7DB"
+              android:padding="8dp">
+
+    <CheckBox
+        android:id="@+id/goods_title_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:button="@drawable/select_shape"
+        android:checked="true"/>
+
+    <TextView
+        android:id="@+id/goods_title_name"
+        android:layout_marginLeft="12dp"
+        android:textSize="18sp"
+        android:drawableLeft="@mipmap/b3z"
+        android:layout_gravity="center_vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawablePadding="8dp"
+        android:drawableRight="@mipmap/right"
+        android:text="L.LA旗舰店"/>
+</LinearLayout>

@@ -12,21 +12,24 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.utils.StreamUtil;
+import com.young.jdmall.bean.LoginInfoBean;
+import com.young.jdmall.network.JDMallService;
+import com.young.jdmall.network.NetworkManage;
+import com.young.jdmall.ui.fragment.MyFragment;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /*
  *  创建者:   tiao
@@ -45,13 +48,16 @@ public class LoginActivity extends AppCompatActivity {
     private BufferedReader bfr;
     private static final String TAG = "LoginActivity";
     private FileOutputStream nameFos;
-    private String baseUrl = "http://localhost:8080/market/login";
+    public static int LOGIN_STATE = -1;
+    private MyFragment mMyFragment;
+    //    private String baseUrl = "http://localhost:8080/market/login";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         ButterKnife.bind(this);
+        mMyFragment = new MyFragment();
         //设置保存的用户名
         try {
             File nameFile = new File(getFilesDir(), "name.txt");
@@ -108,8 +114,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         }
-
-        //2.登录请求提交
+        loginBy(name, pwd);
+        /*//2.登录请求提交
         final String data = "name="+name+"&pwd="+pwd;
         //3.发起网络请求
         new Thread(new Runnable() {
@@ -141,9 +147,34 @@ public class LoginActivity extends AppCompatActivity {
                     e.printStackTrace();
                 }
             }
-        }).start();
+        }).start();*/
+
     }
 
+    public void loginBy(final String name, String password){
+        JDMallService jdMallService = NetworkManage.getJDMallService();
+        Call<LoginInfoBean> loginCall = jdMallService.listLogin(name, password);
+        loginCall.enqueue(new Callback<LoginInfoBean>() {
+            @Override
+            public void onResponse(Call<LoginInfoBean> call, Response<LoginInfoBean> response) {
+//                Log.d(TAG, "onResponse: " + response.body().getUserInfo().getUserid());
+                if("login".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+                    PreferenceUtils.setUserName(LoginActivity.this, name);
+                    finish();
+                }else if("1530".equals(response.code())){
+                    Toast.makeText(LoginActivity.this, "用户名不存在或密码错误", Toast.LENGTH_SHORT).show();
+                }else if("1533".equals(response.body().getResponse())){
+                    Toast.makeText(LoginActivity.this, "没有登录或则需要重新登录", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<LoginInfoBean> call, Throwable t) {
+                Toast.makeText(LoginActivity.this, "登录失败", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
     @OnClick({R.id.iv_back, R.id.bt_login})
     public void onClick(View view) {

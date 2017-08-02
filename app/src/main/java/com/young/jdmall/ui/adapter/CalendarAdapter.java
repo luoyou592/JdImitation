@@ -4,6 +4,10 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 
+import com.young.jdmall.ui.fragment.CalendarALLFragment;
+import com.young.jdmall.ui.fragment.CalendarHouseFragment;
+import com.young.jdmall.ui.fragment.CalendarWarnFragment;
+
 /*
  *  创建者:   tiao
  *  创建时间:  2017/7/30 0030 21:39
@@ -41,7 +45,7 @@ public class CalendarAdapter extends FragmentPagerAdapter {
     private static final int FRAGMENT_HOUSE = 2;
 
 
-    public static Fragment getFragment(int position){
+    public Fragment getFragment(int position){
         switch (position){
             case FRAGMENT_ALL:
                 return new CalendarALLFragment();

@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="match_parent"
+              android:layout_height="120dp"
+              android:background="@android:color/white"
+              android:orientation="horizontal"
+              android:padding="8dp">
+
+    <CheckBox
+        android:id="@+id/goods_checkbox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:button="@drawable/select_shape"
+        android:checked="true"/>
+
+    <ImageView
+        android:id="@+id/goods_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginLeft="8dp"
+        android:background="@drawable/login_shape"
+        android:src="@mipmap/y5"/>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="12dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/goods_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="20dp"
+                android:lines="2"
+                android:text="的冯绍峰的方式的风格的广泛的个人维塔斯的"
+                android:textColor="@android:color/black"
+                android:textSize="16sp"
+                />
+
+            <TextView
+                android:id="@+id/goods_color"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:lines="1"
+                android:text="颜色:对方打开附件是宽带连接福建山多福建山多"
+                android:textSize="14sp"/>
+
+            <TextView
+                android:id="@+id/goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:text="¥198.00"
+                android:textColor="@android:color/holo_red_light"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="8dp">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+
+                <ImageButton
+                    android:id="@+id/delete_unclick"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/delete_unclick_button_shape"
+                    android:clickable="false"
+                    android:padding="4dp"/>
+
+                <ImageButton
+                    android:id="@+id/delete_click"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/delete_click_button_shape"
+                    android:visibility="gone"/>
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/goods_num"
+                android:layout_width="30dp"
+                android:layout_height="20dp"
+                android:background="@drawable/button_shape"
+                android:gravity="center"
+                android:text="1"
+                />
+
+            <ImageButton
+                android:id="@+id/goods_add"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:background="@drawable/add_button"/>
+        </LinearLayout>
+    </RelativeLayout>
+</LinearLayout>
