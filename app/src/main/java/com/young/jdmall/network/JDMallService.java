@@ -5,13 +5,17 @@ import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
+import retrofit2.http.Header;
 import retrofit2.http.POST;
 import retrofit2.http.Query;
 
@@ -36,7 +40,7 @@ public interface JDMallService {
     //登陆
     @FormUrlEncoded
     @POST("login")
-    Observable<LoginInfoBean> listLogin(@Field("username") String username, @Query("password") String password);
+    Observable<LoginInfoBean> listLogin(@Field("username") String username, @Field("password") String password);
     //限时抢购limitbuy
     @GET("limitbuy")
     Observable<LimitbuyBean> listLimitbuy(@Query("page") int page, @Query("pageNum") int pageNum);
@@ -45,4 +49,11 @@ public interface JDMallService {
     //品牌
     @GET("brand")
     Observable<BrandInfoBean> listBrand();
+    @POST("cart")
+    Observable<BrandInfoBean> listCart(@Field("sku") String sku);
+    @POST("orderlist")
+    Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);
+    @POST("ordercancel")
+    Observable<OrderInfoBean> listOrderCancel(@Header("userid") String userid, @Body RequestBody body);
+
 }

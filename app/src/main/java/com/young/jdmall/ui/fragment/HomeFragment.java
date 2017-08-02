@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -70,12 +71,14 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initListener() {
-        /*mSrlHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        //下拉刷新
+        mSrlHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
+                mHomeRvAdapter.notifyDataSetChanged();
 
             }
-        });*/
+        });
     }
 
     private void initView() {
@@ -111,8 +114,21 @@ public class HomeFragment extends BaseFragment {
             protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
                 //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
                 mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
+                Log.d("luoyou", "1");
             }
 
+        });
+
+        //请求秒杀
+        Observable<LimitbuyBean> limitObservable = RetrofitFactory.getInstance().listLimitbuy(1, 10);
+        limitObservable.compose(compose(this.<LimitbuyBean>bindToLifecycle())).subscribe(new BaseObserver<LimitbuyBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(LimitbuyBean limitbuyBean) {
+                mHomeRvAdapter.setLimitProductData(limitbuyBean);
+                Log.d("luoyou", "3");
+
+
+            }
         });
         //请求商品列表
         Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
@@ -120,14 +136,8 @@ public class HomeFragment extends BaseFragment {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
                 mHomeRvAdapter.setNewsProductData(newsProductInfoBean);
-            }
-        });
-        //请求秒杀
-        Observable<LimitbuyBean> limitObservable = RetrofitFactory.getInstance().listLimitbuy(1, 10);
-        limitObservable.compose(compose(this.<LimitbuyBean>bindToLifecycle())).subscribe(new BaseObserver<LimitbuyBean>(getActivity()) {
-            @Override
-            protected void onHandleSuccess(LimitbuyBean limitbuyBean) {
-                mHomeRvAdapter.setLimitProductData(limitbuyBean);
+                Log.d("luoyou", "2");
+                mHomeRvAdapter.notifyDataSetChanged();
             }
         });
 

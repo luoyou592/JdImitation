@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
 
     <TextView
+        android:id="@+id/tv_seckill_title"
         android:layout_toRightOf="@id/iv_seckill_img"
         android:text="减肥的减肥is东方今典司法解释地方就是的大嫁风尚党风建设"
         android:ellipsize="end"
@@ -33,6 +34,7 @@
             android:layout_height="wrap_content"/>
 
     <TextView
+        android:id="@+id/tv_normal_price"
         android:layout_toRightOf="@id/iv_seckill_img"
         android:text="￥199"
         android:textSize="12sp"
