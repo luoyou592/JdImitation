@@ -14,12 +14,12 @@ import java.util.List;
  * 时间:2017/7/30
  */
 
-public class WomanDressAdapter extends CategoryBaseRightAdapter<CategoryBaseBean> {
+public class CategoryRightListAdapter extends CategoryBaseRightAdapter<CategoryBaseBean> {
 
-    private static final String TAG = "WomanDressAdapter";
+    private static final String TAG = "CategoryRightListAdapter";
     private List<CategoryBaseBean> mDataList;
 
-    public WomanDressAdapter(Context context, List<CategoryBaseBean> dataList) {
+    public CategoryRightListAdapter(Context context, List<CategoryBaseBean> dataList) {
         super(context, dataList);
         mDataList = dataList;
     }

@@ -7,7 +7,7 @@ import android.widget.ImageView;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.CategoryBaseBean;
-import com.young.jdmall.ui.adapter.WomanDressAdapter;
+import com.young.jdmall.ui.adapter.CategoryRightListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ public class ChildrenClothesFragment extends CategoryBaseRightListFragment {
         if (mData == null) {
             return null;
         } else {
-            WomanDressAdapter womanDressAdapter = new WomanDressAdapter(getActivity(), mList);
-            return womanDressAdapter;
+            CategoryRightListAdapter categoryRightListAdapter = new CategoryRightListAdapter(getActivity(), mList);
+            return categoryRightListAdapter;
         }
     }
 

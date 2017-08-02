@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
@@ -52,7 +51,6 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
         mItemInfoText.setText(data.getName());
 
         String imageUrl = Constant.IMAGE_URL + data.getPic();
-        Log.d(TAG, "bindView: " + imageUrl);
         Glide.with(getContext())
                 .load(imageUrl)
                 .error(R.mipmap.test_image)

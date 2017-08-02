@@ -3,7 +3,6 @@ package com.young.jdmall.ui.widget;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,7 +63,6 @@ public class CategoryBaseRightItemView extends LinearLayout {
         for (int i = 0; i < category.size(); i++) {
             CategoryBaseBean.CategoryBean categoryBean = category.get(i);
 
-            Log.d(TAG, "bind: 添加");
             //创建一行
             TableRow tableRow = new TableRow(getContext());
 
