@@ -90,6 +90,7 @@ public class SettingAdapter extends PagerAdapter {
         relativeLayout.setBackgroundResource(R.drawable.live_item_bg);
         container.addView(relativeLayout);
         return relativeLayout;
+
     }
 
     @Override
