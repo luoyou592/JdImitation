@@ -43,43 +43,52 @@
             <TextView
                 android:id="@+id/type_sort_comprehensive"
                 style="@style/TypeTextStyle"
-                android:drawableRight="@drawable/selector_sort"
+                android:drawableRight="@drawable/selector_sort_xia"
                 android:text="评价"/>
 
             <TextView
                 android:id="@+id/type_sort_volume"
                 style="@style/TypeTextStyle"
-                android:drawableRight="@drawable/selector_sort"
+                android:drawableRight="@drawable/selector_sort_xia"
                 android:text="销量"/>
 
-            <FrameLayout
-                android:layout_weight="1"
+            <RelativeLayout
                 android:layout_width="0dp"
-                android:layout_height="30dp">
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center">
+
                 <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:textColor="@color/selector_text"
                     android:id="@+id/type_sort_price"
-                    android:text="价格"/>
-
-                <ImageView
-                    android:id="@+id/type_sort_price_selector"
-                    android:layout_toRightOf="@id/type_sort_price"
-                    android:src="@drawable/shang"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:text="价格"
+                    android:textColor="@color/selector_text"/>
 
-                <ImageView
-                    android:layout_below="@id/type_sort_price_selector"
-                    android:layout_toRightOf="@id/type_sort_price"
-                    android:src="@drawable/selector_sort"
+                <LinearLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content"
+                    android:layout_toRightOf="@id/type_sort_price"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/type_sort_price_shang"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/selector_sort_shang"/>
+
+                    <ImageView
+                        android:id="@+id/type_sort_price_xia"
+                        android:layout_width="wrap_content"
+                        android:layout_height="0dp"
+                        android:layout_marginLeft="1dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/selector_sort_xia"/>
+                </LinearLayout>
 
 
-            </FrameLayout>
+            </RelativeLayout>
 
             <TextView
                 android:layout_width="0dp"
