@@ -3,7 +3,7 @@ package com.young.jdmall.ui.adapter;
 import android.content.Context;
 import android.view.View;
 
-import com.young.jdmall.bean.TestBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.ui.widget.CategoryBaseRightItemView;
 
 import java.util.List;
@@ -14,12 +14,12 @@ import java.util.List;
  * 时间:2017/7/30
  */
 
-public class WomanDressAdapter extends CategoryBaseRightAdapter<TestBean> {
+public class CategoryRightListAdapter extends CategoryBaseRightAdapter<CategoryBaseBean> {
 
-    private static final String TAG = "WomanDressAdapter";
-    private List<TestBean> mDataList;
+    private static final String TAG = "CategoryRightListAdapter";
+    private List<CategoryBaseBean> mDataList;
 
-    public WomanDressAdapter(Context context, List<TestBean> dataList) {
+    public CategoryRightListAdapter(Context context, List<CategoryBaseBean> dataList) {
         super(context, dataList);
         mDataList = dataList;
     }

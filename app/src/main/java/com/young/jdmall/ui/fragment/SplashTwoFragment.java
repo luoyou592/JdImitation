@@ -7,7 +7,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.animation.LinearInterpolator;
 
 import com.young.jdmall.R;
 import com.young.jdmall.ui.view.RotateView;
@@ -15,8 +14,6 @@ import com.young.jdmall.ui.view.RotateView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-
-import static com.young.jdmall.network.NetworkManage.init;
 
 public class SplashTwoFragment extends Fragment {
 
@@ -41,12 +38,18 @@ public class SplashTwoFragment extends Fragment {
 
     public void init() {
 
-        LinearInterpolator linearInterpolator = new LinearInterpolator();
+
+  /*      LinearInterpolator linearInterpolator = new LinearInterpolator();
         mRotationAnim = ObjectAnimator.ofFloat(mRotateViewSplash, "rotation", 0f, 360f);
         mRotationAnim.setDuration(2000);
         mRotationAnim.setInterpolator(linearInterpolator);
-        mRotationAnim.setRepeatCount(-1);
+        mRotationAnim.setRepeatCount(-1);*/
 
 
     }
+    public void ScrollView(int positionOffsetPixels) {
+        mRotateViewSplash.getViewLayout(positionOffsetPixels/3);
+
+    }
+
 }
