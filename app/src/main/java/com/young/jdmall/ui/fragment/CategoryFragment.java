@@ -113,20 +113,14 @@ public class CategoryFragment extends BaseFragment {
 
     private void loadNetwork() {
         Observable<CategoryBaseBean> categoryObservable = RetrofitFactory.getInstance().listCategory();
-
         categoryObservable.compose(compose(this.<CategoryBaseBean>bindToLifecycle())).subscribe(new BaseObserver<CategoryBaseBean>(getActivity()) {
-
             @Override
             protected void onHandleSuccess(CategoryBaseBean categoryBean) {
-                Log.d(TAG, "onHandleSuccess: 加载成功" + categoryBean.getCategory().get(6).getTag());
-
                 mCategoryBean = categoryBean;
-
                 //加载成功再添加Fragment
                 initFragment();
                 selectFragment(0);
             }
-
             @Override
             protected void onHandleError(String msg) {
                 Log.d(TAG, "onHandleError: 加载失败");

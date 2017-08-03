@@ -6,6 +6,7 @@ import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.ProductBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 
@@ -47,6 +48,14 @@ public interface JDMallService {
     @GET("brand")
     Observable<BrandInfoBean> listBrand();
 
+    //分类页面
     @GET("category")
     Observable<CategoryBaseBean> listCategory();
+
+    //商品列表
+//    http://localhost:8080/market/productlist?page=1&pageNum=10&cId=125&orderby=saleDown
+    @GET("productlist")
+    Observable<ProductBean> listProductlist(@Query("page")int page, @Query("pageNum")int pageNum,
+                                            @Query("cId")int cId, @Query("orderby")String orderby);
+
 }

@@ -212,7 +212,7 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             });
            /* if (mNewsProductInfoBean != null) {
                 GoodsItemView goodsItemView = (GoodsItemView) mView;
-                NewsProductInfoBean.ProductListBean productListBean = mNewsProductInfoBean.getProductList().get(position);
+                NewsProductInfoBean.ProductBean productListBean = mNewsProductInfoBean.getProductList().get(position);
                 goodsItemView.setTitle(productListBean.getName());
                 goodsItemView.setImagUrl(productListBean.getPic());
                 goodsItemView.setPrice(productListBean.getPrice());
