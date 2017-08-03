@@ -95,7 +95,6 @@ public class SettingAdapter extends PagerAdapter {
 
     @Override
     public void destroyItem(ViewGroup container, int position, Object object) {
-//        super.destroyItem();
         container.removeView((View) object);
     }
 
