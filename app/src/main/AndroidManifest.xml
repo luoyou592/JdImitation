@@ -29,6 +29,8 @@
         <activity android:name=".ui.activity.OrderActivity"/>
         <activity android:name=".ui.activity.TypeListActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.HongBaoActivity"/>
+        <activity android:name=".ui.activity.FillingOrderActivity"/>
 
         <activity android:name=".ui.activity.RegistActivity"/>
         <activity android:name=".ui.activity.AddRecepitAddressActivity"/>
