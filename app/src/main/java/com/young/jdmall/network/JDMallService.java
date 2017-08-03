@@ -2,6 +2,7 @@ package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
+import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
@@ -32,25 +33,36 @@ public interface JDMallService {
     Observable<HomeInfoBean> listHome();
 
     //搜索推荐
-    @GET("search/recommend")
-    Observable<RecommendInfoBean> listRecommend();
+    @GET("hotproduct")
+    Observable<RecommendInfoBean> listRecommend(@Query("page") int page, @Query("pageNum") int pageNum, @Query("orderby") String orderby);
 
     //促销快报
     @GET("topic")
     Observable<TopicInfoBean> listTopic(@Query("page") int page, @Query("pageNum") int pageNum);
 
+    //购物车
+    @FormUrlEncoded
+    @POST("cart")
+    Observable<CartInfoBean> listCart(@Field("sku") String test);
+
+
+
     //登陆
     @FormUrlEncoded
     @POST("login")
     Observable<LoginInfoBean> listLogin(@Field("username") String username, @Query("password") String password);
+
     //限时抢购limitbuy
     @GET("limitbuy")
     Observable<LimitbuyBean> listLimitbuy(@Query("page") int page, @Query("pageNum") int pageNum);
+
     @GET("newproduct")
-    Observable<NewsProductInfoBean> listNewsProduct(@Query("page") int page,@Query("pageNum") int pageNum,@Query("orderby") String orderby);
+    Observable<NewsProductInfoBean> listNewsProduct(@Query("page") int page, @Query("pageNum") int pageNum, @Query("orderby") String orderby);
+
     //品牌
     @GET("brand")
     Observable<BrandInfoBean> listBrand();
+
     @FormUrlEncoded
     @POST("register")
     Observable<LoginInfoBean> listRegister(@Field("username") String username, @Query("password") String password);

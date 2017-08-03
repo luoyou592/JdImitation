@@ -1,6 +1,5 @@
 package com.young.jdmall.ui.fragment;
 
-import android.app.Fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,27 +10,23 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.CartInfoBean;
+import com.young.jdmall.bean.RecommendInfoBean;
+import com.young.jdmall.network.BaseObserver;
+import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.ShoppingCarFragmentAdapter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observable;
 
-/**
- * Created by 钟志鹏 on 2017/7/30.
- */
 
-public class ShopCartFragment extends Fragment {
+public class ShopCartFragment extends BaseFragment {
 
     @BindView(R.id.rv_shopcar)
     RecyclerView mRvShopcar;
     private ShoppingCarFragmentAdapter mShoppingCarFragmentAdapter;
 
-    private List<Map<String, Object>> mMapList = new ArrayList<>();
 
     @Nullable
     @Override
@@ -39,30 +34,46 @@ public class ShopCartFragment extends Fragment {
         View shopCarView = inflater.inflate(R.layout.shop_car, null);
         ButterKnife.bind(this, shopCarView);
         mShoppingCarFragmentAdapter = new ShoppingCarFragmentAdapter(getActivity());
+        initView();
+        initData();
         mRvShopcar.setAdapter(mShoppingCarFragmentAdapter);
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
-        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
-            @Override
-            public int getSpanSize(int position) {
-                return position==0?2:1;
-            }
-        });
-        mRvShopcar.setLayoutManager(manager);
-        Log.d("shopcar", "fragment创建布局,添加适配器");
-        init();
-
         return shopCarView;
 
     }
 
+    private void initView() {
+        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
+            @Override
+            public int getSpanSize(int position) {
+                return position == 0 ? 2 : 1;
+            }
+        });
+        mRvShopcar.setLayoutManager(manager);
+        Log.d("shopcar", "fragment创建布局,添加适配器");
 
-    private void init() {
-        Map<String, Object> map = new HashMap<>();
-        for (int i = 0; i < 25; i++) {
-            map.put("name", "name" + i);
-        }
-        mMapList.add(map);
-        mShoppingCarFragmentAdapter.setList(mMapList);
+    }
+
+    private void initData() {
+        Observable<CartInfoBean> cartInfoBeanObservable = RetrofitFactory.getInstance().listCart("1:3:1,2,3,4|2:2:2,3");
+        cartInfoBeanObservable.compose(compose(this.<CartInfoBean>bindToLifecycle())).subscribe(new BaseObserver<CartInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(CartInfoBean cartInfoBean) {
+                mShoppingCarFragmentAdapter.setList(cartInfoBean.getCart());
+                Log.d("data","cartInfoBean=============="+cartInfoBean.toString());
+            }
+        });
+
+        Observable<RecommendInfoBean> recommendInfoBeanObservable = RetrofitFactory.getInstance().listRecommend(1,10,"saleDown");
+        recommendInfoBeanObservable.compose(compose(this.<RecommendInfoBean>bindToLifecycle())).subscribe(new BaseObserver<RecommendInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(RecommendInfoBean recommendInfoBean) {
+                mShoppingCarFragmentAdapter.setData(recommendInfoBean.getProductList());
+                Log.d("data","recommendInfoBean============="+recommendInfoBean.getProductList().toString());
+            }
+        });
+
+
     }
 
 
