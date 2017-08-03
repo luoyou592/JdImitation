@@ -53,11 +53,11 @@
                 android:text="配送"/>
         </LinearLayout>
 
-        <android.support.v7.widget.RecyclerView
+        <com.hellosliu.easyrecyclerview.LoadMoreRecylerView
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-        </android.support.v7.widget.RecyclerView>
+        </com.hellosliu.easyrecyclerview.LoadMoreRecylerView>
 
     </LinearLayout>
 

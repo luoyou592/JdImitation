@@ -3,15 +3,14 @@ package com.young.jdmall.ui.activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.hellosliu.easyrecyclerview.LoadMoreRecylerView;
+import com.hellosliu.easyrecyclerview.listener.OnRefreshListener;
 import com.young.jdmall.R;
 import com.young.jdmall.bean.ProductBean;
-import com.young.jdmall.bean.TestTypeListBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
-import com.young.jdmall.ui.TypeListListener;
 import com.young.jdmall.ui.adapter.TypeListAdapter;
 import com.young.jdmall.ui.widget.ViewTypeHeader;
 
@@ -34,13 +33,14 @@ public class TypeListActivity extends BaseActivity {
 
     @BindView(R.id.view_type_list_header)
     ViewTypeHeader mViewTypeListHeader;
-    private List<TestTypeListBean> mData = new ArrayList<>();
+    private List<ProductBean.ProductListBean> mData = new ArrayList<>();
     @BindView(R.id.recycle_view)
-    RecyclerView mRecycleView;
+    LoadMoreRecylerView mRecycleView;
 
 
     private List<ProductBean.ProductListBean> mProductList;
     private TypeListAdapter mTypeListAdapter;
+    private int page = 2;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -55,36 +55,64 @@ public class TypeListActivity extends BaseActivity {
     //初始化
     private void init() {
         //添加布局管理器
-        mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         //添加滑动监听
-        mRecycleView.addOnScrollListener(new TypeListListener(findViewById(R.id
-                .view_type_list_header)));
+//        mRecycleView.addOnScrollListener(new TypeListListener(findViewById(R.id
+//                .view_type_list_header)));
+
+
+        mRecycleView.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                loadMoreData(page);
+            }
+
+            @Override
+            public void onReload() {
+                Log.d(TAG, "onReload: 网络异常");
+            }
+        });
+
+//        mRecycleView.setHasFixedSize(true);
+        mRecycleView.setLayoutManager(new LinearLayoutManager(this));
         //设置适配器
         mTypeListAdapter = new TypeListAdapter(this);
-
-        mRecycleView.setAdapter(mTypeListAdapter);
+//        mRecycleView.setAdapter(mTypeListAdapter);
 
         mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
             @Override
             public void onPrimaryVolume() {
                 loadPrimary("saleDown");
-
             }
 
             @Override
             public void onPrimaryEvaluate() {
                 loadPrimary("shelvesDown");
-
             }
 
             @Override
             public void onPrimaryPrice(boolean isMode) {
-                Log.d(TAG, "onPrimaryVolume: 价格排序" + isMode);
                 if (isMode){
                     loadPrimary("priceDown");
                 }else {
                     loadPrimary("priceUp");
                 }
+            }
+        });
+    }
+
+    private void loadMoreData(int page) {
+        page++;
+        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(page, 10, 125, "saleDown");
+        productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
+            @Override
+            protected void onHandleSuccess(ProductBean productBean) {
+                mProductList = productBean.getProductList();
+                mTypeListAdapter.addData(mProductList);
+//                mRecycleView.setAdapter(mTypeListAdapter);
+            }
+            @Override
+            protected void onHandleError(String msg) {
+                Log.d(TAG, "onHandleError: 请求失败");
             }
         });
     }
@@ -96,6 +124,8 @@ public class TypeListActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean productBean) {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
+                mTypeListAdapter.notifyDataSetChanged();
+//                mRecycleView.setAdapter(mTypeListAdapter);
             }
             @Override
             protected void onHandleError(String msg) {
@@ -105,16 +135,17 @@ public class TypeListActivity extends BaseActivity {
     }
 
 
-    //加载假数据
+    //加载数据
     private void loadData() {
-
 
         Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, "saleDown");
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
             @Override
             protected void onHandleSuccess(ProductBean productBean) {
                 mProductList = productBean.getProductList();
+                Log.d(TAG, "onHandleSuccess: 得到数据");
                 mTypeListAdapter.setData(mProductList);
+                mRecycleView.setAdapter(mTypeListAdapter);
             }
             @Override
             protected void onHandleError(String msg) {
