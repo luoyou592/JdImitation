@@ -11,11 +11,13 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
+import com.young.jdmall.bean.CartInfoBean;
+import com.young.jdmall.bean.RecommendInfoBean;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,19 +32,38 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
     private static final int TYPE_TITLE = 0;
     private static final int TYPE_GLIDE = 1;
 
-    Context mContext;
-
+    private Context mContext;
+    private List<RecommendInfoBean.ProductListBean> mData;
 
 
     public ShoppingCarFragmentAdapter(Context context) {
         mContext = context;
     }
 
-    private List<Map<String, Object>> mList = new ArrayList<>();
+    private List<CartInfoBean.CartBean> mList;
 
-    public void setList(List<Map<String, Object>> list) {
+    public void setList(List<CartInfoBean.CartBean> list) {
         mList = list;
     }
+
+    public void setData(List<RecommendInfoBean.ProductListBean> data) {
+        mData = data;
+        Log.d("data", "mdata==============" + mData.toString());
+        notifyDataSetChanged();
+    }
+
+
+    @Override
+    public int getItemCount() {
+        Log.d("shopcar", "得到数目");
+        if (mData != null) {
+            Log.d("data","mData.getListCount()==============="+mData.size());
+            return mData.size();
+        }
+        Log.d("data","得到一个0");
+        return 0;
+    }
+
 
     @Override
     public int getItemViewType(int position) {
@@ -86,20 +107,10 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                 break;
             case TYPE_GLIDE:
                 ItemViewHolder grideViewHolder = (ItemViewHolder) holder;
-                grideViewHolder.setData(mList);
+                grideViewHolder.setData(position);
         }
     }
 
-    @Override
-    public int getItemCount() {
-        Log.d("shopcar", "得到数目");
-        return 30;
-    }
-
-
-    public void setData(List<Map<String, Object>> list) {
-
-    }
 
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -134,13 +145,13 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                     Log.d("shopcar", "点击了mCheck");
                 }
             });
-            GoodsShowAdapter goodsShowAdapter = new GoodsShowAdapter(mContext);
-            mGoodsShow.setLayoutManager(new LinearLayoutManager(mContext));
-            mGoodsShow.setAdapter(goodsShowAdapter);
         }
 
         public void setData() {
-
+            GoodsShowAdapter goodsShowAdapter = new GoodsShowAdapter(mContext);
+            goodsShowAdapter.setData(mList);
+            mGoodsShow.setLayoutManager(new LinearLayoutManager(mContext));
+            mGoodsShow.setAdapter(goodsShowAdapter);
         }
     }
 
@@ -156,39 +167,42 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         TextView mItemDesc;
         @BindView(R.id.item_price)
         TextView mItemPrice;
-
-        TextView mItemPriceRight;
         @BindView(R.id.goods_left)
         RelativeLayout mGoodsLeft;
 
-        ItemViewHolder(View view) {
+        ItemViewHolder(final View view) {
             super(view);
             ButterKnife.bind(this, view);
             mAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("shopcar", "点击了左边add");
+                    Log.d("shopcar", "点击了add");
                 }
             });
 
             mGoaway.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("shopcar", "点击了左边goaway");
+                    Log.d("shopcar", "点击了goaway");
+                    mData.remove(getLayoutPosition());
+                    notifyDataSetChanged();
                 }
             });
 
             mGoodsLeft.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Log.d("shopcar", "点击了左边");
+                    Log.d("shopcar", "点击了进入详情");
                 }
             });
 
         }
 
-        public void setData(List<Map<String, Object>> list) {
-
+         public void setData(int position) {
+             RecommendInfoBean.ProductListBean productList = mData.get(position);
+             mItemDesc.setText(productList.getName());
+            mItemPrice.setText(productList.getPrice()+"");
+            Glide.with(mContext.getApplicationContext()).load(Constant.BASE_URL + productList.getPic()).into(mItemSrc);
         }
     }
 

@@ -10,7 +10,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
+import com.young.jdmall.bean.CartInfoBean;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -23,6 +28,7 @@ import butterknife.ButterKnife;
 public class GoodsShowAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
+    private List<CartInfoBean.CartBean> mList;
 
     public GoodsShowAdapter(Context context) {
         mContext = context;
@@ -39,7 +45,7 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.setData();
+        viewHolder.setData(position);
     }
 
     @Override
@@ -49,12 +55,18 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (mList!=null) {
+            return mList.size();
+        }
+        return 0;
+    }
+
+    public void setData(List<CartInfoBean.CartBean> list) {
+        mList = list;
     }
 
 
-
-    static class ViewHolder extends RecyclerView.ViewHolder {
+     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.goods_checkbox)
         CheckBox mGoodsCheckbox;
         @BindView(R.id.goods_icon)
@@ -79,8 +91,9 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
 
-        public void setData() {
-
+        public void setData(int position) {
+            CartInfoBean.CartBean.ProductBean product = mList.get(position).getProduct();
+            Glide.with(mContext.getApplicationContext()).load(Constant.BASE_URL+product.getPic()).into(mGoodsIcon);
         }
     }
 }
