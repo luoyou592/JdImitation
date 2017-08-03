@@ -9,6 +9,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.ProductBean;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -36,7 +38,7 @@ public class TypeListAdapter extends RecyclerView.Adapter {
 
     private static final String TAG = "RecycleAdapter";
     private Context mContext;
-    private List<ProductBean.ProductListBean> mData;
+    private List<ProductBean.ProductListBean> mData = new ArrayList<>();
 
 
     public TypeListAdapter(Context context) {
@@ -45,8 +47,17 @@ public class TypeListAdapter extends RecyclerView.Adapter {
 
     public void setData(List<ProductBean.ProductListBean> data) {
         mData = data;
+
+        Log.d(TAG, "setData: 设置数据" + mData.size() + this);
         notifyDataSetChanged();
     }
+
+    public void addData(List<ProductBean.ProductListBean> productList) {
+        mData.addAll(productList);
+
+        Log.d(TAG, "addData: 添加数据"+mData.size());
+    }
+
 
 
 
@@ -55,6 +66,7 @@ public class TypeListAdapter extends RecyclerView.Adapter {
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_type_list, parent,false);
             ViewHolder viewHolder = new ViewHolder(rootView);
+        Log.d(TAG, "onCreateViewHolder: 测试1");
             return viewHolder;
     }
 
@@ -63,16 +75,21 @@ public class TypeListAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.setData(mData.get(position));
+        Log.d(TAG, "onCreateViewHolder: 测试2");
     }
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount: "+mData.size());
         if (mData != null) {
+            Log.d(TAG, "size: ");
             return mData.size();
         }
         return 0;
     }
-    
+
+
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.icon)
         ImageView mIcon;
