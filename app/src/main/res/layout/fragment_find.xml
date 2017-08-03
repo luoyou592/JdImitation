@@ -30,15 +30,17 @@
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
+                android:clickable="true"
                 android:padding="10dp"
-                android:src="@drawable/apx"/>
+                android:src="@drawable/msg_selector"/>
 
             <ImageView
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_centerVertical="true"
+                android:clickable="true"
                 android:padding="10dp"
-                android:src="@drawable/apz"/>
+                android:src="@drawable/scan_selector"/>
 
         </RelativeLayout>
 
@@ -109,11 +111,11 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-                <android.support.v4.view.ViewPager
-                    android:id="@+id/view_pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            
+            <android.support.v4.view.ViewPager
+                android:id="@+id/view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+
             <LinearLayout
                 android:id="@+id/tab_select_container"
                 android:layout_width="match_parent"

@@ -28,7 +28,7 @@ public abstract class BaseSettingContainerAdapter extends RecyclerView.Adapter {
         if (viewType == KEY_ITEM_TYPE_LOADING) {
             mLoadingView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
             return new ViewHolderFromLoading(mLoadingView);
-        }else{
+        } else {
             return getViewHolder(parent, viewType);
         }
     }
@@ -36,9 +36,13 @@ public abstract class BaseSettingContainerAdapter extends RecyclerView.Adapter {
     @Override
     public final void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         if (getItemViewType(position) == KEY_ITEM_TYPE_LOADING) {
-            ((ViewHolderFromLoading)holder).bindView();
+            ((ViewHolderFromLoading) holder).bindView();
+        } else {
+            bindView(holder, position);
         }
     }
+
+    protected abstract void bindView(RecyclerView.ViewHolder holder, int position);
 
     @Override
     public final int getItemCount() {
@@ -53,7 +57,7 @@ public abstract class BaseSettingContainerAdapter extends RecyclerView.Adapter {
         return itemViewType(position);
     }
 
-    private int itemViewType(int position) {
+    public int itemViewType(int position) {
         return 0;
     }
 

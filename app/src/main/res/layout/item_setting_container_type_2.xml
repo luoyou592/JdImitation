@@ -36,8 +36,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:layout_marginBottom="8dp"
-                android:scaleType="centerCrop"
                 android:layout_marginTop="8dp"
+                android:scaleType="centerCrop"
                 android:src="@drawable/ayo"/>
 
             <ImageView
@@ -58,12 +58,14 @@
             android:orientation="horizontal">
 
             <ImageView
+                android:id="@+id/item_setting_container_icon"
                 android:layout_width="12dp"
                 android:layout_height="12dp"
                 android:layout_marginRight="5dp"
                 android:background="@drawable/am6"/>
 
             <TextView
+                android:id="@+id/item_setting_container_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="数码发烧友"
@@ -77,6 +79,7 @@
 
 
             <TextView
+                android:id="@+id/item_setting_container_visits"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="9943次播放"

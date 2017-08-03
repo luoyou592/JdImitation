@@ -58,7 +58,7 @@ public class SettingFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            getActivity().getWindow().setStatusBarColor(0x66000000);
+            getActivity().getWindow().setStatusBarColor(0xAA000000);
         }
         View view = View.inflate(getActivity(), R.layout.fragment_find, null);
         unbinder = ButterKnife.bind(this, view);

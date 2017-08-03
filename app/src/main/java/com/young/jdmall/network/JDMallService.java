@@ -9,6 +9,8 @@ import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
 
+import java.util.Observer;
+
 import io.reactivex.Observable;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
