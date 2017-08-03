@@ -86,6 +86,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                 return viewHolder;
             case TYPE_GLIDE:
                 View grideView = View.inflate(mContext, R.layout.shop_car_item, null);
+
                 ItemViewHolder itemViewHolder = new ItemViewHolder(grideView);
                 Log.d("shopcar", "创建其他布局");
                 return itemViewHolder;
