@@ -69,7 +69,6 @@ public class ShopCartFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d("shopcar", "设置数据");
     }
 
     @Override
