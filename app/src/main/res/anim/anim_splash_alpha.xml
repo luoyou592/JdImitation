@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android"
+     android:duration="1000"
+     android:interpolator="@android:anim/accelerate_interpolator"
+     android:shareInterpolator="true"
+    >
+
+    <!--渐变-->
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"/>
+</set>

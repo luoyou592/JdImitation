@@ -1,18 +1,18 @@
 package com.young.jdmall.ui.view;
 
 
-import android.animation.ObjectAnimator;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
 import android.view.View;
-import android.view.animation.LinearInterpolator;
 import android.widget.RelativeLayout;
 
 import com.young.jdmall.R;
 
 import static android.util.TypedValue.COMPLEX_UNIT_DIP;
+import static com.bumptech.glide.gifdecoder.GifHeaderParser.TAG;
 
 /**
  * Created by BjyJyk on 2017/8/2.
@@ -20,9 +20,15 @@ import static android.util.TypedValue.COMPLEX_UNIT_DIP;
 
 public class RotateView extends RelativeLayout {
 
-    private int mRadius;
+    public int mRadius;
     private int mMeasuredWidth;
     private int mMeasuredHeight;
+
+    public void setNum(int num) {
+        this.num = num;
+    }
+
+    private int num =0;
 
     public RotateView(Context context) {
         this(context, null);
@@ -55,15 +61,31 @@ public class RotateView extends RelativeLayout {
     }
 
 
-    protected void onLayout(boolean changed, int l, int t, int r, int b) {
+    public void onLayout(boolean changed, int l, int t, int r, int b) {
         int count = getChildCount();
         mMeasuredWidth = getMeasuredWidth();
         mMeasuredHeight = getMeasuredHeight();
 
         for (int i = 0; i < count; i++) {
             View child = getChildAt(i);
-            int cleft = (int) (getMeasuredWidth() / 2 - child.getMeasuredWidth() / 2 + mRadius * Math.sin(Math.PI * 2 / count * i));
-            int ctop = (int) (getMeasuredHeight() / 2 - child.getMeasuredHeight() / 2 + mRadius * Math.cos(Math.PI * 2 / count * i));
+            int cleft = (int) (getMeasuredWidth() / 2 - child.getMeasuredWidth() / 2 + mRadius * Math.sin(Math.PI * 2 / count * i+(Math.PI * 2 /360)*num));
+            int ctop = (int) (getMeasuredHeight() / 2 - child.getMeasuredHeight() / 2 + mRadius * Math.cos(Math.PI * 2 / count * i+(Math.PI * 2 /360)*num));
+            int width = child.getMeasuredWidth();
+            int height = child.getMeasuredHeight();
+
+            child.layout(cleft, ctop, width + cleft, ctop + height);
+        }
+
+    }
+    int tatalnumber=0;
+    public void getViewLayout(int number) {
+        int count = getChildCount();
+        tatalnumber+=number;
+        Log.e(TAG, "getViewLayout: "+tatalnumber );
+        for (int i = 0; i < count; i++) {
+            View child = getChildAt(i);
+            int cleft = (int) (getMeasuredWidth() / 2 - child.getMeasuredWidth() / 2 + mRadius * Math.sin(Math.PI * 2 / count * i+(Math.PI * 2 /360)*number));
+            int ctop = (int) (getMeasuredHeight() / 2 - child.getMeasuredHeight() / 2 + mRadius * Math.cos(Math.PI * 2 / count * i+(Math.PI * 2 /360)*number));
             int width = child.getMeasuredWidth();
             int height = child.getMeasuredHeight();
 
