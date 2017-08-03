@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             android:id="@+id/splash_contains"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/infographic"
+            android:layout_width="88dp"
+            android:layout_height="66dp"
+            android:layout_above="@+id/imageView2"
+            android:layout_marginBottom="23dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:layout_x="94dp"
+            android:layout_y="172dp"
+            android:src="@mipmap/onboarding_1_atom_infographic"/>
+    </AbsoluteLayout>
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/mainbox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_x="144dp"
+            android:layout_y="200dp"
+            android:src="@mipmap/onboarding_1_mainbox"/>
+    </AbsoluteLayout>
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/quote"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@+id/imageView5"
+            android:layout_alignRight="@+id/imageView5"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_marginTop="14dp"
+            android:layout_x="210dp"
+            android:layout_y="456dp"
+            android:src="@mipmap/onboarding_1_atom_quote"/>
+    </AbsoluteLayout>
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <ImageView
+            android:id="@+id/map"
+            android:layout_width="66dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/map"
+            android:layout_marginEnd="30dp"
+            android:layout_marginRight="30dp"
+            android:layout_marginTop="34dp"
+            android:layout_toLeftOf="@+id/mainbox"
+            android:layout_toStartOf="@+id/mainbox"
+            android:layout_x="72dp"
+            android:layout_y="316dp"
+            android:src="@mipmap/onboarding_1_atom_map"/>
+    </AbsoluteLayout>
+
+
+    <AbsoluteLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_x="-4dp"
+        android:layout_y="-6dp">
+
+        <ImageView
+            android:id="@+id/stockchart"
+            android:layout_width="46dp"
+            android:layout_height="53dp"
+            android:layout_alignBottom="@+id/imageView2"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginEnd="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_x="298dp"
+            android:layout_y="244dp"
+            android:src="@mipmap/onboarding_1_atom_stockchart"/>
+    </AbsoluteLayout>
+
+
+</FrameLayout>

@@ -13,6 +13,15 @@ public class LoginInfoBean {
 
     private String response;
     private UserInfoBean userInfo;
+    private String error;
+
+    public String getError() {
+        return error;
+    }
+
+    public void setError(String error) {
+        this.error = error;
+    }
 
     public String getResponse() {
         return response;
@@ -44,5 +53,14 @@ public class LoginInfoBean {
         public void setUserid(String userid) {
             this.userid = userid;
         }
+
+        @Override
+        public String toString() {
+            return "UserInfoBean{" +
+                    "userid='" + userid + '\'' +
+                    '}';
+        }
     }
+
+
 }

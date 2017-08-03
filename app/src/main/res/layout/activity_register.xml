@@ -8,6 +8,7 @@
         android:layout_height="wrap_content"
         android:padding="14dp">
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@mipmap/a_8"
@@ -43,6 +44,7 @@
                 android:layout_height="wrap_content"
                 android:text="账号"/>
             <EditText
+                android:id="@+id/et_user"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -71,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:text="密码"/>
             <EditText
+                android:id="@+id/et_pwd"
                 android:layout_marginLeft="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -99,6 +102,7 @@
             android:layout_height="wrap_content"
             android:text="密码确认"/>
         <EditText
+            android:id="@+id/et_rpwd"
             android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -116,6 +120,7 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/bt_regist"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

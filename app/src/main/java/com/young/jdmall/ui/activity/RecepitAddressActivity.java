@@ -43,6 +43,7 @@ public class RecepitAddressActivity extends AppCompatActivity {
                 break;
             case R.id.bt_add_address:
                 Intent intent = new Intent(this, AddRecepitAddressActivity.class);
+                startActivity(intent);
                 break;
         }
     }

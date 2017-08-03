@@ -11,15 +11,14 @@ import android.content.SharedPreferences;
 public class PreferenceUtils {
     private static final String NAME = "jdmall";
     private static final String KEY_USER_NAME= "user_name";
+    private static final String KEY_USER_ID = "user_id";
+    private static final String KEY_REGIST_SUCCESS = "regist_success";
 
     public static void setUserName(Context context, String value){
         SharedPreferences sp = getPreference(context);
         sp.edit().putString(KEY_USER_NAME, value).commit();
     }
 
-    /**
-     * 获取程序锁密码
-     */
     public static String getUserName(Context context){
         SharedPreferences sp = getPreference(context);
         return sp.getString(KEY_USER_NAME, "");
@@ -29,4 +28,26 @@ public class PreferenceUtils {
         SharedPreferences sp = context.getSharedPreferences(NAME, Context.MODE_PRIVATE);
         return sp;
     }
+
+    public static void setUserId(Context context, String value){
+        SharedPreferences sp = getPreference(context);
+        sp.edit().putString(KEY_USER_ID, value).commit();
+    }
+
+    public static String getUserId(Context context){
+        SharedPreferences sp = getPreference(context);
+        return sp.getString(KEY_USER_ID, "");
+    }
+
+    public static void setRegistSuccess(Context context, boolean value){
+        SharedPreferences sp = getPreference(context);
+        sp.edit().putBoolean(KEY_REGIST_SUCCESS, value).commit();
+    }
+
+
+    public static boolean getRegistSuccess(Context context){
+        SharedPreferences sp = getPreference(context);
+        return sp.getBoolean(KEY_REGIST_SUCCESS, false);
+    }
+
 }
