@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#F4F5F7">
+                android:layout_height="match_parent">
+
+    <!--android:background="#F4F5F7"-->
 
     <LinearLayout
         android:id="@+id/loading"

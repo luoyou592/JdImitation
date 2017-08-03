@@ -19,8 +19,8 @@
             android:layout_width="11dp"
             android:layout_height="21dp"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="25dp"
             android:background="@drawable/agm"/>
 
         <ImageView
