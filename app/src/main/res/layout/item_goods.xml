@@ -10,6 +10,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
     <ImageView
+        android:id="@+id/iv_limit"
         android:src="@mipmap/goods1"
         android:layout_width="70dp"
         android:layout_height="70dp"/>

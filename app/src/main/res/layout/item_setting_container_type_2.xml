@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/item_bg">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingBottom="8dp"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingTop="8dp">
+
+        <TextView
+            android:id="@+id/item_setting_container_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:lineSpacingExtra="6dp"
+            android:maxLines="1"
+            android:paddingRight="14dp"
+            android:paddingTop="8dp"
+            android:text="情怀至上，原谅色的灯厂机械键盘最赞了！"
+            android:textColor="@color/black"
+            android:textSize="14sp"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/item_setting_container_image"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="8dp"
+                android:scaleType="centerCrop"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/ayo"/>
+
+            <ImageView
+                android:layout_width="55dp"
+                android:layout_height="55dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/aom"/>
+
+
+        </RelativeLayout>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:layout_marginRight="5dp"
+                android:background="@drawable/am6"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="数码发烧友"
+                android:textSize="10sp"/>
+
+            <ImageView
+                android:layout_width="5dp"
+                android:layout_height="5dp"
+                android:layout_margin="3dp"
+                android:background="@drawable/aaw"/>
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9943次播放"
+                android:textSize="10sp"/>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

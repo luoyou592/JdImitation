@@ -3,7 +3,10 @@
           package="com.young.jdmall">
 
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+
     <application
+        android:name=".app.JDMallApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -18,8 +21,11 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.LoginActivity"/>
-        <activity android:name=".ui.activity.AccountSetting"/>
         <activity android:name=".ui.activity.CalendarActivity"/>
+        <activity android:name=".ui.activity.SecKillActivity"/>
+        <activity android:name=".ui.activity.CustomServiceActivity"/>
+        <activity android:name=".ui.activity.MessageActivity"/>
+        <activity android:name=".ui.activity.OrderActivity"/>
     </application>
 
 </manifest>

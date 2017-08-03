@@ -1,8 +1,6 @@
 package com.young.jdmall.ui.fragment;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.graphics.Color;
+import android.animation.ObjectAnimator;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -10,19 +8,22 @@ import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.SettingAdapter;
+import com.young.jdmall.ui.adapter.SettingGridAdapter;
+import com.young.jdmall.ui.adapter.SettingNavigatorAdapter;
 
-import net.lucode.hackware.magicindicator.FragmentContainerHelper;
 import net.lucode.hackware.magicindicator.MagicIndicator;
 import net.lucode.hackware.magicindicator.ViewPagerHelper;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.CommonNavigator;
 import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.IPagerTitleView;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.indicators.LinePagerIndicator;
-import net.lucode.hackware.magicindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,13 +33,26 @@ import butterknife.Unbinder;
  * Created by 钟志鹏 on 2017/7/30.
  */
 
-public class SettingFragment extends Fragment {
+public class SettingFragment extends BaseFragment {
 
+    Unbinder unbinder;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
-    Unbinder unbinder;
     @BindView(R.id.magic_indicator)
     MagicIndicator mMagicIndicator;
+    @BindView(R.id.tab_title)
+    TextView mTabTitle;
+    @BindView(R.id.select_tab)
+    RelativeLayout mSelectTab;
+    @BindView(R.id.tab_select_item_gv)
+    GridView mTabSelectItemGv;
+    @BindView(R.id.tab_select_container)
+    LinearLayout mTabSelectContainer;
+    @BindView(R.id.tab_select_icon)
+    ImageView mTabSelectIcon;
+
+    private String[] mTitles = new String[]{"精选", "直播", "订阅", "视频购", "问答", "清单", "好东西", "社区", "生活", "数码", "亲子", "风尚", "美食"};
+    private SettingGridAdapter mGridAdapter;
 
     @Nullable
     @Override
@@ -49,45 +63,58 @@ public class SettingFragment extends Fragment {
         View view = View.inflate(getActivity(), R.layout.fragment_find, null);
         unbinder = ButterKnife.bind(this, view);
         setAdapter();
+        setListener();
         return view;
+    }
+
+    private void setListener() {
+        mTabSelectItemGv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                mGridAdapter.selectItem(position);
+                mViewPager.setCurrentItem(position);
+                toggleTabSelector();
+            }
+        });
+
+        mSelectTab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleTabSelector();
+            }
+        });
+    }
+
+    private void toggleTabSelector() {
+        if (mTabSelectContainer.getVisibility() == View.GONE) {
+            mTabSelectContainer.setVisibility(View.VISIBLE);
+            mTabTitle.setVisibility(View.VISIBLE);
+            mMagicIndicator.setVisibility(View.GONE);
+            mGridAdapter.selectItem(mViewPager.getCurrentItem());
+            TabSelectIconAnimator(0, 180);
+        } else {
+            mTabSelectContainer.setVisibility(View.GONE);
+            mTabTitle.setVisibility(View.GONE);
+            mMagicIndicator.setVisibility(View.VISIBLE);
+            TabSelectIconAnimator(180, 360);
+        }
+    }
+
+    private void TabSelectIconAnimator(float start, float end) {
+        ObjectAnimator animator = ObjectAnimator.ofFloat(mTabSelectIcon, "rotation", start, end);
+        animator.setDuration(200);
+        animator.start();
     }
 
     private void setAdapter() {
         mViewPager.setAdapter(new SettingAdapter());
         CommonNavigator commonNavigator = new CommonNavigator(getActivity());
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-            @Override
-            public int getCount() {
-                return 10;
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                ColorTransitionPagerTitleView colorTransitionPagerTitleView = new ColorTransitionPagerTitleView(context);
-                colorTransitionPagerTitleView.setNormalColor(Color.GRAY);
-                colorTransitionPagerTitleView.setSelectedColor(Color.RED);
-                colorTransitionPagerTitleView.setText("精选");
-                colorTransitionPagerTitleView.setTextSize(12);
-                colorTransitionPagerTitleView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        mViewPager.setCurrentItem(index);
-                    }
-                });
-                return colorTransitionPagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator indicator = new LinePagerIndicator(context);
-                indicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                indicator.setColors(Color.RED);
-                return indicator;
-            }
-        });
-
+        CommonNavigatorAdapter navigatorAdapter = new SettingNavigatorAdapter(mTitles, mViewPager);
+        commonNavigator.setAdapter(navigatorAdapter);
         mMagicIndicator.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mMagicIndicator, mViewPager);
+        mGridAdapter = new SettingGridAdapter(mTitles);
+        mTabSelectItemGv.setAdapter(mGridAdapter);
     }
 
     @Override

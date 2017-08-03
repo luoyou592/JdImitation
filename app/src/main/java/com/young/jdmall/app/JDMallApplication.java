@@ -13,5 +13,7 @@ public class JDMallApplication extends Application {
     public void onCreate() {
         super.onCreate();
         NetworkManage.init();
+
+
     }
 }

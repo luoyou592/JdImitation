@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/a_8"
+            android:layout_centerVertical="true"/>
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="新建收货地址"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+    </RelativeLayout>
+
+
+
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="3dp"
+        android:background="#fff">
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:text="联系人"/>
+
+        <EditText
+            android:id="@+id/et_name"
+            android:layout_toRightOf="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:background="@null"
+            android:hint="你的姓名"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+
+
+        <RadioGroup
+            android:id="@+id/rg_sex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="90dp"
+            android:orientation="horizontal">
+            <RadioButton
+                android:id="@+id/rb_man"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:text="先生"/>
+            <RadioButton
+                android:id="@+id/rb_women"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:textSize="14sp"
+                android:text="女士"/>
+        </RadioGroup>
+    </RelativeLayout>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:text="联系电话"/>
+
+        <EditText
+            android:id="@+id/et_phone"
+            android:layout_marginLeft="90dp"
+            android:inputType="phone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toLeftOf="@+id/ib_delete_phone"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:background="@null"
+            android:hint="你的手机号"/>
+
+        <ImageButton
+            android:id="@+id/ib_delete_phone"
+            android:layout_marginRight="10dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon_close"
+            android:visibility="invisible"
+            android:layout_toLeftOf="@+id/ib_add_phone_other"
+            />
+
+        <ImageButton
+            android:id="@+id/ib_add_phone_other"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            android:layout_width="15dp"
+            android:layout_height="15dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/address_icon_reserve"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:id="@+id/rl_phone_other"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+
+        <EditText
+            android:id="@+id/et_phone_other"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="90dp"
+            android:inputType="phone"
+            android:layout_toLeftOf="@+id/ib_delete_phone_other"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:background="@null"
+            android:hint="备选电话"/>
+        <ImageButton
+            android:id="@+id/ib_delete_phone_other"
+            android:layout_marginRight="10dp"
+            android:layout_width="10dp"
+            android:layout_height="10dp"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/icon_close"
+            android:visibility="invisible"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:text="收货地址"
+            />
+
+        <EditText
+            android:id="@+id/et_receipt_address"
+            android:layout_marginLeft="90dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:background="@null"
+            android:hint="小区/写字楼/学校"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+
+        <EditText
+            android:id="@+id/et_detail_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="90dp"
+            android:maxLines="1"
+            android:textSize="14sp"
+            android:background="@null"
+            android:hint="详细地址(如门牌号等)"/>
+    </RelativeLayout>
+    <RelativeLayout
+        android:visibility="visible"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginTop="1dp"
+        android:background="#fff">
+        <TextView
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textColor="#000"
+            android:layout_centerVertical="true"
+            android:textSize="12sp"
+            android:text="标签"
+            />
+        <TextView
+            android:id="@+id/tv_label"
+            android:layout_width="30dp"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:maxLines="1"
+            android:padding="3dp"
+            android:textSize="10sp"
+            android:background="#fff"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#fff"
+            android:layout_toLeftOf="@+id/ib_select_label"
+            />
+        <ImageView
+            android:id="@+id/ib_select_label"
+            android:layout_marginRight="5dp"
+            android:layout_width="30dp"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@mipmap/address_icon_down"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+
+    <Button
+        android:id="@+id/bt_ok"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="10dp"
+        android:background="#ff0000"
+        android:textColor="#fff"
+        android:text="保存"/>
+</LinearLayout>
