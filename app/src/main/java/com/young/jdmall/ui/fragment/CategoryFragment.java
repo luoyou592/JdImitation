@@ -54,9 +54,15 @@ public class CategoryFragment extends BaseFragment {
         mContext = getContext();
         init();
         //默认选中第0个
-
-
         return rootview;
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (fragments.size() != 0){
+            selectFragment(1);
+        }
     }
 
     private void initFragment() {
@@ -69,8 +75,6 @@ public class CategoryFragment extends BaseFragment {
             fragments.add(new ChildrenClothesFragment(mCategoryBean));
             fragments.add(new ChildrenToysFragment(mCategoryBean));
         }
-
-
     }
 
 
@@ -105,9 +109,7 @@ public class CategoryFragment extends BaseFragment {
 
         //RecyclerView的初始化
         mCategoryLeftList.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         mCategoryLeftAdapter = new CategoryLeftAdapter(mContext, this);
-
         mCategoryLeftList.setAdapter(mCategoryLeftAdapter);
     }
 

@@ -34,7 +34,7 @@ public class TypeListActivity extends BaseActivity {
 
     @BindView(R.id.view_type_list_header)
     ViewTypeHeader mViewTypeListHeader;
-    private List<TestTypeListBean> mData;
+    private List<TestTypeListBean> mData = new ArrayList<>();
     @BindView(R.id.recycle_view)
     RecyclerView mRecycleView;
 
@@ -63,23 +63,59 @@ public class TypeListActivity extends BaseActivity {
         mTypeListAdapter = new TypeListAdapter(this);
 
         mRecycleView.setAdapter(mTypeListAdapter);
+
+        mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
+            @Override
+            public void onPrimaryVolume() {
+                loadPrimary("saleDown");
+
+            }
+
+            @Override
+            public void onPrimaryEvaluate() {
+                loadPrimary("shelvesDown");
+
+            }
+
+            @Override
+            public void onPrimaryPrice(boolean isMode) {
+                Log.d(TAG, "onPrimaryVolume: 价格排序" + isMode);
+                if (isMode){
+                    loadPrimary("priceDown");
+                }else {
+                    loadPrimary("priceUp");
+                }
+            }
+        });
+    }
+
+    private void loadPrimary(String saleDown) {
+        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, saleDown);
+        productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
+            @Override
+            protected void onHandleSuccess(ProductBean productBean) {
+                mProductList = productBean.getProductList();
+                mTypeListAdapter.setData(mProductList);
+            }
+            @Override
+            protected void onHandleError(String msg) {
+                Log.d(TAG, "onHandleError: 请求失败");
+            }
+        });
     }
 
 
     //加载假数据
     private void loadData() {
 
-        mData = new ArrayList<>();
 
         Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, "saleDown");
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
             @Override
             protected void onHandleSuccess(ProductBean productBean) {
-
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
             }
-
             @Override
             protected void onHandleError(String msg) {
                 Log.d(TAG, "onHandleError: 请求失败");

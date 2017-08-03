@@ -38,6 +38,7 @@ public class TypeListAdapter extends RecyclerView.Adapter {
     private Context mContext;
     private List<ProductBean.ProductListBean> mData;
 
+
     public TypeListAdapter(Context context) {
         mContext = context;
     }
@@ -47,11 +48,14 @@ public class TypeListAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
+
+
+    /**------------------------设置适配器----------------------------*/
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.item_type_list, parent,false);
-        ViewHolder viewHolder = new ViewHolder(rootView);
-        return viewHolder;
+            ViewHolder viewHolder = new ViewHolder(rootView);
+            return viewHolder;
     }
 
 
@@ -68,7 +72,7 @@ public class TypeListAdapter extends RecyclerView.Adapter {
         }
         return 0;
     }
-
+    
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.icon)
         ImageView mIcon;
