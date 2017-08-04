@@ -4,9 +4,9 @@ import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,7 +22,10 @@ import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.CustomServiceActivity;
 import com.young.jdmall.ui.activity.SearchActivity;
-import com.young.jdmall.ui.adapter.HomeRvAdapter;
+import com.young.jdmall.ui.adapter.HomeAdapter;
+import com.young.jdmall.ui.view.RecyclerLoadMoreView;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,6 +37,7 @@ import io.reactivex.Observable;
 
 public class HomeFragment extends BaseFragment {
 
+    private static final String TAG = "HomeFragment";
 
     @BindView(R.id.ib_sweep)
     TextView mIbSweep;
@@ -44,12 +48,10 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.top_container)
     LinearLayout mTopContainer;
     @BindView(R.id.rv_home)
-    RecyclerView mRvHome;
-    @BindView(R.id.srl_home)
-    SwipeRefreshLayout mSrlHome;
+    RecyclerLoadMoreView mRvHome;
 
     private View mHomeView;
-    private HomeRvAdapter mHomeRvAdapter;
+    private HomeAdapter mHomeRvAdapter;
     //上拉透明效果变量
     private int mSumY = 0;
     private float mDistance = 200;  //控制透明度在距离150px的变化
@@ -57,6 +59,8 @@ public class HomeFragment extends BaseFragment {
     private int endValue = 0xff436EEE;
     private int bgColor;
     private ArgbEvaluator mEvaluator;
+    private HomeAdapter mHomeAdapter;
+    private List<NewsProductInfoBean.ProductListBean> mProductList;
 
     @Nullable
     @Override
@@ -88,7 +92,8 @@ public class HomeFragment extends BaseFragment {
         });
         mRvHome.setLayoutManager(manager);
 
-        mHomeRvAdapter = new HomeRvAdapter(getActivity());
+        mHomeRvAdapter = new HomeAdapter(getActivity());
+//        mHomeRvAdapter = new HomeRvAdapter(getActivity());
         mRvHome.setAdapter(mHomeRvAdapter);
         mEvaluator = new ArgbEvaluator();
 
@@ -124,6 +129,7 @@ public class HomeFragment extends BaseFragment {
         //请求商品列表
         Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         requestCarouselPic();
+
     }
 
     private void requestProductList() {
@@ -131,8 +137,17 @@ public class HomeFragment extends BaseFragment {
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
-                mHomeRvAdapter.setNewsProductData(newsProductInfoBean);
+                mProductList = newsProductInfoBean.getProductList();
+                mHomeRvAdapter.setNewsProductData(mProductList);
                 mHomeRvAdapter.notifyDataSetChanged();
+                //请求商品列表后才设置监听请求加载更多
+                mRvHome.setOnRefreshListener(new RecyclerLoadMoreView.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.d(TAG, "onRefresh: 加载更多");
+                        requestProductMoreList();
+                    }
+                });
             }
         });
     }
@@ -166,6 +181,7 @@ public class HomeFragment extends BaseFragment {
 
     //设置标题栏渐变沉浸效果
     private void statusBarAplaChange() {
+
         //监听recyclerview移动距离来设置透明度
         mRvHome.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -184,6 +200,35 @@ public class HomeFragment extends BaseFragment {
                     bgColor = (int) mEvaluator.evaluate(mSumY / mDistance, startValue, endValue);
                 }
                 mTopContainer.setBackgroundColor(bgColor);
+            }
+        });
+    }
+
+    private int page = 1;
+    private void requestProductMoreList() {
+        page++;
+        Log.d(TAG, "requestProductMoreList: 加载更多" + page);
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(page,10,"saleDown");
+        newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
+                Log.d(TAG, "onHandleSuccess: 加载更多成功");
+                mProductList.addAll(newsProductInfoBean.getProductList());
+                mHomeRvAdapter.setNewsProductData(mProductList);
+                mHomeRvAdapter.notifyDataSetChanged();
+                mRvHome.onLoadFinish();
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                super.onHandleError(msg);
+                Log.d(TAG, "onHandleError: 加载更多失败");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                mRvHome.onLoadFinish();
             }
         });
     }
