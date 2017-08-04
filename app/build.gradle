@@ -60,7 +60,8 @@ dependencies {
     //recycler上拉加载更多
     compile 'com.hellosliu.easyrecyclerview:easyrecyclerview:1.3.3'
 
-
+    //三级联动
+    compile 'com.github.open-android:CityPickerWebView:0.1.0'
 
     //详情页
     compile 'com.facebook.fresco:fresco:0.9.0'

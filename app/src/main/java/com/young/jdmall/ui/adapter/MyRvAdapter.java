@@ -19,6 +19,7 @@ import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
+import com.young.jdmall.ui.activity.CollectionActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.activity.OrderActivity;
 import com.young.jdmall.ui.activity.RecepitAddressActivity;
@@ -172,6 +173,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
     }*/
 
     class NormalHolder extends RecyclerView.ViewHolder {
+
         @BindView(R.id.iv_pic)
         ImageView mIvPic;
         @BindView(R.id.tv_title)
@@ -214,7 +216,8 @@ public class MyRvAdapter extends RecyclerView.Adapter {
     }
 
     class TitleHolder extends RecyclerView.ViewHolder {
-
+        @BindView(R.id.tv_collection)
+        TextView mTvCollection;
         @BindView(R.id.tv_level)
         TextView mTvLevel;
         @BindView(R.id.iv_signOrReg)
@@ -234,18 +237,22 @@ public class MyRvAdapter extends RecyclerView.Adapter {
         @BindView(R.id.tv_order_num)
         TextView mTvOrderNum;
 
-        @OnClick({R.id.rl_signOrReg, R.id.tv_address_manage, R.id.ll_order})
+
+        @BindView(R.id.tv_username)
+        TextView mTvUsername;
+
+        @OnClick({R.id.rl_signOrReg, R.id.tv_address_manage, R.id.ll_order, R.id.tv_collection})
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.rl_signOrReg:
-                    if ("".equals(PreferenceUtils.getUserName(mContext))) {
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
 
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         mContext.startActivity(intent);
                     }
                     break;
                 case R.id.tv_address_manage:
-                    if ("".equals(PreferenceUtils.getUserName(mContext))) {
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         mContext.startActivity(intent);
                     } else {
@@ -255,7 +262,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                     }
                     break;
                 case R.id.ll_order:
-                    if ("".equals(PreferenceUtils.getUserName(mContext))) {
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
                         Intent intent = new Intent(mContext, LoginActivity.class);
                         mContext.startActivity(intent);
                     } else {
@@ -264,6 +271,17 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                         mContext.startActivity(intent);
                     }
                     break;
+                case R.id.tv_collection:
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        mContext.startActivity(intent);
+                    } else {
+
+                        Intent intent = new Intent(mContext, CollectionActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                    break;
+
 
             }
         }
@@ -280,22 +298,32 @@ public class MyRvAdapter extends RecyclerView.Adapter {
 //                mRlSignOk.setVisibility(View.VISIBLE);
             }*/
             if (!"".equals(mUsers)) {
-                mTvLogin.setText("您好，" + mUsers);
-                mIvSignOrReg.setImageResource(R.mipmap.fragment_daidai);
+
+//                mTvLogin.setText("您好，" + mUsers);
+                mTvLogin.setVisibility(View.INVISIBLE);
+                mTvUsername.setVisibility(View.VISIBLE);
+                mTvUsername.setText("您好，" + mUsers);
+                mIvSignOrReg.setBackgroundResource(R.mipmap.fragment_daidai);
+                mRlSignOrReg.setBackgroundResource(R.mipmap.b0x);
 
             } else {
+                mTvUsername.setVisibility(View.GONE);
+                mTvLogin.setVisibility(View.VISIBLE);
                 mTvLogin.setText("登录/注册");
+                mTvLevel.setVisibility(View.GONE);
                 mTvLevel.setText("会员等级");
                 mTvFav.setText("0");
                 mTvJdou.setText("0");
                 mTvOrderNum.setText("0");
-                mIvSignOrReg.setImageResource(R.mipmap.b0p);
+                mIvSignOrReg.setBackgroundResource(R.mipmap.b0p);
+                mRlSignOrReg.setBackgroundResource(R.mipmap.b0z);
                 return;
             }
 
 
             if (mInfoBean != null) {
                 Log.d(TAG, "bindView: " + mInfoBean.getLevel());
+                mTvLevel.setVisibility(View.VISIBLE);
                 mTvLevel.setText(mInfoBean.getLevel());
                 mTvFav.setText(mInfoBean.getFavoritesCount() + "");
                 mTvJdou.setText(mInfoBean.getBonus() + "");
