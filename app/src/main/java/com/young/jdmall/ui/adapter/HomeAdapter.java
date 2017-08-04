@@ -220,7 +220,7 @@ public class HomeAdapter extends RecyclerLoadMoreView.Adapter {
                 public void onClick(View v) {
                     Intent intent = new Intent(mActivity, ProductDetaiActivity.class);
                     //传id到详情
-                    intent.putExtra("id",1);
+                    intent.putExtra("id",productListBean.getId());
                     mActivity.startActivity(intent);
                 }
             });
