@@ -53,11 +53,17 @@
                 android:text="配送"/>
         </LinearLayout>
 
-        <com.hellosliu.easyrecyclerview.LoadMoreRecylerView
+        <!--<com.hellosliu.easyrecyclerview.LoadMoreRecylerView-->
+        <!--android:id="@+id/recycle_view"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+        <!--</com.hellosliu.easyrecyclerview.LoadMoreRecylerView>-->
+
+        <com.young.jdmall.ui.view.RecyclerLoadMoreView
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-        </com.hellosliu.easyrecyclerview.LoadMoreRecylerView>
+            android:layout_height="match_parent"/>
+
 
     </LinearLayout>
 

@@ -14,6 +14,7 @@ import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CategoryBaseBean;
+import com.young.jdmall.ui.activity.TypeActivity;
 import com.young.jdmall.ui.activity.TypeListActivity;
 
 import butterknife.BindView;
@@ -64,7 +65,7 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
         mItemInfo.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),TypeListActivity.class);
+                Intent intent = new Intent(getContext(),TypeActivity.class);
                 getContext().startActivity(intent);
             }
         });
