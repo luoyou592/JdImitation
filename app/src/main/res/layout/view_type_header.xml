@@ -19,29 +19,30 @@
             <ImageView
                 android:id="@+id/type_back"
                 android:layout_weight="1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:src="@mipmap/left_arrow"/>
 
             <EditText
+                android:focusable="false"
                 android:id="@+id/type_search"
-                android:layout_weight="5"
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_width="wrap_content"
+                android:layout_weight="8"
+                android:hint="美的压力锅"
                 android:layout_margin="8dp"
-                android:background="@drawable/home_edti_search_bg"
+                android:background="@drawable/type_edti_search_bg"
+                android:paddingLeft="6dp"
                 android:drawableLeft="@mipmap/arp"
                 android:drawablePadding="6dp"
-                android:hint="美的压力锅"
-                android:paddingLeft="6dp"
-                android:textSize="16sp"/>
+                android:textSize="16sp"
+                android:layout_height="wrap_content"/>
 
             <ImageView
                 android:id="@+id/type_selector_layout"
                 android:background="@mipmap/a9e"
                 android:layout_weight="1"
-                android:layout_width="30dp"
-                android:layout_height="30dp"/>
+                android:layout_width="8dp"
+                android:layout_height="wrap_content"/>
         </LinearLayout>
 
         <LinearLayout

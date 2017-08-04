@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.widget;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,6 +43,7 @@ public class ViewTypeHeader extends RelativeLayout {
     @BindView(R.id.type_selector_layout)
     ImageView mTypeSelectorLayout;
 
+
     private boolean isDropOrder = true;//默认则降序
     private boolean isRecyclerView = true;//默认布局
 
@@ -56,7 +59,7 @@ public class ViewTypeHeader extends RelativeLayout {
     }
 
     @OnClick({R.id.type_sort_comprehensive, R.id.type_sort_volume, R.id.type_sort_price, R.id
-            .type_sort_screen, R.id.type_selector_layout, R.id.type_back})
+            .type_sort_screen, R.id.type_selector_layout, R.id.type_back,R.id.type_search})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.type_sort_comprehensive:
@@ -109,6 +112,10 @@ public class ViewTypeHeader extends RelativeLayout {
                     }
                 }
                 break;
+            case R.id.type_search:
+                getContext().startActivity(new Intent(getContext(), SearchActivity.class));
+                break;
+
 
         }
     }

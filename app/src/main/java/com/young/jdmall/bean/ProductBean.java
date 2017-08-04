@@ -15,6 +15,7 @@ public class ProductBean {
     private List<ListFilterBean> listFilter;
     private List<ProductListBean> productList;
 
+
     public int getListCount() {
         return listCount;
     }
@@ -97,10 +98,10 @@ public class ProductBean {
         private float goodEvaluation;
         private int commentCount;
         private int id;
-        private int marketPrice;//现价
+        private int marketPrice;
         private String name;
         private String pic;
-        private int price;//原价
+        private int price;
 
 
         public int getEvaluation() {

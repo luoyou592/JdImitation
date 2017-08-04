@@ -1,7 +1,6 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
-import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CommentInfoBean;
@@ -20,8 +19,6 @@ import com.young.jdmall.bean.RecepitAddressBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
-
-import java.util.Observer;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -116,8 +113,13 @@ public interface JDMallService {
     //商品列表
 //    http://localhost:8080/market/productlist?page=1&pageNum=10&cId=125&orderby=saleDown
     @GET("productlist")
-    Observable<ProductBean> listProductlist(@Query("page") int page, @Query("pageNum") int pageNum,
+    Observable<ProductBean> listProductList(@Query("page") int page, @Query("pageNum") int pageNum,
                                             @Query("cId") int cId, @Query("orderby") String orderby);
+
+//    搜索商品列表
+    @GET("search")
+    Observable<ProductBean> listSearch(@Query("page") int page, @Query("pageNum") int pageNum,
+                                          @Query("orderby") String orderby, @Query("keyword") String keyword);
 
     @POST("orderlist")
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);

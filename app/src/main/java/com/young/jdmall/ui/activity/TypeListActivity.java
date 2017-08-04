@@ -100,7 +100,7 @@ public class TypeListActivity extends BaseActivity {
 
     private void loadMoreData(int page) {
         page++;
-        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(page, 10, 125, "saleDown");
+        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductList(page, 10, 125, "saleDown");
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
             @Override
             protected void onHandleSuccess(ProductBean productBean) {
@@ -117,7 +117,7 @@ public class TypeListActivity extends BaseActivity {
     }
 
     private void loadPrimary(String saleDown) {
-        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, saleDown);
+        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductList(1, 10, 125, saleDown);
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
             @Override
             protected void onHandleSuccess(ProductBean productBean) {
@@ -137,7 +137,7 @@ public class TypeListActivity extends BaseActivity {
     //加载数据
     private void loadData() {
 
-        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, "shelvesDown");
+        Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductList(1, 10, 125, "shelvesDown");
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(this) {
             @Override
             protected void onHandleSuccess(ProductBean productBean) {

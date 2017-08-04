@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +10,7 @@ import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +21,8 @@ import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.ProductBean;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
+import com.young.jdmall.ui.activity.TypeActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
 
@@ -31,17 +35,27 @@ import butterknife.ButterKnife;
 
 public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
 
-    private List<ProductBean.ProductListBean> mData = new ArrayList();
+    private static final String TAG = "TypeAdapter";
+
+    private List<ProductBean.ProductListBean> mData = new ArrayList<>();
+    private TypeActivity mContext;
+
+    public TypeAdapter(TypeActivity typeActivity) {
+        mContext = typeActivity;
+    }
 
     public void addData(List<ProductBean.ProductListBean> productList) {
         mData.addAll(productList);
+        Log.d(TAG, "addData: 添加数据" + mData.size());
         notifyDataSetChanged();
     }
 
     public void setData(List<ProductBean.ProductListBean> data) {
         mData = data;
+
         notifyDataSetChanged();
     }
+
 
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolderToRecyclerLoadMoreView(ViewGroup parent, int viewType) {
@@ -69,6 +83,7 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
 
 
 
+
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.icon)
         ImageView mIcon;
@@ -82,13 +97,26 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
         TextView mItemTypeEvaluation;
         @BindView(R.id.item_type_goodEvaluation)
         TextView mItemTypeGoodEvaluation;
+        private ProductBean.ProductListBean mListTestBean;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ProductDetaiActivity.class);
+                    intent.putExtra("id",mListTestBean.getId());
+                    mContext.startActivity(intent);
+                }
+            });
+
+
         }
 
         public void setData(ProductBean.ProductListBean listTestBean) {
+            mListTestBean = listTestBean;
             Random randomEvaluation = new Random();
             for (int i = 0; i < mData.size(); i++) {
                 listTestBean.setEvaluation(randomEvaluation.nextInt(9) * 13591);
@@ -108,6 +136,7 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
                     .dontAnimate()
                     .into(mIcon);
             mItemTypePrimaryMoney.setText("原价" + listTestBean.getMarketPrice() + "元");
+
             mItemTypePrimaryMoney.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);
 
 
