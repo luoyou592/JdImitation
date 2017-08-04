@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<<<<<<< HEAD
 
     <attr name="radius" format="dimension" />
     <declare-styleable name="RotateView">
         <attr name="radius" />
-=======
+    </declare-styleable>
+
     <declare-styleable name="SlideDetailsLayout">
         <!-- float value for indicate the moment of switch panel-->
         <attr name="percent" format="float"/>
@@ -16,6 +16,6 @@
             <enum name="front" value="0"/>
             <enum name="behind" value="1"/>
         </attr>
->>>>>>> luoyou
+
     </declare-styleable>
 </resources>

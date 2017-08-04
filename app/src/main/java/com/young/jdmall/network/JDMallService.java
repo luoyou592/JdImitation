@@ -1,22 +1,20 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
-import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CommentInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
-import com.young.jdmall.bean.ProductBean;
 import com.young.jdmall.bean.OrderInfoBean;
+import com.young.jdmall.bean.ProductBean;
 import com.young.jdmall.bean.ProductDesInfoBean;
 import com.young.jdmall.bean.ProductInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
-
-import java.util.Observer;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -87,8 +85,6 @@ public interface JDMallService {
     Observable<ProductBean> listProductlist(@Query("page")int page, @Query("pageNum")int pageNum,
                                             @Query("cId")int cId, @Query("orderby")String orderby);
 
-    @POST("cart")
-    Observable<BrandInfoBean> listCart(@Field("sku") String sku);
     @POST("orderlist")
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);
     @POST("ordercancel")
