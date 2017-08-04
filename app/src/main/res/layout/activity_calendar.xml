@@ -7,28 +7,32 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="14dp">
+        android:padding="10dp"
+        android:background="#fff"
+        >
         <ImageView
+            android:id="@+id/iv_back"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@mipmap/a_8"
-            android:layout_centerVertical="true"/>
-
+            android:background="@mipmap/a_8"/>
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
             android:text="我的日历"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textSize="20dp"
+            android:textColor="#000"/>
+
         <ImageView
-            android:layout_alignParentRight="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
             android:background="@mipmap/aba"/>
     </RelativeLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"></View>
 
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"

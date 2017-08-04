@@ -149,8 +149,6 @@ public class RecyclerLoadMoreView extends RecyclerView {
         public final ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (mLoadingView == null) {
                 mLoadingView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
-                mLoading = (LinearLayout) mLoadingView.findViewById(R.id.loading);
-                mLoaded = (TextView) mLoadingView.findViewById(R.id.loaded);
                 mLoadingView.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -203,6 +201,8 @@ public class RecyclerLoadMoreView extends RecyclerView {
 
         public void setLoadItemStart(boolean b) {
             if (mLoadingView != null) {
+                mLoading = (LinearLayout) mLoadingView.findViewById(R.id.loading);
+                mLoaded = (TextView) mLoadingView.findViewById(R.id.loaded);
                 if (b) {
                     if (mLoaded != null && mLoading != null){
                         mLoaded.setVisibility(GONE);

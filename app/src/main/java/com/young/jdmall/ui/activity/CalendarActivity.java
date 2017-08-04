@@ -6,11 +6,13 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 
+import android.view.View;
 import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.CalendarAdapter;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 /*
  *  创建者:   tiao
@@ -22,7 +24,7 @@ public class CalendarActivity extends AppCompatActivity {
     TabLayout mTabLayout;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
-    private String[] mTitles = {"全部","提醒列表","家居家装"};
+    private String[] mTitles = {"全部", "提醒列表", "家居家装"};
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,5 +34,14 @@ public class CalendarActivity extends AppCompatActivity {
 
         mViewPager.setAdapter(new CalendarAdapter(getSupportFragmentManager(), mTitles));
         mTabLayout.setupWithViewPager(mViewPager);
+    }
+
+    @OnClick(R.id.iv_back)
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.iv_back:
+                finish();
+                break;
+        }
     }
 }
