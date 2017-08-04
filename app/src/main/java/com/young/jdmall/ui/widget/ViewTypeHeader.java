@@ -30,6 +30,8 @@ public class ViewTypeHeader extends RelativeLayout {
     TextView mTypeSortVolume;
     @BindView(R.id.type_sort_price)
     TextView mTypeSortPrice;
+     @BindView(R.id.type_sort_screen)
+    TextView mTypeSortScreen;
 
     private boolean isDropOrder = true;//默认则降序
 
@@ -41,11 +43,10 @@ public class ViewTypeHeader extends RelativeLayout {
         super(context, attrs);
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.view_type_header, this);
         ButterKnife.bind(this, this);
-//        mTypeSortComprehensive.setEnabled(false);
         selectorPrimaryShow(Color.RED,Color.BLACK,Color.BLACK);
     }
 
-    @OnClick({R.id.type_sort_comprehensive, R.id.type_sort_volume, R.id.type_sort_price})
+    @OnClick({R.id.type_sort_comprehensive, R.id.type_sort_volume, R.id.type_sort_price,R.id.type_sort_screen})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.type_sort_comprehensive:
@@ -71,6 +72,11 @@ public class ViewTypeHeader extends RelativeLayout {
                     }
                 }
                 break;
+            case R.id.type_sort_screen:
+                selectorPrimaryShow(Color.BLACK,Color.BLACK,Color.BLACK);
+
+                break;
+
         }
     }
 
@@ -88,9 +94,10 @@ public class ViewTypeHeader extends RelativeLayout {
     }
 
     public interface onClickPrimaryListener{
-       public void onPrimaryVolume();//销量排序回调
-       public void onPrimaryEvaluate();//评价排序回调
-       public void onPrimaryPrice(boolean isMode);//价格排序回调
+        void onPrimaryVolume();//销量排序回调
+        void onPrimaryEvaluate();//评价排序回调
+        void onPrimaryPrice(boolean isMode);//价格排序回调
+        void onPrimaryScreen();//筛选排序回调
 
     }
 }

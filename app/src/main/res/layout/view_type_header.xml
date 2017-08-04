@@ -59,11 +59,9 @@
 
 
             <TextView
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:gravity="center"
+                android:textColor="@color/red"
+                android:id="@+id/type_sort_screen"
+                style="@style/TypeTextStyle"
                 android:text="筛选"/>
 
         </LinearLayout>
