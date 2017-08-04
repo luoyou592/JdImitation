@@ -92,7 +92,7 @@ public class TypeActivity extends BaseActivity {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.addData(mProductList);
                 if (mWaterfallAdapter != null){
-                    Log.d(TAG, "onHandleSuccess: 添加数据");
+                    Log.d(TAG, "onHandleSuccess: 获取请求数据");
                     mWaterfallAdapter.addData(mProductList);
                 }
                 mRecycleView.onLoadFinish();
