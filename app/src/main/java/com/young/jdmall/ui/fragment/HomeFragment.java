@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -108,41 +107,45 @@ public class HomeFragment extends BaseFragment {
     //Rxjava2请求数据
     private void initData() {
         //请求轮播图
-        Observable<HomeInfoBean> homeObservable = RetrofitFactory.getInstance().listHome();
-        homeObservable.compose(compose(this.<HomeInfoBean>bindToLifecycle())).subscribe(new BaseObserver<HomeInfoBean>(getActivity()) {
-            @Override
-            protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
-                //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
-                mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
-                Log.d("luoyou", "1");
-            }
+        requestCarouselPic();
+    }
 
-        });
-
-        //请求秒杀
-        Observable<LimitbuyBean> limitObservable = RetrofitFactory.getInstance().listLimitbuy(1, 10);
-        limitObservable.compose(compose(this.<LimitbuyBean>bindToLifecycle())).subscribe(new BaseObserver<LimitbuyBean>(getActivity()) {
-            @Override
-            protected void onHandleSuccess(LimitbuyBean limitbuyBean) {
-                mHomeRvAdapter.setLimitProductData(limitbuyBean);
-                Log.d("luoyou", "3");
-
-
-            }
-        });
-        //请求商品列表
+    private void requestProductList() {
         Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
                 mHomeRvAdapter.setNewsProductData(newsProductInfoBean);
-                Log.d("luoyou", "2");
                 mHomeRvAdapter.notifyDataSetChanged();
             }
         });
-
     }
 
+    private void requestSeckill() {
+        Observable<LimitbuyBean> limitObservable = RetrofitFactory.getInstance().listLimitbuy(1, 10);
+        limitObservable.compose(compose(this.<LimitbuyBean>bindToLifecycle())).subscribe(new BaseObserver<LimitbuyBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(LimitbuyBean limitbuyBean) {
+                mHomeRvAdapter.setLimitProductData(limitbuyBean);
+                //请求列表
+                requestProductList();
+
+            }
+        });
+    }
+
+    private void requestCarouselPic() {
+        Observable<HomeInfoBean> homeObservable = RetrofitFactory.getInstance().listHome();
+        homeObservable.compose(compose(this.<HomeInfoBean>bindToLifecycle())).subscribe(new BaseObserver<HomeInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
+                mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
+                //请求秒杀
+                requestSeckill();
+            }
+
+        });
+    }
 
 
     //设置标题栏渐变沉浸效果

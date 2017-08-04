@@ -30,11 +30,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        processIntent();
         mFragments = new SparseArray<>();
-
         setListener();
         selectedTab(0);
+    }
+
+    private void processIntent() {
+        if (getIntent()!=null){
+            String page = getIntent().getStringExtra("page");
+            //判断是否详情页跳转过来的，是则切换到购物车
+            if ("detail".equals(page)){
+                getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());
+            }
+        }
     }
 
     private void setListener() {

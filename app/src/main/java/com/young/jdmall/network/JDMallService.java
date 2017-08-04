@@ -1,11 +1,14 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
+import com.young.jdmall.bean.CommentInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.bean.OrderInfoBean;
+import com.young.jdmall.bean.ProductDesInfoBean;
+import com.young.jdmall.bean.ProductInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 
@@ -55,5 +58,12 @@ public interface JDMallService {
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);
     @POST("ordercancel")
     Observable<OrderInfoBean> listOrderCancel(@Header("userid") String userid, @Body RequestBody body);
-
+    //商品详情
+    @GET("product")
+    Observable<ProductInfoBean> listProductInfo(@Query("pId") int id);
+    //商品评论
+    @GET("product/comment")
+    Observable<CommentInfoBean> listComment(@Query("pId") int id, @Query("page") int page, @Query("pageNum") int pageNum);
+    @GET("product/description")
+    Observable<ProductDesInfoBean> listProductDes(@Query("pId") int id);
 }

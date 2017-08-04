@@ -49,7 +49,7 @@ public class CustomServiceActivity extends Activity implements OnClickListener{
         setTheme(R.style.MyTheme);
         requestWindowFeature(Window.FEATURE_CUSTOM_TITLE);
         setContentView(R.layout.activity_imitate_main);
-        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE,R.layout.activity_title);
+        getWindow().setFeatureInt(Window.FEATURE_CUSTOM_TITLE, R.layout.activity_title);
         mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         initView();
 
@@ -58,8 +58,8 @@ public class CustomServiceActivity extends Activity implements OnClickListener{
     public void initView() {  
     	backButton=(ImageView)findViewById(R.id.imageButtonback);
     	titleView=(TextView)findViewById(R.id.textViewtitle);
-        mListView = (ListView) findViewById(R.id.listview4_3);  
-        mBtnSend = (Button) findViewById(R.id.btn_send);  
+        mListView = (ListView) findViewById(R.id.listview4_3);
+        mBtnSend = (Button) findViewById(R.id.btn_send);
         mEditTextContent = (EditText) findViewById(R.id.et_sendmessage);
         initData();// 初始化数据
 
@@ -83,7 +83,7 @@ public class CustomServiceActivity extends Activity implements OnClickListener{
      */
     public void initData() {  
         for (int i = 0; i < COUNT; i++) {  
-            ChatMsgEntity entity = new ChatMsgEntity();  
+            ChatMsgEntity entity = new ChatMsgEntity();
             entity.setDate("2012-09-22 18:00:02");  
             if (i % 2 == 0) {  
                 entity.setName("客服");
@@ -125,7 +125,7 @@ public class CustomServiceActivity extends Activity implements OnClickListener{
     private void send() {  
         String contString = mEditTextContent.getText().toString();  
         if (contString.length() > 0) {  
-            ChatMsgEntity entity = new ChatMsgEntity();  
+            ChatMsgEntity entity = new ChatMsgEntity();
             entity.setName("本人");
             entity.setDate(getDate());  
             entity.setMessage(contString);  
