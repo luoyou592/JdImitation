@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                tools:context=".ui.activity.MainActivity"
+              android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="#00ffffff">
+
+            <ImageView
+                android:id="@+id/order_iv_icon"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:background="@mipmap/aib"/>
+
+            <TextView
+                android:id="@+id/order_goods_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/order_iv_icon"
+                android:text="￥43.9"
+                android:textColor="@android:color/holo_red_dark"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/order_goods_price"
+                android:layout_marginLeft="8dp"
+                android:layout_marginTop="15dp"
+                android:layout_toRightOf="@id/order_iv_icon"
+                android:text="库存520件"/>
+
+            <ImageView
+                android:id="@+id/order_dialog_exit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:background="@mipmap/aas"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="尺码"
+            android:textColor="@android:color/black"/>
+
+        <RadioGroup
+            android:id="@+id/goods_dimensions_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+        </RadioGroup>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="4dp"
+            android:text="颜色分类"
+            android:textColor="@android:color/black"/>
+
+        <RadioGroup
+            android:id="@+id/goods_color_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="8dp">
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity=""
+                android:text="购买数量"
+                android:textColor="#000"
+                android:textSize="20sp"/>
+
+            <TextView
+                android:id="@+id/limit"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity=""
+                android:text="(限购5件)"
+                android:textColor="#000"
+                android:textSize="15sp"/>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/order_goods_minus"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@mipmap/a0g"/>
+
+                <TextView
+                    android:id="@+id/order_goods_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginRight="25dp"
+                    android:text="1"
+                    android:textColor="#000"
+                    android:textSize="23sp"/>
+
+                <Button
+                    android:id="@+id/order_goods_add"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@mipmap/a0c"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@android:color/darker_gray"/>
+
+        <Button
+            android:id="@+id/order_goods_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:background="#70ff0000"
+            android:text="确认"
+            android:textColor="@android:color/white"
+            android:textSize="22sp"/>
+    </LinearLayout>
+    <ImageView
+        android:background="@mipmap/default_pic"
+        android:id="@+id/goods_icon_container"
+        android:layout_width="80dp"
+        android:layout_marginLeft="10dp"
+        android:layout_height="120dp"/>
+</RelativeLayout>
