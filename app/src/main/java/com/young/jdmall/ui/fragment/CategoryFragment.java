@@ -49,9 +49,10 @@ public class CategoryFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootview = LayoutInflater.from(getContext()).inflate(R.layout.catecary_fragment, null);
+        View rootview = LayoutInflater.from(getActivity()).inflate(R.layout.catecary_fragment, null);
         ButterKnife.bind(this, rootview);
-        mContext = getContext();
+        mContext = getActivity();
+        //把代码复制过来
         init();
         //默认选中第0个
         return rootview;
