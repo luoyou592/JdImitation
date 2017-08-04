@@ -32,11 +32,15 @@ import io.reactivex.Observable;
 public class TypeActivity extends BaseActivity {
 
     private static final String TAG = "TypeListActivity";
-
     @BindView(R.id.view_type_list_header)
     ViewTypeHeader mViewTypeListHeader;
     @BindView(R.id.recycle_view)
     RecyclerLoadMoreView mRecycleView;
+
+//    @BindView(R.id.view_type_list_header)
+//    ViewTypeHeader mViewTypeListHeader;
+//    @BindView(R.id.recycle_view)
+//    RecyclerLoadMoreView mRecycleView;
 
 
     private List<ProductBean.ProductListBean> mProductList;
@@ -83,7 +87,7 @@ public class TypeActivity extends BaseActivity {
             loadSearchData(mKeyword);
         }
 
-        if (mKeyword != null){
+        if (mKeyword != null) {
             Log.d(TAG, "onResume: 设置" + mKeyword);
 
             mViewTypeListHeader.mTypeSearch.setText(mKeyword);
@@ -373,9 +377,9 @@ public class TypeActivity extends BaseActivity {
                 } else {
                     if (mWaterfallAdapter == null) {
                         mWaterfallAdapter = new TypeWaterfallAdapter(mContext);
-                        if (loadData == 0){
+                        if (loadData == 0) {
                             loadCommodityData();
-                        }else if (loadData == 1){
+                        } else if (loadData == 1) {
                             loadSearchData(mKeyword);
                         }
                     }
@@ -398,8 +402,4 @@ public class TypeActivity extends BaseActivity {
         super.onStop();
     }
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-    }
 }
