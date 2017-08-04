@@ -208,7 +208,6 @@ public class RecyclerLoadMoreView extends RecyclerView {
                         mLoaded.setVisibility(GONE);
                         mLoading.setVisibility(VISIBLE);
                     }
-
                 } else {
                     if (mLoaded != null && mLoading != null){
                         mLoaded.setVisibility(VISIBLE);
