@@ -2,12 +2,9 @@ package com.young.jdmall.ui.view;
 
 import android.content.Context;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
-
-import com.young.jdmall.R;
 
 /**
  * Created by 钟志鹏 on 2017/7/31.

@@ -81,6 +81,7 @@ public class TypeListView extends RelativeLayout {
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+
         measureChildren(widthMeasureSpec, heightMeasureSpec);
         View headView = getChildAt(0);
         mHeadViewheight = headView.getMeasuredHeight();

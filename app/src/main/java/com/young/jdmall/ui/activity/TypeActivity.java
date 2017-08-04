@@ -369,4 +369,8 @@ public class TypeActivity extends BaseActivity {
         });
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
 }

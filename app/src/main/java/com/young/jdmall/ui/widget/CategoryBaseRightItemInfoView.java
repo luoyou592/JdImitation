@@ -65,7 +65,6 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),TypeActivity.class);
-                intent.putExtra("keyword","奶粉");
                 getContext().startActivity(intent);
             }
         });
