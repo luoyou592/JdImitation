@@ -4,6 +4,7 @@ import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
+import com.young.jdmall.bean.HotSearchInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
@@ -12,9 +13,8 @@ import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
 
-import java.util.Observer;
-
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -33,6 +33,10 @@ public interface JDMallService {
     Observable<HomeInfoBean> listHome();
 
     //搜索推荐
+    @GET("search/recommend")
+    Call<HotSearchInfoBean> listHotSearch();
+
+
     @GET("hotproduct")
     Observable<RecommendInfoBean> listRecommend(@Query("page") int page, @Query("pageNum") int pageNum, @Query("orderby") String orderby);
 
@@ -44,7 +48,6 @@ public interface JDMallService {
     @FormUrlEncoded
     @POST("cart")
     Observable<CartInfoBean> listCart(@Field("sku") String test);
-
 
 
     //登陆
@@ -78,7 +81,7 @@ public interface JDMallService {
     //商品列表
 //    http://localhost:8080/market/productlist?page=1&pageNum=10&cId=125&orderby=saleDown
     @GET("productlist")
-    Observable<ProductBean> listProductlist(@Query("page")int page, @Query("pageNum")int pageNum,
-                                            @Query("cId")int cId, @Query("orderby")String orderby);
+    Observable<ProductBean> listProductlist(@Query("page") int page, @Query("pageNum") int pageNum,
+                                            @Query("cId") int cId, @Query("orderby") String orderby);
 
 }

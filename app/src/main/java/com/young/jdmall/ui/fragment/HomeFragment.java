@@ -21,6 +21,7 @@ import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.CustomServiceActivity;
+import com.young.jdmall.ui.activity.SearchActivity;
 import com.young.jdmall.ui.adapter.HomeRvAdapter;
 
 import butterknife.BindView;
@@ -101,7 +102,15 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
+
+        mEtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), SearchActivity.class));
+            }
+        });
     }
+
     //Rxjava2请求数据
     private void initData() {
         //请求轮播图
@@ -114,7 +123,7 @@ public class HomeFragment extends BaseFragment {
             }
         });
         //请求商品列表
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
@@ -131,7 +140,6 @@ public class HomeFragment extends BaseFragment {
         });
 
     }
-
 
 
     //设置标题栏渐变沉浸效果

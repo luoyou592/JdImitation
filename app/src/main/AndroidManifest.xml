@@ -40,6 +40,8 @@
         </activity>
         <activity android:name=".ui.activity.ServiceWindowActivity">
         </activity>
+        <activity android:name=".ui.activity.SearchActivity">
+        </activity>
     </application>
 
 </manifest>
