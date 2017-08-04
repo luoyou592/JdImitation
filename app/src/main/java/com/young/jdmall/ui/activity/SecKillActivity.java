@@ -8,6 +8,7 @@ import android.widget.ImageView;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.BrandInfoBean;
+import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.SeckillRvAdapter;
@@ -40,11 +41,9 @@ public class SecKillActivity extends BaseActivity {
 
     }
 
-
-
     private void processIntent() {
         if (getIntent()!=null){
-            mTime = getIntent().getLongExtra("time", 0);
+            mTime = getIntent().getLongExtra("time", 500);
         }
     }
 
@@ -60,6 +59,15 @@ public class SecKillActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(BrandInfoBean brandInfoBean) {
                 mSeckillRvAdapter.setBrandData(brandInfoBean);
+
+            }
+        });
+        //请求秒杀
+        Observable<LimitbuyBean> limitObservable = RetrofitFactory.getInstance().listLimitbuy(1, 10);
+        limitObservable.compose(compose(this.<LimitbuyBean>bindToLifecycle())).subscribe(new BaseObserver<LimitbuyBean>(this) {
+            @Override
+            protected void onHandleSuccess(LimitbuyBean limitbuyBean) {
+                mSeckillRvAdapter.setLimitProductData(limitbuyBean);
                 mSeckillRvAdapter.notifyDataSetChanged();
             }
         });

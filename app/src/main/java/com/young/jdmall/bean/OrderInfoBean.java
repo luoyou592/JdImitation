@@ -53,3 +53,4 @@ public class OrderInfoBean {
         this.price = price;
     }
 }
+

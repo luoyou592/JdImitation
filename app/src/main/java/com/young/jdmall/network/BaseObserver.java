@@ -25,6 +25,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
     }
     @Override
     public void onNext(T value) {
+
         onHandleSuccess(value);
     }
 

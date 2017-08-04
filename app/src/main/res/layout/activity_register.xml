@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:hint="请输入您的密码"
                 android:background="@null"
-                android:inputType="numberPassword"/>
+                android:inputType="textPassword"/>
 
         </LinearLayout>
 
@@ -108,7 +108,7 @@
             android:layout_height="wrap_content"
             android:hint="请再次输入您的密码"
             android:background="@null"
-            android:inputType="numberPassword"/>
+            android:inputType="textPassword"/>
 
     </LinearLayout>
 

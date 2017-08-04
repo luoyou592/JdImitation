@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:background="@drawable/item_bar_bg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="14dp">
+
+        <ImageView
+            android:id="@+id/iv_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:background="@mipmap/a_8"/>
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:text="收藏夹"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"/>
+
+
+    </RelativeLayout>
+
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rl_container"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v7.widget.RecyclerView>
+</LinearLayout>
