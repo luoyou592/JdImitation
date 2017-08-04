@@ -342,7 +342,6 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onBack() {
                 finish();
-//                Log.d(TAG, "onBack: 有bug");
             }
 
             @Override
@@ -358,6 +357,7 @@ public class TypeActivity extends BaseActivity {
                             loadCommodityData();
                         }else if (loadData == 1){
                             loadSearchData(mKeyword);
+                            Log.d(TAG, "onSelectorLayout: aaaa");
                         }
                     }
                     mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2,
