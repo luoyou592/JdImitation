@@ -5,6 +5,8 @@ import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -30,10 +32,17 @@ public class ViewTypeHeader extends RelativeLayout {
     TextView mTypeSortVolume;
     @BindView(R.id.type_sort_price)
     TextView mTypeSortPrice;
-     @BindView(R.id.type_sort_screen)
+    @BindView(R.id.type_sort_screen)
     TextView mTypeSortScreen;
+    @BindView(R.id.type_back)
+    ImageView mTypeBack;
+    @BindView(R.id.type_search)
+    EditText mTypeSearch;
+    @BindView(R.id.type_selector_layout)
+    ImageView mTypeSelectorLayout;
 
     private boolean isDropOrder = true;//默认则降序
+    private boolean isRecyclerView = true;//默认布局
 
     public ViewTypeHeader(Context context) {
         this(context, null);
@@ -43,38 +52,62 @@ public class ViewTypeHeader extends RelativeLayout {
         super(context, attrs);
         View inflate = LayoutInflater.from(getContext()).inflate(R.layout.view_type_header, this);
         ButterKnife.bind(this, this);
-        selectorPrimaryShow(Color.RED,Color.BLACK,Color.BLACK);
+        selectorPrimaryShow(Color.RED, Color.BLACK, Color.BLACK);
     }
 
-    @OnClick({R.id.type_sort_comprehensive, R.id.type_sort_volume, R.id.type_sort_price,R.id.type_sort_screen})
+    @OnClick({R.id.type_sort_comprehensive, R.id.type_sort_volume, R.id.type_sort_price, R.id
+            .type_sort_screen, R.id.type_selector_layout, R.id.type_back})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.type_sort_comprehensive:
-                selectorPrimaryShow(Color.RED,Color.BLACK,Color.BLACK);
-                if (mOnClickPrimaryListener != null){
+                selectorPrimaryShow(Color.RED, Color.BLACK, Color.BLACK);
+                if (mOnClickPrimaryListener != null) {
                     mOnClickPrimaryListener.onPrimaryEvaluate();
                 }
                 break;
             case R.id.type_sort_volume:
-                selectorPrimaryShow(Color.BLACK,Color.RED,Color.BLACK);
-                if (mOnClickPrimaryListener != null){
+                selectorPrimaryShow(Color.BLACK, Color.RED, Color.BLACK);
+                if (mOnClickPrimaryListener != null) {
                     mOnClickPrimaryListener.onPrimaryVolume();
                 }
                 break;
             case R.id.type_sort_price:
-                selectorPrimaryShow(Color.BLACK,Color.BLACK,Color.RED);
-                if (mOnClickPrimaryListener != null){
+                selectorPrimaryShow(Color.BLACK, Color.BLACK, Color.RED);
+                if (mOnClickPrimaryListener != null) {
                     mOnClickPrimaryListener.onPrimaryPrice(isDropOrder);
-                    if (isDropOrder){
+
+                    if (isDropOrder) {
+
                         isDropOrder = false;
-                    }else{
+                    } else {
                         isDropOrder = true;
                     }
                 }
                 break;
             case R.id.type_sort_screen:
-                selectorPrimaryShow(Color.BLACK,Color.BLACK,Color.BLACK);
+                selectorPrimaryShow(Color.BLACK, Color.BLACK, Color.BLACK);
+                if (mOnClickPrimaryListener != null) {
+                    mOnClickPrimaryListener.onPrimaryScreen();
+                }
+                break;
+            case R.id.type_back:
+                if (mOnClickPrimaryListener != null) {
+                    mOnClickPrimaryListener.onBack();
+                }
+                break;
+            case R.id.type_selector_layout:
+                if (mOnClickPrimaryListener != null) {
+                    mOnClickPrimaryListener.onSelectorLayout(isRecyclerView);
 
+                    if (isRecyclerView) {
+                        mTypeSelectorLayout.setBackgroundResource(R.mipmap.a8r);
+                        isRecyclerView = false;
+                    } else {
+                        mTypeSelectorLayout.setBackgroundResource(R.mipmap.a9e);
+                        isRecyclerView = true;
+
+                    }
+                }
                 break;
 
         }
@@ -93,11 +126,20 @@ public class ViewTypeHeader extends RelativeLayout {
         mOnClickPrimaryListener = onClickPrimaryListener;
     }
 
-    public interface onClickPrimaryListener{
+
+    public interface onClickPrimaryListener {
         void onPrimaryVolume();//销量排序回调
+
         void onPrimaryEvaluate();//评价排序回调
+
         void onPrimaryPrice(boolean isMode);//价格排序回调
+
         void onPrimaryScreen();//筛选排序回调
+
+        void onBack();//返回键回调
+
+        void onSelectorLayout(boolean isRecyclerView);//选择布局回调
+
 
     }
 }

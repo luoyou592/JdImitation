@@ -22,6 +22,7 @@ public class CategoryRightListAdapter extends CategoryBaseRightAdapter<CategoryB
     public CategoryRightListAdapter(Context context, List<CategoryBaseBean> dataList) {
         super(context, dataList);
         mDataList = dataList;
+        notifyDataSetChanged();
     }
 
     @Override

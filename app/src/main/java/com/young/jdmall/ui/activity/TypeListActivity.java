@@ -59,31 +59,43 @@ public class TypeListActivity extends BaseActivity {
         mTypeListAdapter = new TypeListAdapter(this);
         mRecycleView.setAdapter(mTypeListAdapter);
 
-        mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
-            @Override
-            public void onPrimaryVolume() {
-                loadPrimary("saleDown");
-            }
-
-            @Override
-            public void onPrimaryEvaluate() {
-                loadPrimary("shelvesDown");
-            }
-
-            @Override
-            public void onPrimaryPrice(boolean isMode) {
-                if (isMode){
-                    loadPrimary("priceDown");
-                }else {
-                    loadPrimary("priceUp");
-                }
-            }
-
-            @Override
-            public void onPrimaryScreen() {
-                Log.d(TAG, "onPrimaryScreen: 弹出筛选菜单");
-            }
-        });
+//        mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
+//            @Override
+//            public void onPrimaryVolume() {
+//                Log.d(TAG, "onPrimaryVolume: 修改请求");
+//                loadPrimary("saleDown");
+//            }
+//
+//            @Override
+//            public void onPrimaryEvaluate() {
+//                loadPrimary("shelvesDown");
+//            }
+//
+//            @Override
+//            public void onPrimaryPrice(boolean isMode) {
+//                if (isMode){
+//                    loadPrimary("priceDown");
+//                }else {
+//                    loadPrimary("priceUp");
+//                }
+//            }
+//
+//            @Override
+//            public void onPrimaryScreen() {
+//                Log.d(TAG, "onPrimaryScreen: 弹出筛选菜单");
+//            }
+//
+//            @Override
+//            public void onBack() {
+//                Log.d(TAG, "onBack: 销毁");
+//                finish();
+//            }
+//
+//            @Override
+//            public void onSelectorLayout() {
+//                Log.d(TAG, "onSelectorLayout: 修改布局");
+//            }
+//        });
     }
 
     private void loadMoreData(int page) {
