@@ -1,9 +1,12 @@
 package com.young.jdmall.ui.activity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -43,6 +46,10 @@ public class LoginActivity extends BaseActivity {
     Button mBtLogin;
     @BindView(R.id.tv_regist)
     TextView mTvRegist;
+    @BindView(R.id.tv_pwd)
+    TextView mTvPwd;
+    @BindView(R.id.pwd_delete)
+    ImageView mPwdDelete;
     private BufferedReader bfr;
     private static final String TAG = "LoginActivity";
     private FileOutputStream nameFos;
@@ -75,6 +82,30 @@ public class LoginActivity extends BaseActivity {
                 }
             }
         }*/
+        mEtPassword.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                if (TextUtils.isEmpty(s)) {
+                    mPwdDelete.setVisibility(View.INVISIBLE);
+                    mBtLogin.setBackgroundColor(Color.RED);
+                    mBtLogin.setTextColor(Color.WHITE);
+                } else {
+                    mPwdDelete.setVisibility(View.VISIBLE);
+                    mBtLogin.setTextColor(Color.DKGRAY);
+                    mBtLogin.setBackgroundColor(Color.GRAY);
+                }
+            }
+        });
     }
 
 
@@ -118,7 +149,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(LoginInfoBean loginInfoBean) {
 
-                Log.d(TAG, "onHandleSuccess: "+ loginInfoBean.getResponse());
+                Log.d(TAG, "onHandleSuccess: " + loginInfoBean.getResponse());
 /*                if("login".equals(loginInfoBean.getResponse())){
                     Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
                     PreferenceUtils.setUserName(LoginActivity.this, name);
@@ -130,12 +161,13 @@ public class LoginActivity extends BaseActivity {
                     String errorCode = loginInfoBean.getErrorCode();
                     Log.d(TAG, "onHandleSuccess: "+errorCode);
                 }*/
-                if(loginInfoBean.getUserInfo()!=null){
+                if (loginInfoBean.getUserInfo() != null) {
                     Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
                     PreferenceUtils.setUserName(LoginActivity.this, name);
                     PreferenceUtils.setUserId(LoginActivity.this, loginInfoBean.getUserInfo().getUserid());
+
                     finish();
-                }else {
+                } else {
                     String errorCode = loginInfoBean.getError();
                     Toast.makeText(LoginActivity.this, errorCode, Toast.LENGTH_SHORT).show();
                 }
@@ -150,7 +182,7 @@ public class LoginActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                Log.e(TAG, "onError: "+ e );
+                Log.e(TAG, "onError: " + e);
             }
         });
 
@@ -212,9 +244,7 @@ public class LoginActivity extends BaseActivity {
             }*/
 
 
-
-
-    @OnClick({R.id.iv_back, R.id.bt_login, R.id.tv_regist})
+    @OnClick({R.id.iv_back, R.id.bt_login, R.id.tv_regist, R.id.pwd_delete})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
@@ -227,17 +257,21 @@ public class LoginActivity extends BaseActivity {
                 Intent intent = new Intent(this, RegistActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.pwd_delete:
+                mEtPassword.setText("");
         }
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        if(!"".equals(PreferenceUtils.getUserName(this))){
+        if (!"".equals(PreferenceUtils.getUserName(this))) {
             mEtName.setText(PreferenceUtils.getUserName(this));
         }
-        if(PreferenceUtils.getRegistSuccess(this)){
+        if (PreferenceUtils.getRegistSuccess(this)) {
             finish();
         }
     }
+
+
 }

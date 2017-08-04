@@ -66,23 +66,7 @@ public class MyFragment extends BaseFragment {
 //        textView.setText("我的");
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
-        mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
-            @Override
-            public void OnRefresh() {
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        SystemClock.sleep(2000);
-                        mRvFresh.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                mRvFresh.closeRefresh();
-                            }
-                        });
-                    }
-                }).start();
-            }
-        });
+        initData();
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -115,9 +99,30 @@ public class MyFragment extends BaseFragment {
                     Toast.makeText(getActivity(), "成功获取用户信息", Toast.LENGTH_SHORT).show();
                     mMyRvAdapter.setUserInfoBean(usersInfoBean.getUserInfo());
 
+                }else{
+                    Toast.makeText(getActivity(), usersInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "onHandleSuccess: "+usersInfoBean.getResponse());
+                    PreferenceUtils.setUserId(getActivity(), "");
+                    mMyRvAdapter.setUsers("");
                 }
 //                String level = usersInfoBean.getUserInfo().getLevel();
 //                Log.d(TAG, "onHandleSuccess: "+ level);
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                super.onHandleError(msg);
+                Log.d(TAG, "onHandleError: "+msg);
+                PreferenceUtils.setUserId(getActivity(),"");
+                mMyRvAdapter.setUsers("");
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                Log.d(TAG, "onHandleError: "+e);
+                PreferenceUtils.setUserId(getActivity(), "");
+                mMyRvAdapter.setUsers("");
             }
         });
         Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
@@ -126,6 +131,14 @@ public class MyFragment extends BaseFragment {
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
 
                 mMyRvAdapter.setNewsProductData(newsProductInfoBean);
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                super.onHandleError(msg);
+                Log.d(TAG, "onHandleError: "+msg);
+                PreferenceUtils.setUserId(getActivity(), "");
+                mMyRvAdapter.setUsers("");
             }
         });
     }
@@ -226,7 +239,26 @@ public class MyFragment extends BaseFragment {
         initData();
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
+        if(!"".equals(userName)){
 
+            mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+                @Override
+                public void OnRefresh() {
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            SystemClock.sleep(2000);
+                            mRvFresh.post(new Runnable() {
+                                @Override
+                                public void run() {
+                                    mRvFresh.closeRefresh();
+                                }
+                            });
+                        }
+                    }).start();
+                }
+            });
+        }
         mMyRvAdapter.setUsers(userName);
 //        String userid = JDMallApplication.sLoginInfoBean.getUserInfo().getUserid();
 //        mMyRvAdapter.setUsers(userid);

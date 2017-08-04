@@ -4,8 +4,6 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,18 +11,22 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.LoginInfoBean;
+import com.young.jdmall.network.BaseObserver;
+import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observable;
 
 /*
  *  创建者:   tiao
  *  创建时间:  2017/7/30 0030 20:49
  *  描述：    TODO
  */
-public class AccountSettingActivity extends AppCompatActivity {
+public class AccountSettingActivity extends BaseActivity {
 
 
     @BindView(R.id.iv_signOrReg)
@@ -57,9 +59,11 @@ public class AccountSettingActivity extends AppCompatActivity {
     Button mBtUnregist;
     @BindView(R.id.rl_login)
     RelativeLayout mRlLogin;
+    @BindView(R.id.rl_help)
+    RelativeLayout mRlHelp;
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_setting);
         ButterKnife.bind(this);
@@ -78,26 +82,43 @@ public class AccountSettingActivity extends AppCompatActivity {
         }
     }
 
-    @OnClick({R.id.iv_back, R.id.rl_address, R.id.bt_unregist, R.id.rl_login})
+    @OnClick({R.id.iv_back, R.id.rl_address, R.id.bt_unregist, R.id.rl_login, R.id.rl_help})
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_back:
                 finish();
                 break;
             case R.id.rl_address:
-                Intent intent = new Intent(this, RecepitAddressActivity.class);
-                startActivity(intent);
+                if(!"".equals(PreferenceUtils.getUserId(this))){
+
+                    Intent intent = new Intent(this, RecepitAddressActivity.class);
+                    startActivity(intent);
+                }else {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+                }
                 break;
             case R.id.bt_unregist:
                 isUnregist();
                 break;
             case R.id.rl_login:
-                if("".equals(PreferenceUtils.getUserName(this))){
+                if("".equals(PreferenceUtils.getUserId(this))){
                     Intent intent2 = new Intent(this, LoginActivity.class);
                     startActivity(intent2);
 
                 }
                 break;
+            case R.id.rl_help:
+                if("".equals(PreferenceUtils.getUserId(this))){
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    startActivity(intent);
+
+                }else {
+                    Intent intent = new Intent(this, HelpCenterActivity.class);
+                    startActivity(intent);
+                }
+                break;
+
         }
     }
 
@@ -107,10 +128,22 @@ public class AccountSettingActivity extends AppCompatActivity {
         builder.setPositiveButton("是的", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                PreferenceUtils.setUserName(AccountSettingActivity.this, "");
-                PreferenceUtils.setUserId(AccountSettingActivity.this, "");
-                PreferenceUtils.setRegistSuccess(AccountSettingActivity.this, false);
-                finish();
+                Observable<LoginInfoBean> newsObservable = RetrofitFactory.getInstance().unRegist(PreferenceUtils.getUserId(AccountSettingActivity.this));
+                newsObservable.compose(compose(AccountSettingActivity.this.<LoginInfoBean>bindToLifecycle())).subscribe(new BaseObserver<LoginInfoBean>(AccountSettingActivity.this) {
+                    @Override
+                    protected void onHandleSuccess(LoginInfoBean loginInfoBean) {
+                        if("logout".equals(loginInfoBean.getResponse())){
+//                            PreferenceUtils.setUserName(AccountSettingActivity.this, "");
+                            PreferenceUtils.setUserId(AccountSettingActivity.this, "");
+                            PreferenceUtils.setRegistSuccess(AccountSettingActivity.this, false);
+                            finish();
+                        }
+
+
+                    }
+
+                });
+
             }
         });
         builder.setNegativeButton("取消", new DialogInterface.OnClickListener() {

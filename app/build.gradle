@@ -56,7 +56,8 @@ dependencies {
     //rxjava
     //compile 'io.reactivex:rxandroid:1.2.1'
 
-
+    //三级联动
+    compile 'com.github.open-android:CityPickerWebView:0.1.0'
 
 
 

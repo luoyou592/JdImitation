@@ -13,9 +13,6 @@
         android:background="@mipmap/b0z">
 
 
-
-
-
         <ImageView
 
             android:id="@+id/iv_signOrReg"
@@ -46,18 +43,18 @@
 
         <TextView
             android:id="@+id/tv_level"
-            android:layout_marginLeft="10dp"
-            android:textColor="@android:color/white"
-            android:layout_alignBaseline="@id/tv_login"
-            android:layout_toRightOf="@id/tv_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="会员等级"/>
+            android:layout_alignBaseline="@id/tv_login"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@id/tv_login"
+            android:text="会员等级"
+            android:textColor="@android:color/white"/>
 
         <ImageView
-            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
             android:background="@mipmap/b18"/>
     </RelativeLayout>
 
@@ -269,57 +266,68 @@
             />
     </LinearLayout>
 
-        <ImageView
+       <!-- <ImageView
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="@android:color/darker_gray"/>
-
+            android:background="@android:color/white"/>
+-->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+
         <TextView
-            android:padding="4dp"
-            android:gravity="center"
+            android:layout_marginRight="10dp"
+            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="购物记录"
             android:drawablePadding="10dp"
-            android:drawableTop="@mipmap/mine_cart"/>
-        <TextView
-            android:padding="4dp"
+            android:drawableTop="@mipmap/mine_cart"
             android:gravity="center"
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:text="购物记录"/>
+
+        <TextView
+            android:layout_marginRight="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="浏览足迹"
-
             android:drawablePadding="10dp"
-
-            android:drawableTop="@mipmap/mine_footmark"/>
-        <TextView
-            android:padding="4dp"
+            android:drawableTop="@mipmap/mine_footmark"
             android:gravity="center"
+
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:text="浏览足迹"/>
+
+        <TextView
+            android:layout_marginRight="10dp"
+            android:id="@+id/tv_collection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="收藏宝贝"
             android:drawablePadding="10dp"
+            android:drawableTop="@mipmap/mine_collect"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:text="收藏宝贝"/>
 
-            android:drawableTop="@mipmap/mine_collect"/>
         <TextView
+            android:layout_marginRight="10dp"
             android:id="@+id/tv_address_manage"
-            android:padding="4dp"
-            android:gravity="center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="地址管理"
             android:drawablePadding="10dp"
-
-            android:drawableTop="@mipmap/mine_address"/>
+            android:drawableTop="@mipmap/mine_address"
+            android:gravity="center"
+            android:padding="4dp"
+            android:textSize="16sp"
+            android:text="地址管理"/>
         <!--<TextView
             android:textColor="@android:color/black"
             android:textSize="10sp"
@@ -387,18 +395,24 @@
             android:layout_weight="1"
             android:text="我的订单"/>-->
     </LinearLayout>
-        <ImageView
+
+    <!--<ImageView
             android:layout_width="match_parent"
             android:layout_height="8dp"
-            android:background="@android:color/darker_gray"/>
-
+            android:background="@android:color/white"/>
+-->
         <LinearLayout
+
+            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="95dp"
             android:orientation="horizontal"
+            android:gravity="center_vertical"
             >
 
             <ImageView
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
                 android:id="@+id/imageView2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -406,16 +420,19 @@
                 android:background="@mipmap/mine_list1"/>
 
             <ImageView
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/mine_list2"/>
             <ImageView
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:background="@mipmap/mine_list4"/>
             <ImageView
+                android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

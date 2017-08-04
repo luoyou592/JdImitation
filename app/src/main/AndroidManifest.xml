@@ -28,6 +28,8 @@
         <activity android:name=".ui.activity.AddRecepitAddressActivity"/>
         <activity android:name=".ui.activity.RecepitAddressActivity"/>
         <activity android:name=".ui.activity.MainActivity"/>
+        <activity android:name=".ui.activity.CollectionActivity"/>
+        <activity android:name=".ui.activity.HelpCenterActivity"/>
     </application>
 
 </manifest>

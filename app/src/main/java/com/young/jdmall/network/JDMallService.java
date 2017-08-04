@@ -1,15 +1,21 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
+import com.young.jdmall.bean.HelpInfoBean;
+import com.young.jdmall.bean.HelpInfoDetailBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.RecepitAddressBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
 
 import io.reactivex.Observable;
+import okhttp3.RequestBody;
+import retrofit2.Call;
+import retrofit2.http.Body;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
@@ -38,7 +44,7 @@ public interface JDMallService {
     //登陆
     @FormUrlEncoded
     @POST("login")
-    Observable<LoginInfoBean> listLogin(@Field("username") String username, @Query("password") String password);
+    Observable<LoginInfoBean> listLogin(@Field("username") String username, @Field("password") String password);
     //限时抢购limitbuy
     @GET("limitbuy")
     Observable<LimitbuyBean> listLimitbuy(@Query("page") int page, @Query("pageNum") int pageNum);
@@ -49,9 +55,31 @@ public interface JDMallService {
     Observable<BrandInfoBean> listBrand();
     @FormUrlEncoded
     @POST("register")
-    Observable<LoginInfoBean> listRegister(@Field("username") String username, @Query("password") String password);
+    Observable<LoginInfoBean> listRegister(@Field("username") String username, @Field("password") String password);
 
     @GET("userinfo")
     Observable<UsersInfoBean> listUserInfo(@Header("userid") String userid);
+    @GET("logout")
+    Observable<LoginInfoBean> unRegist(@Header("userid") String userid);
+
+    @GET("addresslist")
+    Observable<RecepitAddressBean> listAddressList(@Header("userid") String userid);
+    @GET("addresslist")
+    Call<RecepitAddressBean> listAddressListCall(@Header("userid") String userid);
+    @GET("addressdefault")
+    Call<RecepitAddressBean> listAddressDefault(@Header("userid") String userid, @Query("id") String id);
+    @POST("addressdelete")
+    Call<RecepitAddressBean> listAddressDelete(@Header("userid") String userid, @Body RequestBody addressDelete);
+    @POST("addresssave")
+    Call<RecepitAddressBean> listAddressSave(@Header("userid") String userid, @Body RequestBody addressSave);
+
+    @GET("favorites")
+    Observable<NewsProductInfoBean> listCollectProduct(@Header("userid") String userid, @Query("page") int page,@Query("pageNum") int pageNum);
+
+    @GET("help")
+    Observable<HelpInfoBean> listHelpList();
+
+    @GET("helpDetail")
+    Observable<HelpInfoDetailBean> listHelpDetail(@Query("id") int id);
 
 }
