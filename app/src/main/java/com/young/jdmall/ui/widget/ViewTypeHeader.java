@@ -37,7 +37,7 @@ public class ViewTypeHeader extends RelativeLayout {
     @BindView(R.id.type_back)
     ImageView mTypeBack;
     @BindView(R.id.type_search)
-    EditText mTypeSearch;
+    public EditText mTypeSearch;
     @BindView(R.id.type_selector_layout)
     ImageView mTypeSelectorLayout;
 
@@ -111,7 +111,7 @@ public class ViewTypeHeader extends RelativeLayout {
                 }
                 break;
             case R.id.type_search:
-                mOnClickPrimaryListener.onSearch(mTypeSearch);
+                mOnClickPrimaryListener.onSearch();
                 break;
 
 
@@ -145,7 +145,7 @@ public class ViewTypeHeader extends RelativeLayout {
 
         void onSelectorLayout(boolean isRecyclerView);//选择布局回调
 
-        void onSearch(EditText typeSearch);
+        void onSearch();
 
 
     }

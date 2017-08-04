@@ -7,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
-import android.widget.EditText;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.ProductBean;
@@ -50,14 +49,28 @@ public class TypeActivity extends BaseActivity {
     private String mKeyword;
 
     @Override
+    protected void onNewIntent(Intent intent) {
+        setIntent(intent);
+        super.onNewIntent(intent);
+    }
+
+    @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_type_list);
         ButterKnife.bind(this);
         mContext = this;
 
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         Intent intent = getIntent();
         mKeyword = intent.getStringExtra("name");
+        Log.d(TAG, "onCreate: " + intent.getStringExtra("name"));
+        Log.d(TAG, "onCreate: " + mKeyword);
         if (mKeyword == null) {
             //分类页面进来的
             loadData = 0;
@@ -68,6 +81,12 @@ public class TypeActivity extends BaseActivity {
             loadData = 1;
             initSearch();
             loadSearchData(mKeyword);
+        }
+
+        if (mKeyword != null){
+            Log.d(TAG, "onResume: 设置" + mKeyword);
+
+            mViewTypeListHeader.mTypeSearch.setText(mKeyword);
         }
     }
 
@@ -156,13 +175,9 @@ public class TypeActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(ProductBean searchListBean) {
                 mProductList = searchListBean.getProductList();
-                Log.d(TAG, "onCreate: ------------>92");
-                Log.d(TAG, "onHandleSuccess: 添加数据");
                 mTypeListAdapter.addData(mProductList);
-                Log.d(TAG, "onCreate: ------------>6");
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
-                    Log.d(TAG, "onCreate: ------------>102");
                 }
                 mRecycleView.onLoadFinish();
             }
@@ -189,7 +204,6 @@ public class TypeActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean searchListBean) {
                 mProductList = searchListBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
-                Log.d(TAG, "onCreate: ------------>7");
 
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
@@ -303,6 +317,7 @@ public class TypeActivity extends BaseActivity {
 
     private void setListener() {
         mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
+
             @Override
             public void onPrimaryVolume() {
                 if (loadData == 0) {
@@ -362,7 +377,6 @@ public class TypeActivity extends BaseActivity {
                             loadCommodityData();
                         }else if (loadData == 1){
                             loadSearchData(mKeyword);
-                            Log.d(TAG, "onSelectorLayout: aaaa");
                         }
                     }
                     mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2,
@@ -373,8 +387,7 @@ public class TypeActivity extends BaseActivity {
             }
 
             @Override
-            public void onSearch(EditText typeSearch) {
-                typeSearch.setText(mKeyword);
+            public void onSearch() {
                 startActivity(new Intent(TypeActivity.this, SearchActivity.class));
             }
         });
@@ -383,12 +396,10 @@ public class TypeActivity extends BaseActivity {
     @Override
     protected void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ------------->");
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: ------->");
     }
 }
