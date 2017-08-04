@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.widget.EditText;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.ProductBean;
@@ -57,7 +58,6 @@ public class TypeActivity extends BaseActivity {
 
         Intent intent = getIntent();
         mKeyword = intent.getStringExtra("name");
-        Log.d(TAG, "onCreate: " + mKeyword);
         if (mKeyword == null) {
             //分类页面进来的
             loadData = 0;
@@ -110,6 +110,7 @@ public class TypeActivity extends BaseActivity {
         mTypeListAdapter = new TypeAdapter(this);
         mRecycleView.setAdapter(mTypeListAdapter);
         mRecycleView.setLoadMoreOpportunity(1);
+
         setListener();
     }
 
@@ -155,10 +156,13 @@ public class TypeActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(ProductBean searchListBean) {
                 mProductList = searchListBean.getProductList();
+                Log.d(TAG, "onCreate: ------------>92");
                 Log.d(TAG, "onHandleSuccess: 添加数据");
                 mTypeListAdapter.addData(mProductList);
+                Log.d(TAG, "onCreate: ------------>6");
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
+                    Log.d(TAG, "onCreate: ------------>102");
                 }
                 mRecycleView.onLoadFinish();
             }
@@ -185,6 +189,7 @@ public class TypeActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean searchListBean) {
                 mProductList = searchListBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
+                Log.d(TAG, "onCreate: ------------>7");
 
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
@@ -366,11 +371,24 @@ public class TypeActivity extends BaseActivity {
                 }
 
             }
+
+            @Override
+            public void onSearch(EditText typeSearch) {
+                typeSearch.setText(mKeyword);
+                startActivity(new Intent(TypeActivity.this, SearchActivity.class));
+            }
         });
     }
 
     @Override
     protected void onStop() {
         super.onStop();
+        Log.d(TAG, "onStop: ------------->");
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: ------->");
     }
 }

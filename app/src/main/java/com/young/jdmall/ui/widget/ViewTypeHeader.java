@@ -1,7 +1,6 @@
 package com.young.jdmall.ui.widget;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Color;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
@@ -12,7 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.activity.SearchActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -113,7 +111,7 @@ public class ViewTypeHeader extends RelativeLayout {
                 }
                 break;
             case R.id.type_search:
-                getContext().startActivity(new Intent(getContext(), SearchActivity.class));
+                mOnClickPrimaryListener.onSearch(mTypeSearch);
                 break;
 
 
@@ -146,6 +144,8 @@ public class ViewTypeHeader extends RelativeLayout {
         void onBack();//返回键回调
 
         void onSelectorLayout(boolean isRecyclerView);//选择布局回调
+
+        void onSearch(EditText typeSearch);
 
 
     }

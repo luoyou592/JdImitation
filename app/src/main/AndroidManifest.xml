@@ -28,7 +28,8 @@
         <activity android:name=".ui.activity.MessageActivity"/>
         <activity android:name=".ui.activity.OrderActivity"/>
         <activity android:name=".ui.activity.TypeListActivity"/>
-        <activity android:name=".ui.activity.TypeActivity"/>
+        <activity android:name=".ui.activity.TypeActivity"
+                  android:launchMode="singleInstance"/>
         <activity android:name=".ui.activity.MainActivity"/>
         <activity android:name=".ui.activity.HongBaoActivity"/>
         <activity android:name=".ui.activity.FillingOrderActivity"/>
@@ -46,7 +47,8 @@
 
         <activity android:name=".ui.activity.CollectionActivity"/>
         <activity android:name=".ui.activity.HelpCenterActivity"/>
-        <activity android:name=".ui.activity.SearchActivity">
+        <activity android:name=".ui.activity.SearchActivity"
+                  android:launchMode="singleInstance">
         </activity>
         <activity android:name=".ui.activity.InfoActivity"/>
     </application>
