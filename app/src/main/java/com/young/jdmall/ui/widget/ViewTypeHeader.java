@@ -3,7 +3,6 @@ package com.young.jdmall.ui.widget;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -97,9 +96,8 @@ public class ViewTypeHeader extends RelativeLayout {
                 }
                 break;
             case R.id.type_selector_layout:
-                Log.d(TAG, "onViewClicked: 点击");
                 if (mOnClickPrimaryListener != null) {
-                    mOnClickPrimaryListener.onSelectorLayout();
+                    mOnClickPrimaryListener.onSelectorLayout(isRecyclerView);
 
                     if (isRecyclerView) {
                         mTypeSelectorLayout.setBackgroundResource(R.mipmap.a8r);
@@ -140,7 +138,7 @@ public class ViewTypeHeader extends RelativeLayout {
 
         void onBack();//返回键回调
 
-        void onSelectorLayout();//选择布局回调
+        void onSelectorLayout(boolean isRecyclerView);//选择布局回调
 
 
     }

@@ -24,6 +24,7 @@ import com.young.jdmall.ui.activity.TypeActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,16 +40,20 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
 
     private static final String TAG = "TypeWaterfallAdapter";
     private Context mContext;
-    private List<ProductBean.ProductListBean> mData;
+    private List<ProductBean.ProductListBean> mData = new ArrayList<>();
 
     public TypeWaterfallAdapter(Context context) {
         mContext = context;
-        Log.d(TAG, "TypeWaterfallAdapter: 创建");
     }
 
     public void setData(List<ProductBean.ProductListBean> data) {
         mData = data;
-        Log.d(TAG, "setData: 设置数据");
+        notifyDataSetChanged();
+    }
+
+    public void addData(List<ProductBean.ProductListBean> productList) {
+        mData.addAll(productList);
+        Log.d(TAG, "addData: 添加数据" + mData.size());
         notifyDataSetChanged();
     }
 
@@ -56,7 +61,7 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
     @Override
     protected RecyclerView.ViewHolder onCreateViewHolderToRecyclerLoadMoreView(ViewGroup parent,
                                                                                int viewType) {
-        return new TypeWaterfallAdapter.ViewHolder(LayoutInflater.from(mContext).inflate(R.layout
+        return new TypeWaterfallAdapter.ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
                 .item_type_water, parent, false));
     }
 
@@ -97,19 +102,18 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
         }
 
         public void setData(ProductBean.ProductListBean productListBean) {
-            Log.d(TAG, "setData: 设置具体数据");
 
             Display display= ((TypeActivity)mContext).getWindow().getWindowManager().getDefaultDisplay();
             DisplayMetrics dm=new DisplayMetrics();
             display.getMetrics(dm);
             int mWidth=dm.widthPixels;
             int mHeight=dm.heightPixels;
-            Log.d(TAG, "setData: " + mWidth + "_________" + mHeight);
 
             ViewGroup.LayoutParams layoutParams = mTypeWaterIcon.getLayoutParams();
 
             //将宽度设置为屏幕的1/2
             layoutParams.width=mWidth/2;
+            layoutParams.height=mHeight/2;
             mTypeWaterIcon.setLayoutParams(layoutParams);
 
             String imageUrl = Constant.IMAGE_URL + productListBean.getPic();
@@ -123,8 +127,8 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
             mTypeWaterName.setText(productListBean.getName());
 
             SpannableString spannableString = new SpannableString(PriceFormater.format(productListBean.getMarketPrice()));
-            spannableString.setSpan(new AbsoluteSizeSpan(80), 4, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            spannableString.setSpan(new ForegroundColorSpan(Color.RED), 4, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new AbsoluteSizeSpan(80), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             mTypeWaterMoney.setText(spannableString);
         }

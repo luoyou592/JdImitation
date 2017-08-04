@@ -91,6 +91,10 @@ public class TypeActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean productBean) {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.addData(mProductList);
+                if (mWaterfallAdapter != null){
+                    Log.d(TAG, "onHandleSuccess: 添加数据");
+                    mWaterfallAdapter.addData(mProductList);
+                }
                 mRecycleView.onLoadFinish();
             }
             @Override
@@ -119,7 +123,6 @@ public class TypeActivity extends BaseActivity {
             }
             @Override
             protected void onHandleError(String msg) {
-                Log.d(TAG, "onHandleError: 请求失败");
                 mRecycleView.onLoadFinish();
             }
             @Override
@@ -133,7 +136,6 @@ public class TypeActivity extends BaseActivity {
 
     //加载数据
     private void loadData() {
-
         Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listProductlist(1, 10, 125, "shelvesDown");
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver<ProductBean>(mContext) {
             @Override
@@ -141,6 +143,7 @@ public class TypeActivity extends BaseActivity {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.addData(mProductList);
                 if (mWaterfallAdapter != null){
+                    Log.d(TAG, "onHandleSuccess: 重新设置数据");
                     mWaterfallAdapter.setData(mProductList);
                 }
             }
@@ -154,10 +157,11 @@ public class TypeActivity extends BaseActivity {
                 Log.d(TAG, "onHandleError: 请求失败");
             }
         });
-
-
         /**----------------------------------请求数据----------------------------------------*/
     }
+
+
+
 
     private void setListener() {
         mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
@@ -184,16 +188,25 @@ public class TypeActivity extends BaseActivity {
 
             @Override
             public void onBack() {
-//                finish();
-                Log.d(TAG, "onBack: 有bug");
+                finish();
+//                Log.d(TAG, "onBack: 有bug");
             }
 
             @Override
-            public void onSelectorLayout() {
+            public void onSelectorLayout(boolean isRecyclerView) {
                 Log.d(TAG, "onSelectorLayout: 修改布局");
-                mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
-                mWaterfallAdapter = new TypeWaterfallAdapter(mContext);
-                loadData();
+                if (!isRecyclerView){
+                    //设置为垂直布局
+                    mRecycleView.setLayoutManager(new LinearLayoutManager(mContext));
+                    mRecycleView.setAdapter(mTypeListAdapter);
+                }else {
+                    if (mWaterfallAdapter == null){
+                        mWaterfallAdapter = new TypeWaterfallAdapter(mContext);
+                        loadData();
+                    }
+                    mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL));
+                    mRecycleView.setAdapter(mWaterfallAdapter);
+                }
 
             }
         });
