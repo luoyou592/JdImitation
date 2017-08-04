@@ -66,7 +66,6 @@ public class HomeFragment extends BaseFragment {
         initData();
         initListener();
         return mHomeView;
-
     }
 
     private void initListener() {

@@ -26,6 +26,7 @@
                 android:src="@drawable/akz"/>
 
             <ImageView
+                android:id="@+id/open_message"
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_alignParentRight="true"

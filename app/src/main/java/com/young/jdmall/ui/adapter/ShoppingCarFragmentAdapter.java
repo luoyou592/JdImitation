@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -16,6 +17,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
+import com.young.jdmall.ui.activity.InfoActivity;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
 
     private static final int TYPE_TITLE = 0;
     private static final int TYPE_GLIDE = 1;
+
 
     private Context mContext;
     private List<RecommendInfoBean.ProductListBean> mData;
@@ -57,10 +60,10 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
     public int getItemCount() {
         Log.d("shopcar", "得到数目");
         if (mData != null) {
-            Log.d("data","mData.getListCount()==============="+mData.size());
+            Log.d("data", "mData.getListCount()===============" + mData.size());
             return mData.size();
         }
-        Log.d("data","得到一个0");
+        Log.d("data", "得到一个0");
         return 0;
     }
 
@@ -113,7 +116,6 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
     }
 
 
-
     class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.login)
         Button mLogin;
@@ -123,6 +125,8 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         Button mCheck;
         @BindView(R.id.goods_show)
         RecyclerView mGoodsShow;
+        @BindView(R.id.chat)
+        ImageView mChat;
 
 
         ViewHolder(View view) {
@@ -144,6 +148,13 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     Log.d("shopcar", "点击了mCheck");
+                }
+            });
+            mChat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext, InfoActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
         }
@@ -199,10 +210,10 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
 
         }
 
-         public void setData(int position) {
-             RecommendInfoBean.ProductListBean productList = mData.get(position);
-             mItemDesc.setText(productList.getName());
-            mItemPrice.setText(productList.getPrice()+"");
+        public void setData(int position) {
+            RecommendInfoBean.ProductListBean productList = mData.get(position);
+            mItemDesc.setText(productList.getName());
+            mItemPrice.setText(productList.getPrice() + "");
             Glide.with(mContext.getApplicationContext()).load(Constant.BASE_URL + productList.getPic()).into(mItemSrc);
         }
     }

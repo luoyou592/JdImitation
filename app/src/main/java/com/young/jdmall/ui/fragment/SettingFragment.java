@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.fragment;
 
 import android.animation.ObjectAnimator;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -16,6 +17,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.InfoActivity;
 import com.young.jdmall.ui.adapter.SettingAdapter;
 import com.young.jdmall.ui.adapter.SettingGridAdapter;
 import com.young.jdmall.ui.adapter.SettingNavigatorAdapter;
@@ -27,6 +29,7 @@ import net.lucode.hackware.magicindicator.buildins.commonnavigator.abs.CommonNav
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import butterknife.Unbinder;
 
 /**
@@ -121,5 +124,15 @@ public class SettingFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
         unbinder.unbind();
+    }
+
+    @OnClick(R.id.open_message)
+    public void onViewClicked(View view) {
+        switch (view.getId()){
+            case R.id.open_message:
+                Intent intent=new Intent(getActivity(), InfoActivity.class);
+                startActivity(intent);
+                break;
+        }
     }
 }

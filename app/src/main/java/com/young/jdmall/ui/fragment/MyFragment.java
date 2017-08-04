@@ -22,6 +22,7 @@ import com.young.jdmall.bean.UsersInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.AccountSettingActivity;
+import com.young.jdmall.ui.activity.InfoActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.adapter.MyRvAdapter;
 import com.young.jdmall.ui.utils.PreferenceUtils;
@@ -199,6 +200,8 @@ public class MyFragment extends BaseFragment {
                 startActivity(intent);
                 break;
             case R.id.iv_message:
+                Intent intent1=new Intent(getActivity(), InfoActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.iv_setting:
                 Intent intent3 = new Intent(getActivity(), AccountSettingActivity.class);
