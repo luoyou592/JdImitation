@@ -21,6 +21,7 @@ import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.CustomServiceActivity;
+import com.young.jdmall.ui.activity.SearchActivity;
 import com.young.jdmall.ui.adapter.HomeRvAdapter;
 
 import butterknife.BindView;
@@ -70,14 +71,12 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void initListener() {
-        //下拉刷新
-        mSrlHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+        /*mSrlHome.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                mHomeRvAdapter.notifyDataSetChanged();
 
             }
-        });
+        });*/
     }
 
     private void initView() {
@@ -103,10 +102,28 @@ public class HomeFragment extends BaseFragment {
 
             }
         });
+
+        mEtSearch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                getActivity().startActivity(new Intent(getActivity(), SearchActivity.class));
+            }
+        });
     }
+
     //Rxjava2请求数据
     private void initData() {
         //请求轮播图
+        Observable<HomeInfoBean> homeObservable = RetrofitFactory.getInstance().listHome();
+        homeObservable.compose(compose(this.<HomeInfoBean>bindToLifecycle())).subscribe(new BaseObserver<HomeInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
+                //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
+                mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
+            }
+        });
+        //请求商品列表
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         requestCarouselPic();
     }
 

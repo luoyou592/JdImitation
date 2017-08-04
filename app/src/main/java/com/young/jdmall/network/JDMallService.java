@@ -1,12 +1,14 @@
 package com.young.jdmall.network;
 
 import com.young.jdmall.bean.BrandInfoBean;
+import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CommentInfoBean;
 import com.young.jdmall.bean.HelpInfoBean;
 import com.young.jdmall.bean.HelpInfoDetailBean;
 import com.young.jdmall.bean.HomeInfoBean;
+import com.young.jdmall.bean.HotSearchInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
@@ -18,6 +20,8 @@ import com.young.jdmall.bean.RecepitAddressBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
+
+import java.util.Observer;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -41,6 +45,10 @@ public interface JDMallService {
     Observable<HomeInfoBean> listHome();
 
     //搜索推荐
+    @GET("search/recommend")
+    Call<HotSearchInfoBean> listHotSearch();
+
+
     @GET("hotproduct")
     Observable<RecommendInfoBean> listRecommend(@Query("page") int page, @Query("pageNum") int pageNum, @Query("orderby") String orderby);
 
@@ -59,7 +67,6 @@ public interface JDMallService {
     @FormUrlEncoded
     @POST("login")
     Observable<LoginInfoBean> listLogin(@Field("username") String username, @Query("password") String password);
-
 
     //限时抢购limitbuy
     @GET("limitbuy")
@@ -109,8 +116,8 @@ public interface JDMallService {
     //商品列表
 //    http://localhost:8080/market/productlist?page=1&pageNum=10&cId=125&orderby=saleDown
     @GET("productlist")
-    Observable<ProductBean> listProductlist(@Query("page")int page, @Query("pageNum")int pageNum,
-                                            @Query("cId")int cId, @Query("orderby")String orderby);
+    Observable<ProductBean> listProductlist(@Query("page") int page, @Query("pageNum") int pageNum,
+                                            @Query("cId") int cId, @Query("orderby") String orderby);
 
     @POST("orderlist")
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);

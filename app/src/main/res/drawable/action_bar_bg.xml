@@ -3,12 +3,12 @@
     <item
         android:left="-1px"
         android:right="-1px"
-        android:top="-1px">
+        android:top="-2dp">
         <shape>
             <solid android:color="#ffffff"/>
             <stroke
-                android:width="1px"
-                android:color="#AAAAAA"/>
+                android:width="2px"
+                android:color="#e1e1e1"/>
         </shape>
     </item>
 </layer-list>
