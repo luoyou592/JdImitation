@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
@@ -20,6 +21,7 @@ import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.ProductBean;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.TypeActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
@@ -95,13 +97,25 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
         TextView mTypeWaterName;
         @BindView(R.id.type_water_money)
         TextView mTypeWaterMoney;
+        private ProductBean.ProductListBean mProductListBean;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, ProductDetaiActivity.class);
+                    intent.putExtra("id",mProductListBean.getId());
+                    mContext.startActivity(intent);
+                }
+            });
+
         }
 
         public void setData(ProductBean.ProductListBean productListBean) {
+            mProductListBean = productListBean;
 
             Display display= ((TypeActivity)mContext).getWindow().getWindowManager().getDefaultDisplay();
             DisplayMetrics dm=new DisplayMetrics();

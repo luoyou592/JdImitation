@@ -15,7 +15,6 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.ui.activity.TypeActivity;
-import com.young.jdmall.ui.activity.TypeListActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -66,6 +65,7 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(),TypeActivity.class);
+                intent.putExtra("keyword","奶粉");
                 getContext().startActivity(intent);
             }
         });
