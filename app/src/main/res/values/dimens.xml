@@ -7,4 +7,5 @@
     <dimen name="dp_180">180dp</dimen>
     <dimen name="dp_220">220dp</dimen>
     <dimen name="dp_2">2dp</dimen>
+    <dimen name="dp_14">14dp</dimen>
 </resources>

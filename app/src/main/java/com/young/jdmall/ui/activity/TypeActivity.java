@@ -56,7 +56,7 @@ public class TypeActivity extends BaseActivity {
         mContext = this;
 
         Intent intent = getIntent();
-        mKeyword = intent.getStringExtra("keyword");
+        mKeyword = intent.getStringExtra("name");
         Log.d(TAG, "onCreate: " + mKeyword);
         if (mKeyword == null) {
             //分类页面进来的
