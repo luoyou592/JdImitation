@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:scaleType="fitXY"
+        android:id="@+id/type_water_icon"
+        android:src="@mipmap/test_image"
+        android:layout_width="180dp"
+        android:layout_height="230dp"/>
+    <TextView
+        android:id="@+id/type_water_name"
+        android:text="名字一定要常常常常常常常常常常常常常常常常常常常常"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/type_water_money"
+        android:text="money"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

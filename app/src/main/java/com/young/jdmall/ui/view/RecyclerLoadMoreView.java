@@ -187,6 +187,8 @@ public class RecyclerLoadMoreView extends RecyclerView {
         public void setOnRefreshListener(OnRefreshListener l) {
             mRefreshListener = l;
         }
+
+
     }
 
     static class ViewHolderFromLoading extends ViewHolder {

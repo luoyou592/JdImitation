@@ -66,6 +66,7 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void initFragment() {
+        Log.d(TAG, "initFragment: 添加Fragment");
         //初始化Fragment
         for (int i = 0; i < 4; i++) {
             fragments.add(new MomAreaFragment(mCategoryBean));
@@ -103,6 +104,7 @@ public class CategoryFragment extends BaseFragment {
          */
 
     private void init() {
+        Log.d(TAG, "init: 初始化");
         //加载网络数据
         loadNetwork();
 
@@ -114,11 +116,13 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void loadNetwork() {
+        Log.d(TAG, "loadNetwork: 加载数据");
         Observable<CategoryBaseBean> categoryObservable = RetrofitFactory.getInstance().listCategory();
         categoryObservable.compose(compose(this.<CategoryBaseBean>bindToLifecycle())).subscribe(new BaseObserver<CategoryBaseBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(CategoryBaseBean categoryBean) {
                 mCategoryBean = categoryBean;
+                Log.d(TAG, "onHandleSuccess: 加载数据成功");
                 //加载成功再添加Fragment
                 initFragment();
                 selectFragment(0);
@@ -128,6 +132,18 @@ public class CategoryFragment extends BaseFragment {
                 Log.d(TAG, "onHandleError: 加载失败");
             }
         });
+//        categoryObservable.compose(compose(this.<CategoryBaseBean>bindToLifecycle())).subscribe(new BaseObserver
+//                <CategoryBaseBean>(getActivity()) {
+//            @Override
+//            protected void onHandleSuccess(CategoryBaseBean categoryBaseBean) {
+//                Log.d(TAG, "onHandleSuccess: 请求数据成功");
+//            }
+//
+//            @Override
+//            protected void onHandleError(String msg) {
+//                Log.d(TAG, "onHandleError: 请求数据失败");
+//            }
+//        });
     }
 
 
