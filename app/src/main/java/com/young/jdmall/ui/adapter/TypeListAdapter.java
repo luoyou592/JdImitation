@@ -48,14 +48,12 @@ public class TypeListAdapter extends RecyclerView.Adapter {
     public void setData(List<ProductBean.ProductListBean> data) {
         mData = data;
 
-        Log.d(TAG, "setData: 设置数据" + mData.size() + this);
         notifyDataSetChanged();
     }
 
     public void addData(List<ProductBean.ProductListBean> productList) {
         mData.addAll(productList);
 
-        Log.d(TAG, "addData: 添加数据"+mData.size());
     }
 
 
