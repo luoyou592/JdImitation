@@ -12,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.daimajia.slider.library.SliderLayout;
@@ -23,6 +22,7 @@ import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.widget.CountDownView;
@@ -207,7 +207,10 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             mGoodsItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mActivity,"点了"+productListBean.getName(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mActivity, ProductDetaiActivity.class);
+                    //传id到详情
+                    intent.putExtra("id",1);
+                    mActivity.startActivity(intent);
                 }
             });
            /* if (mNewsProductInfoBean != null) {

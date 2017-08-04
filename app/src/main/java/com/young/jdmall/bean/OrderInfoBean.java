@@ -1,5 +1,6 @@
 package com.young.jdmall.bean;
 
+<<<<<<< HEAD
 /*
  *  创建者:   tiao
  *  创建时间:  2017/7/31 0031 17:38
@@ -52,4 +53,4 @@ public class OrderInfoBean {
     public void setPrice(String price) {
         this.price = price;
     }
-}
+

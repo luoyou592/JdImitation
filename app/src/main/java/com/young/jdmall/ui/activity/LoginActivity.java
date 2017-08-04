@@ -1,15 +1,14 @@
 package com.young.jdmall.ui.activity;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
@@ -20,19 +19,25 @@ import com.young.jdmall.ui.fragment.MyFragment;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import io.reactivex.Observable;
 
 /*
  *  创建者:   tiao
  *  创建时间:  2017/7/30 0030 19:48
  *  描述：    TODO
  */
-public class LoginActivity extends BaseActivity {
+public class LoginActivity extends AppCompatActivity {
     @BindView(R.id.iv_back)
     ImageView mIvBack;
     @BindView(R.id.et_name)
