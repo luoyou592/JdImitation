@@ -237,6 +237,10 @@ public class MyRvAdapter extends RecyclerView.Adapter {
         @BindView(R.id.tv_order_num)
         TextView mTvOrderNum;
 
+
+        @BindView(R.id.tv_username)
+        TextView mTvUsername;
+
         @OnClick({R.id.rl_signOrReg, R.id.tv_address_manage, R.id.ll_order, R.id.tv_collection})
         public void onClick(View view) {
             switch (view.getId()) {
@@ -294,12 +298,19 @@ public class MyRvAdapter extends RecyclerView.Adapter {
 //                mRlSignOk.setVisibility(View.VISIBLE);
             }*/
             if (!"".equals(mUsers)) {
-                mTvLogin.setText("您好，" + mUsers);
+
+//                mTvLogin.setText("您好，" + mUsers);
+                mTvLogin.setVisibility(View.INVISIBLE);
+                mTvUsername.setVisibility(View.VISIBLE);
+                mTvUsername.setText("您好，" + mUsers);
                 mIvSignOrReg.setBackgroundResource(R.mipmap.fragment_daidai);
                 mRlSignOrReg.setBackgroundResource(R.mipmap.b0x);
 
             } else {
+                mTvUsername.setVisibility(View.GONE);
+                mTvLogin.setVisibility(View.VISIBLE);
                 mTvLogin.setText("登录/注册");
+                mTvLevel.setVisibility(View.GONE);
                 mTvLevel.setText("会员等级");
                 mTvFav.setText("0");
                 mTvJdou.setText("0");
@@ -312,6 +323,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
 
             if (mInfoBean != null) {
                 Log.d(TAG, "bindView: " + mInfoBean.getLevel());
+                mTvLevel.setVisibility(View.VISIBLE);
                 mTvLevel.setText(mInfoBean.getLevel());
                 mTvFav.setText(mInfoBean.getFavoritesCount() + "");
                 mTvJdou.setText(mInfoBean.getBonus() + "");
