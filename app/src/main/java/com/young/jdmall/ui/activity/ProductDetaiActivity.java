@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.activity;
 
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,12 +9,16 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.gxz.PagerSlidingTabStrip;
 import com.young.jdmall.R;
+import com.young.jdmall.bean.CollectInfoBean;
 import com.young.jdmall.bean.CommentInfoBean;
+import com.young.jdmall.bean.GoodsOrderInfoBean;
 import com.young.jdmall.bean.ProductDesInfoBean;
 import com.young.jdmall.bean.ProductInfoBean;
+import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.ItemTitlePagerAdapter;
@@ -82,6 +87,7 @@ public class ProductDetaiActivity extends BaseActivity {
     private boolean isConcern = true;
     public DialogConfirmView mDialogView;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,6 +104,24 @@ public class ProductDetaiActivity extends BaseActivity {
         mPstsTabs.setViewPager(mVpContent);
 
     }
+
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        int mCount = 0;
+        List<GoodsOrderInfoBean> goodsOrderInfoBeen = CartDao.queryAll();
+        if (goodsOrderInfoBeen.size()>0){
+            for (GoodsOrderInfoBean goodsOrderInfoBean : goodsOrderInfoBeen) {
+                mCount += goodsOrderInfoBean.getCount();
+            }
+            mTvCount.setVisibility(View.VISIBLE);
+            mTvCount.setText(mCount+"");
+        }else{
+            mTvCount.setVisibility(View.VISIBLE);
+        }
+    }
+
 
     //处理传过来的id进行请求网络
     private void processIntent() {
@@ -182,6 +206,7 @@ public class ProductDetaiActivity extends BaseActivity {
                 if (isConcern){
                     mIvConcern.setImageResource(R.mipmap.akc);
                     mTvConcern.setText("已关注");
+                    requestAddCollect(); //添加商品收藏
                     isConcern = false;
                 }else{
                     mIvConcern.setImageResource(R.mipmap.akb);
@@ -197,7 +222,37 @@ public class ProductDetaiActivity extends BaseActivity {
             case R.id.tv_buy:
                 mDialogView = new DialogConfirmView(this,mProductInfoBean);
                 mDialogView.show();
+
+                mDialogView.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                    @Override
+                    public void onDismiss(DialogInterface dialog) {
+                        onResume();
+                    }
+                });
                 break;
         }
     }
+
+    private void requestAddCollect() {
+        Observable<CollectInfoBean> collectObservable = RetrofitFactory.getInstance().listCollect(mProductInfoBean.getProduct().getId());
+        collectObservable.compose(compose(this.<CollectInfoBean>bindToLifecycle())).subscribe(new BaseObserver<CollectInfoBean>(this) {
+            @Override
+            protected void onHandleSuccess(CollectInfoBean collectInfoBean) {
+                Log.d("luoyou", "collect"+collectInfoBean.getResponse());
+               if ("1533".equals(collectInfoBean.getError_code())){
+                   Toast.makeText(ProductDetaiActivity.this,"使用关注功能需要先进行登录",Toast.LENGTH_SHORT).show();
+               }
+               //已添加
+               /*if ("1535".equals(collectInfoBean.getError_code())){
+                   Toast.makeText(ProductDetaiActivity.this,"关注成功",Toast.LENGTH_SHORT).show();
+               }*/
+               //添加成功
+               if ("addfavorites".equals(collectInfoBean.getResponse())){
+                   Toast.makeText(ProductDetaiActivity.this,"关注成功",Toast.LENGTH_SHORT).show();
+               }
+            }
+        });
+
+    }
+
 }

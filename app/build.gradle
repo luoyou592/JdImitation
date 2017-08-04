@@ -1,4 +1,5 @@
 apply plugin: 'com.android.application'
+apply plugin: 'org.greenrobot.greendao'
 
 android {
     compileSdkVersion 25
@@ -7,7 +8,7 @@ android {
     aaptOptions.useNewCruncher = false
     defaultConfig {
         applicationId "com.young.jdmall"
-        minSdkVersion 16
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -66,6 +67,8 @@ dependencies {
     compile 'com.facebook.fresco:fresco:0.9.0'
     compile 'com.gxz.pagerslidingtabstrip:library:1.3'
     compile 'com.bigkoo:convenientbanner:2.0.5'
+    //GreenDao3依赖
+    compile 'org.greenrobot:greendao:3.2.2'
 
 
 }

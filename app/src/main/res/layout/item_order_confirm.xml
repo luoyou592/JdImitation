@@ -91,15 +91,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="35dp"
             android:layout_margin="15dp"
             android:orientation="horizontal">
 
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="1"
-                android:gravity=""
+                android:layout_weight="1.5"
+                android:gravity="center"
                 android:text="购买数量"
                 android:textColor="#000"
                 android:textSize="20sp"/>
@@ -109,39 +109,51 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity=""
+                android:gravity="center"
+                android:layout_marginRight="10dp"
                 android:text="(限购5件)"
                 android:textColor="#000"
                 android:textSize="15sp"/>
 
             <LinearLayout
                 android:layout_width="0dp"
+                android:layout_marginLeft="30dp"
+                android:focusable="true"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:weightSum="1">
 
                 <Button
                     android:id="@+id/order_goods_minus"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:layout_marginLeft="20dp"
-                    android:background="@mipmap/a0g"/>
+                    android:layout_width="30dp"
+                    android:layout_height="match_parent"
+                    android:focusable="false"
+                    android:enabled="false"
+                    android:background="@drawable/minus_btn_selector"
+                    android:text="—"
+                    android:textSize="22sp"
+                    android:textColor="@android:color/black"/>
 
-                <TextView
+                <EditText
                     android:id="@+id/order_goods_count"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="25dp"
-                    android:layout_marginRight="25dp"
+                    android:layout_width="60dp"
+                    android:layout_height="match_parent"
                     android:text="1"
+                    android:gravity="center"
+                    android:background="@drawable/dialog_edit_bg"
                     android:textColor="#000"
                     android:textSize="23sp"/>
 
                 <Button
                     android:id="@+id/order_goods_add"
-                    android:layout_width="40dp"
-                    android:layout_height="40dp"
-                    android:background="@mipmap/a0c"/>
+                    android:layout_width="30dp"
+                    android:textSize="22sp"
+                    android:gravity="center"
+                    android:layout_height="match_parent"
+                    android:background="@drawable/add_btn_selector"
+                    android:text="+"
+                    />
             </LinearLayout>
         </LinearLayout>
 
@@ -154,7 +166,7 @@
             android:id="@+id/order_goods_confirm"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:background="#70ff0000"
+            android:background="@drawable/buy_btn_selector"
             android:text="确认"
             android:textColor="@android:color/white"
             android:textSize="22sp"/>

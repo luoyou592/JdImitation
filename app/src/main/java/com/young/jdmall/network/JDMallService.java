@@ -3,6 +3,7 @@ package com.young.jdmall.network;
 import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
+import com.young.jdmall.bean.CollectInfoBean;
 import com.young.jdmall.bean.CommentInfoBean;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
@@ -97,4 +98,6 @@ public interface JDMallService {
     Observable<CommentInfoBean> listComment(@Query("pId") int id, @Query("page") int page, @Query("pageNum") int pageNum);
     @GET("product/description")
     Observable<ProductDesInfoBean> listProductDes(@Query("pId") int id);
+    @GET("product/favorites")
+    Observable<CollectInfoBean> listCollect(@Query("pId") int id);
 }

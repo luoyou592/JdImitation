@@ -157,13 +157,13 @@
                 android:id="@+id/tvCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
+                android:layout_marginRight="14dp"
                 android:layout_alignRight="@id/tv_cart"
                 android:background="@drawable/circle_red"
                 android:gravity="center"
                 android:text="1"
                 android:textColor="#fff"
-                android:textSize="8sp"
+                android:textSize="10sp"
                 android:visibility="invisible"
                 />
         </RelativeLayout>

@@ -2,14 +2,15 @@ package com.young.jdmall.ui.widget;
 
 import android.app.Activity;
 import android.app.Dialog;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -20,7 +21,9 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.Target;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
+import com.young.jdmall.bean.GoodsOrderInfoBean;
 import com.young.jdmall.bean.ProductInfoBean;
+import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.ui.activity.ProductDetaiActivity;
 
 import java.util.List;
@@ -44,7 +47,10 @@ public class DialogConfirmView extends Dialog {
     private String mColor;
     private String mDimen;
     private int mColorId;
-    private int mDimenId;
+    private int mDimenId = -1;
+    private boolean isChecked = true;
+    private RadioGroup.LayoutParams mRadioParams;
+    private int mRadiotextPxSize;
 
     public DialogConfirmView(ProductDetaiActivity activity) {
         this(activity, null);
@@ -60,6 +66,13 @@ public class DialogConfirmView extends Dialog {
         WindowManager.LayoutParams params = window.getAttributes();
         params.width = WindowManager.LayoutParams.MATCH_PARENT;
         params.gravity = Gravity.BOTTOM | Gravity.CENTER;
+        //初始化radiobutton间距以及文字大小
+        int endPxSize = activity.getResources().getDimensionPixelSize(R.dimen.dp_15);
+        mRadiotextPxSize = activity.getResources().getDimensionPixelSize(R.dimen.dp_5);
+        int startPxSize = activity.getResources().getDimensionPixelSize(R.dimen.dp_5);
+        mRadioParams = new RadioGroup.LayoutParams(RadioGroup.LayoutParams.WRAP_CONTENT,RadioGroup.LayoutParams.WRAP_CONTENT);
+        mRadioParams.setMarginEnd(endPxSize);
+        mRadioParams.setMarginStart(startPxSize);
     }
 
 
@@ -73,18 +86,45 @@ public class DialogConfirmView extends Dialog {
         setListener();
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        mOrderGoodsCount.setText(mCount+"");
+    }
 
     private void setListener() {
         mGoodsDimensionsContainer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                mDimenId = group.getCheckedRadioButtonId();
+
+                mDimenId = group.getCheckedRadioButtonId()%5;
+                if (group.getCheckedRadioButtonId()%5==0){
+                    mDimenId = 5;
+                }
+
+                for(int i=0;i<group.getChildCount();i++){
+                    View childAt = group.getChildAt(i);
+                    if (childAt instanceof RadioButton&&((RadioButton) childAt).isChecked()){
+                        childAt.setBackgroundResource(R.drawable.radio_btn_select);
+                    }else{
+                        childAt.setBackgroundResource(R.drawable.radio_btn_normal);
+                    }
+                }
             }
         });
         mGoodsColorContainer.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, @IdRes int checkedId) {
-                mColorId = group.getCheckedRadioButtonId();
+                mColorId = group.getCheckedRadioButtonId()%5;
+                for(int i=0;i<group.getChildCount();i++){
+                    View childAt = group.getChildAt(i);
+                    if (childAt instanceof RadioButton&&((RadioButton) childAt).isChecked()){
+                        childAt.setBackgroundResource(R.drawable.radio_btn_select);
+                    }else{
+                        childAt.setBackgroundResource(R.drawable.radio_btn_normal);
+                    }
+                }
+
             }
         });
     }
@@ -104,44 +144,56 @@ public class DialogConfirmView extends Dialog {
                 break;
             case R.id.order_goods_minus:
                 getCurrentCount();
-                if (mCount == 0) {
-                    Toast.makeText(getContext(), "客官!不能再少了!", Toast.LENGTH_SHORT).show();
+                if (mCount <= 1) {
+                    mOrderGoodsMinus.setEnabled(false);
+                    mOrderGoodsMinus.setFocusable(false);
                     return;
                 }
                 mCount--;
                 mOrderGoodsCount.setText(String.valueOf(mCount));
                 break;
             case R.id.order_goods_add:
+                mOrderGoodsCount.requestFocus();  //让光标置最后
                 getCurrentCount();
                 if (mCount >= mProductInfoBean.getProduct().getBuyLimit()) {
                     Toast.makeText(getContext(), "亲!限购10件哦!", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 mCount++;
+                if (mCount>0){
+                    mOrderGoodsMinus.setEnabled(true);
+                    mOrderGoodsMinus.setFocusable(true);
+                }
                 mOrderGoodsCount.setText(String.valueOf(mCount));
                 break;
             case R.id.order_goods_confirm:
                 //获取用户选择的对象
                 getCurrentCount();
-                int count = mCount;
+                //int count = mCount;
                 int goodsId = mProductInfoBean.getProduct().getId();
-                if (mColorId < 1) {
-                    Toast.makeText(mDetailActivity, "请选择颜色", Toast.LENGTH_SHORT).show();
-                    return;
-                }
+
                 if(mDimenId < 1) {
                     Toast.makeText(mDetailActivity, "请选择尺码", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                ProductInfoBean goodsOrderBean = new ProductInfoBean(goodsId,count,mColorId,mDimenId);
-                //OrderDao orderDao = new OrderDao(getContext());
-                //boolean insert = orderDao.onInsert(goodsOrderBean);
-                /*if (insert) {
-                    Toast.makeText(getContext(), "添加成功", Toast.LENGTH_SHORT).show();
-                }*/
-                Toast.makeText(getContext(), "添加成功", Toast.LENGTH_SHORT).show();
+                if (mColorId < 1) {
+                    Toast.makeText(mDetailActivity, "请选择颜色", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //从数据库获取已有的数据
+                GoodsOrderInfoBean goods = CartDao.queryGood(goodsId);
+                if (goods !=null){
+                    mCount += goods.getCount();
+                }
+                GoodsOrderInfoBean goodsOrderInfoBean = new GoodsOrderInfoBean(goodsId,mCount,mDimenId+","+mColorId);
+                CartDao.insertCart(goodsOrderInfoBean);
+                Log.d("luoyou", "dao"+goodsOrderInfoBean.toString());
+
+                Toast.makeText(getContext(), "加入成功", Toast.LENGTH_SHORT).show();
+
                 dismiss();
                 break;
+
         }
     }
 
@@ -149,7 +201,9 @@ public class DialogConfirmView extends Dialog {
     public void setData(ProductInfoBean productInfoBean) {
         ProductInfoBean.ProductBean childBean = productInfoBean.getProduct();
         //图片
-        Glide.with(getContext()).load(Constant.BASE_URL + childBean.getPics().get(0)).override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL).into(mGoodsIconContainer);
+        if (childBean.getPics().size()>0){
+            Glide.with(getContext()).load(Constant.BASE_URL + childBean.getPics().get(0)).override(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL).into(mGoodsIconContainer);
+        }
         mOrderGoodsPrice.setText(childBean.getMarketPrice() + "");
         mLimit.setText("(限购 " + childBean.getBuyLimit() + "件)");
         //属性
@@ -157,22 +211,27 @@ public class DialogConfirmView extends Dialog {
         for (int i = 0; i < property.size(); i++) {
             //颜色  尺码
             if (i <= 1) {
-                final RadioButton radioButton = new RadioButton(getContext());
+                RadioButton radioButton = new RadioButton(getContext());
                 //RadioBtnView radioButton = new RadioBtnView(getContext());
                 radioButton.setPadding(8, 8, 8, 8);
+                radioButton.setGravity(Gravity.CENTER);
                 radioButton.setText(property.get(i).getV());
+                Log.d("luoyou", "V"+property.get(i).getV());
+                radioButton.setTextSize(mRadiotextPxSize);
                 radioButton.setButtonDrawable(android.R.color.transparent);
                 radioButton.setTextColor(getContext().getResources().getColorStateList(R.color.radio_text_selector));
-                //radioButton.setBackgroundResource(R.drawable.radio_bg_selector);
-                /*radioButton.setBackground(getContext().getResources().getDrawable(R.drawable.radio_bg_selector));*/
-                //radioButton.setTextColor(Color.GRAY);
-                mGoodsColorContainer.addView(radioButton);
+                radioButton.setBackgroundResource(R.drawable.radio_btn_normal);
+                mGoodsColorContainer.addView(radioButton,mRadioParams);
             } else {
-                final RadioButton radioButton = new RadioButton(getContext());
+                RadioButton radioButton = new RadioButton(getContext());
                 radioButton.setPadding(8, 8, 8, 8);
                 radioButton.setText(property.get(i).getV());
-                radioButton.setTextColor(Color.GRAY);
-                mGoodsDimensionsContainer.addView(radioButton);
+                radioButton.setGravity(Gravity.CENTER);
+                radioButton.setTextSize(mRadiotextPxSize);
+                radioButton.setButtonDrawable(android.R.color.transparent);
+                radioButton.setTextColor(getContext().getResources().getColorStateList(R.color.radio_text_selector));
+                radioButton.setBackgroundResource(R.drawable.radio_btn_normal);
+                mGoodsDimensionsContainer.addView(radioButton,mRadioParams);
             }
         }
     }
@@ -187,7 +246,7 @@ public class DialogConfirmView extends Dialog {
     @BindView(R.id.order_goods_minus)
     Button mOrderGoodsMinus;
     @BindView(R.id.order_goods_count)
-    TextView mOrderGoodsCount;
+    EditText mOrderGoodsCount;
     @BindView(R.id.order_goods_add)
     Button mOrderGoodsAdd;
     @BindView(R.id.order_goods_confirm)
