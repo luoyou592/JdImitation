@@ -24,6 +24,8 @@ import com.young.jdmall.ui.fragment.ShopCartFragment;
 
 import java.util.List;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
