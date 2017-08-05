@@ -15,7 +15,5 @@
         android:text="进入详情页"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-
-        android:background="@drawable/type_popwindow_btn_selector"
-        android:text="进入详情页"/>
+        android:background="@drawable/type_popwindow_btn_selector"/>
 </RelativeLayout>
