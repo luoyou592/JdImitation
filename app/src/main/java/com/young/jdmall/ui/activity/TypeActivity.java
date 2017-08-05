@@ -501,31 +501,23 @@ public class TypeActivity extends BaseActivity {
                                 switch (a) {
                                     case 1:
                                         mTypeBtn1.setText(text);
-                                        mTypeBtn1.setTextColor(Color.WHITE);
-                                        mTypeBtn1.setBackgroundColor(Color.RED);
                                         mTypeBtn2.setText("类型");
                                         mTypeBtn3.setText("品牌");
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 2:
-                                        mTypeBtn2.setTextColor(Color.WHITE);
-                                        mTypeBtn2.setBackgroundColor(Color.RED);
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText(text);
                                         mTypeBtn3.setText("品牌");
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 3:
-                                        mTypeBtn3.setTextColor(Color.WHITE);
-                                        mTypeBtn3.setBackgroundColor(Color.RED);
-                                        mTypeBtn3.setText(text);
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText("类型");
+                                        mTypeBtn3.setText(text);
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 4:
-                                        mTypeBtn4.setTextColor(Color.WHITE);
-                                        mTypeBtn4.setBackgroundColor(Color.RED);
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText("类型");
                                         mTypeBtn3.setText("品牌");
