@@ -217,7 +217,7 @@ public class HomeFragment extends BaseFragment {
                 mProductList.addAll(newsProductInfoBean.getProductList());
                 mHomeRvAdapter.setNewsProductData(mProductList);
                 mHomeRvAdapter.notifyDataSetChanged();
-                mRvHome.onLoadFinish();
+                mRvHome.onLoadSuccess();
             }
 
             @Override
@@ -229,7 +229,7 @@ public class HomeFragment extends BaseFragment {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRvHome.onLoadFinish();
+                mRvHome.onLoadFailure();
             }
         });
     }
