@@ -1,83 +1,127 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+
+    <!--<RadioGroup-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent"-->
+    <!--android:orientation="horizontal"-->
+    <!--&gt;-->
+
+    <!--<RadioButton-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="3dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/type_popwindow_btn_selector"-->
+    <!--android:button="@null"-->
+    <!--android:clickable="true"-->
+    <!--android:gravity="center"-->
+    <!--android:text="蕾丝"/>-->
+
+    <!--<RadioButton-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="3dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/type_popwindow_btn_selector"-->
+    <!--android:button="@null"-->
+    <!--android:clickable="true"-->
+    <!--android:text="背带"/>-->
+
+    <!--<RadioButton-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="3dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/type_popwindow_btn_selector"-->
+    <!--android:button="@null"-->
+    <!--android:clickable="true"-->
+    <!--android:text="绣花"/>-->
+
+    <!--<RadioButton-->
+    <!--android:gravity="center"-->
+    <!--android:layout_width="0dp"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_margin="3dp"-->
+    <!--android:layout_weight="1"-->
+    <!--android:background="@drawable/type_popwindow_btn_selector"-->
+    <!--android:button="@null"-->
+    <!--android:clickable="true"-->
+    <!--android:text="网纱"/>-->
+    <!--</RadioGroup>-->
+
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="蕾丝"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="蕾丝"/>
+
         <Button
-            android:text="背带"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="背带"/>
+
         <Button
-            android:text="绣花"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="绣花"/>
+
         <Button
-            android:text="网纱"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="网纱"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="燕尾"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="燕尾"/>
+
         <Button
-            android:text="系带"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="系带"/>
+
         <Button
-            android:text="渐变"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="渐变"/>
+
         <Button
-            android:text="立体装饰"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="立体装饰"/>
     </LinearLayout>
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="流苏"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="流苏"/>
+
         <Button
-            android:text="肩章"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="肩章"/>
+
         <Button
-            android:text="简约"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="简约"/>
+
         <Button
-            android:text="纽扣"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="纽扣"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -1,58 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="长袖"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="长袖"/>
+
         <Button
-            android:text="短袖"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="短袖"/>
+
         <Button
-            android:text="背心"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="背心"/>
+
         <Button
-            android:text="抹胸"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="抹胸"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="长裙"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="长裙"/>
+
         <Button
-            android:text="短裙"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="短裙"/>
+
         <Button
-            android:text="长裤"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="长裤"/>
+
         <Button
-            android:text="短裤"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="短裤"/>
     </LinearLayout>
 
 </LinearLayout>

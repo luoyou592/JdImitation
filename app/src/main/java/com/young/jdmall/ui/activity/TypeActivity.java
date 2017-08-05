@@ -2,7 +2,10 @@ package com.young.jdmall.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
@@ -61,6 +64,7 @@ public class TypeActivity extends BaseActivity {
 
     private int loadData = 0;
     private String mKeyword;
+    private CharSequence mText;
 
     @Override
     protected void onNewIntent(Intent intent) {
@@ -373,11 +377,13 @@ public class TypeActivity extends BaseActivity {
                 Log.d(TAG, "onPrimaryScreen: 弹出侧边菜单");
             }
 
+            //销毁
             @Override
             public void onBack() {
                 finish();
             }
 
+            //修改适配器
             @Override
             public void onSelectorLayout(boolean isRecyclerView) {
                 if (!isRecyclerView) {
@@ -399,7 +405,7 @@ public class TypeActivity extends BaseActivity {
                 }
 
             }
-
+            //跳转到详情页
             @Override
             public void onSearch() {
                 startActivity(new Intent(TypeActivity.this, SearchActivity.class));
@@ -408,11 +414,8 @@ public class TypeActivity extends BaseActivity {
 
 
         mTypeListAdapter.setListener(new TypeAdapter.onClickItemControlListener() {
-
             @Override
             public void onImageClick(ProductBean.ProductListBean productBean, int position) {
-                Log.d(TAG, "onImageClick: 点击图片,执行网络请求");
-//
                 requestProductDetail(productBean.getId());
             }
         });
@@ -420,11 +423,8 @@ public class TypeActivity extends BaseActivity {
 
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-    }
 
+    //图片轮播图
     private void requestProductDetail(final int id) {
         Observable<ProductInfoBean> productObservable = RetrofitFactory.getInstance()
                 .listProductInfo(id);
@@ -432,8 +432,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(ProductInfoBean productInfoBean) {
                 List<String> pics = productInfoBean.getProduct().getPics();
-                Log.d(TAG, "onHandleSuccess: 请求成功" + pics.size());
-                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext);
+                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext,R.style.Dialog);
                 imageViewPagerDialog.setData(pics, id);
                 imageViewPagerDialog.show();
             }
@@ -441,45 +440,98 @@ public class TypeActivity extends BaseActivity {
     }
 
 
+    //PopupWindow处理事件
     @OnClick({R.id.type_btn_1, R.id.type_btn_2, R.id.type_btn_3, R.id.type_btn_4})
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.type_btn_1:
                 View pop1 = LayoutInflater.from(this).inflate(R.layout.type_popup_window1, null);
-                PopupWindow popupWindow1 = new PopupWindow(pop1, ViewGroup.LayoutParams
-                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow1.setOutsideTouchable(true);
-                popupWindow1.setFocusable(true);
-                popupWindow1.update();
-                popupWindow1.showAsDropDown(mTypeBtn1, 0, 20);
+                PopupWindow popupWindow1 = getPopupWindow(pop1);
+                setPopupWindowOnClick(1, pop1, popupWindow1);
                 break;
             case R.id.type_btn_2:
                 View pop2 = LayoutInflater.from(this).inflate(R.layout.type_popup_window2, null);
-                PopupWindow popupWindow2 = new PopupWindow(pop2, ViewGroup.LayoutParams
-                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow2.setOutsideTouchable(true);
-                popupWindow2.setFocusable(true);
-                popupWindow2.update();
-                popupWindow2.showAsDropDown(mTypeBtn1, 0, 20);
+                PopupWindow popupWindow2 = getPopupWindow(pop2);
+
+                setPopupWindowOnClick(2, pop2, popupWindow2);
                 break;
             case R.id.type_btn_3:
                 View pop3 = LayoutInflater.from(this).inflate(R.layout.type_popup_window3, null);
-                PopupWindow popupWindow3 = new PopupWindow(pop3, ViewGroup.LayoutParams
-                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow3.setOutsideTouchable(true);
-                popupWindow3.setFocusable(true);
-                popupWindow3.update();
-                popupWindow3.showAsDropDown(mTypeBtn1, 0, 20);
+
+                PopupWindow popupWindow3 = getPopupWindow(pop3);
+                setPopupWindowOnClick(3, pop3, popupWindow3);
                 break;
             case R.id.type_btn_4:
                 View pop4 = LayoutInflater.from(this).inflate(R.layout.type_popup_window4, null);
-                PopupWindow popupWindow4 = new PopupWindow(pop4, ViewGroup.LayoutParams
-                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-                popupWindow4.setOutsideTouchable(true);
-                popupWindow4.setFocusable(true);
-                popupWindow4.update();
-                popupWindow4.showAsDropDown(mTypeBtn1, 0, 20);
+
+                PopupWindow popupWindow4 = getPopupWindow(pop4);
+                setPopupWindowOnClick(4, pop4, popupWindow4);
+
                 break;
         }
     }
+
+    //创建PopupWindow
+    @NonNull
+    private PopupWindow getPopupWindow(View pop) {
+        final PopupWindow popupWindow4 = new PopupWindow(pop, ViewGroup.LayoutParams
+                .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        popupWindow4.setOutsideTouchable(true);
+        popupWindow4.setBackgroundDrawable(new ColorDrawable(Color.WHITE));
+        popupWindow4.setFocusable(true);
+        popupWindow4.update();
+        popupWindow4.showAsDropDown(mTypeBtn1, 0, 20);
+        return popupWindow4;
+    }
+
+    //PopupWindowBottom点击事件
+    private void setPopupWindowOnClick(final int a, View pop, final PopupWindow popupWindow) {
+        if (pop instanceof ViewGroup) {
+            int childCount = ((ViewGroup) pop).getChildCount();
+            for (int i = 0; i < childCount; i++) {
+                View childAt = ((ViewGroup) pop).getChildAt(i);
+                if (childAt instanceof ViewGroup) {
+                    int childAtChildCount = ((ViewGroup) childAt).getChildCount();
+                    for (int j = 0; j < childAtChildCount; j++) {
+                        ((ViewGroup) childAt).getChildAt(j).setOnClickListener(new View
+                                .OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                CharSequence text = ((Button) v).getText();
+                                switch (a) {
+                                    case 1:
+                                        mTypeBtn1.setText(text);
+                                        mTypeBtn2.setText("类型");
+                                        mTypeBtn3.setText("品牌");
+                                        mTypeBtn4.setText("样式");
+                                        break;
+                                    case 2:
+                                        mTypeBtn1.setText("包邮");
+                                        mTypeBtn2.setText(text);
+                                        mTypeBtn3.setText("品牌");
+                                        mTypeBtn4.setText("样式");
+                                        break;
+                                    case 3:
+                                        mTypeBtn3.setText(text);
+                                        mTypeBtn1.setText("包邮");
+                                        mTypeBtn2.setText("类型");
+                                        mTypeBtn4.setText("样式");
+                                        break;
+                                    case 4:
+                                        mTypeBtn4.setText(text);
+                                        mTypeBtn1.setText("包邮");
+                                        mTypeBtn2.setText("类型");
+                                        mTypeBtn3.setText("品牌");
+                                        break;
+                                }
+                                popupWindow.dismiss();
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    }
+
+
 }
