@@ -37,11 +37,8 @@
         <activity android:name=".ui.activity.RecepitAddressActivity"/>
         <activity android:name=".ui.activity.NewsDetailActivity">
         </activity>
-        <activity android:name=".ui.activity.ServiceWindowActivity">
-        </activity>
-        <activity android:name=".ui.activity.OrderActivity">
+        <activity android:name=".ui.activity.ServiceWindowActivity"/>
 
-        </activity>
         <activity android:name=".ui.activity.ProductDetaiActivity"/>
 
         <activity android:name=".ui.activity.CollectionActivity"/>

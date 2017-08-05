@@ -11,7 +11,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
@@ -22,6 +21,7 @@ import com.young.jdmall.bean.UsersInfoBean;
 import com.young.jdmall.ui.activity.CollectionActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.activity.OrderActivity;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.RecepitAddressActivity;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.utils.PriceFormater;
@@ -192,7 +192,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
 
-        public void bindView(int position) {
+        public void bindView(final int position) {
             final NewsProductInfoBean.ProductListBean productListBean = mNewsProductInfoBean.getProductList().get(position - 2);
             //渲染首页商品列表
             mTvTitle.setText(productListBean.getName());
@@ -201,7 +201,11 @@ public class MyRvAdapter extends RecyclerView.Adapter {
             mGoodsItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext, "点了" + productListBean.getName(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext, "点了" + productListBean.getName(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, ProductDetaiActivity.class);
+                    intent.putExtra("id", mNewsProductInfoBean.getProductList().get(position).getId());
+                    mContext.startActivity(intent);
+
                 }
             });
            /* if (mNewsProductInfoBean != null) {

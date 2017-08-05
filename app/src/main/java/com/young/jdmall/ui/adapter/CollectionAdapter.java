@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,12 +9,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 
 import java.util.ArrayList;
@@ -86,7 +87,10 @@ public class CollectionAdapter extends RecyclerView.Adapter {
             mGoodsItem.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"点了"+productListBean.getName(),Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(mContext,"点了"+productListBean.getName(),Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, ProductDetaiActivity.class);
+                    intent.putExtra("id", productListBean.getId());
+                    mContext.startActivity(intent);
                 }
             });
         }

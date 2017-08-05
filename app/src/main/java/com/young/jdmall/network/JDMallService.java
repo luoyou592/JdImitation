@@ -124,4 +124,10 @@ public interface JDMallService {
     Observable<CommentInfoBean> listComment(@Query("pId") int id, @Query("page") int page, @Query("pageNum") int pageNum);
     @GET("product/description")
     Observable<ProductDesInfoBean> listProductDes(@Query("pId") int id);
+
+    @GET("orderlist")
+    Call<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Query("type") int type, @Query("page") int page, @Query("pageNum") int pageNum);
+
+    @GET("ordercancel")
+    Call<OrderInfoBean> listCancelOrder(@Header("userid") String userid, @Query("orderId") String orderId);
 }

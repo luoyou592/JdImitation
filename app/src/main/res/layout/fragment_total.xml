@@ -1,13 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
               android:background="@android:color/white"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/order_recycler_view"
-        android:background="#fbf5f5"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#fbf5f5">
     </android.support.v7.widget.RecyclerView>
-</LinearLayout>
+    <LinearLayout
+        android:id="@+id/ll_nonOrder"
+        android:visibility="gone"
+        android:orientation="vertical"
+        android:layout_centerInParent="true"
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/ak7"/>
+        <TextView
+            android:layout_marginTop="40dp"
+            android:textSize="26sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="您还没有相关订单"/>
+    </LinearLayout>
+</RelativeLayout>

@@ -76,7 +76,7 @@ public class AccountSettingActivity extends BaseActivity {
     }
 
     public void init() {
-        if (!"".equals(PreferenceUtils.getUserName(this))) {
+        if (!"".equals(PreferenceUtils.getUserId(this))) {
             mTvUser.setText(PreferenceUtils.getUserName(this));
             mBtUnregist.setVisibility(View.VISIBLE);
         }

@@ -9,6 +9,8 @@
     android:orientation="vertical"
     tools:context="com.young.jdmall.ui.activity.NewsDetailActivity">
 
+
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
