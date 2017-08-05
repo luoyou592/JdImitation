@@ -163,7 +163,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -174,7 +174,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -193,7 +193,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -204,7 +204,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -222,7 +222,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -233,7 +233,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -256,18 +256,18 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
             protected void onHandleError(String msg) {
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -280,7 +280,7 @@ public class TypeActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean productBean) {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
@@ -288,13 +288,13 @@ public class TypeActivity extends BaseActivity {
 
             @Override
             protected void onHandleError(String msg) {
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -317,7 +317,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override

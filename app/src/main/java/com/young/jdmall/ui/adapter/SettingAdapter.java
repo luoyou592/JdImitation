@@ -63,6 +63,8 @@ public class SettingAdapter extends PagerAdapter {
     }
 
     private RelativeLayout getLiveView(ViewGroup container) {
+//        http://pic.sogou.com/pics/channel/getAllRecomPicByTag.jsp?category=%C3%C0%C5%AE&tag=%E5%85%A8%E9%83%A8&start=0&len=15
+
         RecyclerView recyclerView = new RecyclerView(container.getContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
         recyclerView.setAdapter(new SettingLiveAdapter(FindInfoBean.getFinInfoBeanList()));
@@ -91,6 +93,9 @@ public class SettingAdapter extends PagerAdapter {
         container.addView(relativeLayout);
         return relativeLayout;
 
+
+
+        
     }
 
     @Override
