@@ -29,13 +29,14 @@
 
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="203dp"
+                        android:layout_height="400dp"
                         android:background="@color/white">
 
                         <!-- 自动轮播的第三方控件 -->
                         <com.bigkoo.convenientbanner.ConvenientBanner xmlns:app="http://schemas.android.com/apk/res-auto"
                                                                       android:id="@+id/vp_item_goods_img"
                                                                       android:layout_width="match_parent"
+
                                                                       android:layout_height="match_parent"
                                                                       android:background="#ffffff"
                                                                       app:canLoop="true"/>
@@ -152,7 +153,7 @@
                             android:layout_marginLeft="10dp"
                             android:layout_marginRight="20dp"
                             android:layout_weight="1"
-                            android:text="黑色, 1件"
+                            android:text="红色/ M"
                             android:textColor="#222222"
                             android:textSize="14sp"/>
 
@@ -344,7 +345,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|end"
-            android:layout_margin="30dp"
+            android:layout_marginBottom="60dp"
+            android:layout_marginRight="22dp"
             android:src="@mipmap/go_top"
             app:backgroundTint="#ffffff"
             app:borderWidth="0dp"

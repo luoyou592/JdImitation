@@ -22,11 +22,12 @@ public abstract class BaseObserver<T> implements Observer<T> {
     @Override
     public void onSubscribe(Disposable d) {
 
+
     }
     @Override
     public void onNext(T value) {
-
         onHandleSuccess(value);
+
     }
 
     @Override
@@ -36,7 +37,9 @@ public abstract class BaseObserver<T> implements Observer<T> {
 
     @Override
     public void onComplete() {
+
         Log.d(TAG, "onComplete");
+
     }
 
     protected abstract void onHandleSuccess(T t);

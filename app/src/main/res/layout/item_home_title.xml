@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:fitsSystemWindows="false"
               android:orientation="vertical">
-
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/home_slider"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="match_parent">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/home_banner"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:background="#ffffff"
+        app:canLoop="true"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -17,7 +27,7 @@
         <android.support.v4.view.ViewPager
             android:id="@+id/home_vp"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="140dp">
         </android.support.v4.view.ViewPager>
 
         <com.young.jdmall.ui.widget.CricleIndicatorView
@@ -31,7 +41,7 @@
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="120dp"
         android:background="@mipmap/home_big_bag"/>
 
     <LinearLayout
@@ -126,8 +136,10 @@
         android:id="@+id/flash_recycler_view"
         android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="120dp"/>
+        android:layout_height="130dp"/>
     </LinearLayout>
+    </LinearLayout>
+    </ScrollView>
 
 
 </LinearLayout>

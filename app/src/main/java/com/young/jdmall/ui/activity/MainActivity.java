@@ -6,17 +6,23 @@ import android.app.FragmentTransaction;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.young.jdmall.R;
+import com.young.jdmall.bean.GoodsOrderInfoBean;
+import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.ui.fragment.CategoryFragment;
 import com.young.jdmall.ui.fragment.HomeFragment;
 import com.young.jdmall.ui.fragment.MyFragment;
 import com.young.jdmall.ui.fragment.SettingFragment;
 import com.young.jdmall.ui.fragment.ShopCartFragment;
-import com.young.jdmall.ui.widget.RedPacketDialog;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -25,7 +31,9 @@ public class MainActivity extends AppCompatActivity {
 
     @BindView(R.id.main_navigation)
     LinearLayout mMainNavigation;
-    private SparseArray<Fragment> mFragments;
+    @BindView(R.id.tv_count)
+    TextView mTvCount;
+    public SparseArray<Fragment> mFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,22 +43,24 @@ public class MainActivity extends AppCompatActivity {
             getWindow().setStatusBarColor(0xAA000000);
         }
         ButterKnife.bind(this);
-        processIntent();
         mFragments = new SparseArray<>();
         setListener();
         selectedTab(0);
+        processIntent();
 
-        RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
+        /*RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
         redPacketDialog.create();
-        redPacketDialog.show();
+        redPacketDialog.show();*/
     }
 
     private void processIntent() {
         if (getIntent()!=null){
             String page = getIntent().getStringExtra("page");
+            Log.d("luoyou", "intent");
             //判断是否详情页跳转过来的，是则切换到购物车
             if ("detail".equals(page)){
-                getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());
+                /*getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());*/
+                selectedTab(2);
             }
         }
     }
@@ -69,11 +79,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void selectedTab(int index) {
+        Log.d("luoyou", "select");
         for (int i = 0; i < mMainNavigation.getChildCount(); i++) {
             View view = mMainNavigation.getChildAt(i);
             if (i == index) {
+                if (view instanceof RelativeLayout){
+                    ((RelativeLayout) view).getChildAt(0).setEnabled(false);
+                }
                 view.setEnabled(false);
             } else {
+                if (view instanceof RelativeLayout){
+                    ((RelativeLayout) view).getChildAt(0).setEnabled(true);
+                }
                 view.setEnabled(true);
             }
         }
@@ -92,6 +109,7 @@ public class MainActivity extends AppCompatActivity {
                     break;
                 case 2:
                     fragment = new ShopCartFragment();
+
                     break;
                 case 3:
                     fragment = new MyFragment();
@@ -108,7 +126,24 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction ft = fm.beginTransaction();
         ft.replace(R.id.container_fragment, fragment);
         ft.commit();
-
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        int mCount = 0;
+        List<GoodsOrderInfoBean> goodsOrderInfoBeen = CartDao.queryAll();
+        if (goodsOrderInfoBeen.size() > 0) {
+            for (GoodsOrderInfoBean goodsOrderInfoBean : goodsOrderInfoBeen) {
+                mCount += goodsOrderInfoBean.getCount();
+            }
+            mTvCount.setVisibility(View.VISIBLE);
+            mTvCount.setText(mCount + "");
+        } else {
+            mTvCount.setVisibility(View.INVISIBLE);
+        }
+    }
+    public void updataCount(){
+        onStart();
+    }
 }

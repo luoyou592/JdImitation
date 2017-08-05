@@ -7,12 +7,13 @@
     android:layout_width="match_parent"
     android:layout_height="260dp"
     android:background="@android:color/white"
-    android:padding="8dp">
+    android:padding="12dp">
 
     <ImageView
         android:id="@+id/goaway"
         android:layout_width="15dp"
         android:layout_height="15dp"
+        android:layout_marginTop="8dp"
         android:layout_alignParentRight="true"
         android:src="@drawable/shop_car_go_away"
         />
@@ -20,11 +21,11 @@
     <ImageView
         android:id="@+id/add"
         android:layout_width="20dp"
+        android:layout_marginRight="12dp"
         android:layout_height="20dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_marginBottom="8dp"
-        android:layout_marginRight="8dp"
         android:background="@drawable/small_shopcar"
         />
 
@@ -32,7 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="4dp">
+        android:padding="8dp">
 
         <ImageView
             android:id="@+id/item_src"
@@ -56,6 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
             android:text="¥139.00"
             android:textColor="@android:color/holo_red_light"
             />

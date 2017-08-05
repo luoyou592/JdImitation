@@ -51,6 +51,7 @@ public class DialogConfirmView extends Dialog {
     private boolean isChecked = true;
     private RadioGroup.LayoutParams mRadioParams;
     private int mRadiotextPxSize;
+    private GoodsOrderInfoBean mGoodsOrderInfoBean;
 
     public DialogConfirmView(ProductDetaiActivity activity) {
         this(activity, null);
@@ -185,9 +186,9 @@ public class DialogConfirmView extends Dialog {
                 if (goods !=null){
                     mCount += goods.getCount();
                 }
-                GoodsOrderInfoBean goodsOrderInfoBean = new GoodsOrderInfoBean(goodsId,mCount,mDimenId+","+mColorId);
-                CartDao.insertCart(goodsOrderInfoBean);
-                Log.d("luoyou", "dao"+goodsOrderInfoBean.toString());
+                mGoodsOrderInfoBean = new GoodsOrderInfoBean(goodsId,mCount,mColorId+","+mDimenId);
+                CartDao.insertCart(mGoodsOrderInfoBean);
+                Log.d("luoyou", "dao"+ mGoodsOrderInfoBean.toString());
 
                 Toast.makeText(getContext(), "加入成功", Toast.LENGTH_SHORT).show();
 
@@ -196,7 +197,9 @@ public class DialogConfirmView extends Dialog {
 
         }
     }
-
+    public GoodsOrderInfoBean getGoodsInfo(){
+        return mGoodsOrderInfoBean;
+    }
     //123456111
     public void setData(ProductInfoBean productInfoBean) {
         ProductInfoBean.ProductBean childBean = productInfoBean.getProduct();

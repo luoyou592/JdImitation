@@ -83,5 +83,6 @@ public class HomePageAdapter extends PagerAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+
     }
 }

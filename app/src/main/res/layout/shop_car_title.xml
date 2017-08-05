@@ -41,11 +41,10 @@
         android:layout_weight="1">
 
         <LinearLayout
-            android:id="@+id/visible_table"
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone">
+            android:orientation="vertical">
 
             <LinearLayout
 
@@ -53,6 +52,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
+                android:visibility="visible"
                 android:padding="8dp">
 
                 <Button
@@ -87,6 +87,8 @@
                 android:background="#F1F2F6"/>
 
             <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/visible_table"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
