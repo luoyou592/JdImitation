@@ -26,43 +26,38 @@
             android:padding="8dp">
 
             <Button
-                android:id="@+id/btn_1"
+                android:id="@+id/type_btn_1"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="包邮"/>
 
             <Button
-                android:id="@+id/btn_2"
+                android:id="@+id/type_btn_2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="配送"/>
+                android:text="类型"/>
 
             <Button
-                android:id="@+id/btn_3"
+                android:id="@+id/type_btn_3"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="配送"/>
+                android:text="品牌"/>
 
             <Button
-                android:id="@+id/btn_4"
+                android:id="@+id/type_btn_4"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="配送"/>
+                android:text="样式"/>
         </LinearLayout>
 
         <com.young.jdmall.ui.view.RecyclerLoadMoreView
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-
-        <!--<com.young.jdmall.ui.view.RecyclerLoadMoreView-->
-            <!--android:id="@+id/recycle_view_selector"-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="match_parent"/>-->
     </LinearLayout>
 
 
