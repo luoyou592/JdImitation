@@ -40,7 +40,7 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="32dp"
+        android:layout_height="30dp"
         android:layout_marginTop="6dp"
         android:background="@drawable/home_notice_bg"
         android:gravity="center_vertical"
