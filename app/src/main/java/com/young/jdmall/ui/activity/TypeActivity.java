@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 
 import com.young.jdmall.R;
@@ -55,6 +56,8 @@ public class TypeActivity extends BaseActivity {
     Button mTypeBtn3;
     @BindView(R.id.type_btn_4)
     Button mTypeBtn4;
+    @BindView(R.id.type_ll_btn)
+    LinearLayout mTypeLlBtn;
 
     private List<ProductBean.ProductListBean> mProductList;
     private TypeAdapter mTypeListAdapter;
@@ -405,6 +408,7 @@ public class TypeActivity extends BaseActivity {
                 }
 
             }
+
             //跳转到详情页
             @Override
             public void onSearch() {
@@ -432,7 +436,8 @@ public class TypeActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(ProductInfoBean productInfoBean) {
                 List<String> pics = productInfoBean.getProduct().getPics();
-                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext,R.style.Dialog);
+                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext, R
+                        .style.Dialog);
                 imageViewPagerDialog.setData(pics, id);
                 imageViewPagerDialog.show();
             }
@@ -498,26 +503,77 @@ public class TypeActivity extends BaseActivity {
                             @Override
                             public void onClick(View v) {
                                 CharSequence text = ((Button) v).getText();
+                                int llBtn = mTypeLlBtn.getChildCount();
                                 switch (a) {
                                     case 1:
+                                        for (int k = 0; k < llBtn; k++) {
+                                            if (k == 0){
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.WHITE);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_selector_bg);
+                                            }else {
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.BLACK);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_bg);
+                                            }
+                                        }
+
+
                                         mTypeBtn1.setText(text);
                                         mTypeBtn2.setText("类型");
                                         mTypeBtn3.setText("品牌");
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 2:
+                                        for (int k = 0; k < llBtn; k++) {
+                                            if (k == 1){
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.WHITE);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_selector_bg);
+                                            }else {
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.BLACK);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_bg);
+                                            }
+                                        }
+//                                        mTypeBtn2.setTextColor(Color.WHITE);
+//                                        mTypeBtn2.setBackgroundResource(R.drawable
+//                                                .type_popwindow_btn_bg);
+
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText(text);
                                         mTypeBtn3.setText("品牌");
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 3:
+                                        for (int k = 0; k < llBtn; k++) {
+                                            if (k == 2){
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.WHITE);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_selector_bg);
+                                            }else {
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.BLACK);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_bg);
+                                            }
+                                        }
+//                                        mTypeBtn3.setTextColor(Color.WHITE);
+//                                        mTypeBtn3.setBackgroundResource(R.drawable
+//                                                .type_popwindow_btn_bg);
+
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText("类型");
                                         mTypeBtn3.setText(text);
                                         mTypeBtn4.setText("样式");
                                         break;
                                     case 4:
+                                        for (int k = 0; k < llBtn; k++) {
+                                            if (k == 3){
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.WHITE);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_selector_bg);
+                                            }else {
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setTextColor(Color.BLACK);
+                                                ((Button) mTypeLlBtn.getChildAt(k)).setBackgroundResource(R.drawable.type_popwindow_btn_bg);
+                                            }
+                                        }
+//                                        mTypeBtn4.setTextColor(Color.WHITE);
+//                                        mTypeBtn4.setBackgroundResource(R.drawable
+//                                                .type_popwindow_btn_bg);
+
                                         mTypeBtn1.setText("包邮");
                                         mTypeBtn2.setText("类型");
                                         mTypeBtn3.setText("品牌");

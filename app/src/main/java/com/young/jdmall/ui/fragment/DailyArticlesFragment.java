@@ -1,7 +1,11 @@
 package com.young.jdmall.ui.fragment;
 
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 
@@ -24,6 +28,7 @@ public class DailyArticlesFragment extends CategoryBaseRightListFragment {
     private static final String TAG = "MomAreaFragment";
     private List<CategoryBaseBean> mList = new ArrayList<>();
     private CategoryBaseBean mData;
+    private int[] imgages = {R.mipmap.cx,R.mipmap.jd618,R.mipmap.s11};
 
     public DailyArticlesFragment(CategoryBaseBean data) {
         mData = data;
@@ -43,9 +48,10 @@ public class DailyArticlesFragment extends CategoryBaseRightListFragment {
     @Override
     protected View getHeader() {
 
-        ImageView imageView = new ImageView(getActivity());
-        imageView.setBackgroundResource(R.mipmap.jd);
-        return imageView;
+        View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.category_header, null);
+        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.category_header_view_pager);
+        viewPager.setAdapter(mPagerAdapter);
+        return rootView;
     }
 
     @Override
@@ -127,5 +133,34 @@ public class DailyArticlesFragment extends CategoryBaseRightListFragment {
         }
 
     }
+
+    private PagerAdapter mPagerAdapter = new PagerAdapter() {
+        @Override
+        public int getCount() {
+            if (imgages != null){
+                return Integer.MAX_VALUE;
+            }
+            return 0;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            int newPosition = position % imgages.length;
+            ImageView imageView = new ImageView(getActivity());
+            imageView.setBackgroundResource(imgages[newPosition]);
+            container.addView(imageView);
+            return imageView;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+    };
 
 }

@@ -27,7 +27,6 @@
         <activity android:name=".ui.activity.CustomServiceActivity"/>
         <activity android:name=".ui.activity.MessageActivity"/>
         <activity android:name=".ui.activity.OrderActivity"/>
-        <activity android:name=".ui.activity.TypeListActivity"/>
         <activity android:name=".ui.activity.TypeActivity"
                   android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.MainActivity"/>
@@ -41,6 +40,7 @@
         <activity android:name=".ui.activity.ServiceWindowActivity">
         </activity>
         <activity android:name=".ui.activity.OrderActivity">
+        <activity android:name=".ui.activity.SubmitSuccessActivity"/>
 
         </activity>
         <activity android:name=".ui.activity.ProductDetaiActivity"/>
