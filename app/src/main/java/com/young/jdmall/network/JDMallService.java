@@ -1,5 +1,6 @@
 package com.young.jdmall.network;
 
+import com.rance.chatui.enity.MessageInfo;
 import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
@@ -11,6 +12,7 @@ import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.HotSearchInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
+import com.young.jdmall.bean.MessageInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.bean.ProductBean;
@@ -62,7 +64,6 @@ public interface JDMallService {
     Observable<CartInfoBean> listCart(@Field("sku") String test);
 
 
-
     //登陆
     @FormUrlEncoded
     @POST("login")
@@ -85,22 +86,27 @@ public interface JDMallService {
 
     @GET("userinfo")
     Observable<UsersInfoBean> listUserInfo(@Header("userid") String userid);
+
     @GET("logout")
     Observable<LoginInfoBean> unRegist(@Header("userid") String userid);
 
     @GET("addresslist")
     Observable<RecepitAddressBean> listAddressList(@Header("userid") String userid);
+
     @GET("addresslist")
     Call<RecepitAddressBean> listAddressListCall(@Header("userid") String userid);
+
     @GET("addressdefault")
     Call<RecepitAddressBean> listAddressDefault(@Header("userid") String userid, @Query("id") String id);
+
     @POST("addressdelete")
     Call<RecepitAddressBean> listAddressDelete(@Header("userid") String userid, @Body RequestBody addressDelete);
+
     @POST("addresssave")
     Call<RecepitAddressBean> listAddressSave(@Header("userid") String userid, @Body RequestBody addressSave);
 
     @GET("favorites")
-    Observable<NewsProductInfoBean> listCollectProduct(@Header("userid") String userid, @Query("page") int page,@Query("pageNum") int pageNum);
+    Observable<NewsProductInfoBean> listCollectProduct(@Header("userid") String userid, @Query("page") int page, @Query("pageNum") int pageNum);
 
     @GET("help")
     Observable<HelpInfoBean> listHelpList();
@@ -121,14 +127,21 @@ public interface JDMallService {
 
     @POST("orderlist")
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);
+
     @POST("ordercancel")
     Observable<OrderInfoBean> listOrderCancel(@Header("userid") String userid, @Body RequestBody body);
+
     //商品详情
     @GET("product")
     Observable<ProductInfoBean> listProductInfo(@Query("pId") int id);
+
     //商品评论
     @GET("product/comment")
     Observable<CommentInfoBean> listComment(@Query("pId") int id, @Query("page") int page, @Query("pageNum") int pageNum);
+
     @GET("product/description")
     Observable<ProductDesInfoBean> listProductDes(@Query("pId") int id);
+
+    @POST("/openapi/api/v2")
+    Call<MessageInfoBean> listMessage(@Body RequestBody body);
 }
