@@ -12,6 +12,7 @@ import com.young.jdmall.bean.HotSearchInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.bean.OrdersumbitBean;
 import com.young.jdmall.bean.ProductBean;
@@ -150,6 +151,7 @@ public interface JDMallService {
                                                 @Field("addressId") int addressId, @Field("paymentType") int paymentType,
                                                 @Field("deliveryType") int deliveryType, @Field("invoiceType") int invoiceType,
                                                 @Field("invoiceTitle") String invoiceTitle, @Field("invoiceContent") int invoiceContent);
-
+    @GET("orderdetail")
+    Observable<OrderDetailBean>  listOrderDetail(@Header("userid") String userid,@Query("orderId") String orderId);
 
 }

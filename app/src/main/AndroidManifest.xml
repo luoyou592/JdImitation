@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".ui.activity.SplashActivity">
+        <!--SplashActivity-->
+        <activity android:name=".ui.activity.OrderDetailsActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -48,6 +49,9 @@
                   android:launchMode="singleTask">
         </activity>
         <activity android:name=".ui.activity.InfoActivity"/>
+        <activity android:name=".ui.activity.SplashActivity"/>
+
+
     </application>
 
 </manifest>

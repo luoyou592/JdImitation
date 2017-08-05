@@ -13,7 +13,7 @@
         android:padding="14dp">
 
         <ImageView
-            android:id="@+id/order_back_icon"
+            android:id="@+id/order_back_icon1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
@@ -57,6 +57,7 @@
                     />
 
                 <TextView
+                    android:id="@+id/order_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
@@ -70,7 +71,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/ll_address_model"
+                android:id="@+id/ll_address_mode2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -102,7 +103,7 @@
                         android:orientation="horizontal">
 
                         <TextView
-                            android:id="@+id/order_user_name"
+                            android:id="@+id/order_user_name1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="高波"
@@ -110,7 +111,7 @@
 
 
                         <TextView
-                            android:id="@+id/order_phone"
+                            android:id="@+id/order_phone1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="20dp"
@@ -119,7 +120,7 @@
                     </LinearLayout>
 
                     <TextView
-                        android:id="@+id/order_address"
+                        android:id="@+id/order_address1"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp"
@@ -156,19 +157,19 @@
                 >
 
                 <TextView
+                    android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:layout_gravity="center_vertical"
                     android:layout_margin="10dp"
                     android:gravity="center"
                     android:text="京东"
-                    android:textSize="14sp"
-                    />
+                    android:textSize="14sp"/>
 
             </LinearLayout>
 
             <LinearLayout
-                android:id="@+id/goods_details"
+                android:id="@+id/goods_details1"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:layout_marginBottom="10dp"
@@ -201,13 +202,14 @@
                         />
 
                     <TextView
-
+                        android:id="@+id/order_number1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
                         android:text="53809551843"
                         android:textColor="@color/black"
-                        android:textSize="10sp"/>
+                        android:textSize="10sp"
+                        />
 
                 </LinearLayout>
 
@@ -225,7 +227,7 @@
                         />
 
                     <TextView
-
+                        android:id="@+id/order_time1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -251,12 +253,12 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="下单时间："
+                    android:text="支付方式："
                     android:textSize="10sp"
                     />
 
                 <TextView
-
+                    android:id="@+id/payway"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
@@ -313,7 +315,7 @@
                         />
 
                     <TextView
-
+                        android:id="@+id/fapiao_style"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="10dp"
@@ -387,7 +389,7 @@
         android:layout_weight="10">
 
         <TextView
-
+            android:id="@+id/delete_button"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -396,7 +398,7 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/order_all_pay"
+            android:id="@+id/order_all_pay1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -406,7 +408,7 @@
             android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/order_commit"
+            android:id="@+id/order_commit1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"

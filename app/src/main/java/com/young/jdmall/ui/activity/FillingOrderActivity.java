@@ -14,13 +14,17 @@ import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CartInfoBean;
+import com.young.jdmall.bean.GoodsOrderInfoBean;
 import com.young.jdmall.bean.OrdersumbitBean;
 import com.young.jdmall.bean.RecepitAddressBean;
+import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.widget.PopWinPayWay;
 import com.young.jdmall.ui.widget.PopWindowFaPiao;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -84,6 +88,8 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
     private int payWayType = 1;
     private int invoiceType = 1;
     private int mId;
+    private List<GoodsOrderInfoBean> mGoodsOrderInfoBeen;
+    private CartInfoBean mCartInfo;
 
 
     @Override
@@ -91,7 +97,16 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filling_order);
         ButterKnife.bind(this);
+        processIntent();
         init();
+    }
+
+    private void processIntent() {
+        if (getIntent()!=null){
+            mCartInfo = (CartInfoBean) getIntent().getSerializableExtra("cart");
+            setData(mCartInfo);
+        }
+            
     }
 
     //初始化
@@ -177,13 +192,19 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
     private void commit() {
 // TODO: 2017/8/4 网络请求数据  商品ID
         String userId = PreferenceUtils.getUserId(this);
-        Observable<OrdersumbitBean> ordersumbitlist = RetrofitFactory.getInstance().Ordersumbitlist(userId, "1:3:1,2,3,4|2:2:2,3", mId,payWayType, 0,invoiceType, "", 0);
+        mGoodsOrderInfoBeen = CartDao.queryAll();
+        String sku = "";
+        for (GoodsOrderInfoBean goodsOrderInfoBean : mGoodsOrderInfoBeen) {
+            sku += goodsOrderInfoBean.toString()+"|";
+
+        }
+        Observable<OrdersumbitBean> ordersumbitlist = RetrofitFactory.getInstance().Ordersumbitlist(userId, sku, mId,payWayType, 0,invoiceType, "", 0);
         ordersumbitlist.compose(compose(this.<OrdersumbitBean>bindToLifecycle())).subscribe(new BaseObserver<OrdersumbitBean>(this) {
             @Override
             protected void onHandleSuccess(OrdersumbitBean ordersumbitBean) {
                 if (ordersumbitBean != null) {
-// TODO: 2017/8/4  
-                    Toast.makeText(FillingOrderActivity.this, "提交订单成功", Toast.LENGTH_SHORT).show();
+                // TODO: 2017/8/4
+                    Toast.makeText(FillingOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 }
             }
 
