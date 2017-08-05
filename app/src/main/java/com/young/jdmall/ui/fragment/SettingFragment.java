@@ -6,6 +6,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,8 +17,10 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.young.jdmall.R;
 import com.young.jdmall.ui.activity.InfoActivity;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.adapter.SettingAdapter;
 import com.young.jdmall.ui.adapter.SettingGridAdapter;
 import com.young.jdmall.ui.adapter.SettingNavigatorAdapter;
@@ -38,6 +41,8 @@ import butterknife.Unbinder;
 
 public class SettingFragment extends BaseFragment {
 
+    private static final String TAG = "SettingFragment";
+
     Unbinder unbinder;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;
@@ -53,6 +58,10 @@ public class SettingFragment extends BaseFragment {
     LinearLayout mTabSelectContainer;
     @BindView(R.id.tab_select_icon)
     ImageView mTabSelectIcon;
+    @BindView(R.id.open_message)
+    ImageView mOpenMessage;
+    @BindView(R.id.open_scan)
+    ImageView mOpenScan;
 
     private String[] mTitles = new String[]{"精选", "直播", "订阅", "视频购", "问答", "清单", "好东西", "社区", "生活", "数码", "亲子", "风尚", "美食"};
     private SettingGridAdapter mGridAdapter;
@@ -126,13 +135,30 @@ public class SettingFragment extends BaseFragment {
         unbinder.unbind();
     }
 
-    @OnClick(R.id.open_message)
+    @OnClick({R.id.open_message, R.id.open_scan})
     public void onViewClicked(View view) {
-        switch (view.getId()){
+        switch (view.getId()) {
             case R.id.open_message:
-                Intent intent=new Intent(getActivity(), InfoActivity.class);
+                Intent intent = new Intent(getActivity(), InfoActivity.class);
                 startActivity(intent);
                 break;
+            case R.id.open_scan:
+                startActivityForResult(new Intent(getActivity(), CaptureActivity.class), 100);
+                break;
+        }
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            String goodsId = data.getStringExtra("GoodsId");
+            Log.d(TAG, "onActivityResult: " + requestCode + "|" + resultCode + "|" + goodsId);
+            if (resultCode == -1) {
+                Intent intent = new Intent(getActivity(), ProductDetaiActivity.class);
+                intent.putExtra("id", Integer.valueOf(goodsId));
+                startActivity(intent);
+            }
         }
     }
 }
