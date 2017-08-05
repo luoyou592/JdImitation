@@ -18,10 +18,15 @@ public class ItemRecommendAdapter implements Holder<List<RecommendGoodsBean>> {
     private View rootview;
     private GridView gv_recommend_goods;
 
+
+
     @Override
     public View createView(final Context context) {
         rootview = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.item_recommend, null);
         gv_recommend_goods = (GridView) rootview.findViewById(R.id.gv_recommend_goods);
+
+
+
         return rootview;
     }
 
