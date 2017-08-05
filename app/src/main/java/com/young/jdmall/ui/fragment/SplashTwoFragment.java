@@ -1,12 +1,15 @@
 package com.young.jdmall.ui.fragment;
 
 import android.animation.ObjectAnimator;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.young.jdmall.R;
 import com.young.jdmall.ui.view.RotateView;
@@ -19,6 +22,12 @@ public class SplashTwoFragment extends Fragment {
 
     @BindView(R.id.rotate_view_splash)
     RotateView mRotateViewSplash;
+    @BindView(R.id.running_man)
+    Button mRunningMan;
+    @BindView(R.id.tv_two1)
+    TextView mTvTwo1;
+    @BindView(R.id.tv_two2)
+    TextView mTvTwo2;
     private Unbinder mBind;
     public ObjectAnimator mRotationAnim;
 
@@ -38,7 +47,9 @@ public class SplashTwoFragment extends Fragment {
 
     public void init() {
 
-
+        mRunningMan.setBackgroundResource(R.drawable.runningman);
+        AnimationDrawable drawable= (AnimationDrawable) mRunningMan.getBackground();
+        drawable.start();
   /*      LinearInterpolator linearInterpolator = new LinearInterpolator();
         mRotationAnim = ObjectAnimator.ofFloat(mRotateViewSplash, "rotation", 0f, 360f);
         mRotationAnim.setDuration(2000);
@@ -47,9 +58,11 @@ public class SplashTwoFragment extends Fragment {
 
 
     }
+
     public void ScrollView(int positionOffsetPixels) {
-        mRotateViewSplash.getViewLayout(positionOffsetPixels/3);
+        mRotateViewSplash.getViewLayout(positionOffsetPixels / 3);
 
     }
 
 }
+

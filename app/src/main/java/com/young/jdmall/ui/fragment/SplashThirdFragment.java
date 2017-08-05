@@ -1,6 +1,8 @@
 package com.young.jdmall.ui.fragment;
 
 import android.content.Intent;
+import android.media.MediaMetadataRetriever;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -8,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 
 import com.young.jdmall.R;
 import com.young.jdmall.ui.activity.MainActivity;
@@ -35,6 +38,8 @@ public class SplashThirdFragment extends Fragment {
     Button mBtnSplashStart;
 
     Unbinder unbinder;
+    @BindView(R.id.iv_splash)
+    public ImageView mIvSplash;
 
     @Nullable
     @Override
@@ -47,6 +52,11 @@ public class SplashThirdFragment extends Fragment {
 
     private void init() {
         mVvSplash.setVideoPath(getVideoPath());
+        MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+        String videoPath = getVideoPath();
+        mmr.setDataSource(getContext(), Uri.parse(videoPath));
+        mIvSplash.setImageBitmap(mmr.getFrameAtTime());
+
     }
 
     private String getVideoPath() {
@@ -73,19 +83,13 @@ public class SplashThirdFragment extends Fragment {
             mLoop.dispose();
 
         }
-       /* mLoop = Observable.interval(0, 6 * 1000, TimeUnit.MILLISECONDS)
-              .subscribe(new Consumer<Long>() {
-            @Override
-            public void accept(@NonNull Long aLong) throws Exception {
 
-            }
-        });*/
         Disposable subscribe = Observable.interval(0, 6 * 1000, TimeUnit.MILLISECONDS)
                 .subscribe(new Consumer<Long>() {
                     @Override
                     public void accept(@NonNull Long aLong) throws Exception {
                         if (mVvSplash != null) {
-                            mVvSplash.seekTo(0 * 6 * 1000);
+                            mVvSplash.seekTo(1* 6 * 1000);
                             if (!mVvSplash.isPlaying()) {
                                 mVvSplash.start();
                             }
@@ -97,7 +101,7 @@ public class SplashThirdFragment extends Fragment {
 
     @OnClick(R.id.btn_splash_start)
     public void onViewClicked() {
-        Intent intent=new Intent(getActivity(), MainActivity.class);
+        Intent intent = new Intent(getActivity(), MainActivity.class);
         startActivity(intent);
         getActivity().finish();
     }

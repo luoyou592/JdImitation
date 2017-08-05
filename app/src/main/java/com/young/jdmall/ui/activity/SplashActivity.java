@@ -8,6 +8,7 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.young.jdmall.R;
 import com.young.jdmall.ui.adapter.SplashAdapter;
@@ -69,9 +70,10 @@ public class SplashActivity extends AppCompatActivity {
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            Log.e(TAG, "onPageScrolled: " + positionOffsetPixels);
+            Log.e(TAG, "onPageScrolled: "+position+positionOffsetPixels);
             if (position == 0) {
                 ((SplashFirstFragment) fragments.get(0)).ScrollView(positionOffsetPixels - mlastPosition);
+                ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels );
                 mlastPosition = positionOffsetPixels;
             }else if(position==1){
                 ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels );
@@ -87,6 +89,7 @@ public class SplashActivity extends AppCompatActivity {
             }
 
 
+
         }
 
         @Override
@@ -98,6 +101,10 @@ public class SplashActivity extends AppCompatActivity {
                     ((SplashTwoFragment)fragments.get(1)).mRotationAnim.clone();
                 }
             }*/
+            if (mPosition == 2) {
+                ((SplashThirdFragment) fragments.get(2)).mIvSplash.setVisibility(View.GONE);
+            }
+
 
         }
     };

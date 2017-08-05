@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
               xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:background="@color/white"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:orientation="vertical">
@@ -12,51 +13,98 @@
 
     </RelativeLayout>
 
-    <com.young.jdmall.ui.view.RotateView
-        android:id="@+id/rotate_view_splash"
+
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="3"
-        app:radius="150dp">
+        android:layout_weight="4">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom01"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom02"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom03"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom04"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom05"
-            />
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/onboarding_3_atom06"
+            android:layout_gravity="center"
+            android:layout_width="330dp"
+            android:layout_height="330dp"
+            android:src="@mipmap/onboarding_2_circleline"
             />
 
-    </com.young.jdmall.ui.view.RotateView>
+        <Button
+            android:id="@+id/running_man"
+            android:layout_gravity="center"
+            android:layout_width="100dp"
+            android:layout_height="100dp"/>
+
+        <com.young.jdmall.ui.view.RotateView
+            android:id="@+id/rotate_view_splash"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:radius="155dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/onboarding_2_moon"
+                />
+
+            <!--     <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:src="@mipmap/onboarding_3_atom02"
+                     />
+
+                 <ImageView
+                     android:layout_width="wrap_content"
+                     android:layout_height="wrap_content"
+                     android:src="@mipmap/onboarding_3_atom03"
+                     />-->
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@mipmap/onboarding_2_sun"
+                />
+
+            <!--   <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@mipmap/onboarding_3_atom05"
+                   />
+
+               <ImageView
+                   android:layout_width="wrap_content"
+                   android:layout_height="wrap_content"
+                   android:src="@mipmap/onboarding_3_atom06"
+                   />-->
+
+        </com.young.jdmall.ui.view.RotateView>
+
+
+    </FrameLayout>
 
     <RelativeLayout
+        android:gravity="center_horizontal"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
+        <TextView
+            android:id="@+id/tv_two1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="   “围绕”"
+            android:textSize="14sp"
+
+            />
+
+        <TextView
+            android:layout_marginTop="20dp"
+            android:id="@+id/tv_two2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="时刻陪伴 用心服务"
+            android:textSize="8sp"
+
+            />
+
     </RelativeLayout>
+
 
 </LinearLayout>
