@@ -40,11 +40,12 @@
         android:layout_width="match_parent"
         android:layout_height="1px"/>
     <android.support.design.widget.TabLayout
+
         android:id="@+id/tab_layout"
         app:tabIndicatorColor="#ff0900"
         app:tabIndicatorHeight="3dp"
         app:tabSelectedTextColor="#ff0900"
-        app:tabMode="scrollable"
+        app:tabMode="fixed"
         app:tabMinWidth="82dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

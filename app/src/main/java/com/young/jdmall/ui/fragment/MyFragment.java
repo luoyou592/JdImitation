@@ -2,6 +2,8 @@ package com.young.jdmall.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.annotation.Nullable;
@@ -65,9 +67,14 @@ public class MyFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 //        TextView textView = new TextView(getActivity());
 //        textView.setText("我的");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(0xAA000000);
+        }
+
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
         initData();
+
         GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
@@ -157,6 +164,7 @@ public class MyFragment extends BaseFragment {
     int end = 0X99FFFFFF;
     int bgColor;
 
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
@@ -176,11 +184,20 @@ public class MyFragment extends BaseFragment {
 
                 if (sumY <= 0) {
                     bgColor = start;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
+                    }
                 } else if (sumY >= distance) {
                     bgColor = end;
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(Color.GRAY);
+                    }
                 } else {
 
                     bgColor = (int) mArgbEvaluator.evaluate(sumY / distance, start, end);
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        getActivity().getWindow().setStatusBarColor(Color.GRAY);
+                    }
                 }
                 mLlTitleContainer.setBackgroundColor(bgColor);
                 if (bgColor == (int) mArgbEvaluator.evaluate(1, start, end)) {

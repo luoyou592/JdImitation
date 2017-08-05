@@ -16,47 +16,48 @@
         <ImageView
 
             android:id="@+id/iv_signOrReg"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="50dp"
             android:background="@mipmap/b0q"
             />
 
 
         <TextView
 
-            android:visibility="visible"
             android:id="@+id/tv_login"
-
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
 
+            android:layout_height="wrap_content"
             android:layout_alignTop="@+id/iv_signOrReg"
+
             android:layout_marginLeft="11dp"
             android:layout_marginStart="11dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="20dp"
             android:layout_toEndOf="@+id/iv_signOrReg"
             android:layout_toRightOf="@+id/iv_signOrReg"
+            android:drawableRight="@mipmap/aqx"
 
             android:text="登录/注册"
             android:textColor="@android:color/white"
-            android:textSize="14sp"
-            android:drawableRight="@mipmap/aqx"/>
+            android:textSize="12sp"
+            android:visibility="visible"/>
 
         <TextView
-            android:visibility="invisible"
-            android:gravity="center"
-            android:background="@drawable/level_bg"
+            android:id="@+id/tv_level"
+            android:layout_width="60dp"
+            android:layout_height="16dp"
+            android:layout_below="@id/tv_username"
+            android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
             android:layout_toRightOf="@+id/iv_signOrReg"
-            android:layout_below="@id/tv_username"
-            android:id="@+id/tv_level"
-            android:layout_width="80dp"
-            android:layout_height="20dp"
-            android:layout_marginLeft="10dp"
+            android:background="@drawable/level_bg"
+            android:gravity="center"
             android:text="会员等级"
-            android:textColor="@android:color/white"/>
+            android:textSize="10sp"
+            android:textColor="@android:color/white"
+            android:visibility="invisible"/>
 
         <ImageView
             android:layout_width="match_parent"
@@ -65,16 +66,16 @@
             android:background="@mipmap/b18"/>
 
         <TextView
-            android:visibility="invisible"
             android:id="@+id/tv_username"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="40dp"
-            android:textSize="20sp"
-            android:layout_toRightOf="@+id/iv_signOrReg"
-            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="用户名"/>
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="56dp"
+            android:layout_toRightOf="@+id/iv_signOrReg"
+            android:text="用户名"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:visibility="invisible"/>
 
     </RelativeLayout>
 
@@ -170,6 +171,7 @@
 
 
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -177,26 +179,28 @@
 
         <LinearLayout
 
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_jdou"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
-            <TextView
-                android:textColor="@android:color/black"
 
-                android:textSize="10sp"
+            <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="京豆"/>
+                android:text="京豆"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"/>
         </LinearLayout>
 
 
@@ -292,6 +296,7 @@
             android:background="@android:color/white"/>
 -->
     <LinearLayout
+        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -416,14 +421,13 @@
             android:text="我的订单"/>-->
     </LinearLayout>
 
-    <!--<ImageView
+    <ImageView
             android:layout_width="match_parent"
             android:layout_height="8dp"
             android:background="@android:color/white"/>
--->
         <LinearLayout
-
-            android:layout_marginTop="8dp"
+            android:background="@color/white"
+            
             android:layout_width="match_parent"
             android:layout_height="95dp"
             android:orientation="horizontal"

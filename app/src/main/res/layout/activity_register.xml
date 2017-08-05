@@ -5,28 +5,35 @@
               android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="14dp">
+        android:layout_height="45dp"
+        android:background="@drawable/action_bar_bg">
+
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@mipmap/a_8"
-            android:layout_centerVertical="true"/>
+            android:layout_width="11dp"
+            android:layout_height="21dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="25dp"
+            android:background="@drawable/agm"/>
+
 
         <TextView
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:gravity="center"
             android:text="快速注册"
-            android:textColor="@android:color/black"
-            android:textSize="24sp"/>
+            android:textColor="@color/black"
+            android:textSize="17sp"/>
+
+
     </RelativeLayout>
+
 
     <LinearLayout
         android:padding="10dp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="20dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

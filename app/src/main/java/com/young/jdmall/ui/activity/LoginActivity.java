@@ -97,12 +97,13 @@ public class LoginActivity extends BaseActivity {
             public void afterTextChanged(Editable s) {
                 if (TextUtils.isEmpty(s)) {
                     mPwdDelete.setVisibility(View.INVISIBLE);
-                    mBtLogin.setBackgroundColor(Color.RED);
-                    mBtLogin.setTextColor(Color.WHITE);
+
+                    mBtLogin.setBackgroundColor(Color.parseColor("#D6D7D7"));
+                    mBtLogin.setTextColor(Color.parseColor("#BABABA"));
                 } else {
                     mPwdDelete.setVisibility(View.VISIBLE);
-                    mBtLogin.setTextColor(Color.DKGRAY);
-                    mBtLogin.setBackgroundColor(Color.GRAY);
+                    mBtLogin.setTextColor(Color.WHITE);
+                    mBtLogin.setBackgroundColor(Color.RED);
                 }
             }
         });

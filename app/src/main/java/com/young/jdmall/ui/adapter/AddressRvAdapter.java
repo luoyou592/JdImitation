@@ -1,6 +1,8 @@
 package com.young.jdmall.ui.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -145,31 +147,40 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
         }
 
         private void deleteAddress() {
-            int id = mAddressListBean.getId();
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("id", id+"")
-                    .build();
-            String userId = PreferenceUtils.getUserId(mContext);
-            Call<RecepitAddressBean> call = (Call<RecepitAddressBean>) RetrofitFactory.getInstance().listAddressDelete(userId, requestBody);
-            call.enqueue(new Callback<RecepitAddressBean>() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("确认删除吗？");
+            builder.setPositiveButton("是的", new DialogInterface.OnClickListener() {
                 @Override
-                public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
-                    if("addressDelete".equals(response.body().getResponse())){
-                        Log.d(TAG, "onResponse: " + response.body().getResponse());
-                        Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
-                        mAddressBeanList.remove(mAddressListBean);
-                        notifyDataSetChanged();
+                public void onClick(DialogInterface dialog, int which) {
+                    int id = mAddressListBean.getId();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("id", id + "")
+                            .build();
+                    String userId = PreferenceUtils.getUserId(mContext);
+                    Call<RecepitAddressBean> call = (Call<RecepitAddressBean>) RetrofitFactory.getInstance().listAddressDelete(userId, requestBody);
+                    call.enqueue(new Callback<RecepitAddressBean>() {
+                        @Override
+                        public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
+                            if("addressDelete".equals(response.body().getResponse())){
+                                Log.d(TAG, "onResponse: " + response.body().getResponse());
+                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+                                mAddressBeanList.remove(mAddressListBean);
+                                notifyDataSetChanged();
 
-                    } else {
-                        Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                            } else {
+                                Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
-                    Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        @Override
+                        public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
+                            Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        }
+                    });
                 }
             });
+            builder.show();
+
         }
 
         private RecepitAddressBean.AddressListBean mAddressListBean;
@@ -278,31 +289,40 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
         }
 
         private void deleteAddress() {
-            int id = mAddressListBean.getId();
-            RequestBody requestBody = new FormBody.Builder()
-                    .add("id", id+"")
-                    .build();
-            String userId = PreferenceUtils.getUserId(mContext);
-            Call<RecepitAddressBean> call = (Call<RecepitAddressBean>) RetrofitFactory.getInstance().listAddressDelete(userId, requestBody);
-            call.enqueue(new Callback<RecepitAddressBean>() {
+            AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+            builder.setTitle("确认删除吗？");
+            builder.setPositiveButton("是的", new DialogInterface.OnClickListener() {
                 @Override
-                public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
-                    if("addressDelete".equals(response.body().getResponse())){
-                        Log.d(TAG, "onResponse: " + response.body().getResponse());
-                        Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
-                        mAddressBeanList.remove(mAddressListBean);
-                        notifyDataSetChanged();
+                public void onClick(DialogInterface dialog, int which) {
+                    int id = mAddressListBean.getId();
+                    RequestBody requestBody = new FormBody.Builder()
+                            .add("id", id+"")
+                            .build();
+                    String userId = PreferenceUtils.getUserId(mContext);
+                    Call<RecepitAddressBean> call = (Call<RecepitAddressBean>) RetrofitFactory.getInstance().listAddressDelete(userId, requestBody);
+                    call.enqueue(new Callback<RecepitAddressBean>() {
+                        @Override
+                        public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
+                            if("addressDelete".equals(response.body().getResponse())){
+                                Log.d(TAG, "onResponse: " + response.body().getResponse());
+                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+                                mAddressBeanList.remove(mAddressListBean);
+                                notifyDataSetChanged();
 
-                    } else {
-                        Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                            } else {
+                                Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
-                    Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        @Override
+                        public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
+                            Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        }
+                    });
                 }
             });
+            builder.show();
+
         }
 
         public void getAddressList() {

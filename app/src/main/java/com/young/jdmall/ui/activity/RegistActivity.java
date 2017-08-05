@@ -74,7 +74,7 @@ public class RegistActivity extends BaseActivity {
                     PreferenceUtils.setUserId(RegistActivity.this, loginInfoBean.getUserInfo().getUserid());
                     PreferenceUtils.setRegistSuccess(RegistActivity.this, true);
                     finish();
-                }else if(loginInfoBean.getUserInfo() == null){
+                }else {
                     Toast.makeText(RegistActivity.this, loginInfoBean.getError(), Toast.LENGTH_SHORT).show();
                 }
             }

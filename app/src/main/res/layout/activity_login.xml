@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
+                android:clipToPadding="true"
+                android:fitsSystemWindows="true"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
 
@@ -108,6 +109,7 @@
         </LinearLayout>
 
         <Button
+            android:background="#D6D7D7"
             android:id="@+id/bt_login"
             android:layout_margin="10dp"
             android:layout_marginTop="30dp"

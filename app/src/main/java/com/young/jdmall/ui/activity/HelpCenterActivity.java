@@ -123,12 +123,14 @@ public class HelpCenterActivity extends BaseActivity {
     }
 
     public void setHelpTitle(List<HelpInfoBean.HelpListBean> helpTitle) {
+        mTvHelp.setText("帮助中心");
         if (helpTitle == null) {
             mRlBuy.setVisibility(View.GONE);
             mRlServer.setVisibility(View.GONE);
             mRlUpdate.setVisibility(View.GONE);
             mRlWay.setVisibility(View.GONE);
         } else {
+
             mRlResult.setVisibility(View.GONE);
             mLlContainer.setVisibility(View.VISIBLE);
             mTvBuy.setText(helpTitle.get(0).getTitle());

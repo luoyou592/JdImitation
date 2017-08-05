@@ -10,4 +10,11 @@
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
+
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowTranslucentStatus">true</item>
+    </style>
+
 </resources>

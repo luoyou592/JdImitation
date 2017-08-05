@@ -3,7 +3,8 @@
               android:orientation="vertical"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-                android:fitsSystemWindows="true">
+    >
+
     <com.young.jdmall.ui.view.RecyclerRefreshLayout
         android:id="@+id/rv_fresh"
         android:layout_width="match_parent"
@@ -16,7 +17,6 @@
 
 
     <RelativeLayout
-
         android:id="@+id/ll_title_container"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

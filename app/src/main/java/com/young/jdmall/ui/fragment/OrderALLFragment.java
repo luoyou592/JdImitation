@@ -45,24 +45,24 @@ public class OrderALLFragment extends Fragment {
 
     public void init() {
         mRvAllOrder.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAllOrderAdapter = new AllOrderAdapter(getActivity());
+        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 3);
         mRvAllOrder.setAdapter(mAllOrderAdapter);
-        List<OrderInfoBean> data = initTempData();
+        List<OrderInfoBean.OrderListBean> data = initTempData();
         mAllOrderAdapter.setAddressBeanList(data);
 
     }
-    private List<OrderInfoBean> mOrderInfoBeanList = new ArrayList<>();
+    private List<OrderInfoBean.OrderListBean> mOrderInfoBeanList = new ArrayList<>();
 
-    public List<OrderInfoBean> initTempData(){
+    public List<OrderInfoBean.OrderListBean> initTempData(){
 
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
-            OrderInfoBean orderInfoBean = new OrderInfoBean();
+            /*OrderInfoBean orderInfoBean = new OrderInfoBean();
             orderInfoBean.desc = "描述"+i;
 
             orderInfoBean.num = String.valueOf(random.nextInt(10));
             orderInfoBean.price = String.valueOf(random.nextInt(100));
-            mOrderInfoBeanList.add(orderInfoBean);
+            mOrderInfoBeanList.add(orderInfoBean.getOrderList().get(i));*/
         }
         Log.d(TAG, "initTempData: "+mOrderInfoBeanList.size());
 
