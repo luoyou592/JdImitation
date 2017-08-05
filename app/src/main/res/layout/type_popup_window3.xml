@@ -1,58 +1,51 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
               android:layout_width="match_parent"
-              android:layout_height="match_parent">
+              android:layout_height="match_parent"
+              android:orientation="vertical">
+
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="欧莎(OSA)"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="欧莎(OSA)"/>
+
         <Button
-            android:text="范思蓝恩"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="范思蓝恩"/>
+
         <Button
-            android:text="妖精的口袋"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="妖精的口袋"/>
+
         <Button
-            android:text="秋水伊人"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="秋水伊人"/>
     </LinearLayout>
 
     <LinearLayout
-        android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
         <Button
-            android:text="一米阳光"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="一米阳光"/>
+
         <Button
-            android:text="乐町"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="乐町"/>
+
         <Button
-            android:text="衣多米舒"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="衣多米舒"/>
+
         <Button
-            android:text="熙世界"
-            android:layout_weight="1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"/>
+            style="@style/TypePopWindowBtnStyle"
+            android:text="熙世界"/>
     </LinearLayout>
 
 </LinearLayout>

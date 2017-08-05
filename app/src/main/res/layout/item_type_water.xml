@@ -13,6 +13,7 @@
         android:layout_width="180dp"
         android:layout_height="230dp"/>
     <TextView
+        android:textSize="16dp"
         android:id="@+id/type_water_name"
         android:text="名字一定要常常常常常常常常常常常常常常常常常常常常"
         android:maxLines="1"

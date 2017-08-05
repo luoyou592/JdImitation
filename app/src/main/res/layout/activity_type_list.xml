@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.young.jdmall.ui.view.HideHeadView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
     android:id="@+id/hh_view"
+    android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <com.young.jdmall.ui.widget.ViewTypeHeader
@@ -27,30 +27,22 @@
 
             <Button
                 android:id="@+id/type_btn_1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/TypePopWindowBtnStyle"
                 android:text="包邮"/>
 
             <Button
                 android:id="@+id/type_btn_2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/TypePopWindowBtnStyle"
                 android:text="类型"/>
 
             <Button
                 android:id="@+id/type_btn_3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/TypePopWindowBtnStyle"
                 android:text="品牌"/>
 
             <Button
                 android:id="@+id/type_btn_4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
+                style="@style/TypePopWindowBtnStyle"
                 android:text="样式"/>
         </LinearLayout>
 
