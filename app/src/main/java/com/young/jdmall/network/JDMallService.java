@@ -16,6 +16,7 @@ import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.MessageInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
+import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.bean.OrdersumbitBean;
 import com.young.jdmall.bean.ProductBean;
@@ -65,6 +66,7 @@ public interface JDMallService {
     @FormUrlEncoded
     @POST("cart")
     Observable<CartInfoBean> listCart(@Field("sku") String test);
+
 
 
     //登陆
@@ -157,6 +159,9 @@ public interface JDMallService {
 
     @GET("ordercancel")
     Call<OrderInfoBean> listCancelOrder(@Header("userid") String userid, @Query("orderId") String orderId);
+    @GET("orderdetail")
+    Call<OrderDetailBean> listOrderDetail(@Header("userid") String userid, @Query("orderId") String orderId);
+
 
     @FormUrlEncoded
     @POST("ordersumbit")

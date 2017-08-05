@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.fragment;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.AllOrderAdapter;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +34,10 @@ public class ReceiveOdFragment extends BaseFragment {
     RecyclerView mOrderRecyclerView;
     @BindView(R.id.ll_nonOrder)
     LinearLayout mLlNonOrder;
+    @BindView(R.id.fv_fresh)
+    RecyclerRefreshLayout mFvFresh;
     private AllOrderAdapter mAllOrderAdapter;
+    private int page = 0;
 
     @Nullable
     @Override
@@ -45,9 +50,27 @@ public class ReceiveOdFragment extends BaseFragment {
     }
 
     private void initView() {
-        mOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 2);
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mOrderRecyclerView.setLayoutManager(layoutManager);
+        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 2, mLlNonOrder);
         mOrderRecyclerView.setAdapter(mAllOrderAdapter);
+        mOrderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int position = layoutManager.findLastCompletelyVisibleItemPosition();
+                if (position == mAllOrderAdapter.getItemCount() - 2) {
+                    page++;
+                    initData();
+                }
+            }
+        });
     }
 
     private static final String TAG = "ReceiveOdFragment";
@@ -63,17 +86,14 @@ public class ReceiveOdFragment extends BaseFragment {
 
             }
         });*/
-        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 2, 0, 10);
+        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 2, page, 10);
         call.enqueue(new Callback<OrderInfoBean>() {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
                 if (response.body().getOrderList() != null) {
-                    Toast.makeText(getActivity(), "获取2订单", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "获取2订单", Toast.LENGTH_SHORT).show();
                     mAllOrderAdapter.setAddressBeanList(response.body().getOrderList());
-                    if (response.body().getOrderList().size() == 0) {
-                        mOrderRecyclerView.setVisibility(View.GONE);
-                        mLlNonOrder.setVisibility(View.VISIBLE);
-                    }
+
                 } else {
                     Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
                 }
@@ -90,5 +110,27 @@ public class ReceiveOdFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        mFvFresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mFvFresh.closeRefresh();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
     }
 }

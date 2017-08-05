@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.fragment;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,6 +17,7 @@ import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.AllOrderAdapter;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import java.util.List;
 
@@ -34,6 +36,8 @@ public class TotalOdFragment extends BaseFragment {
     RecyclerView mOrderRecyclerView;
     @BindView(R.id.ll_nonOrder)
     LinearLayout mLlNonOrder;
+    @BindView(R.id.fv_fresh)
+    RecyclerRefreshLayout mFvFresh;
     private AllOrderAdapter mAllOrderAdapter;
 
     @Nullable
@@ -47,6 +51,7 @@ public class TotalOdFragment extends BaseFragment {
     }
 
     private static final String TAG = "TotalOdFragment";
+    private int page = 0;
 
     private void initData() {
         /*//获取全部订单列表
@@ -59,15 +64,15 @@ public class TotalOdFragment extends BaseFragment {
 
             }
         });*/
-        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 1, 0, 10);
+        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 1, page, 10);
         call.enqueue(new Callback<OrderInfoBean>() {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
                 if (response.body().getOrderList() != null) {
                     Log.d(TAG, "onResponse: " + response.body().getResponse());
-                    Toast.makeText(getActivity(), "获取1订单", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "获取1订单", Toast.LENGTH_SHORT).show();
 //                    mAllOrderAdapter.setAddressBeanList(response.body().getOrderList());
-                    getOneMonthII(response.body().getOrderList());
+                    getOneMonthII(response.body().getOrderList(), page);
                 } else {
                     Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
                 }
@@ -82,23 +87,39 @@ public class TotalOdFragment extends BaseFragment {
     }
 
     private void initView() {
-        mOrderRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 0);
+
+        final LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        mOrderRecyclerView.setLayoutManager(layoutManager);
+        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 0, mLlNonOrder);
         mOrderRecyclerView.setAdapter(mAllOrderAdapter);
+        mOrderRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+
+            }
+
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int position = layoutManager.findLastCompletelyVisibleItemPosition();
+                if (position == mAllOrderAdapter.getItemCount() - 2) {
+                    page++;
+                    initData();
+                }
+            }
+        });
     }
 
-    public void getOneMonthII(final List<OrderInfoBean.OrderListBean> orderList) {
-        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 2, 0, 10);
+    public void getOneMonthII(final List<OrderInfoBean.OrderListBean> orderList, int page) {
+        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 2, page, 10);
         call.enqueue(new Callback<OrderInfoBean>() {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
                 if (response.body().getOrderList() != null) {
-                    if (response.body().getOrderList().size() == 0) {
-                        mOrderRecyclerView.setVisibility(View.GONE);
-                        mLlNonOrder.setVisibility(View.VISIBLE);
-                    }
+
                     Log.d(TAG, "onResponse: " + response.body().getResponse());
-                    Toast.makeText(getActivity(), "获取2订单", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "获取2订单", Toast.LENGTH_SHORT).show();
                     orderList.addAll(response.body().getOrderList());
                     mAllOrderAdapter.setAddressBeanList(orderList);
                 } else {
@@ -117,5 +138,28 @@ public class TotalOdFragment extends BaseFragment {
     public void onDestroyView() {
         super.onDestroyView();
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        mFvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        mFvFresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mFvFresh.closeRefresh();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
     }
 }

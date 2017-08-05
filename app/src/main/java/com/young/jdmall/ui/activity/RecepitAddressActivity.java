@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.RecepitAddressBean;
@@ -72,7 +71,7 @@ public class RecepitAddressActivity extends BaseActivity {
                 @Override
                 protected void onHandleSuccess(RecepitAddressBean addressListBean) {
                     if(addressListBean.getAddressList() != null){
-                        Toast.makeText(RecepitAddressActivity.this, "访问成功"+ addressListBean.getResponse(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(RecepitAddressActivity.this, "访问成功"+ addressListBean.getResponse(), Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onHandleSuccess: "+ addressListBean.getAddressList().size());
                         mAddressRvAdapter.setAddressBeanList(addressListBean.getAddressList());
 

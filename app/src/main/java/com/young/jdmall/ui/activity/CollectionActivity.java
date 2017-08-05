@@ -3,9 +3,9 @@ package com.young.jdmall.ui.activity;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +15,8 @@ import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.CollectionAdapter;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.RecyclerLoadMoreView;
+import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -32,7 +34,9 @@ public class CollectionActivity extends BaseActivity {
     @BindView(R.id.tv_title)
     TextView mTvTitle;
     @BindView(R.id.rl_container)
-    RecyclerView mRlContainer;
+    RecyclerLoadMoreView mRlContainer;
+    @BindView(R.id.rl_refresh)
+    RecyclerRefreshLayout mRlRefresh;
     private CollectionAdapter mCollectionAdapter;
 
     @Override
@@ -43,12 +47,18 @@ public class CollectionActivity extends BaseActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             getWindow().setStatusBarColor(Color.GRAY);
         }
-        initData();
+//        initData();
         GridLayoutManager manager = new GridLayoutManager(this, 2);
         mRlContainer.setLayoutManager(manager);
         mCollectionAdapter = new CollectionAdapter(this);
 
         mRlContainer.setAdapter(mCollectionAdapter);
+        mCollectionAdapter.setOnRefreshListener(new RecyclerLoadMoreView.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                initData();
+            }
+        });
     }
 
     private void initData() {
@@ -67,6 +77,23 @@ public class CollectionActivity extends BaseActivity {
     protected void onStart() {
         super.onStart();
         initData();
+        mRlRefresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        mRlRefresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRlRefresh.closeRefresh();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
     }
 
     @OnClick(R.id.iv_back)

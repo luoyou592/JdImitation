@@ -33,12 +33,23 @@
     </RelativeLayout>
 
 
-
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rl_container"
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.young.jdmall.ui.view.RecyclerRefreshLayout
+            android:id="@+id/rl_refresh"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-        </android.support.v7.widget.RecyclerView>
+            <com.young.jdmall.ui.view.RecyclerLoadMoreView
+                android:id="@+id/rl_container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+            </com.young.jdmall.ui.view.RecyclerLoadMoreView>
+        </com.young.jdmall.ui.view.RecyclerRefreshLayout>
+    </RelativeLayout>
+
+
+
 </LinearLayout>

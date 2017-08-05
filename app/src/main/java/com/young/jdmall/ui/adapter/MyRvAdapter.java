@@ -2,6 +2,8 @@ package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,6 +25,7 @@ import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.activity.OrderActivity;
 import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.RecepitAddressActivity;
+import com.young.jdmall.ui.utils.IconUtil;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.utils.PriceFormater;
 
@@ -122,16 +125,16 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                 ((RecoHolder) holder).bindView();
                 break;
             case TYPE_NORMAL:
-                ((NormalHolder) holder).bindView(position);
+                ((NormalHolder) holder).bindView(mProductInfo.get(position - 2));
                 break;
         }
     }
 
     @Override
     public int getItemCount() {
-        if ((!"".equals(mUsers)) && (mNewsProductInfoBean != null)) {
+        if ((!"".equals(mUsers)) && (mProductInfo != null)) {
 
-            return mNewsProductInfoBean.getListCount() + 2;
+            return mProductInfo.size() + 2;
         } else {
             return 1;
         }
@@ -142,8 +145,10 @@ public class MyRvAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    public void setNewsProductData(NewsProductInfoBean newsProductInfoBean) {
-        mNewsProductInfoBean = newsProductInfoBean;
+    private List<NewsProductInfoBean.ProductListBean> mProductInfo = new ArrayList<>();
+
+    public void setNewsProductData(List<NewsProductInfoBean.ProductListBean> productListBeen) {
+        mProductInfo.addAll(productListBeen);
     }
 
 
@@ -192,8 +197,8 @@ public class MyRvAdapter extends RecyclerView.Adapter {
             ButterKnife.bind(this, view);
         }
 
-        public void bindView(final int position) {
-            final NewsProductInfoBean.ProductListBean productListBean = mNewsProductInfoBean.getProductList().get(position - 2);
+        public void bindView(final NewsProductInfoBean.ProductListBean productListBean) {
+//            final NewsProductInfoBean.ProductListBean productListBean = mNewsProductInfoBean.getProductList().get(position - 2);
             //渲染首页商品列表
             mTvTitle.setText(productListBean.getName());
             mTvPrice.setText(PriceFormater.format(productListBean.getPrice()));
@@ -203,7 +208,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                 public void onClick(View v) {
 //                    Toast.makeText(mContext, "点了" + productListBean.getName(), Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(mContext, ProductDetaiActivity.class);
-                    intent.putExtra("id", mNewsProductInfoBean.getProductList().get(position).getId());
+                    intent.putExtra("id", productListBean.getId());
                     mContext.startActivity(intent);
 
                 }
@@ -240,12 +245,15 @@ public class MyRvAdapter extends RecyclerView.Adapter {
         TextView mTvFav;
         @BindView(R.id.tv_order_num)
         TextView mTvOrderNum;
-
+        @BindView(R.id.tv_gouwu)
+        TextView mTvGouwu;
+        @BindView(R.id.tv_kefu)
+        ImageView mTvKefu;
 
         @BindView(R.id.tv_username)
         TextView mTvUsername;
 
-        @OnClick({R.id.rl_signOrReg, R.id.tv_address_manage, R.id.ll_order, R.id.tv_collection})
+        @OnClick({R.id.rl_signOrReg, R.id.tv_address_manage, R.id.ll_order, R.id.tv_collection, R.id.tv_fav, R.id.tv_gouwu, R.id.tv_kefu})
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.rl_signOrReg:
@@ -285,7 +293,28 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                         mContext.startActivity(intent);
                     }
                     break;
+                case R.id.tv_fav:
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        mContext.startActivity(intent);
+                    } else {
 
+                        Intent intent = new Intent(mContext, CollectionActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                    break;
+                case R.id.tv_gouwu:
+                    if ("".equals(PreferenceUtils.getUserId(mContext))) {
+                        Intent intent = new Intent(mContext, LoginActivity.class);
+                        mContext.startActivity(intent);
+                    } else {
+
+                        Intent intent = new Intent(mContext, OrderActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                    break;
+                case R.id.tv_kefu:
+                    break;
 
             }
         }
@@ -307,8 +336,10 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                 mTvLogin.setVisibility(View.INVISIBLE);
                 mTvUsername.setVisibility(View.VISIBLE);
                 mTvUsername.setText("您好，" + mUsers);
-                mIvSignOrReg.setBackgroundResource(R.mipmap.fragment_daidai);
-                mRlSignOrReg.setBackgroundResource(R.mipmap.b0x);
+                Bitmap bitmap = BitmapFactory.decodeResource(mContext.getResources(), R.mipmap.huaji);
+                Bitmap roundedCornerBitmap = IconUtil.getRoundedCornerBitmap(bitmap);
+                mIvSignOrReg.setImageBitmap(roundedCornerBitmap);
+                mRlSignOrReg.setBackgroundResource(R.mipmap.logined5);
 
             } else {
                 mTvUsername.setVisibility(View.GONE);
@@ -319,7 +350,7 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                 mTvFav.setText("0");
                 mTvJdou.setText("0");
                 mTvOrderNum.setText("0");
-                mIvSignOrReg.setBackgroundResource(R.mipmap.b0p);
+                mIvSignOrReg.setImageResource(R.mipmap.b0p);
                 mRlSignOrReg.setBackgroundResource(R.mipmap.b0z);
                 return;
             }

@@ -3,13 +3,18 @@
               android:background="@android:color/white"
               android:layout_width="match_parent"
               android:layout_height="match_parent">
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/order_recycler_view"
+    <com.young.jdmall.ui.view.RecyclerRefreshLayout
+        android:id="@+id/fv_fresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="#fbf5f5">
-    </android.support.v7.widget.RecyclerView>
+        android:layout_height="match_parent">
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/order_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#fbf5f5">
+        </android.support.v7.widget.RecyclerView>
+    </com.young.jdmall.ui.view.RecyclerRefreshLayout>
+
     <LinearLayout
         android:id="@+id/ll_nonOrder"
         android:visibility="gone"

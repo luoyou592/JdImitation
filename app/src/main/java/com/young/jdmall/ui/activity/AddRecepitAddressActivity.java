@@ -161,7 +161,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
                     public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                         if ("addressDelete".equals(response.body().getResponse())) {
                             Log.d(TAG, "onResponse: " + response.body().getResponse());
-                            Toast.makeText(AddRecepitAddressActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
+//                            Toast.makeText(AddRecepitAddressActivity.this, "删除成功", Toast.LENGTH_SHORT).show();
                             finish();
 
                         } else {
@@ -254,7 +254,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
             public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                 Log.d(TAG, "onResponse: " + response.body().getResponse());
                 if (response.body().getAddressList() != null) {
-                    Toast.makeText(AddRecepitAddressActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AddRecepitAddressActivity.this, "修改成功", Toast.LENGTH_SHORT).show();
                     setUpdateAddressDefault(id);
                 } else {
                     Toast.makeText(AddRecepitAddressActivity.this, response.body().getError(), Toast.LENGTH_SHORT).show();
@@ -310,7 +310,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
                 public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                     Log.d(TAG, "onResponse: " + response.body().getResponse());
                     if (response.body().getAddressList() != null) {
-                        Toast.makeText(AddRecepitAddressActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddRecepitAddressActivity.this, "添加成功", Toast.LENGTH_SHORT).show();
                         //获取最后一个list
                         getLastAddress();
                     } else {
@@ -425,7 +425,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
             @Override
             protected void onHandleSuccess(RecepitAddressBean addressListBean) {
                 if(addressListBean.getAddressList() != null){
-                    Toast.makeText(AddRecepitAddressActivity.this, "访问成功"+ addressListBean.getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AddRecepitAddressActivity.this, "访问成功"+ addressListBean.getResponse(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onHandleSuccess: "+ addressListBean.getAddressList().size());
                     mAddressList = addressListBean.getAddressList();
                     Log.d(TAG, "onHandleSuccess: 地址单" + addressListBean.getAddressList().size());
@@ -446,7 +446,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
                 public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                     if("addressDefault".equals(response.body().getResponse())){
                         Log.d(TAG, "onResponse: " + response.body().getResponse());
-                        Toast.makeText(AddRecepitAddressActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(AddRecepitAddressActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
                         Toast.makeText(AddRecepitAddressActivity.this, response.toString()+"", Toast.LENGTH_SHORT).show();
@@ -467,7 +467,7 @@ public class AddRecepitAddressActivity extends BaseActivity implements CityPicke
             public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                 if("addressDefault".equals(response.body().getResponse())){
                     Log.d(TAG, "onResponse: " + response.body().getResponse());
-                    Toast.makeText(AddRecepitAddressActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(AddRecepitAddressActivity.this, "设置成功", Toast.LENGTH_SHORT).show();
                     finish();
                 } else {
                     Toast.makeText(AddRecepitAddressActivity.this, response.toString()+"", Toast.LENGTH_SHORT).show();

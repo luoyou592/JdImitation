@@ -29,6 +29,7 @@ import static android.content.ContentValues.TAG;
  *  描述：    TODO
  */
 public class OrderALLFragment extends Fragment {
+
     @BindView(R.id.rv_all_order)
     RecyclerView mRvAllOrder;
     private AllOrderAdapter mAllOrderAdapter;
@@ -45,15 +46,16 @@ public class OrderALLFragment extends Fragment {
 
     public void init() {
         mRvAllOrder.setLayoutManager(new LinearLayoutManager(getActivity()));
-        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 3);
+//        mAllOrderAdapter = new AllOrderAdapter(getActivity(), 3, mLlNonOrder);
         mRvAllOrder.setAdapter(mAllOrderAdapter);
         List<OrderInfoBean.OrderListBean> data = initTempData();
         mAllOrderAdapter.setAddressBeanList(data);
 
     }
+
     private List<OrderInfoBean.OrderListBean> mOrderInfoBeanList = new ArrayList<>();
 
-    public List<OrderInfoBean.OrderListBean> initTempData(){
+    public List<OrderInfoBean.OrderListBean> initTempData() {
 
         Random random = new Random();
         for (int i = 0; i < 10; i++) {
@@ -64,9 +66,14 @@ public class OrderALLFragment extends Fragment {
             orderInfoBean.price = String.valueOf(random.nextInt(100));
             mOrderInfoBeanList.add(orderInfoBean.getOrderList().get(i));*/
         }
-        Log.d(TAG, "initTempData: "+mOrderInfoBeanList.size());
+        Log.d(TAG, "initTempData: " + mOrderInfoBeanList.size());
 
         return mOrderInfoBeanList;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+//        null.unbind();
+    }
 }

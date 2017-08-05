@@ -3,6 +3,8 @@ package com.young.jdmall.ui.activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,6 +16,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
+import com.young.jdmall.ui.utils.IconUtil;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import butterknife.BindView;
@@ -79,6 +82,9 @@ public class AccountSettingActivity extends BaseActivity {
         if (!"".equals(PreferenceUtils.getUserId(this))) {
             mTvUser.setText(PreferenceUtils.getUserName(this));
             mBtUnregist.setVisibility(View.VISIBLE);
+            Bitmap bitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.huaji);
+            Bitmap roundedCornerBitmap = IconUtil.getRoundedCornerBitmap(bitmap);
+            mIvSignOrReg.setImageBitmap(roundedCornerBitmap);
         }
     }
 
