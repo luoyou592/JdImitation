@@ -65,8 +65,10 @@
             style="@style/TypePopWindowBtnStyle"
             android:text="夜夜"/>
 
-        <Button
-            style="@style/TypePopWindowBtnStyle"
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1"
             android:background="#ffffff"/>
 
 
