@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:padding="@dimen/content_vertical_margin">
+
+
+    <TextView
+        android:id="@+id/chat_item_date"
+        style="@style/text_body"
+        android:layout_gravity="center_horizontal"
+        android:visibility="gone"/>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/chat_item_header"
+            android:layout_width="44dp"
+            android:layout_height="44dp"
+            android:layout_alignParentLeft="true"
+            android:background="@drawable/acg"
+            android:scaleType="centerCrop"/>
+
+        <com.rance.chatui.widget.BubbleImageView
+            android:id="@+id/chat_item_content_image"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/chat_item_header"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            app:angle="6dp"
+            app:arrowHeight="8dp"
+            app:arrowLocation="left"
+            app:arrowPosition="15dp"
+            app:arrowWidth="10dp"/>
+
+        <com.rance.chatui.widget.BubbleLinearLayout
+            android:id="@+id/chat_item_layout_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/chat_item_header"
+            android:gravity="left|center_vertical"
+            android:minHeight="40dp"
+            android:minWidth="120dp"
+            android:orientation="horizontal"
+            app:angle="4dp"
+            app:arrowHeight="10dp"
+            app:arrowLocation="left"
+            app:arrowPosition="10dp"
+            app:arrowWidth="8dp"
+            app:bubbleColor="@color/white">
+
+            <com.rance.chatui.widget.GifTextView
+                android:id="@+id/chat_item_content_text"
+                style="@style/text_subhead_black"
+                android:layout_marginLeft="@dimen/content_horizontal_margin"
+                android:padding="@dimen/content_vertical_margin"/>
+
+            <ImageView
+                android:id="@+id/chat_item_voice"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:src="@mipmap/icon_voice_left3"
+                android:visibility="gone"/>
+        </com.rance.chatui.widget.BubbleLinearLayout>
+
+        <TextView
+            android:id="@+id/chat_item_voice_time"
+            style="@style/text_body"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/content_vertical_margin"
+            android:layout_toRightOf="@+id/chat_item_layout_content"
+            android:visibility="gone"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -43,7 +43,7 @@ public class NewsDetailContainerGoodsView extends RelativeLayout {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), ProductDetaiActivity.class);
-                intent.putExtra("id", id);
+                intent.putExtra("id", Integer.valueOf(id));
                 getContext().startActivity(intent);
             }
         });

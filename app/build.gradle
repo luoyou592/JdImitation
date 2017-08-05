@@ -66,5 +66,8 @@ dependencies {
     compile 'org.greenrobot:greendao:3.2.2'
 
 
+    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.jude:easyrecyclerview:4.2.3'
+
 
 }
