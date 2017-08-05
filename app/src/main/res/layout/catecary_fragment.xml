@@ -1,24 +1,71 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="@color/background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:background="@color/background"
+    android:orientation="vertical">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/catecary_left_list"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_marginRight="8dp"
-        android:layout_weight="30">
-    </android.support.v7.widget.RecyclerView>
+    <LinearLayout
+        android:id="@+id/top_container"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="#70ffffff"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="6dp">
 
-    <FrameLayout
-        android:id="@+id/category_right_contains"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="100">
-    </FrameLayout>
+        <TextView
+            android:id="@+id/ib_sweep"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/a9v"
+            android:text="扫啊扫"
+            android:textSize="10sp"/>
+
+        <EditText
+            android:id="@+id/et_search_catecary"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="8dp"
+            android:layout_weight="1"
+            android:background="@drawable/type_edti_search_bg"
+            android:drawableLeft="@mipmap/arp"
+            android:drawablePadding="6dp"
+            android:focusable="false"
+            android:hint="美的压力锅"
+            android:paddingLeft="6dp"
+            android:textSize="16sp"/>
+
+        <TextView
+            android:id="@+id/tv_news_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawableTop="@mipmap/a90"
+            android:text="消息"
+            android:textSize="10sp"/>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/catecary_left_list"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="8dp"
+            android:layout_weight="30">
+        </android.support.v7.widget.RecyclerView>
+
+        <FrameLayout
+            android:id="@+id/category_right_contains"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="100">
+        </FrameLayout>
+
+    </LinearLayout>
 
 </LinearLayout>
