@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     LinearLayout mMainNavigation;
     @BindView(R.id.tv_count)
     TextView mTvCount;
-    private SparseArray<Fragment> mFragments;
+    public SparseArray<Fragment> mFragments;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,5 +138,8 @@ public class MainActivity extends AppCompatActivity {
         } else {
             mTvCount.setVisibility(View.INVISIBLE);
         }
+    }
+    public void updataCount(){
+        onStart();
     }
 }
