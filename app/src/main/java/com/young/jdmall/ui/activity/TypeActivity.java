@@ -10,11 +10,13 @@ import android.util.Log;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.ProductBean;
+import com.young.jdmall.bean.ProductInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.TypeAdapter;
 import com.young.jdmall.ui.adapter.TypeWaterfallAdapter;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
+import com.young.jdmall.ui.widget.ImageViewPagerDialog;
 import com.young.jdmall.ui.widget.ViewTypeHeader;
 
 import java.util.List;
@@ -65,7 +67,6 @@ public class TypeActivity extends BaseActivity {
         ButterKnife.bind(this);
         mContext = this;
 
-
     }
 
     @Override
@@ -113,6 +114,7 @@ public class TypeActivity extends BaseActivity {
         mRecycleView.setAdapter(mTypeListAdapter);
         mRecycleView.setLoadMoreOpportunity(1);
         setListener();
+
     }
 
     /**
@@ -172,6 +174,7 @@ public class TypeActivity extends BaseActivity {
 
     private void loadSearchMoreData(int page, String mKeyword) {
         page++;
+
         Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listSearch
                 (page, 10, "saleDown", mKeyword);
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver
@@ -395,11 +398,39 @@ public class TypeActivity extends BaseActivity {
                 startActivity(new Intent(TypeActivity.this, SearchActivity.class));
             }
         });
+
+
+
+        mTypeListAdapter.setListener(new TypeAdapter.onClickItemControlListener() {
+
+            @Override
+            public void onImageClick(ProductBean.ProductListBean productBean, int position) {
+                Log.d(TAG, "onImageClick: 点击图片,执行网络请求");
+//
+                requestProductDetail(productBean.getId());
+            }
+        });
+
+
     }
 
     @Override
     protected void onStop() {
         super.onStop();
     }
+    private void requestProductDetail(final int id) {
+        Observable<ProductInfoBean> productObservable = RetrofitFactory.getInstance().listProductInfo(id);
+        productObservable.compose(compose(this.<ProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<ProductInfoBean>(this) {
+            @Override
+            protected void onHandleSuccess(ProductInfoBean productInfoBean) {
+                List<String> pics = productInfoBean.getProduct().getPics();
+                Log.d(TAG, "onHandleSuccess: 请求成功" + pics.size());
+                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext);
+                imageViewPagerDialog.setData(pics,id);
+                imageViewPagerDialog.show();
+            }
+        });
+    }
+
 
 }
