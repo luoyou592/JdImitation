@@ -14,7 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 
 import com.young.jdmall.R;
-import com.young.jdmall.ui.activity.HongBaoActivity;
+import com.young.jdmall.ui.activity.FillingOrderActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -69,7 +69,7 @@ public class RedPacketDialog extends Dialog {
 
     @OnClick(R.id.btn_hongbao)
     public void onViewClicked() {
-        Intent intent =new Intent(mContext, HongBaoActivity.class);
+        Intent intent =new Intent(mContext, FillingOrderActivity.class);
         this.dismiss();
         mContext.startActivity(intent);
     }

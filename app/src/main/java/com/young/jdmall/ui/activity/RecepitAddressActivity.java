@@ -44,6 +44,7 @@ public class RecepitAddressActivity extends BaseActivity {
         mRvReceiptAddress.setLayoutManager(new LinearLayoutManager(this));
         mAddressRvAdapter = new AddressRvAdapter(this);
         mRvReceiptAddress.setAdapter(mAddressRvAdapter);
+
     }
 
     @OnClick({R.id.iv_back, R.id.bt_add_address})

@@ -186,6 +186,7 @@
                 android:src="@mipmap/right"/>
 
             <LinearLayout
+                android:id="@+id/pay_contains"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"

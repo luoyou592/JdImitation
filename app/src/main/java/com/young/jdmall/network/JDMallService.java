@@ -13,6 +13,7 @@ import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.LoginInfoBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.bean.OrderInfoBean;
+import com.young.jdmall.bean.OrdersumbitBean;
 import com.young.jdmall.bean.ProductBean;
 import com.young.jdmall.bean.ProductDesInfoBean;
 import com.young.jdmall.bean.ProductInfoBean;
@@ -142,4 +143,13 @@ public interface JDMallService {
 
     @GET("ordercancel")
     Call<OrderInfoBean> listCancelOrder(@Header("userid") String userid, @Query("orderId") String orderId);
+
+    @FormUrlEncoded
+    @POST("ordersumbit")
+    Observable<OrdersumbitBean> Ordersumbitlist(@Header("userid") String userid, @Field("sku") String sku,
+                                                @Field("addressId") int addressId, @Field("paymentType") int paymentType,
+                                                @Field("deliveryType") int deliveryType, @Field("invoiceType") int invoiceType,
+                                                @Field("invoiceTitle") String invoiceTitle, @Field("invoiceContent") int invoiceContent);
+
+
 }
