@@ -427,6 +427,7 @@
             android:layout_weight="1"
             android:background="@color/red"
             android:gravity="center"
+            android:clickable="true"
             android:text="提交订单"
             android:textColor="@color/white"
             android:textSize="14sp"/>

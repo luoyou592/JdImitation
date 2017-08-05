@@ -28,6 +28,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 import static com.young.jdmall.R.id.pay_right_icon;
@@ -93,12 +94,15 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
     private int mId;
     private List<GoodsOrderInfoBean> mGoodsOrderInfoBeen;
     private CartInfoBean mCartInfo;
+    public static FillingOrderActivity instance;
+    private int mTotalPrice;
 
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.filling_order);
+        instance=this;
         ButterKnife.bind(this);
         processIntent();
         init();
@@ -131,13 +135,14 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
      * @param data
      */
     public void setData(CartInfoBean data) {
+        mTotalPrice = data.getTotalPrice() - 1;
         mTvGoodsNumber.setText("共" + data.getTotalCount() + "件");
-        mOrderAllPay.setText("合计：￥" + (data.getTotalPrice() - 5));
+        mOrderAllPay.setText("合计：￥" + (data.getTotalPrice() - 1));
         mGoodsMeney.setText("￥" + data.getTotalPrice());
         for (int i = 0; i < data.getCart().size(); i++) {
             ImageView imageView = new ImageView(this);
             String pic = Constant.BASE_URL + data.getCart().get(i).getProduct().getPic();
-            Glide.with(this).load(pic).override(100,200).into(imageView);
+            Glide.with(this).load(pic).override(100, 200).into(imageView);
             mGoodsContainer.addView(imageView);
         }
 
@@ -210,7 +215,10 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
             protected void onHandleSuccess(OrdersumbitBean ordersumbitBean) {
                 if (ordersumbitBean != null) {
                     // TODO: 2017/8/4
-                    Toast.makeText(FillingOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FillingOrderActivity.this, "提交订单成功", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(FillingOrderActivity.this,ZhifubaoActivity.class);
+                    intent.putExtra("sum",mTotalPrice+"");
+                    startActivity(intent);
                 }
             }
 
@@ -260,6 +268,10 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
         popWinShare.showAsDropDown(v, 0, 0);
 //如果窗口存在，则更新
         popWinShare.update();
+    }
+
+    @OnClick(R.id.order_commit)
+    public void onViewClicked() {
     }
 
     class OnClickLintener implements View.OnClickListener {
