@@ -7,20 +7,28 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.Log;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.PopupWindow;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.ProductBean;
+import com.young.jdmall.bean.ProductInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.adapter.TypeAdapter;
 import com.young.jdmall.ui.adapter.TypeWaterfallAdapter;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
+import com.young.jdmall.ui.widget.ImageViewPagerDialog;
 import com.young.jdmall.ui.widget.ViewTypeHeader;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 /**
@@ -36,12 +44,14 @@ public class TypeActivity extends BaseActivity {
     ViewTypeHeader mViewTypeListHeader;
     @BindView(R.id.recycle_view)
     RecyclerLoadMoreView mRecycleView;
-
-//    @BindView(R.id.view_type_list_header)
-//    ViewTypeHeader mViewTypeListHeader;
-//    @BindView(R.id.recycle_view)
-//    RecyclerLoadMoreView mRecycleView;
-
+    @BindView(R.id.type_btn_1)
+    Button mTypeBtn1;
+    @BindView(R.id.type_btn_2)
+    Button mTypeBtn2;
+    @BindView(R.id.type_btn_3)
+    Button mTypeBtn3;
+    @BindView(R.id.type_btn_4)
+    Button mTypeBtn4;
 
     private List<ProductBean.ProductListBean> mProductList;
     private TypeAdapter mTypeListAdapter;
@@ -64,8 +74,6 @@ public class TypeActivity extends BaseActivity {
         setContentView(R.layout.activity_type_list);
         ButterKnife.bind(this);
         mContext = this;
-
-
     }
 
     @Override
@@ -113,6 +121,7 @@ public class TypeActivity extends BaseActivity {
         mRecycleView.setAdapter(mTypeListAdapter);
         mRecycleView.setLoadMoreOpportunity(1);
         setListener();
+
     }
 
     /**
@@ -154,7 +163,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -165,13 +174,14 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
 
     private void loadSearchMoreData(int page, String mKeyword) {
         page++;
+
         Observable<ProductBean> productObservable = RetrofitFactory.getInstance().listSearch
                 (page, 10, "saleDown", mKeyword);
         productObservable.compose(compose(this.<ProductBean>bindToLifecycle())).subscribe(new BaseObserver
@@ -183,7 +193,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -194,7 +204,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -212,7 +222,7 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
@@ -223,7 +233,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -246,18 +256,18 @@ public class TypeActivity extends BaseActivity {
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.addData(mProductList);
                 }
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
             }
 
             @Override
             protected void onHandleError(String msg) {
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -270,7 +280,7 @@ public class TypeActivity extends BaseActivity {
             protected void onHandleSuccess(ProductBean productBean) {
                 mProductList = productBean.getProductList();
                 mTypeListAdapter.setData(mProductList);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadSuccess();
                 if (mWaterfallAdapter != null) {
                     mWaterfallAdapter.setData(mProductList);
                 }
@@ -278,13 +288,13 @@ public class TypeActivity extends BaseActivity {
 
             @Override
             protected void onHandleError(String msg) {
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
         });
     }
@@ -307,7 +317,7 @@ public class TypeActivity extends BaseActivity {
             @Override
             public void onError(Throwable e) {
                 super.onError(e);
-                mRecycleView.onLoadFinish();
+                mRecycleView.onLoadFailure();
             }
 
             @Override
@@ -395,6 +405,19 @@ public class TypeActivity extends BaseActivity {
                 startActivity(new Intent(TypeActivity.this, SearchActivity.class));
             }
         });
+
+
+        mTypeListAdapter.setListener(new TypeAdapter.onClickItemControlListener() {
+
+            @Override
+            public void onImageClick(ProductBean.ProductListBean productBean, int position) {
+                Log.d(TAG, "onImageClick: 点击图片,执行网络请求");
+//
+                requestProductDetail(productBean.getId());
+            }
+        });
+
+
     }
 
     @Override
@@ -402,4 +425,61 @@ public class TypeActivity extends BaseActivity {
         super.onStop();
     }
 
+    private void requestProductDetail(final int id) {
+        Observable<ProductInfoBean> productObservable = RetrofitFactory.getInstance()
+                .listProductInfo(id);
+        productObservable.compose(compose(this.<ProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<ProductInfoBean>(this) {
+            @Override
+            protected void onHandleSuccess(ProductInfoBean productInfoBean) {
+                List<String> pics = productInfoBean.getProduct().getPics();
+                Log.d(TAG, "onHandleSuccess: 请求成功" + pics.size());
+                ImageViewPagerDialog imageViewPagerDialog = new ImageViewPagerDialog(mContext);
+                imageViewPagerDialog.setData(pics, id);
+                imageViewPagerDialog.show();
+            }
+        });
+    }
+
+
+    @OnClick({R.id.type_btn_1, R.id.type_btn_2, R.id.type_btn_3, R.id.type_btn_4})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.type_btn_1:
+                View pop1 = LayoutInflater.from(this).inflate(R.layout.type_popup_window1, null);
+                PopupWindow popupWindow1 = new PopupWindow(pop1, ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow1.setOutsideTouchable(true);
+                popupWindow1.setFocusable(true);
+                popupWindow1.update();
+                popupWindow1.showAsDropDown(mTypeBtn1, 0, 20);
+                break;
+            case R.id.type_btn_2:
+                View pop2 = LayoutInflater.from(this).inflate(R.layout.type_popup_window2, null);
+                PopupWindow popupWindow2 = new PopupWindow(pop2, ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow2.setOutsideTouchable(true);
+                popupWindow2.setFocusable(true);
+                popupWindow2.update();
+                popupWindow2.showAsDropDown(mTypeBtn1, 0, 20);
+                break;
+            case R.id.type_btn_3:
+                View pop3 = LayoutInflater.from(this).inflate(R.layout.type_popup_window3, null);
+                PopupWindow popupWindow3 = new PopupWindow(pop3, ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow3.setOutsideTouchable(true);
+                popupWindow3.setFocusable(true);
+                popupWindow3.update();
+                popupWindow3.showAsDropDown(mTypeBtn1, 0, 20);
+                break;
+            case R.id.type_btn_4:
+                View pop4 = LayoutInflater.from(this).inflate(R.layout.type_popup_window4, null);
+                PopupWindow popupWindow4 = new PopupWindow(pop4, ViewGroup.LayoutParams
+                        .MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+                popupWindow4.setOutsideTouchable(true);
+                popupWindow4.setFocusable(true);
+                popupWindow4.update();
+                popupWindow4.showAsDropDown(mTypeBtn1, 0, 20);
+                break;
+        }
+    }
 }

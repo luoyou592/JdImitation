@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.activity;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -239,7 +240,7 @@ public class SearchActivity extends AppCompatActivity {
             }
         });
 
-//        Dialog dialog = new Dialog(this);
+//        Dialog dialog = new Dialog(this,R.style.Dialog);
 //        dialog.setContentView(view);
 //        dialog.show();
 

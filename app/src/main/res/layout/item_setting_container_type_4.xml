@@ -18,7 +18,7 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/item_setting_container_image1"
+                android:id="@+id/item_setting_container_image"
                 android:layout_width="match_parent"
                 android:layout_height="180dp"
                 android:scaleType="centerCrop"
@@ -66,6 +66,7 @@
                 </LinearLayout>
 
                 <TextView
+                    android:id="@+id/item_setting_container_count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="2dp"
@@ -86,6 +87,7 @@
                 android:padding="5dp">
 
                 <ImageView
+                    android:id="@+id/item_setting_container_icon"
                     android:layout_width="28dp"
                     android:layout_height="28dp"
                     android:layout_marginRight="6dp"
@@ -94,6 +96,7 @@
 
 
                 <TextView
+                    android:id="@+id/item_setting_container_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="安静的小妞儿"

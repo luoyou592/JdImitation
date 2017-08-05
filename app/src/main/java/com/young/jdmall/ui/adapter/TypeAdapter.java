@@ -65,7 +65,7 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
     @Override
     protected void onBindViewHolderToRecyclerLoadMoreView(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
-        viewHolder.setData(mData.get(position));
+        viewHolder.setData(mData.get(position),position);
     }
 
     @Override
@@ -84,9 +84,9 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
 
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.icon)
-        ImageView mIcon;
+        public ImageView mIcon;
         @BindView(R.id.item_type_name)
         TextView mItemTypeName;
         @BindView(R.id.item_type_primary_money)
@@ -98,6 +98,7 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
         @BindView(R.id.item_type_goodEvaluation)
         TextView mItemTypeGoodEvaluation;
         private ProductBean.ProductListBean mListTestBean;
+        private int mPosition;
 
         ViewHolder(View view) {
             super(view);
@@ -112,11 +113,20 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
                 }
             });
 
+            mIcon.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mListener != null){
+                        mListener.onImageClick(mListTestBean,mPosition);
+                    }
+                }
+            });
 
         }
 
-        public void setData(ProductBean.ProductListBean listTestBean) {
+        public void setData(ProductBean.ProductListBean listTestBean, int position) {
             mListTestBean = listTestBean;
+            mPosition = position;
             Random randomEvaluation = new Random();
             for (int i = 0; i < mData.size(); i++) {
                 listTestBean.setEvaluation(randomEvaluation.nextInt(9) * 13591);
@@ -148,5 +158,15 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
 
             mItemTypeMoney.setMovementMethod(LinkMovementMethod.getInstance());
         }
+    }
+
+    private onClickItemControlListener mListener;
+
+    public void setListener(onClickItemControlListener listener) {
+        mListener = listener;
+    }
+
+    public interface onClickItemControlListener{
+        void onImageClick(ProductBean.ProductListBean productBean, int position);
     }
 }
