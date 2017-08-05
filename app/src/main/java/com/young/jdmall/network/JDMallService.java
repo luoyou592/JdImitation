@@ -7,6 +7,7 @@ import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CollectInfoBean;
 import com.young.jdmall.bean.CommentInfoBean;
+import com.young.jdmall.bean.GirlInfoBean;
 import com.young.jdmall.bean.HelpInfoBean;
 import com.young.jdmall.bean.HelpInfoDetailBean;
 import com.young.jdmall.bean.HomeInfoBean;
@@ -64,7 +65,6 @@ public interface JDMallService {
     @FormUrlEncoded
     @POST("cart")
     Observable<CartInfoBean> listCart(@Field("sku") String test);
-
 
 
     //登陆
@@ -128,10 +128,10 @@ public interface JDMallService {
     Observable<ProductBean> listProductList(@Query("page") int page, @Query("pageNum") int pageNum,
                                             @Query("cId") int cId, @Query("orderby") String orderby);
 
-//    搜索商品列表
+    //    搜索商品列表
     @GET("search")
     Observable<ProductBean> listSearch(@Query("page") int page, @Query("pageNum") int pageNum,
-                                          @Query("orderby") String orderby, @Query("keyword") String keyword);
+                                       @Query("orderby") String orderby, @Query("keyword") String keyword);
 
     @POST("orderlist")
     Observable<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Body RequestBody body);
@@ -152,6 +152,7 @@ public interface JDMallService {
 
     @POST("/openapi/api/v2")
     Call<MessageInfoBean> listMessage(@Body RequestBody body);
+
     @GET("product/favorites")
     Observable<CollectInfoBean> listCollect(@Query("pId") int id);
 
@@ -168,5 +169,6 @@ public interface JDMallService {
                                                 @Field("deliveryType") int deliveryType, @Field("invoiceType") int invoiceType,
                                                 @Field("invoiceTitle") String invoiceTitle, @Field("invoiceContent") int invoiceContent);
 
-
+    @GET("getAllRecomPicByTag.jsp")
+    Call<GirlInfoBean> listGirl(@Query("category") String category, @Query("tag") String tag, @Query("start") int start, @Query("len") int len);
 }

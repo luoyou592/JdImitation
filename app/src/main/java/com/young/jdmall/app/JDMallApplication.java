@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.DisplayMetrics;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.android.volley.RequestQueue;
+import com.android.volley.toolbox.Volley;
 import com.facebook.drawee.backends.pipeline.Fresco;
 import com.young.jdmall.bean.DaoMaster;
 import com.young.jdmall.bean.DaoSession;
@@ -16,8 +18,9 @@ import com.young.jdmall.network.NetworkManage;
 
 public class JDMallApplication extends Application {
 
-//    public static LoginInfoBean sLoginInfoBean;
+    //    public static LoginInfoBean sLoginInfoBean;
     private static DaoSession daoSession;
+    private static RequestQueue sRequestQueue;
 
     @Override
     public void onCreate() {
@@ -32,6 +35,15 @@ public class JDMallApplication extends Application {
         mContext = getApplicationContext();
         mInstance = this;
         initScreenSize();
+        initVolley();
+    }
+
+    public void initVolley() {
+        sRequestQueue = Volley.newRequestQueue(getApplicationContext());
+    }
+
+    public static RequestQueue getVolley(){
+        return sRequestQueue;
     }
 
     private static JDMallApplication mInstance;
@@ -48,6 +60,7 @@ public class JDMallApplication extends Application {
      * 屏幕密度
      */
     public static float screenDensity;
+
     private void setupDatabase() {
         DaoMaster.DevOpenHelper helper = new DaoMaster.DevOpenHelper(this, "shop.db", null);
         //获取可写数据库
@@ -61,7 +74,6 @@ public class JDMallApplication extends Application {
     public static DaoSession getDaoInstant() {
         return daoSession;
     }
-
 
 
     public static Context getInstance() {
