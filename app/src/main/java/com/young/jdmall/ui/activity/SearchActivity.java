@@ -220,6 +220,8 @@ public class SearchActivity extends AppCompatActivity {
         View view = View.inflate(this, R.layout.layout_serch_dialog, null);
         View confirm = view.findViewById(R.id.confirm);
         View abolish = view.findViewById(R.id.abolish);
+        TextView textView = (TextView) view.findViewById(R.id.dialog_title);
+        textView.setText("确定清空历史搜索吗？");
         final AlertDialog alertDialog = new AlertDialog.Builder(this)
                 .setView(view)
                 .create();
