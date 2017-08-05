@@ -103,7 +103,9 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
 
     private void processIntent() {
         if (getIntent()!=null){
-            mCartInfo = (CartInfoBean) getIntent().getSerializableExtra("cart");
+            Intent intent=getIntent();
+            Bundle bundle=intent.getExtras();
+            CartInfoBean mCartInfo = (CartInfoBean) bundle.getSerializable("cart");
             setData(mCartInfo);
         }
             

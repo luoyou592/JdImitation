@@ -79,7 +79,7 @@ public class CartInfoBean implements Serializable {
         this.prom = prom;
     }
 
-    public static class CartBean {
+    public static class CartBean implements Serializable {
         private int prodNum;
         /**
          * buyLimit : 10
@@ -109,7 +109,7 @@ public class CartInfoBean implements Serializable {
             this.product = product;
         }
 
-        public static class ProductBean {
+        public static class ProductBean implements Serializable {
             private int buyLimit;
             private int id;
             private String name;
@@ -180,7 +180,7 @@ public class CartInfoBean implements Serializable {
                 this.productProperty = productProperty;
             }
 
-            public static class ProductPropertyBean {
+            public static class ProductPropertyBean implements Serializable {
                 private int id;
                 private String k;
                 private String v;

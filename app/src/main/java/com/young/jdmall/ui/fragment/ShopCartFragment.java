@@ -183,7 +183,9 @@ public class ShopCartFragment extends BaseFragment {
             case R.id.pay:
                 if (mCartInfoBean!=null&&Integer.parseInt(mTotalMoney.getText().toString().trim())>0){
                     Intent intent = new Intent(getActivity(), FillingOrderActivity.class);
-                    intent.putExtra("cart", mCartInfoBean);
+                    Bundle bundle = new Bundle();
+                    bundle.putSerializable("cart",mCartInfoBean);
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }else{
                     Toast.makeText(getActivity(),"请选中商品",Toast.LENGTH_SHORT).show();
