@@ -35,7 +35,7 @@ import butterknife.OnClick;
  * 公司：黑马程序员
  */
 
-class ZhifubaoActivity extends FragmentActivity {
+public class ZhifubaoActivity extends FragmentActivity {
     //商户PID
     public static final String PARTNER = "2088011085074233";
     //商户收款账号
