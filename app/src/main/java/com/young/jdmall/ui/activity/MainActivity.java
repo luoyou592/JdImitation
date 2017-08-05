@@ -21,6 +21,7 @@ import com.young.jdmall.ui.fragment.HomeFragment;
 import com.young.jdmall.ui.fragment.MyFragment;
 import com.young.jdmall.ui.fragment.SettingFragment;
 import com.young.jdmall.ui.fragment.ShopCartFragment;
+import com.young.jdmall.ui.widget.RedPacketDialog;
 
 import java.util.List;
 
@@ -50,9 +51,9 @@ public class MainActivity extends AppCompatActivity {
         selectedTab(0);
         processIntent();
 
-        /*RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
+        RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
         redPacketDialog.create();
-        redPacketDialog.show();*/
+        redPacketDialog.show();
     }
 
     private void processIntent() {

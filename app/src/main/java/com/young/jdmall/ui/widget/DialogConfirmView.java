@@ -190,7 +190,7 @@ public class DialogConfirmView extends Dialog {
                 CartDao.insertCart(mGoodsOrderInfoBean);
                 Log.d("luoyou", "dao"+ mGoodsOrderInfoBean.toString());
 
-                Toast.makeText(getContext(), "加入成功", Toast.LENGTH_SHORT).show();
+
 
                 dismiss();
                 break;

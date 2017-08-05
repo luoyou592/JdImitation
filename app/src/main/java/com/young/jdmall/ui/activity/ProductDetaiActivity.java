@@ -234,7 +234,7 @@ public class ProductDetaiActivity extends BaseActivity {
                 break;
             case R.id.tv_contact:
                 // TODO: 2017/8/3  机器人界面(聊天)
-                Intent chatIntent = new Intent(this, CustomServiceActivity.class);
+                Intent chatIntent = new Intent(this, com.rance.chatui.ui.activity.MainActivity.class);
                 startActivity(chatIntent);
                 break;
             case R.id.tv_shop:
