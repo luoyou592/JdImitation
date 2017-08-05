@@ -1,5 +1,6 @@
 package com.young.jdmall.bean;
 
+import java.io.Serializable;
 import java.util.List;
 
 /*
@@ -7,7 +8,7 @@ import java.util.List;
  *  创建时间:  2017/8/2 18:54
  *  描述：    TODO
  */
-public class CartInfoBean {
+public class CartInfoBean implements Serializable {
 
     /**
      * cart : [{"prodNum":3,"product":{"buyLimit":10,"id":1,"name":"韩版时尚蕾丝裙","number":"100","pic":"/images/product/detail/c3.jpg","price":350,"productProperty":[{"id":1,"k":"颜色","v":"红色"},{"id":2,"k":"颜色","v":"绿色"},{"id":3,"k":"尺码","v":"M"},{"id":4,"k":"尺码","v":"XXL"}]}},{"prodNum":2,"product":{"buyLimit":10,"id":2,"name":"粉色毛衣","number":"13","pic":"/images/product/detail/q1.jpg","price":100,"productProperty":[{"id":2,"k":"颜色","v":"绿色"},{"id":3,"k":"尺码","v":"M"}]}}]
@@ -78,7 +79,7 @@ public class CartInfoBean {
         this.prom = prom;
     }
 
-    public static class CartBean {
+    public static class CartBean implements Serializable {
         private int prodNum;
         /**
          * buyLimit : 10
@@ -108,7 +109,7 @@ public class CartInfoBean {
             this.product = product;
         }
 
-        public static class ProductBean {
+        public static class ProductBean implements Serializable {
             private int buyLimit;
             private int id;
             private String name;
@@ -179,7 +180,7 @@ public class CartInfoBean {
                 this.productProperty = productProperty;
             }
 
-            public static class ProductPropertyBean {
+            public static class ProductPropertyBean implements Serializable {
                 private int id;
                 private String k;
                 private String v;
@@ -207,6 +208,9 @@ public class CartInfoBean {
                 public void setV(String v) {
                     this.v = v;
                 }
+
+
+
             }
         }
     }

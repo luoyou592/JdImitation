@@ -140,7 +140,9 @@
                     android:layout_width="60dp"
                     android:layout_height="match_parent"
                     android:text="1"
-                    android:gravity="center"
+                    android:gravity="right"
+                    android:paddingTop="4dp"
+                    android:paddingRight="25dp"
                     android:background="@drawable/dialog_edit_bg"
                     android:textColor="#000"
                     android:textSize="23sp"/>

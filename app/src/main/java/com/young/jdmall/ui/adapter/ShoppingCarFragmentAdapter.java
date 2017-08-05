@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -17,7 +18,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
-import com.young.jdmall.ui.activity.InfoActivity;
+import com.young.jdmall.ui.activity.LoginActivity;
 
 import java.util.List;
 
@@ -37,21 +38,27 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
 
     private Context mContext;
     private List<RecommendInfoBean.ProductListBean> mData;
+    public GoodsShowAdapter mGoodsShowAdapter;
 
 
     public ShoppingCarFragmentAdapter(Context context) {
         mContext = context;
+
+        notifyDataSetChanged();
     }
 
-    private List<CartInfoBean.CartBean> mList;
+    private CartInfoBean mList;
 
-    public void setList(List<CartInfoBean.CartBean> list) {
+    public void setList(CartInfoBean list) {
         mList = list;
+
+        notifyDataSetChanged();
     }
 
     public void setData(List<RecommendInfoBean.ProductListBean> data) {
         mData = data;
         Log.d("data", "mdata==============" + mData.toString());
+
         notifyDataSetChanged();
     }
 
@@ -125,17 +132,19 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         Button mCheck;
         @BindView(R.id.goods_show)
         RecyclerView mGoodsShow;
-        @BindView(R.id.chat)
-        ImageView mChat;
-
+        @BindView(R.id.visible_table)
+        LinearLayout mVisibleTable;
 
         ViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+
             mLogin.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("shopcar", "点击了login");
+                    Intent intent = new Intent(mContext, LoginActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
             mSencondKill.setOnClickListener(new View.OnClickListener() {
@@ -150,20 +159,21 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                     Log.d("shopcar", "点击了mCheck");
                 }
             });
-            mChat.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent=new Intent(mContext, InfoActivity.class);
-                    mContext.startActivity(intent);
-                }
-            });
         }
 
+
         public void setData() {
-            GoodsShowAdapter goodsShowAdapter = new GoodsShowAdapter(mContext);
-            goodsShowAdapter.setData(mList);
+            if (mList != null) {
+                mGoodsShow.setVisibility(View.VISIBLE);
+                mVisibleTable.setVisibility(View.GONE);
+            } else {
+                mGoodsShow.setVisibility(View.GONE);
+                mVisibleTable.setVisibility(View.VISIBLE);
+            }
+            mGoodsShowAdapter = new GoodsShowAdapter(mContext);
+            mGoodsShowAdapter.setData(mList);
             mGoodsShow.setLayoutManager(new LinearLayoutManager(mContext));
-            mGoodsShow.setAdapter(goodsShowAdapter);
+            mGoodsShow.setAdapter(mGoodsShowAdapter);
         }
     }
 
@@ -185,6 +195,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         ItemViewHolder(final View view) {
             super(view);
             ButterKnife.bind(this, view);
+
             mAdd.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -211,6 +222,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         }
 
         public void setData(int position) {
+
             RecommendInfoBean.ProductListBean productList = mData.get(position);
             mItemDesc.setText(productList.getName());
             mItemPrice.setText(productList.getPrice() + "");

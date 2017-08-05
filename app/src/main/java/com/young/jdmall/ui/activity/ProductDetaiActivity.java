@@ -25,6 +25,7 @@ import com.young.jdmall.ui.adapter.ItemTitlePagerAdapter;
 import com.young.jdmall.ui.fragment.GoodsCommentFragment;
 import com.young.jdmall.ui.fragment.GoodsDetailFragment;
 import com.young.jdmall.ui.fragment.GoodsInfoFragment;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.widget.DialogConfirmView;
 import com.young.jdmall.ui.widget.NoScrollViewPager;
 
@@ -38,6 +39,7 @@ import io.reactivex.Observable;
 
 import static com.young.jdmall.R.id.psts_tabs;
 import static com.young.jdmall.R.id.vp_content;
+import static com.young.jdmall.app.JDMallApplication.mContext;
 
 /**
  * Created by 25505 on 2017/8/3.
@@ -86,6 +88,7 @@ public class ProductDetaiActivity extends BaseActivity {
     private ItemTitlePagerAdapter mPagerAdapter;
     private boolean isConcern = true;
     public DialogConfirmView mDialogView;
+    private GoodsOrderInfoBean mGoodsInfo;
 
 
     @Override
@@ -111,15 +114,50 @@ public class ProductDetaiActivity extends BaseActivity {
         super.onResume();
         int mCount = 0;
         List<GoodsOrderInfoBean> goodsOrderInfoBeen = CartDao.queryAll();
-        if (goodsOrderInfoBeen.size()>0){
+        if (goodsOrderInfoBeen.size() > 0) {
             for (GoodsOrderInfoBean goodsOrderInfoBean : goodsOrderInfoBeen) {
                 mCount += goodsOrderInfoBean.getCount();
             }
             mTvCount.setVisibility(View.VISIBLE);
-            mTvCount.setText(mCount+"");
-        }else{
-            mTvCount.setVisibility(View.VISIBLE);
+            mTvCount.setText(mCount + "");
+        } else {
+            mTvCount.setVisibility(View.INVISIBLE);
         }
+        Log.d("luoyou", "OnResume");
+        //回显选中的属性
+        if (mGoodsInfo != null) {
+            Log.d("luoyou", "mgoodsinfo"+mGoodsInfo.toString());
+            String[] split = mGoodsInfo.getProperty().split(",");
+            if (split.length > 1) {
+                String colorName = "";
+                switch (Integer.parseInt(split[0])) {
+                    case 1:
+                        colorName = "红色";
+                        break;
+                    case 2:
+                        colorName = "绿色";
+                        break;
+                }
+                String diment = "";
+                switch (Integer.parseInt(split[1])) {
+                    case 3:
+                        diment = "M";
+                        break;
+                    case 4:
+                        diment = "XXL";
+                        break;
+                    case 5:
+                        diment = "XXXL";
+                        break;
+                    default:
+                        diment = "M";
+                        break;
+                }
+                Log.d("luoyou", "已选"+colorName+ "," + diment);
+                goodsInfoFragment.setSelectedGood(colorName + "/" + diment);
+            }
+        }
+
     }
 
 
@@ -188,44 +226,53 @@ public class ProductDetaiActivity extends BaseActivity {
             case R.id.iv_back:
                 //判断当前是哪个fragment
                 boolean userVisibleHint = goodsInfoFragment.getUserVisibleHint();
-                if (userVisibleHint){
+                if (userVisibleHint) {
                     finish();
-                }else{
+                } else {
                     mVpContent.setCurrentItem(0);
                 }
                 break;
             case R.id.tv_contact:
-                // TODO: 2017/8/3  机器人界面
-
+                // TODO: 2017/8/3  机器人界面(聊天)
+                Intent chatIntent = new Intent(this, CustomServiceActivity.class);
+                startActivity(chatIntent);
                 break;
             case R.id.tv_shop:
 
                 break;
             case R.id.ll_concern:
+                String userId = PreferenceUtils.getUserId(this);
+                if (userId.length()==0){
+                    Toast.makeText(mContext,"请登录后再关注",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 //关注
-                if (isConcern){
+                if (isConcern) {
                     mIvConcern.setImageResource(R.mipmap.akc);
                     mTvConcern.setText("已关注");
                     requestAddCollect(); //添加商品收藏
                     isConcern = false;
-                }else{
+                } else {
                     mIvConcern.setImageResource(R.mipmap.akb);
                     mTvConcern.setText("关注");
                     isConcern = true;
                 }
                 break;
             case R.id.tv_cart:
-                Intent intent = new Intent(this,MainActivity.class);
-                intent.putExtra("page","detail");
+                Intent intent = new Intent(this, MainActivity.class);
+                intent.putExtra("page", "detail");
                 startActivity(intent);
                 break;
             case R.id.tv_buy:
-                mDialogView = new DialogConfirmView(this,mProductInfoBean);
+                mDialogView = new DialogConfirmView(this, mProductInfoBean);
                 mDialogView.show();
 
                 mDialogView.setOnDismissListener(new DialogInterface.OnDismissListener() {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
+                        mGoodsInfo = mDialogView.getGoodsInfo();
                         onResume();
                     }
                 });
@@ -238,18 +285,18 @@ public class ProductDetaiActivity extends BaseActivity {
         collectObservable.compose(compose(this.<CollectInfoBean>bindToLifecycle())).subscribe(new BaseObserver<CollectInfoBean>(this) {
             @Override
             protected void onHandleSuccess(CollectInfoBean collectInfoBean) {
-                Log.d("luoyou", "collect"+collectInfoBean.getResponse());
-               if ("1533".equals(collectInfoBean.getError_code())){
-                   Toast.makeText(ProductDetaiActivity.this,"使用关注功能需要先进行登录",Toast.LENGTH_SHORT).show();
-               }
-               //已添加
+                Log.d("luoyou", "collect" + collectInfoBean.getResponse());
+                if ("1533".equals(collectInfoBean.getError_code())) {
+                    Toast.makeText(ProductDetaiActivity.this, "使用关注功能需要先进行登录", Toast.LENGTH_SHORT).show();
+                }
+                //已添加
                /*if ("1535".equals(collectInfoBean.getError_code())){
                    Toast.makeText(ProductDetaiActivity.this,"关注成功",Toast.LENGTH_SHORT).show();
                }*/
-               //添加成功
-               if ("addfavorites".equals(collectInfoBean.getResponse())){
-                   Toast.makeText(ProductDetaiActivity.this,"关注成功",Toast.LENGTH_SHORT).show();
-               }
+                //添加成功
+                if ("addfavorites".equals(collectInfoBean.getResponse())) {
+                    Toast.makeText(ProductDetaiActivity.this, "关注成功", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

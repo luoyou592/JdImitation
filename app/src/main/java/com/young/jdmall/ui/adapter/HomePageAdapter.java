@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.young.jdmall.R;
+import com.young.jdmall.ui.activity.TypeActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -41,13 +43,20 @@ public class HomePageAdapter extends PagerAdapter {
             menu1.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(mContext,"等待开放",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, TypeActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
             container.addView(menu1);
             return menu1;
         } else {
             View menu2 = LayoutInflater.from(mContext).inflate(R.layout.item_title_menu2, null);
+            menu2.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(mContext,"等待开放",Toast.LENGTH_SHORT).show();
+                }
+            });
             container.addView(menu2);
             return menu2;
         }
@@ -83,5 +92,6 @@ public class HomePageAdapter extends PagerAdapter {
         ViewHolder(View view) {
             ButterKnife.bind(this, view);
         }
+
     }
 }

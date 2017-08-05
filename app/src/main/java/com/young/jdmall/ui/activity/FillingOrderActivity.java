@@ -82,6 +82,9 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
     @BindView(R.id.order_commit)
     TextView mOrderCommit;
     private static final int TOADDRESS = 1;
+    @BindView(R.id.goods_container)
+    LinearLayout mGoodsContainer;
+
     private PopWindowFaPiao popWinShare;
     private PopWinPayWay mPopWinPayWay;
     private RecepitAddressBean.AddressListBean mAddressListBean;
@@ -102,11 +105,13 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
     }
 
     private void processIntent() {
-        if (getIntent()!=null){
-            mCartInfo = (CartInfoBean) getIntent().getSerializableExtra("cart");
+        if (getIntent() != null) {
+            Intent intent = getIntent();
+            Bundle bundle = intent.getExtras();
+            CartInfoBean mCartInfo = (CartInfoBean) bundle.getSerializable("cart");
             setData(mCartInfo);
         }
-            
+
     }
 
     //初始化
@@ -132,21 +137,22 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
         for (int i = 0; i < data.getCart().size(); i++) {
             ImageView imageView = new ImageView(this);
             String pic = Constant.BASE_URL + data.getCart().get(i).getProduct().getPic();
-            Glide.with(this).load(pic).into(imageView);
-            mGoodsPreview.addView(imageView);
+            Glide.with(this).load(pic).override(100,200).into(imageView);
+            mGoodsContainer.addView(imageView);
         }
 
     }
 
     /**
      * 设置地址
+     *
      * @param data
      */
-   public void setAddressData(RecepitAddressBean.AddressListBean data) {
-       mId = data.getId();
-       mOrderUserName.setText(data.getName());
+    public void setAddressData(RecepitAddressBean.AddressListBean data) {
+        mId = data.getId();
+        mOrderUserName.setText(data.getName());
         mOrderPhone.setText(data.getPhoneNumber());
-        mOrderAddress.setText(data.getAddressArea()+data.getAddressDetail());
+        mOrderAddress.setText(data.getAddressArea() + data.getAddressDetail());
     }
 
 
@@ -195,15 +201,15 @@ public class FillingOrderActivity extends BaseActivity implements View.OnClickLi
         mGoodsOrderInfoBeen = CartDao.queryAll();
         String sku = "";
         for (GoodsOrderInfoBean goodsOrderInfoBean : mGoodsOrderInfoBeen) {
-            sku += goodsOrderInfoBean.toString()+"|";
+            sku += goodsOrderInfoBean.toString() + "|";
 
         }
-        Observable<OrdersumbitBean> ordersumbitlist = RetrofitFactory.getInstance().Ordersumbitlist(userId, sku, mId,payWayType, 0,invoiceType, "", 0);
+        Observable<OrdersumbitBean> ordersumbitlist = RetrofitFactory.getInstance().Ordersumbitlist(userId, sku, mId, payWayType, 0, invoiceType, "", 0);
         ordersumbitlist.compose(compose(this.<OrdersumbitBean>bindToLifecycle())).subscribe(new BaseObserver<OrdersumbitBean>(this) {
             @Override
             protected void onHandleSuccess(OrdersumbitBean ordersumbitBean) {
                 if (ordersumbitBean != null) {
-                // TODO: 2017/8/4
+                    // TODO: 2017/8/4
                     Toast.makeText(FillingOrderActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
                 }
             }

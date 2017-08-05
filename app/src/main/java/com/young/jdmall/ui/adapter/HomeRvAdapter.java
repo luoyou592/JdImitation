@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.BrandInfoBean;
@@ -25,10 +25,12 @@ import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
+import com.young.jdmall.ui.view.ZoomOutPageTransformer;
 import com.young.jdmall.ui.widget.CountDownView;
 import com.young.jdmall.ui.widget.CricleIndicatorView;
 import com.young.jdmall.ui.widget.NoticeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -117,8 +119,8 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
     }
 
     class TitleViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.home_slider)
-        SliderLayout mHomeSlider;
+        @BindView(R.id.home_banner)
+        ConvenientBanner mHomeBanner;
         @BindView(R.id.home_vp)
         ViewPager mHomeVp;
         @BindView(R.id.notice_view)
@@ -131,10 +133,17 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
         CountDownView mCountDownView;
         @BindView(R.id.seckill_container)
         LinearLayout mSeckillContainer;
+        private List<String> imgUrls = new ArrayList<>();
 
         TitleViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            mHomeBanner.setPageIndicator(new int[]{R.mipmap.ari, R.mipmap.arh});
+            mHomeBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+            mHomeBanner.setPageTransformer(new ZoomOutPageTransformer());
+            mHomeBanner.isTurning();
+            mHomeBanner.startTurning(2500);
+
         }
 
         public void bindView(int position) {
@@ -143,16 +152,24 @@ public class HomeRvAdapter extends RecyclerView.Adapter {
             //头部轮播图设置
             for (int i = 0; i < mHomeTopic.size(); i++) {
                 HomeInfoBean.HomeTopicBean homeTopicBean = mHomeTopic.get(i);
-                TextSliderView textSliderView = new TextSliderView(mActivity);
-                textSliderView
-                        .description(homeTopicBean.getTitle())
-                        .image(Constant.BASE_URL + homeTopicBean.getPic());
-                mHomeSlider.addSlider(textSliderView);
+                imgUrls.add(Constant.BASE_URL+homeTopicBean.getPic());
             }
+            mHomeBanner.setPages(new CBViewHolderCreator() {
+                @Override
+                public Object createHolder() {
+                    return new NetworkImageHolderView();
+                }
+            },imgUrls);
             //内嵌适配器
             HomePageAdapter homePageAdapter = new HomePageAdapter(mActivity);
             mHomeVp.setAdapter(homePageAdapter);
             mIndicatorView.setViewPage(mHomeVp);
+           /* mHomeVp.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                }
+            });*/
             //内嵌recycleview适配器,
             mFlashRecyclerView.setLayoutManager(new LinearLayoutManager(mActivity, LinearLayout.HORIZONTAL, false));
             FlashRvAdapter flashRvAdapter = new FlashRvAdapter(mActivity, mCountDownView,mLimitbuyBean);

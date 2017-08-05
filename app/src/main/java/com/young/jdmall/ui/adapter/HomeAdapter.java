@@ -13,9 +13,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
 import com.bumptech.glide.Glide;
-import com.daimajia.slider.library.SliderLayout;
-import com.daimajia.slider.library.SliderTypes.TextSliderView;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.BrandInfoBean;
@@ -30,6 +30,7 @@ import com.young.jdmall.ui.widget.CountDownView;
 import com.young.jdmall.ui.widget.CricleIndicatorView;
 import com.young.jdmall.ui.widget.NoticeView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -128,8 +129,8 @@ public class HomeAdapter extends RecyclerLoadMoreView.Adapter {
 
 
     class TitleViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.home_slider)
-        SliderLayout mHomeSlider;
+        @BindView(R.id.home_banner)
+        ConvenientBanner mHomeBanner;
         @BindView(R.id.home_vp)
         ViewPager mHomeVp;
         @BindView(R.id.notice_view)
@@ -142,24 +143,37 @@ public class HomeAdapter extends RecyclerLoadMoreView.Adapter {
         CountDownView mCountDownView;
         @BindView(R.id.seckill_container)
         LinearLayout mSeckillContainer;
+        private List<String> imgUrls = new ArrayList<>();
 
         TitleViewHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
+            mHomeBanner.setPageIndicator(new int[]{R.mipmap.ari, R.mipmap.arh});
+            mHomeBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+            //mHomeBanner.setPageTransformer(new ZoomOutPageTransformer());
+            mHomeBanner.isTurning();
+            mHomeBanner.startTurning(2500);
         }
 
         public void bindView(int position) {
             mNoticeView.addNotice(notices);
             mNoticeView.startFlipping();
             //头部轮播图设置
+            imgUrls.clear();  //防止复用叠加
             for (int i = 0; i < mHomeTopic.size(); i++) {
                 HomeInfoBean.HomeTopicBean homeTopicBean = mHomeTopic.get(i);
-                TextSliderView textSliderView = new TextSliderView(mActivity);
+                /*TextSliderView textSliderView = new TextSliderView(mActivity);
                 textSliderView
                         .description(homeTopicBean.getTitle())
-                        .image(Constant.BASE_URL + homeTopicBean.getPic());
-                mHomeSlider.addSlider(textSliderView);
+                        .image(Constant.BASE_URL + homeTopicBean.getPic());*/
+                imgUrls.add(Constant.BASE_URL+homeTopicBean.getPic());
             }
+            mHomeBanner.setPages(new CBViewHolderCreator() {
+                @Override
+                public Object createHolder() {
+                    return new NetworkImageHolderView();
+                }
+            },imgUrls);
             //内嵌适配器
             HomePageAdapter homePageAdapter = new HomePageAdapter(mActivity);
             mHomeVp.setAdapter(homePageAdapter);

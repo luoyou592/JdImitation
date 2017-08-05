@@ -1,23 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
               android:fitsSystemWindows="false"
               android:orientation="vertical">
 
-    <com.daimajia.slider.library.SliderLayout
-        android:id="@+id/home_slider"
+    <com.bigkoo.convenientbanner.ConvenientBanner
+        android:id="@+id/home_banner"
         android:layout_width="match_parent"
-        android:layout_height="150dp"/>
+        android:layout_height="130dp"
+        android:background="#ffffff"
+        app:canLoop="true"
+        />
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp">
+        android:layout_height="140dp">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/home_vp"
             android:layout_width="match_parent"
-            android:layout_height="150dp">
+            android:layout_height="130dp">
         </android.support.v4.view.ViewPager>
 
         <com.young.jdmall.ui.widget.CricleIndicatorView
@@ -26,12 +30,12 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="8dp"/>
+            android:layout_marginBottom="4dp"/>
     </RelativeLayout>
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="110dp"
+        android:layout_height="60dp"
         android:background="@mipmap/home_big_bag"/>
 
     <LinearLayout
@@ -126,7 +130,7 @@
         android:id="@+id/flash_recycler_view"
         android:background="@android:color/white"
         android:layout_width="match_parent"
-        android:layout_height="120dp"/>
+        android:layout_height="150dp"/>
     </LinearLayout>
 
 

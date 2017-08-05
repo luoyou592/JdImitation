@@ -1,15 +1,21 @@
 package com.young.jdmall.ui.activity;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
+import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +36,7 @@ import io.reactivex.Observable;
         String userid = "20428";*/
 
 public class OrderDetailsActivity extends BaseActivity {
+    private static final String TAG = "OrderDetailsActivity";
     @BindView(R.id.order_back_icon1)
     ImageView mOrderBackIcon1;
     @BindView(R.id.order_user_name1)
@@ -43,7 +50,7 @@ public class OrderDetailsActivity extends BaseActivity {
     @BindView(R.id.textView1)
     TextView mTextView1;
     @BindView(R.id.goods_details1)
-    LinearLayout mGoodsDetails1;
+    HorizontalScrollView mGoodsDetails1;
     @BindView(R.id.order_number1)
     TextView mOrderNumber1;
     @BindView(R.id.order_time1)
@@ -59,17 +66,20 @@ public class OrderDetailsActivity extends BaseActivity {
     @BindView(R.id.order_commit1)
     TextView mOrderCommit1;
 
-    String orderid = "098593";
-    String userid = "20428";
+
     @BindView(R.id.order_type)
     TextView mOrderType;
+    @BindView(R.id.ll_goods_details)
+    LinearLayout mLlGoodsDetails;
     private OrderDetailBean mOrderDetailBean;
-    private int mType=0;
+    private int mType = 0;
+    private Context mContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.order_details);
+        mContext = this;
         ButterKnife.bind(this);
         init1();
         initData();
@@ -78,7 +88,6 @@ public class OrderDetailsActivity extends BaseActivity {
     private void init1() {
 
         mType = getIntent().getIntExtra("type", 0);
-
 
     }
 
@@ -103,18 +112,33 @@ public class OrderDetailsActivity extends BaseActivity {
     }
 
     private void initData() {
+          String orderId =  getIntent().getStringExtra("orderId");
 
-
-        Observable<OrderDetailBean> listOrderDetail = RetrofitFactory.getInstance().listOrderDetail(userid, orderid);
+//OrderDetailBean
+        Observable<OrderDetailBean> listOrderDetail = RetrofitFactory.getInstance().listOrderDetail(PreferenceUtils.getUserId(this), orderId);
         listOrderDetail.compose(compose(this.<OrderDetailBean>bindToLifecycle())).subscribe(new BaseObserver<OrderDetailBean>(this) {
             @Override
             protected void onHandleSuccess(OrderDetailBean orderDetailBean) {
-                mOrderDetailBean = orderDetailBean;
-                setData(mOrderDetailBean);
-
+                if(orderDetailBean.getProductList() != null){
+                    setData(orderDetailBean);
+                    setPic(orderDetailBean);
+                }
 
             }
         });
+    }
+
+    private void setPic(OrderDetailBean orderDetailBean) {
+        if (orderDetailBean != null) {
+            for (int i = 0; i < orderDetailBean.getProductList().size(); i++) {
+                String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
+                Log.e(TAG, "setPic: "+pic );
+                ImageView imageView = new ImageView(mContext);
+                Glide.with(mContext).load(pic).override(300,600).into(imageView);
+                mLlGoodsDetails.addView(imageView);
+            }
+        }
+
     }
 
     private String getOrderFaPiaoType(OrderDetailBean orderDetailBean) {
@@ -156,7 +180,7 @@ public class OrderDetailsActivity extends BaseActivity {
         //需要判断
         mFapiaoStyle.setText(getOrderFaPiaoType(orderDetailBean));
         mPayway.setText(getOrderPayWayType(orderDetailBean));
-        if(mType!=0){
+        if (mType != 0) {
             mOrderType.setText(getOrderType());
         }
 

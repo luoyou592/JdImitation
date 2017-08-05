@@ -59,4 +59,6 @@ public class CartDao {
     public static GoodsOrderInfoBean queryGood(long id){
         return JDMallApplication.getDaoInstant().getGoodsOrderInfoBeanDao().loadByRowId(id);
     }
+
+
 }

@@ -1,5 +1,6 @@
 package com.young.jdmall.ui.adapter;
 
+import android.content.Intent;
 import android.graphics.Paint;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.BrandInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.widget.CountDownView;
@@ -120,19 +122,30 @@ public class SeckillRvAdapter extends RecyclerView.Adapter {
         TextView mTvSeckillPrice;
         @BindView(R.id.tv_normal_price)
         TextView mTvNormalPrice;
+         private View mView;
 
-        NormalViewHolder(View view) {
+         NormalViewHolder(View view) {
             super(view);
-            ButterKnife.bind(this, view);
+             mView = view;
+             ButterKnife.bind(this, view);
+
         }
 
         public void bindView(int position) {
-            LimitbuyBean.ProductListBean productListBean = mLimitbuyBean.getProductList().get(position-1);
+            final LimitbuyBean.ProductListBean productListBean = mLimitbuyBean.getProductList().get(position-1);
             mTvSeckillTitle.setText(productListBean.getName());
             mTvNormalPrice.setText(PriceFormater.format(productListBean.getPrice()));
             mTvNormalPrice.getPaint().setFlags(Paint.STRIKE_THRU_TEXT_FLAG);//价格下划线
             mTvSeckillPrice.setText(PriceFormater.format(productListBean.getLimitPrice()));
             Glide.with(mActivity).load(Constant.BASE_URL+productListBean.getPic()).into(mIvSeckillImg);
+            mView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mActivity, ProductDetaiActivity.class);
+                    intent.putExtra("id",productListBean.getId());
+                    mActivity.startActivity(intent);
+                }
+            });
         }
     }
 }
