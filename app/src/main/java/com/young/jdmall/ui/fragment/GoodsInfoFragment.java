@@ -53,6 +53,7 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
     public FrameLayout fl_content;
     public LinearLayout ll_current_goods, ll_activity, ll_comment, ll_recommend, ll_pull_up, ll_info_comment;
     public TextView tv_no_comment, tv_goods_title, tv_new_price, tv_old_price, tv_current_goods, tv_comment_count, tv_good_comment;
+    public List<String> imgUrls = new ArrayList<>();
 
     /**
      * 当前商品详情数据页的索引分别是图文详情、规格参数
@@ -196,7 +197,7 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
         data.add(new RecommendGoodsBean("丝袜薄款瘦腿袜竹纤维三角棉裆连裤袜美腿连体打底袜子女",
                 "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1501748584716&di=16da50a0f9934d77462d67f317dce3ef&imgtype=0&src=http%3A%2F%2Fdynamic-image.yesky.com%2F740x-%2FuploadImages%2F2015%2F159%2F20%2FHV9K66V8I35T.jpg", new BigDecimal(1099), "9.9"));
         data.add(new RecommendGoodsBean("维多利亚的秘密 Victoria's Secret 性感系带口袋睡袍浴袍 241580 黑色 XS/S",
-                "http://10.0.2.2:8080/market//images/product/detail/c1.jpg", new BigDecimal(1099), "599"));
+                "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1502552743&di=9d04a0d2ddd8c8b1dc7e2c8aa37b9e89&imgtype=jpg&er=1&src=http%3A%2F%2Fimg.tupianzj.com%2Fuploads%2Fallimg%2F160328%2F16-16032Q63140.jpg", new BigDecimal(1099), "599"));
         data.add(new RecommendGoodsBean("百褶连衣裙 香影2017夏秋女装新款系带收腰裙子纯色休闲雪纺裙潮纯色百褶连衣裙",
                 "https://img.alicdn.com/bao/uploaded/i1/TB1TsjkSpXXXXabaFXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg", new BigDecimal(899), "239"));
         data.add(new RecommendGoodsBean("预售乐町2017秋季新款女毛衣毛针织衫开衫绣花甜美外套中长款时尚 ",
@@ -207,6 +208,10 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
                 "https://img.alicdn.com/bao/uploaded/i3/TB1U6wjSXXXXXbZXXXXXXXXXXXX_!!0-item_pic.jpg_430x430q90.jpg", new BigDecimal(299), "39"));
 
         List<List<RecommendGoodsBean>> handledData = handleRecommendGoods(data);
+
+
+
+
         //设置如果只有一组数据时不能滑动
         vp_recommend.setManualPageable(handledData.size() == 1 ? false : true);
         vp_recommend.setCanLoop(handledData.size() == 1 ? false : true);
@@ -216,6 +221,8 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
                 return new ItemRecommendAdapter();
             }
         }, handledData);
+
+
     }
 
     @Override

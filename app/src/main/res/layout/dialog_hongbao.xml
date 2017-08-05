@@ -2,7 +2,8 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
              android:layout_width="match_parent"
              android:layout_height="match_parent"
-             android:background="@mipmap/redbag"
+             android:background="#ff0000"
+
              android:orientation="vertical">
 
 
@@ -13,6 +14,7 @@
         android:background="#00000000"/>
 
     <ImageView
+        android:src="@mipmap/redbag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         />
@@ -27,8 +29,9 @@
         <com.young.jdmall.ui.view.GuaGuaKa
 
             android:id="@+id/guaGuaLeView"
-            android:layout_width="200dp"
-            android:layout_height="50dp"/>
+            android:layout_marginTop="90dp"
+            android:layout_width="330dp"
+            android:layout_height="119dp"/>
 
         />
 
