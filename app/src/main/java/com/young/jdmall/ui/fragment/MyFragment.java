@@ -16,7 +16,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.NewsProductInfoBean;
@@ -74,8 +73,8 @@ public class MyFragment extends BaseFragment {
         View view = inflater.inflate(R.layout.activity_user, container, false);
         unbinder = ButterKnife.bind(this, view);
         initData();
-
-        GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
+        initReco();
+        final GridLayoutManager manager = new GridLayoutManager(getActivity(), 2);
         manager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(int position) {
@@ -87,9 +86,44 @@ public class MyFragment extends BaseFragment {
         mMyRvAdapter = new MyRvAdapter(getActivity());
         mArgbEvaluator = new ArgbEvaluator();
         mRvUser.setAdapter(mMyRvAdapter);
+        mRvUser.addOnScrollListener(new RecyclerView.OnScrollListener() {
+            @Override
+            public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                int position = manager.findLastCompletelyVisibleItemPosition();
+                if (position == mMyRvAdapter.getItemCount() - 1) {
+                    page++;
+                    initReco();
+                }
+            }
+        });
         return view;
     }
 
+    private void initReco() {
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(page, 10, "saleDown");
+        newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
+            @Override
+            protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
+                if(newsProductInfoBean.getProductList()!= null){
+
+                    mMyRvAdapter.setNewsProductData(newsProductInfoBean.getProductList());
+                }else {
+//                    Toast.makeText(getActivity(), newsProductInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                super.onHandleError(msg);
+                Log.d(TAG, "onHandleError: "+msg);
+                PreferenceUtils.setUserId(getActivity(), "");
+                mMyRvAdapter.setUsers("");
+            }
+        });
+    }
+
+    private int page = 0;
     private void initData() {
         final String userId = PreferenceUtils.getUserId(getActivity());
         Log.d(TAG, "initData: " + userId);
@@ -104,11 +138,11 @@ public class MyFragment extends BaseFragment {
 
                 //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
                 if ("userInfo".equals(usersInfoBean.getResponse())) {
-                    Toast.makeText(getActivity(), "成功获取用户信息", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), "成功获取用户信息", Toast.LENGTH_SHORT).show();
                     mMyRvAdapter.setUserInfoBean(usersInfoBean.getUserInfo());
 
                 }else{
-                    Toast.makeText(getActivity(), usersInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), usersInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
                     Log.d(TAG, "onHandleSuccess: "+usersInfoBean.getResponse());
                     PreferenceUtils.setUserId(getActivity(), "");
                     mMyRvAdapter.setUsers("");
@@ -133,22 +167,7 @@ public class MyFragment extends BaseFragment {
                 mMyRvAdapter.setUsers("");
             }
         });
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
-        newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
-            @Override
-            protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
 
-                mMyRvAdapter.setNewsProductData(newsProductInfoBean);
-            }
-
-            @Override
-            protected void onHandleError(String msg) {
-                super.onHandleError(msg);
-                Log.d(TAG, "onHandleError: "+msg);
-                PreferenceUtils.setUserId(getActivity(), "");
-                mMyRvAdapter.setUsers("");
-            }
-        });
     }
 
 
@@ -257,6 +276,7 @@ public class MyFragment extends BaseFragment {
 //        }
         super.onStart();
         initData();
+        initReco();
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
         if(!"".equals(userName)){

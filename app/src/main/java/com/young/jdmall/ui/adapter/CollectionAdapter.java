@@ -16,6 +16,7 @@ import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
+import com.young.jdmall.ui.view.RecyclerLoadMoreView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,7 @@ import butterknife.ButterKnife;
  *  创建时间:  2017/8/3 0003 19:30
  *  描述：    TODO
  */
-public class CollectionAdapter extends RecyclerView.Adapter {
+public class CollectionAdapter extends RecyclerLoadMoreView.Adapter {
     private Context mContext;
 
     public CollectionAdapter(Context context) {
@@ -43,23 +44,28 @@ public class CollectionAdapter extends RecyclerView.Adapter {
     }
 
     @Override
-    public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    protected RecyclerView.ViewHolder onCreateViewHolderToRecyclerLoadMoreView(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.goods_item_view, parent, false);
         ViewHolder viewHolder = new ViewHolder(itemView);
         return viewHolder;
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    protected void onBindViewHolderToRecyclerLoadMoreView(RecyclerView.ViewHolder holder, int position) {
         ViewHolder viewHolder = (ViewHolder) holder;
         viewHolder.setData(mProductListBeen.get(position));
     }
 
     @Override
-    public int getItemCount() {
+    protected int getItemCountToRecyclerLoadMoreView() {
         if (mProductListBeen != null) {
             return mProductListBeen.size();
         }
+        return 0;
+    }
+
+    @Override
+    protected int getItemViewTypeToRecyclerLoadMoreView(int position) {
         return 0;
     }
 

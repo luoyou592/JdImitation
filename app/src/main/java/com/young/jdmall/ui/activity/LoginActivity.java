@@ -163,7 +163,7 @@ public class LoginActivity extends BaseActivity {
                     Log.d(TAG, "onHandleSuccess: "+errorCode);
                 }*/
                 if (loginInfoBean.getUserInfo() != null) {
-                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(LoginActivity.this, "成功登录", Toast.LENGTH_SHORT).show();
                     PreferenceUtils.setUserName(LoginActivity.this, name);
                     PreferenceUtils.setUserId(LoginActivity.this, loginInfoBean.getUserInfo().getUserid());
 

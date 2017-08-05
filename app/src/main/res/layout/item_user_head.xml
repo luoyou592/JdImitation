@@ -303,6 +303,7 @@
         >
 
         <TextView
+            android:id="@+id/tv_gouwu"
             android:layout_marginRight="10dp"
             android:layout_marginLeft="10dp"
             android:layout_width="0dp"
@@ -450,6 +451,7 @@
                 android:layout_height="wrap_content"
                 android:background="@mipmap/mine_list2"/>
             <ImageView
+                android:id="@+id/tv_kefu"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
                 android:layout_width="0dp"

@@ -4,7 +4,6 @@ import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,18 +17,18 @@ import com.young.jdmall.R;
  * Created by 钟志鹏 on 2017/8/3.
  */
 
-public class RecyclerLoadMoreView extends RecyclerView {
+public class RecyclerMoreView extends RecyclerView {
     private int mItemLastPosition = 0;
     private OnRefreshListener mRefreshListener;
     private boolean mIsExceed;
     private boolean mIsLoading;
     private Adapter mAdapter;
 
-    public RecyclerLoadMoreView(Context context) {
+    public RecyclerMoreView(Context context) {
         this(context, null);
     }
 
-    public RecyclerLoadMoreView(Context context, @Nullable AttributeSet attrs) {
+    public RecyclerMoreView(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         addOnScrollListener(new OnScrollListener() {
             @Override
@@ -50,38 +49,10 @@ public class RecyclerLoadMoreView extends RecyclerView {
                             mIsExceed = false;
                         }
 
-                    }else if (layoutManager instanceof StaggeredGridLayoutManager){             //添加当为_StaggeredGridLayoutManager_时上拉加载更多
-                        StaggeredGridLayoutManager manager = (StaggeredGridLayoutManager) layoutManager;
-                        int[] lastVisiblePositions = manager.findLastVisibleItemPositions(new int[manager.getSpanCount()]);
-                        int lastVisiblePos = getMaxElem(lastVisiblePositions);
-                        int itemCount = manager.getItemCount();
-
-                        int position = lastVisiblePos;
-                        if (lastVisiblePos == itemCount -1  && !mIsExceed){
-                            mIsExceed = true;
-                            if (mRefreshListener != null) {
-                                loadMoreData();
-                                setLoadItemStart(mIsLoading);
-                            }
-                        }
-                        if (getAdapter().getItemCount() - mItemLastPosition - 1 > position) {
-                            mIsExceed = false;
-                        }
-                        }
                     }
                 }
-
+            }
         });
-    }
-
-    private int getMaxElem(int[] arr) {
-        int size = arr.length;
-        int maxVal = Integer.MIN_VALUE;
-        for (int i = 0; i < size; i++) {
-            if (arr[i]>maxVal)
-                maxVal = arr[i];
-        }
-        return maxVal;
     }
 
     private void setLoadItemStart(boolean b) {
@@ -147,7 +118,7 @@ public class RecyclerLoadMoreView extends RecyclerView {
 
         @Override
         public final ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
+            if (mLoadingView == null) {
                 mLoadingView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
                 mLoadingView.setOnClickListener(new OnClickListener() {
                     @Override
@@ -157,7 +128,7 @@ public class RecyclerLoadMoreView extends RecyclerView {
                         }
                     }
                 });
-
+            }
             if (viewType == KEY_ITEM_TYPE_LOADING) {
                 return new ViewHolderFromLoading(mLoadingView);
             } else {
@@ -204,15 +175,11 @@ public class RecyclerLoadMoreView extends RecyclerView {
                 mLoading = (LinearLayout) mLoadingView.findViewById(R.id.loading);
                 mLoaded = (TextView) mLoadingView.findViewById(R.id.loaded);
                 if (b) {
-                    if (mLoaded != null && mLoading != null){
-                        mLoaded.setVisibility(GONE);
-                        mLoading.setVisibility(VISIBLE);
-                    }
+                    mLoaded.setVisibility(GONE);
+                    mLoading.setVisibility(VISIBLE);
                 } else {
-                    if (mLoaded != null && mLoading != null){
-                        mLoaded.setVisibility(VISIBLE);
-                        mLoading.setVisibility(GONE);
-                    }
+                    mLoaded.setVisibility(VISIBLE);
+                    mLoading.setVisibility(GONE);
                 }
             }
         }
@@ -220,9 +187,6 @@ public class RecyclerLoadMoreView extends RecyclerView {
         public void setOnRefreshListener(OnRefreshListener l) {
             mRefreshListener = l;
         }
-
-
-
     }
 
     static class ViewHolderFromLoading extends ViewHolder {

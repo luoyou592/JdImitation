@@ -163,7 +163,7 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                         public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                             if("addressDelete".equals(response.body().getResponse())){
                                 Log.d(TAG, "onResponse: " + response.body().getResponse());
-                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
                                 mAddressBeanList.remove(mAddressListBean);
                                 notifyDataSetChanged();
 
@@ -253,7 +253,7 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                 public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                     if ("addressDefault".equals(response.body().getResponse())) {
                         Log.d(TAG, "onResponse: " + response.body().getResponse());
-                        Toast.makeText(mContext, "设置成功", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "设置成功", Toast.LENGTH_SHORT).show();
                         getAddressList();
                     } else {
                         Toast.makeText(mContext, response.toString() + "", Toast.LENGTH_SHORT).show();
@@ -305,7 +305,7 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                         public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
                             if("addressDelete".equals(response.body().getResponse())){
                                 Log.d(TAG, "onResponse: " + response.body().getResponse());
-                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
                                 mAddressBeanList.remove(mAddressListBean);
                                 notifyDataSetChanged();
 
@@ -347,7 +347,7 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                 public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
 
                     if(response.body().getAddressList() != null){
-                        Toast.makeText(mContext, "访问成功"+ response.body().getResponse(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "访问成功"+ response.body().getResponse(), Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onHandleSuccess: "+ response.body().getAddressList().size());
                         setAddressBeanList(response.body().getAddressList());
 
