@@ -1,6 +1,5 @@
 package com.young.jdmall.ui.adapter;
 
-import android.app.Application;
 import android.os.SystemClock;
 import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
@@ -12,23 +11,15 @@ import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.Volley;
 import com.young.jdmall.R;
 import com.young.jdmall.app.JDMallApplication;
 import com.young.jdmall.bean.FindInfoBean;
 import com.young.jdmall.bean.GirlInfoBean;
 import com.young.jdmall.network.GsonRequest;
-import com.young.jdmall.network.JDMallService;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
 import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 /**
  * Created by 钟志鹏 on 2017/7/30.
