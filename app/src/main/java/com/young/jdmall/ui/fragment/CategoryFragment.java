@@ -53,7 +53,6 @@ public class CategoryFragment extends BaseFragment {
     private CategoryLeftAdapter mCategoryLeftAdapter;
     private CategoryBaseBean mCategoryBean;
     private List<CategoryBaseRightListFragment> fragments = new ArrayList();
-    private EditText mViewById;
 
     @RequiresApi(api = M)
     @Nullable
@@ -63,11 +62,8 @@ public class CategoryFragment extends BaseFragment {
         View rootview = LayoutInflater.from(getActivity()).inflate(R.layout.catecary_fragment,
                 null);
         ButterKnife.bind(this, rootview);
-
         mContext = getActivity();
-        //把代码复制过来
         init();
-        //默认选中第0个
         return rootview;
     }
 
@@ -80,7 +76,6 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void initFragment() {
-        Log.d(TAG, "initFragment: 添加Fragment");
         //初始化Fragment
         for (int i = 0; i < 4; i++) {
             fragments.add(new MomAreaFragment(mCategoryBean));
@@ -147,7 +142,6 @@ public class CategoryFragment extends BaseFragment {
     }
 
     private void loadNetwork() {
-        Log.d(TAG, "loadNetwork: 加载数据");
         Observable<CategoryBaseBean> categoryObservable = RetrofitFactory.getInstance()
                 .listCategory();
         categoryObservable.compose(compose(this.<CategoryBaseBean>bindToLifecycle())).subscribe
@@ -155,7 +149,7 @@ public class CategoryFragment extends BaseFragment {
                     @Override
                     protected void onHandleSuccess(CategoryBaseBean categoryBean) {
                         mCategoryBean = categoryBean;
-                        Log.d(TAG, "onHandleSuccess: 加载数据成功");
+
                         //加载成功再添加Fragment
                         initFragment();
                         selectFragment(0);
