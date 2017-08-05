@@ -15,13 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.rance.chatui.ui.activity.MainActivity;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.young.jdmall.R;
 import com.young.jdmall.bean.HomeInfoBean;
 import com.young.jdmall.bean.LimitbuyBean;
 import com.young.jdmall.bean.NewsProductInfoBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
-import com.young.jdmall.ui.activity.CustomServiceActivity;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SearchActivity;
 import com.young.jdmall.ui.adapter.HomeAdapter;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
@@ -30,6 +31,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 /**
@@ -136,7 +138,7 @@ public class HomeFragment extends BaseFragment {
     }
 
     private void requestProductList() {
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1,10,"saleDown");
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
@@ -208,10 +210,11 @@ public class HomeFragment extends BaseFragment {
     }
 
     private int page = 1;
+
     private void requestProductMoreList() {
         page++;
         Log.d(TAG, "requestProductMoreList: 加载更多" + page);
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(page,10,"saleDown");
+        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(page, 10, "saleDown");
         newsObservable.compose(compose(this.<NewsProductInfoBean>bindToLifecycle())).subscribe(new BaseObserver<NewsProductInfoBean>(getActivity()) {
             @Override
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
@@ -234,5 +237,24 @@ public class HomeFragment extends BaseFragment {
                 mRvHome.onLoadFailure();
             }
         });
+    }
+
+    @OnClick(R.id.ib_sweep)
+    public void onViewClicked() {
+        startActivityForResult(new Intent(getActivity(), CaptureActivity.class), 100);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            String goodsId = data.getStringExtra("GoodsId");
+            Log.d(TAG, "onActivityResult: " + requestCode + "|" + resultCode + "|" + goodsId);
+            if (resultCode == -1) {
+                Intent intent = new Intent(getActivity(), ProductDetaiActivity.class);
+                intent.putExtra("id", Integer.valueOf(goodsId));
+                startActivity(intent);
+            }
+        }
     }
 }

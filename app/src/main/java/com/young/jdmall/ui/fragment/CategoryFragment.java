@@ -16,10 +16,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.rance.chatui.ui.activity.MainActivity;
+import com.xys.libzxing.zxing.activity.CaptureActivity;
 import com.young.jdmall.R;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
+import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SearchActivity;
 import com.young.jdmall.ui.adapter.CategoryLeftAdapter;
 
@@ -28,6 +30,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 import static android.os.Build.VERSION_CODES.M;
@@ -160,6 +163,25 @@ public class CategoryFragment extends BaseFragment {
                         Log.d(TAG, "onHandleError: 加载失败");
                     }
                 });
+    }
+
+    @OnClick(R.id.ib_sweep)
+    public void onViewClicked() {
+        startActivityForResult(new Intent(getActivity(), CaptureActivity.class), 100);
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 100) {
+            String goodsId = data.getStringExtra("GoodsId");
+            Log.d(TAG, "onActivityResult: " + requestCode + "|" + resultCode + "|" + goodsId);
+            if (resultCode == -1) {
+                Intent intent = new Intent(getActivity(), ProductDetaiActivity.class);
+                intent.putExtra("id", Integer.valueOf(goodsId));
+                startActivity(intent);
+            }
+        }
     }
 
 }
