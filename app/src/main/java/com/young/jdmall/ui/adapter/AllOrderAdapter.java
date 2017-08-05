@@ -3,6 +3,7 @@ package com.young.jdmall.ui.adapter;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,6 +20,7 @@ import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.bean.OrderInfoBean;
 import com.young.jdmall.network.RetrofitFactory;
+import com.young.jdmall.ui.activity.OrderDetailsActivity;
 import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.utils.TimeUtil;
 
@@ -43,6 +45,7 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
 
 
     private static final int KEY_ITEM_TYPE_LOADING = 1;
+
 
     private Context mContext;
     private int mType;
@@ -116,7 +119,6 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
     }
 
 
-
     class ViewHolderFromLoading extends RecyclerView.ViewHolder {
         @BindView(R.id.loading)
         LinearLayout mLoading;
@@ -129,9 +131,9 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
         }
 
         public void bindView() {
-            if(mAllOrderBeanList.size() == 0){
+            if (mAllOrderBeanList.size() == 0) {
                 mLoading.setVisibility(View.GONE);
-            }else {
+            } else {
                 mLoading.setVisibility(View.VISIBLE);
             }
         }
@@ -152,10 +154,12 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
         TextView mTvDesc;
         @BindView(R.id.tv_pay)
         TextView mTvPay;
+        @BindView(R.id.ll_detail)
+        LinearLayout mLlDetail;
         private OrderInfoBean.OrderListBean mOrderListBean;
         private String mPic;
 
-        @OnClick({R.id.iv_order_delete, R.id.again_buy})
+        @OnClick({R.id.iv_order_delete, R.id.again_buy, R.id.ll_detail})
         public void onClick(View view) {
             switch (view.getId()) {
                 case R.id.iv_order_delete:
@@ -164,6 +168,11 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
                 case R.id.again_buy:
                     Toast.makeText(mContext, "商品已过期", Toast.LENGTH_SHORT).show();
                     break;
+                case R.id.ll_detail:
+                    Intent intent = new Intent(mContext, OrderDetailsActivity.class);
+                    intent.putExtra("type", mType);
+                    intent.putExtra("orderId", mOrderListBean.getOrderId());
+                    mContext.startActivity(intent);
             }
         }
 
@@ -220,9 +229,10 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
             mTvTime.setText(TimeUtil.stampToDate(orderInfoBean.getTime()));
             Glide.with(mContext).load(Constant.BASE_URL + getImage()).placeholder(R.mipmap.default_pic).into(mIvOrderPic);
         }
+
         public String getImage() {
 
-            Call<OrderDetailBean> call = (Call<OrderDetailBean>) RetrofitFactory.getInstance().listOrderDetail(PreferenceUtils.getUserId(mContext), mOrderListBean.getOrderId());
+            Call<OrderDetailBean> call = (Call<OrderDetailBean>) RetrofitFactory.getInstance().listOrdDetail(PreferenceUtils.getUserId(mContext), mOrderListBean.getOrderId());
             call.enqueue(new Callback<OrderDetailBean>() {
                 @Override
                 public void onResponse(Call<OrderDetailBean> call, Response<OrderDetailBean> response) {

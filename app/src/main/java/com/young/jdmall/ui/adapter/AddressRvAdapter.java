@@ -2,7 +2,9 @@ package com.young.jdmall.ui.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -150,7 +152,7 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                 case R.id.ll_address:
                     Intent intent2 = new Intent();
                     intent2.putExtra("address", mAddressListBean);
-                    ((RecepitAddressActivity)mContext).setResult(Activity.RESULT_OK, intent2);
+                    ((RecepitAddressActivity) mContext).setResult(Activity.RESULT_OK, intent2);
                     ((RecepitAddressActivity) mContext).finish();
             }
         }
@@ -170,22 +172,26 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                     call.enqueue(new Callback<RecepitAddressBean>() {
                         @Override
                         public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
-                            if("addressDelete".equals(response.body().getResponse())){
+                            if ("addressDelete".equals(response.body().getResponse())) {
                                 Log.d(TAG, "onResponse: " + response.body().getResponse());
 //                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
                                 mAddressBeanList.remove(mAddressListBean);
                                 notifyDataSetChanged();
 
-                    } else {
-                        Toast.makeText(mContext, response.toString() + "", Toast.LENGTH_SHORT).show();
-                    }
-                }
+                            } else {
+                                Toast.makeText(mContext, response.toString() + "", Toast.LENGTH_SHORT).show();
+                            }
+                        }
 
-                @Override
-                public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
-                    Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        @Override
+                        public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
+                            Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                        }
+                    });
                 }
             });
+            builder.show();
+
         }
 
         private RecepitAddressBean.AddressListBean mAddressListBean;
@@ -278,7 +284,6 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
         private RecepitAddressBean.AddressListBean mAddressListBean;
 
 
-
         NormalHolder(View view) {
             super(view);
             ButterKnife.bind(this, view);
@@ -304,21 +309,21 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                 public void onClick(DialogInterface dialog, int which) {
                     int id = mAddressListBean.getId();
                     RequestBody requestBody = new FormBody.Builder()
-                            .add("id", id+"")
+                            .add("id", id + "")
                             .build();
                     String userId = PreferenceUtils.getUserId(mContext);
                     Call<RecepitAddressBean> call = (Call<RecepitAddressBean>) RetrofitFactory.getInstance().listAddressDelete(userId, requestBody);
                     call.enqueue(new Callback<RecepitAddressBean>() {
                         @Override
                         public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
-                            if("addressDelete".equals(response.body().getResponse())){
+                            if ("addressDelete".equals(response.body().getResponse())) {
                                 Log.d(TAG, "onResponse: " + response.body().getResponse());
 //                                Toast.makeText(mContext, "删除成功", Toast.LENGTH_SHORT).show();
                                 mAddressBeanList.remove(mAddressListBean);
                                 notifyDataSetChanged();
 
                             } else {
-                                Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(mContext, response.toString() + "", Toast.LENGTH_SHORT).show();
                             }
                         }
 
@@ -354,28 +359,28 @@ public class AddressRvAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onResponse(Call<RecepitAddressBean> call, Response<RecepitAddressBean> response) {
 
-                    if(response.body().getAddressList() != null){
-//                        Toast.makeText(mContext, "访问成功"+ response.body().getResponse(), Toast.LENGTH_SHORT).show();
-                        Log.d(TAG, "onHandleSuccess: "+ response.body().getAddressList().size());
                     if (response.body().getAddressList() != null) {
-                        Toast.makeText(mContext, "访问成功" + response.body().getResponse(), Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(mContext, "访问成功"+ response.body().getResponse(), Toast.LENGTH_SHORT).show();
                         Log.d(TAG, "onHandleSuccess: " + response.body().getAddressList().size());
-                        setAddressBeanList(response.body().getAddressList());
+                        if (response.body().getAddressList() != null) {
+                            Toast.makeText(mContext, "访问成功" + response.body().getResponse(), Toast.LENGTH_SHORT).show();
+                            Log.d(TAG, "onHandleSuccess: " + response.body().getAddressList().size());
+                            setAddressBeanList(response.body().getAddressList());
 
-                    }else {
-                        Toast.makeText(mContext, response.toString()+"", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(mContext, response.toString() + "", Toast.LENGTH_SHORT).show();
 
+                        }
                     }
+
                 }
 
                 @Override
                 public void onFailure(Call<RecepitAddressBean> call, Throwable t) {
                     Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+
                 }
             });
-
         }
     }
-
-
 }

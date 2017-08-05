@@ -1,8 +1,6 @@
 package com.young.jdmall.network;
 
-import com.rance.chatui.enity.MessageInfo;
 import com.young.jdmall.bean.BrandInfoBean;
-import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.bean.CollectInfoBean;
@@ -26,8 +24,6 @@ import com.young.jdmall.bean.RecepitAddressBean;
 import com.young.jdmall.bean.RecommendInfoBean;
 import com.young.jdmall.bean.TopicInfoBean;
 import com.young.jdmall.bean.UsersInfoBean;
-
-import java.util.Observer;
 
 import io.reactivex.Observable;
 import okhttp3.RequestBody;
@@ -160,7 +156,7 @@ public interface JDMallService {
     @GET("ordercancel")
     Call<OrderInfoBean> listCancelOrder(@Header("userid") String userid, @Query("orderId") String orderId);
     @GET("orderdetail")
-    Call<OrderDetailBean> listOrderDetail(@Header("userid") String userid, @Query("orderId") String orderId);
+    Call<OrderDetailBean> listOrdDetail(@Header("userid") String userid, @Query("orderId") String orderId);
 
 
     @FormUrlEncoded

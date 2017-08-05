@@ -44,6 +44,7 @@
 
         <activity android:name=".ui.activity.CollectionActivity"/>
         <activity android:name=".ui.activity.HelpCenterActivity"/>
+        <activity android:name=".ui.activity.OrderDetailsActivity"/>
         <activity android:name=".ui.activity.SearchActivity"
                   android:launchMode="singleTask">
         </activity>
@@ -62,6 +63,8 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden|adjustPan"
             android:theme="@android:style/Theme.Translucent" />
+
+
     </application>
 
 </manifest>
