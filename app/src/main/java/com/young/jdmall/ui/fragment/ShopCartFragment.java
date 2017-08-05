@@ -24,8 +24,10 @@ import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.activity.FillingOrderActivity;
+import com.young.jdmall.ui.activity.LoginActivity;
 import com.young.jdmall.ui.adapter.GoodsShowAdapter;
 import com.young.jdmall.ui.adapter.ShoppingCarFragmentAdapter;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.util.List;
 
@@ -33,6 +35,8 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import io.reactivex.Observable;
+
+import static com.young.jdmall.app.JDMallApplication.mContext;
 
 
 public class ShopCartFragment extends BaseFragment {
@@ -181,6 +185,13 @@ public class ShopCartFragment extends BaseFragment {
 
                 break;
             case R.id.pay:
+                String userid = PreferenceUtils.getUserId(getActivity());
+                if (userid.length()==0){
+                    Toast.makeText(mContext,"请登陆后再操作",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 if (mCartInfoBean!=null&&Integer.parseInt(mTotalMoney.getText().toString().trim())>0){
                     Intent intent = new Intent(getActivity(), FillingOrderActivity.class);
                     Bundle bundle = new Bundle();

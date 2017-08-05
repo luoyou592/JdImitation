@@ -26,7 +26,6 @@ import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SecKillActivity;
 import com.young.jdmall.ui.utils.PriceFormater;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
-import com.young.jdmall.ui.view.ZoomOutPageTransformer;
 import com.young.jdmall.ui.widget.CountDownView;
 import com.young.jdmall.ui.widget.CricleIndicatorView;
 import com.young.jdmall.ui.widget.NoticeView;
@@ -151,7 +150,7 @@ public class HomeAdapter extends RecyclerLoadMoreView.Adapter {
             ButterKnife.bind(this, view);
             mHomeBanner.setPageIndicator(new int[]{R.mipmap.ari, R.mipmap.arh});
             mHomeBanner.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
-            mHomeBanner.setPageTransformer(new ZoomOutPageTransformer());
+            //mHomeBanner.setPageTransformer(new ZoomOutPageTransformer());
             mHomeBanner.isTurning();
             mHomeBanner.startTurning(2500);
         }
