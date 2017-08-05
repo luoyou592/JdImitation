@@ -66,7 +66,6 @@ public class TypeActivity extends BaseActivity {
         setContentView(R.layout.activity_type_list);
         ButterKnife.bind(this);
         mContext = this;
-
     }
 
     @Override

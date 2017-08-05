@@ -147,7 +147,6 @@ public class RecyclerLoadMoreView extends RecyclerView {
 
         @Override
         public final ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            if (mLoadingView == null) {
                 mLoadingView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_setting_container_loading, parent, false);
                 mLoadingView.setOnClickListener(new OnClickListener() {
                     @Override
@@ -157,7 +156,6 @@ public class RecyclerLoadMoreView extends RecyclerView {
                         }
                     }
                 });
-            }
             if (viewType == KEY_ITEM_TYPE_LOADING) {
                 return new ViewHolderFromLoading(mLoadingView);
             } else {
