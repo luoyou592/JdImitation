@@ -25,6 +25,7 @@ import com.young.jdmall.ui.adapter.ItemTitlePagerAdapter;
 import com.young.jdmall.ui.fragment.GoodsCommentFragment;
 import com.young.jdmall.ui.fragment.GoodsDetailFragment;
 import com.young.jdmall.ui.fragment.GoodsInfoFragment;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 import com.young.jdmall.ui.widget.DialogConfirmView;
 import com.young.jdmall.ui.widget.NoScrollViewPager;
 
@@ -38,6 +39,7 @@ import io.reactivex.Observable;
 
 import static com.young.jdmall.R.id.psts_tabs;
 import static com.young.jdmall.R.id.vp_content;
+import static com.young.jdmall.app.JDMallApplication.mContext;
 
 /**
  * Created by 25505 on 2017/8/3.
@@ -239,6 +241,13 @@ public class ProductDetaiActivity extends BaseActivity {
 
                 break;
             case R.id.ll_concern:
+                String userId = PreferenceUtils.getUserId(this);
+                if (userId.length()==0){
+                    Toast.makeText(mContext,"请登录后再关注",Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
+                    return;
+                }
                 //关注
                 if (isConcern) {
                     mIvConcern.setImageResource(R.mipmap.akc);
