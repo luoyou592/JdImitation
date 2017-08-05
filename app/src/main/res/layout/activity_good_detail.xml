@@ -162,6 +162,7 @@
                 android:background="@drawable/circle_red"
                 android:gravity="center"
                 android:text="1"
+                android:layout_marginBottom="1dp"
                 android:textColor="#fff"
                 android:textSize="10sp"
                 android:visibility="invisible"

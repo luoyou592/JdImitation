@@ -8,6 +8,7 @@ import android.graphics.Paint;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,6 +81,7 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
     @Override
     public void onResume() {
         super.onResume();
+        Log.d("luoyou", "fragmentonResume");
         //开始自动翻页
         vp_item_goods_img.startTurning(4000);
     }
@@ -90,6 +92,9 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
         super.onPause();
         //停止翻页
         vp_item_goods_img.stopTurning();
+    }
+    public void setSelectedGood(String text){
+        tv_current_goods.setText(text);
     }
 
     @Nullable
@@ -275,7 +280,7 @@ public class GoodsInfoFragment extends BaseFragment implements View.OnClickListe
             tv_new_price.setText(PriceFormater.format(product.getPrice()));
             tv_old_price.setText(PriceFormater.format(product.getMarketPrice()));
             //设置已选
-            tv_current_goods.setText(product.getProductProperty().get(0).getV() + ",1件");
+            //tv_current_goods.setText(product.getProductProperty().get(0).getV() + ",1件");
             //设置评论数
             //有评论默认显示第一条
             CommentInfoBean commentBean = mActivity.mCommentInfoBean;

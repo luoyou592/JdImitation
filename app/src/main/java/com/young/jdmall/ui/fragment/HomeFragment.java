@@ -69,6 +69,7 @@ public class HomeFragment extends BaseFragment {
         ButterKnife.bind(this, mHomeView);
         initView();
         initData();
+        statusBarAplaChange();
         initListener();
         return mHomeView;
     }
@@ -97,7 +98,7 @@ public class HomeFragment extends BaseFragment {
         mRvHome.setAdapter(mHomeRvAdapter);
         mEvaluator = new ArgbEvaluator();
 
-        statusBarAplaChange();
+
         mTvMsg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -124,10 +125,11 @@ public class HomeFragment extends BaseFragment {
             protected void onHandleSuccess(HomeInfoBean homeInfoBean) {
                 //Log.d("luoyou", "homeimgurl"+homeInfoBean.getResponse());
                 mHomeRvAdapter.setHomeData(homeInfoBean.getHomeTopic());
+
             }
         });
         //请求商品列表
-        Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
+        //Observable<NewsProductInfoBean> newsObservable = RetrofitFactory.getInstance().listNewsProduct(1, 10, "saleDown");
         requestCarouselPic();
 
     }
