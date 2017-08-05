@@ -63,14 +63,16 @@ public class OrderDetailsActivity extends BaseActivity {
     TextView mDeleteButton;
     @BindView(R.id.order_all_pay1)
     TextView mOrderAllPay1;
-    @BindView(R.id.order_commit1)
-    TextView mOrderCommit1;
+
 
 
     @BindView(R.id.order_type)
     TextView mOrderType;
     @BindView(R.id.ll_goods_details)
     LinearLayout mLlGoodsDetails;
+    @BindView(R.id.textView)
+    TextView mTextView;
+
     private OrderDetailBean mOrderDetailBean;
     private int mType = 0;
     private Context mContext;
@@ -112,14 +114,14 @@ public class OrderDetailsActivity extends BaseActivity {
     }
 
     private void initData() {
-          String orderId =  getIntent().getStringExtra("orderId");
+        String orderId = getIntent().getStringExtra("orderId");
 
 //OrderDetailBean
         Observable<OrderDetailBean> listOrderDetail = RetrofitFactory.getInstance().listOrderDetail(PreferenceUtils.getUserId(this), orderId);
         listOrderDetail.compose(compose(this.<OrderDetailBean>bindToLifecycle())).subscribe(new BaseObserver<OrderDetailBean>(this) {
             @Override
             protected void onHandleSuccess(OrderDetailBean orderDetailBean) {
-                if(orderDetailBean.getProductList() != null){
+                if (orderDetailBean.getProductList() != null) {
                     setData(orderDetailBean);
                     setPic(orderDetailBean);
                 }
@@ -132,10 +134,13 @@ public class OrderDetailsActivity extends BaseActivity {
         if (orderDetailBean != null) {
             for (int i = 0; i < orderDetailBean.getProductList().size(); i++) {
                 String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
-                Log.e(TAG, "setPic: "+pic );
+                Log.e(TAG, "setPic: " + pic);
                 ImageView imageView = new ImageView(mContext);
-                Glide.with(mContext).load(pic).override(300,600).into(imageView);
-                mLlGoodsDetails.addView(imageView);
+                Glide.with(mContext).load(pic).into(imageView);
+                imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dp_180), getResources().getDimensionPixelSize(R.dimen.dp_180));
+                mLlGoodsDetails.addView(imageView, layoutParams);
+
             }
         }
 
@@ -170,12 +175,11 @@ public class OrderDetailsActivity extends BaseActivity {
 
     private void setData(OrderDetailBean orderDetailBean) {
         mOrderUserName1.setText(orderDetailBean.getAddressInfo().getName());
-        mOrderAddress1.setText(orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
+        mOrderAddress1.setText("地址"+ orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
         mOrderTime1.setText(orderDetailBean.getOrderInfo().getTime());
-        mOrderAllPay1.setText("" + orderDetailBean.getCheckoutAddup().getTotalPrice());
+        mOrderAllPay1.setText("￥" + orderDetailBean.getCheckoutAddup().getTotalPrice());
         mOrderNumber1.setText("" + orderDetailBean.getOrderInfo().getOrderId());
         mOrderPhone1.setText("" + orderDetailBean.getAddressInfo().getId());
-
 
         //需要判断
         mFapiaoStyle.setText(getOrderFaPiaoType(orderDetailBean));

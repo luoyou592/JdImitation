@@ -3,7 +3,8 @@
               xmlns:app="http://schemas.android.com/apk/res-auto"
               android:layout_width="match_parent"
               android:layout_height="match_parent"
-              android:orientation="vertical">
+              android:orientation="vertical"
+    android:background="#dbdbdb">
 
 
     <RelativeLayout
@@ -73,25 +74,25 @@
             <LinearLayout
                 android:id="@+id/ll_address_mode2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
+
                 android:orientation="horizontal">
 
-                <LinearLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:gravity="center">
+
 
                     <ImageView
+                        android:layout_marginTop="8dp"
+                        android:layout_marginLeft="10dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:src="@mipmap/a2k"
                         />
-                </LinearLayout>
+
 
                 <LinearLayout
+                    android:layout_marginLeft="10dp"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="15"
@@ -103,6 +104,7 @@
                         android:orientation="horizontal">
 
                         <TextView
+                            android:layout_marginTop="8dp"
                             android:id="@+id/order_user_name1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -111,6 +113,7 @@
 
 
                         <TextView
+                            android:layout_marginTop="8dp"
                             android:id="@+id/order_phone1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -126,7 +129,8 @@
                         android:layout_marginTop="10dp"
                         android:text="广东省深圳市宝安区流线二路中粮商务公园3栋17楼黑马程序员"
                         android:textSize="14sp"
-                        />
+                        android:maxLines="2"
+                        android:ellipsize="end"/>
 
                 </LinearLayout>
 
@@ -147,16 +151,22 @@
 
             </LinearLayout>
 
-
             <LinearLayout
+                android:gravity="center_vertical"
                 android:layout_width="match_parent"
-                android:layout_height="30dp"
+                android:layout_height="40dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
                 >
+                <ImageView
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="16dp"
+                    android:layout_height="12dp"
+                    android:background="@mipmap/b3j"/>
 
                 <TextView
+
                     android:id="@+id/textView1"
                     android:layout_width="wrap_content"
                     android:layout_height="30dp"
@@ -171,7 +181,7 @@
             <HorizontalScrollView
                 android:id="@+id/goods_details1"
                 android:layout_width="match_parent"
-                android:layout_height="180dp"
+                android:layout_height="140dp"
                 android:layout_marginBottom="10dp"
                 android:layout_marginTop="10dp"
                 android:background="@color/white"
@@ -179,14 +189,16 @@
 
                 <LinearLayout
                     android:id="@+id/ll_goods_details"
-                    android:orientation="horizontal"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
 
                 </LinearLayout>
 
 
             </HorizontalScrollView>
+
+
 
 
             <LinearLayout
@@ -203,11 +215,11 @@
                     android:padding="5dp">
 
                     <TextView
+                        android:id="@+id/textView"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="订单编码："
-                        android:textSize="10sp"
-                        />
+                        android:textSize="10sp"/>
 
                     <TextView
                         android:id="@+id/order_number1"
@@ -252,11 +264,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -279,15 +289,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:orientation="horizontal"
-                android:padding="15dp">
+                android:padding="6dp">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="配送方式"
+                    android:text="配送方式："
                     android:textSize="10sp"
                     />
 
@@ -382,7 +391,76 @@
                 </LinearLayout>
 
 
+
+
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_marginTop="10dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/white"
+                android:orientation="vertical">
+
+
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:padding="5dp">
+
+                    <TextView
+
+                        android:layout_centerVertical="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="商品总额"
+                        android:textSize="10sp"
+                        />
+
+                    <TextView
+                        android:id="@+id/order_all_pay1"
+
+
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="￥"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="5dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="+运费"
+                        android:textSize="10sp"
+                        />
+
+                    <TextView
+                        android:layout_alignParentRight="true"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="10dp"
+                        android:text="￥0.00"
+                        android:textColor="@color/black"
+                        android:textSize="10sp"/>
+
+                </RelativeLayout>
+
+
+
+            </LinearLayout>
+
 
         </LinearLayout>
 
@@ -390,42 +468,41 @@
     </ScrollView>
 
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_alignParentBottom="true"
         android:layout_weight="10">
 
         <TextView
+            android:layout_marginLeft="30dp"
+            android:layout_centerVertical="true"
             android:id="@+id/delete_button"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
             android:gravity="center"
             android:text="删除订单"
             android:textSize="14sp"/>
 
-        <TextView
-            android:id="@+id/order_all_pay1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
 
-            android:textColor="@color/red"
-            android:textSize="14sp"/>
 
         <TextView
-            android:id="@+id/order_commit1"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:textColor="@color/white"
-            android:textSize="14sp"/>
+            android:layout_marginRight="20dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            android:id="@+id/again_buy"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+
+            android:background="@drawable/text_btn_bg"
+            android:padding="4dp"
+            android:text="再次购买"
+            android:textColor="@android:color/holo_red_dark"/>
 
 
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
