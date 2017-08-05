@@ -98,7 +98,7 @@ public class FindInfoBean {
         String text = stringBuilder.toString();
         ArrayList<FindInfoBean> findInfoBeen = new ArrayList<>();
         findInfoBeen.add(new FindInfoBean(0, 1, "价格跌入冰点，苹果6s plus是时候入手了", "http://a1239.phobos.apple.com/us/r30/Purple3/v4/13/44/98/134498ce-4c5d-d0e0-b85b-14038aad6dd7/pr_source.png", "叮咚日记", 234, "", "http://i03.pictn.sogoucdn.com/b7a058860e22ace8", "", "", stringBuilder.toString()));
-        findInfoBeen.add(new FindInfoBean(0, 1, "穿裙子要穿丝袜么?怎么穿才不low", "http://cdn.duitang.com/uploads/item/201301/31/20130131025347_anUnd.thumb.600_0.jpeg", "美人鱼的眼泪", 21234, "", "http://panews.zjol.com.cn/pic/0/11/37/82/11378239_992527.jpg", "", "", stringBuilder1.toString()));
+        findInfoBeen.add(new FindInfoBean(0, 1, "穿裙子要穿丝袜么?怎么穿才不low", "http://cdn.duitang.com/uploads/item/201301/31/20130131025347_anUnd.thumb.600_0.jpeg", "美人鱼的眼泪", 21234, "", "http://img03.sogoucdn.com/app/a/100520093/1315d1ac439b8362-d41746057b5baa8f-cd1a975d3e84364344e2eaeaf6e8389b.jpg", "", "", stringBuilder1.toString()));
         for (int i = 1; i < 10; i++) {
             Random type = new Random();
             findInfoBeen.add(new FindInfoBean(i, 1, "不一样的机械师，体验不一样的机械键盘", "http://scimg.jb51.net/allimg/151026/14-151026145342264.jpg", "东东爱分享", 234, "", "http://dynamic-image.yesky.com/800x600/resources/product/20140722/80LB8WCS8KP3R42Q32MZ53782W56F0OE.jpg", "", "", ""));
