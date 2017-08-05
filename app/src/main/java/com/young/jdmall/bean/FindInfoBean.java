@@ -70,9 +70,35 @@ public class FindInfoBean {
         stringBuilder.append("<text>看完这波降价，你是否开始心动了呢？喜欢苹果的用户千万不要错过这次降价，机不可失！</text>");
         stringBuilder.append("</container>");
 
+        StringBuilder stringBuilder1 = new StringBuilder();
+        stringBuilder1.append("<container>");
+        stringBuilder1.append("<text>大家最期待的人间四月天，已经历时大半个月了，很多mm迫不及待的翻出了自己的短裙，但是,20°的天气露出白花花的大腿似乎不太合适啊......瘦的姑娘傲娇的拿出肉色丝袜，美美的出街了，但是，习惯性穿黑色丝袜显瘦的妹子就懵了，到底是光腿还是继续穿丝袜？</text>");
+        stringBuilder1.append("<image>http://www.iyi8.com/uploadfile/2015/0519/20150519111832279.jpg</image>");
+        stringBuilder1.append("<text>其实这个问题很简单，腿粗的姑娘，为了显瘦，当然不要穿肉色的丝袜，可是黑色袜子跟浅色调的春夏衣裙也不搭调啊。其实，大家可以换个角度想，给自己一个月的时间瘦腿，先从半身裙穿起吧。</text>");
+        stringBuilder1.append("<goods><name>新款毛衣</name><price>160</price><icon>http://114.115.218.128/market/images/product/detail/q20.jpg</icon><id>22</id></goods>");
+        stringBuilder1.append("<text>牛仔比较休闲不挑人，比较日常，简约。雪纺偏淑女风，更挑人。选款时买的高腰的单品一般不会出错，还显瘦！上班族和学生党都可以穿。 </text>");
+        stringBuilder1.append("<text>记得已经问过一个女生：天气这麼热，穿丝袜不是更热吗？答：不热啦，丝袜很薄。</text>");
+        stringBuilder1.append("<text>高腰一步裙，视觉上显瘦效果超赞，微开叉，露出小性感，走路轻盈，搭配跟跟鞋，尽显淑女风范 </text>");
+        stringBuilder1.append("<image>http://www.iyi8.com/uploadfile/2015/0419/20150419110731356.jpg</image>");
+        stringBuilder1.append("<text>由于丝袜可以遮住腿毛，而夏天不穿丝袜就是光着腿，刮腿毛太费事，还不如穿一条丝袜复杂。</text>");
+        stringBuilder1.append("<goods><name>女士外套</name><price>160</price><icon>http://114.115.218.128/market/images/product/detail/q10.jpg</icon><id>12</id></goods>");
+        stringBuilder1.append("<text>防勾丝超薄款连体裤袜，非常的轻薄透气，很自然的一款肤色丝裤袜，超好的弹性，上身没有一丝的紧绷感，尽显腿部流畅优美的线条美。</text>");
+        stringBuilder1.append("<text>薄薄的款式，现在这种天气穿刚刚好，，舒适透气，经典的抗菌裆设计，可以很好地保护，小腿看起来更纤细，没有那种束缚感穿上很舒服的。</text>");
+        stringBuilder1.append("<image>http://www.iyi8.com/uploadfile/2015/0531/20150531100425209.jpg</image>");
+        stringBuilder1.append("<text>这个理由满分，之前说丝袜很保暖，如今马上就现学现用了，不过这谁家公司也太任性了吧，空调开这麼低。</text>");
+        stringBuilder1.append("<text>其实这才是姑娘们穿丝袜真实缘由，美观才是霸道，爲了美观，热不热冷不冷什麼的都曾经不重要了。</text>");
+        stringBuilder1.append("<goods><name>韩版粉嫩外套</name><price>160</price><icon>http://114.115.218.128/market/images/product/detail/q13.jpg</icon><id>15</id></goods>");
+        stringBuilder1.append("<text>校园情结满满的性感丝袜高通丝袜，上身轻巧美观更性感撩人，有着很好的上身体验，是你丝袜的最佳选择。</text>");
+        stringBuilder1.append("<text>防勾丝，奢华蚕丝光泽袜口，袜口内镶嵌硅胶防滑层，超柔天鹅绒质感，欧洲大牌品质。杜绝由于身材偏瘦引起的下滑现象，适应身材更为广泛。 </text>");
+        stringBuilder1.append("<image>http://www.iyi8.com/uploadfile/2014/1218/20141218105452144.jpg</image>");
+        stringBuilder1.append("<text>夏天，就是露腿的季节。满大街的姑娘们，都穿上了漂亮的短裙，露出两条大长腿，时尚美丽不说，还显得个头很高。</text>");
+        stringBuilder1.append("</container>");
+//        stringBuilder.append("<image></image>");
+//        stringBuilder.append("<goods><name></name><price></price><icon></icon><id></id></goods>");
         String text = stringBuilder.toString();
         ArrayList<FindInfoBean> findInfoBeen = new ArrayList<>();
         findInfoBeen.add(new FindInfoBean(0, 1, "价格跌入冰点，苹果6s plus是时候入手了", "http://a1239.phobos.apple.com/us/r30/Purple3/v4/13/44/98/134498ce-4c5d-d0e0-b85b-14038aad6dd7/pr_source.png", "叮咚日记", 234, "", "http://i03.pictn.sogoucdn.com/b7a058860e22ace8", "", "", stringBuilder.toString()));
+        findInfoBeen.add(new FindInfoBean(0, 1, "穿裙子要穿丝袜么?怎么穿才不low", "http://cdn.duitang.com/uploads/item/201301/31/20130131025347_anUnd.thumb.600_0.jpeg", "美人鱼的眼泪", 21234, "", "http://panews.zjol.com.cn/pic/0/11/37/82/11378239_992527.jpg", "", "", stringBuilder1.toString()));
         for (int i = 1; i < 10; i++) {
             Random type = new Random();
             findInfoBeen.add(new FindInfoBean(i, 1, "不一样的机械师，体验不一样的机械键盘", "http://scimg.jb51.net/allimg/151026/14-151026145342264.jpg", "东东爱分享", 234, "", "http://dynamic-image.yesky.com/800x600/resources/product/20140722/80LB8WCS8KP3R42Q32MZ53782W56F0OE.jpg", "", "", ""));

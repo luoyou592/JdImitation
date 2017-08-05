@@ -110,95 +110,99 @@
             android:layout_marginTop="130dp"
             android:background="@color/white"/>
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                android:paddingLeft="10dp"
-                android:paddingTop="15dp"
-                android:text="热搜"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="45dp"
-                android:background="@drawable/item_down_bg"
-                android:scrollbars="none">
-
-                <LinearLayout
-                    android:id="@+id/search_linear"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:padding="5dp"/>
-
-            </HorizontalScrollView>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/item_up_down_bg"
-                android:paddingBottom="8dp"
-                android:paddingLeft="10dp"
-                android:paddingTop="8dp"
-                android:text="历史搜索"
-                android:textColor="@color/black"
-                android:textSize="15sp"
-                android:textStyle="bold"/>
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/search_linear_history"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/item_up_down_bg"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-            </LinearLayout>
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="140dp"
-                android:background="@color/white"
-                android:gravity="center"
-                android:padding="40dp">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="15dp"
+                    android:text="热搜"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:background="@drawable/item_down_bg"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:id="@+id/search_linear"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:padding="5dp"/>
+
+                </HorizontalScrollView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:background="@drawable/item_up_down_bg"
+                    android:paddingBottom="8dp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="8dp"
+                    android:text="历史搜索"
+                    android:textColor="@color/black"
+                    android:textSize="15sp"
+                    android:textStyle="bold"/>
 
                 <LinearLayout
-                    android:id="@+id/search_clean_button"
+                    android:id="@+id/search_linear_history"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="@drawable/clean_search_button_bg_selector"
-                    android:clickable="true"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:layout_width="16dp"
-                        android:layout_height="16dp"
-                        android:layout_marginRight="8dp"
-                        android:background="@drawable/a_a"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="清空历史搜索"
-                        android:textColor="#78797B"
-                        android:textSize="14sp"/>
-
+                    android:layout_height="match_parent"
+                    android:background="@drawable/item_up_down_bg"
+                    android:orientation="vertical">
                 </LinearLayout>
 
-            </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="140dp"
+                    android:background="@color/white"
+                    android:gravity="center"
+                    android:padding="40dp">
+
+                    <LinearLayout
+                        android:id="@+id/search_clean_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:background="@drawable/clean_search_button_bg_selector"
+                        android:clickable="true"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_marginRight="8dp"
+                            android:background="@drawable/a_a"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="清空历史搜索"
+                            android:textColor="#78797B"
+                            android:textSize="14sp"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
 
 
-        </LinearLayout>
-
+            </LinearLayout>
+        </ScrollView>
 
     </RelativeLayout>
 
