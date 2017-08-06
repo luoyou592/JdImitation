@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -41,6 +42,8 @@ public class ImageViewPagerDialog extends Dialog {
     ViewPager mViewImageViewPager;
     @BindView(R.id.btn_image_view_pager)
     Button mBtnImageViewPager;
+    @BindView(R.id.image_dialog_tab_layout)
+    TabLayout mTabLayout;
     private Context mContext;
     private List<String> mImages;
     private int mId;
@@ -59,7 +62,6 @@ public class ImageViewPagerDialog extends Dialog {
         super.onCreate(savedInstanceState);
         init();
     }
-
 
 
     private void init() {
@@ -83,19 +85,20 @@ public class ImageViewPagerDialog extends Dialog {
 
 
         mViewImageViewPager.setAdapter(mPagerAdapter);
+        mTabLayout.setupWithViewPager(mViewImageViewPager);
     }
 
     @OnClick(R.id.btn_image_view_pager)
     public void onViewClicked() {
         Intent intent = new Intent(mContext, ProductDetaiActivity.class);
-        intent.putExtra("id",mId);
+        intent.putExtra("id", mId);
         mContext.startActivity(intent);
     }
 
     private PagerAdapter mPagerAdapter = new PagerAdapter() {
         @Override
         public int getCount() {
-            if (mImages != null){
+            if (mImages != null) {
                 return mImages.size();
             }
             return 0;

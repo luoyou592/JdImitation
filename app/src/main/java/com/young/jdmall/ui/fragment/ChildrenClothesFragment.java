@@ -1,14 +1,15 @@
 package com.young.jdmall.ui.fragment;
 
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
+import com.facebook.drawee.view.SimpleDraweeView;
 import com.young.jdmall.R;
 import com.young.jdmall.bean.CategoryBaseBean;
 import com.young.jdmall.ui.adapter.CategoryRightListAdapter;
@@ -29,6 +30,8 @@ public class ChildrenClothesFragment extends CategoryBaseRightListFragment {
     private List<CategoryBaseBean> mList = new ArrayList<>();
     private CategoryBaseBean mData;
     private int[] imgages = {R.mipmap.cx,R.mipmap.jd618,R.mipmap.s11};
+    private List<Integer> mImageList = new ArrayList<>();
+    private ConvenientBanner mViewPager;
 
     public ChildrenClothesFragment(CategoryBaseBean data) {
         mData = data;
@@ -48,9 +51,23 @@ public class ChildrenClothesFragment extends CategoryBaseRightListFragment {
     @Override
     protected View getHeader() {
 
+        mImageList.clear();
+        mImageList.add(R.mipmap.cx);
+        mImageList.add(R.mipmap.jd618);
+        mImageList.add(R.mipmap.s11);
         View rootView = LayoutInflater.from(getActivity()).inflate(R.layout.category_header, null);
-        ViewPager viewPager = (ViewPager) rootView.findViewById(R.id.category_header_view_pager);
-        viewPager.setAdapter(mPagerAdapter);
+        mViewPager = (ConvenientBanner) rootView.findViewById(R.id.category_header_view_pager);
+
+        mViewPager.setPageIndicator(new int[]{R.mipmap.index_white, R.mipmap.index_red});
+        mViewPager.setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+
+        mViewPager.setPages(new CBViewHolderCreator() {
+            @Override
+            public Object createHolder() {
+                return new ImageHolderView();
+            }
+        }, mImageList);
+//        mViewPager.setAdapter(mPagerAdapter);
         return rootView;
     }
 
@@ -146,32 +163,21 @@ public class ChildrenClothesFragment extends CategoryBaseRightListFragment {
     }
 
 
-    private PagerAdapter mPagerAdapter = new PagerAdapter() {
+    public class ImageHolderView implements Holder<Integer> {
+        private View rootview;
+        private SimpleDraweeView imageView;
+
         @Override
-        public int getCount() {
-            if (imgages != null){
-                return Integer.MAX_VALUE;
-            }
-            return 0;
+        public View createView(Context context) {
+            rootview = ((LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.goods_item_head_img, null);
+            imageView = (SimpleDraweeView) rootview.findViewById(R.id.sdv_item_head_img);
+            return rootview;
         }
 
         @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
+        public void UpdateUI(Context context, int position, Integer data) {
+            imageView.setBackgroundResource(data);
         }
+    }
 
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            int newPosition = position % imgages.length;
-            ImageView imageView = new ImageView(getActivity());
-            imageView.setBackgroundResource(imgages[newPosition]);
-            container.addView(imageView);
-            return imageView;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
-    };
 }
