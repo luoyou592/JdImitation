@@ -86,6 +86,7 @@ public class TypeActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
+
         Intent intent = getIntent();
         mKeyword = intent.getStringExtra("name");
         Log.d(TAG, "onCreate: " + intent.getStringExtra("name"));
@@ -339,6 +340,7 @@ public class TypeActivity extends BaseActivity {
     private void setListener() {
         mViewTypeListHeader.setOnClickPrimaryListener(new ViewTypeHeader.onClickPrimaryListener() {
 
+
             @Override
             public void onPrimaryVolume() {
                 if (loadData == 0) {
@@ -402,8 +404,7 @@ public class TypeActivity extends BaseActivity {
                             loadSearchData(mKeyword);
                         }
                     }
-                    mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2,
-                            StaggeredGridLayoutManager.VERTICAL));
+                    mRecycleView.setLayoutManager(new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL));
                     mRecycleView.setAdapter(mWaterfallAdapter);
                 }
 
@@ -448,6 +449,7 @@ public class TypeActivity extends BaseActivity {
     //PopupWindow处理事件
     @OnClick({R.id.type_btn_1, R.id.type_btn_2, R.id.type_btn_3, R.id.type_btn_4})
     public void onViewClicked(View view) {
+        Log.d(TAG, "onViewClicked: aaa");
         switch (view.getId()) {
             case R.id.type_btn_1:
                 View pop1 = LayoutInflater.from(this).inflate(R.layout.type_popup_window1, null);

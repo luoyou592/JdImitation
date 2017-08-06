@@ -38,6 +38,7 @@ public class RecyclerRefreshLayout extends RelativeLayout {
     private AnimationDrawable mDrawable;
     private boolean mRefreshing;
     private OnRefreshListener mListener;
+    private boolean mToggle;
 
     public RecyclerRefreshLayout(Context context) {
         this(context, null);
@@ -92,9 +93,17 @@ public class RecyclerRefreshLayout extends RelativeLayout {
         startAnimation(getScrollY(), 0);
     }
 
+    public void setToggle(boolean toggle) {
+        mToggle = !toggle;
+    }
+
     @Override
     public boolean onTouchEvent(MotionEvent event) {
         if (mRefreshing) {
+            return false;
+        }
+
+        if (mToggle) {
             return false;
         }
 

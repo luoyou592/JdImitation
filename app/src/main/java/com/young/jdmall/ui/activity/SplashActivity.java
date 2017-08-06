@@ -1,8 +1,10 @@
 package com.young.jdmall.ui.activity;
 
 
+import android.Manifest;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.ViewPager;
@@ -33,7 +35,7 @@ public class SplashActivity extends AppCompatActivity {
     ViewPager mVpSplash;
     private FragmentManager mSupportFragmentManager;
     private int mlastPosition = 0;
-    private int mlastPosition1=0;
+    private int mlastPosition1 = 0;
 
     private int mPosition;
 
@@ -46,6 +48,7 @@ public class SplashActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         initdata();
         init();
+        ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
     }
 
     private void initdata() {
@@ -67,16 +70,17 @@ public class SplashActivity extends AppCompatActivity {
         mVpSplash.setAdapter(splashAdapter);
         mVpSplash.setOnPageChangeListener(mOnPageChangeListener);
     }
+
     private ViewPager.OnPageChangeListener mOnPageChangeListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            Log.e(TAG, "onPageScrolled: "+position+positionOffsetPixels);
+            Log.e(TAG, "onPageScrolled: " + position + positionOffsetPixels);
             if (position == 0) {
                 ((SplashFirstFragment) fragments.get(0)).ScrollView(positionOffsetPixels - mlastPosition);
-                ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels );
+                ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels);
                 mlastPosition = positionOffsetPixels;
-            }else if(position==1){
-                ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels );
+            } else if (position == 1) {
+                ((SplashTwoFragment) fragments.get(1)).ScrollView(positionOffsetPixels);
             }
 
         }
@@ -87,7 +91,6 @@ public class SplashActivity extends AppCompatActivity {
             if (position == 2) {
                 ((SplashThirdFragment) fragments.get(2)).startLoop();
             }
-
 
 
         }

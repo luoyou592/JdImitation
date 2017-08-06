@@ -178,7 +178,7 @@
 
             </LinearLayout>
 
-            <HorizontalScrollView
+            <com.young.jdmall.ui.view.MyScrollView
                 android:id="@+id/goods_details1"
                 android:layout_width="match_parent"
                 android:layout_height="140dp"
@@ -191,14 +191,12 @@
                     android:id="@+id/ll_goods_details"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                 </LinearLayout>
 
 
-            </HorizontalScrollView>
-
-
+            </com.young.jdmall.ui.view.MyScrollView>
 
 
             <LinearLayout

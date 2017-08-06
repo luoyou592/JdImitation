@@ -68,7 +68,21 @@ public class CollectionActivity extends BaseActivity {
             protected void onHandleSuccess(NewsProductInfoBean newsProductInfoBean) {
                 if (newsProductInfoBean.getProductList() != null) {
                     mCollectionAdapter.setNewsProductInfoBeen(newsProductInfoBean.getProductList());
+                    mRlContainer.onLoadSuccess();
+
                 }
+            }
+
+            @Override
+            protected void onHandleError(String msg) {
+                super.onHandleError(msg);
+                mRlContainer.onLoadFailure();
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                super.onError(e);
+                mRlContainer.onLoadFailure();
             }
         });
     }

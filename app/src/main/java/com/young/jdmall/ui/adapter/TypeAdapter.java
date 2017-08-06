@@ -140,8 +140,8 @@ public class TypeAdapter extends RecyclerLoadMoreView.Adapter {
             String imageUrl = Constant.IMAGE_URL + listTestBean.getPic();
             Glide.with(mIcon.getContext())
                     .load(imageUrl)
-                    .error(R.mipmap.test_image)
-                    .fallback(R.mipmap.test_image)
+                    .error(R.mipmap.default_pic)
+                    .fallback(R.mipmap.default_pic)
                     .override(200, 200)
                     .dontAnimate()
                     .into(mIcon);

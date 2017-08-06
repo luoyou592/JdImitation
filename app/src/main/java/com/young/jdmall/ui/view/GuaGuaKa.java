@@ -98,14 +98,14 @@ public class GuaGuaKa extends View
 	{   //初始化被覆盖的内容bitmap
 		bpBackground = BitmapFactory.decodeResource(getResources(), R.mipmap.ah8);
 
-		canvas.drawBitmap(bpBackground	, 0, 0, null);
+		canvas.drawBitmap(bpBackground	, 200, 0, null);
 		// 绘制奖项
 		/*canvas.drawText(mText, getWidth() / 2 - mTextBound.width() / 2,
 				getHeight() / 2 + mTextBound.height() / 2, mBackPint);*/
 		if (!isComplete)
 		{
 			drawPath();
-			canvas.drawBitmap(mBitmap, 0, 0, null);
+			canvas.drawBitmap(mBitmap, 000, 0, null);
 		}
 
 	}

@@ -2,6 +2,7 @@ package com.young.jdmall.ui.fragment;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -62,6 +63,9 @@ public class CategoryFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle
             savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(0xAA000000);
+        }
         View rootview = LayoutInflater.from(getActivity()).inflate(R.layout.catecary_fragment,
                 null);
         ButterKnife.bind(this, rootview);

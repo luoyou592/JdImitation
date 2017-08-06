@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.rance.chatui.ui.activity.MainActivity;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.LoginInfoBean;
@@ -314,6 +315,8 @@ public class MyRvAdapter extends RecyclerView.Adapter {
                     }
                     break;
                 case R.id.tv_kefu:
+                    Intent intent = new Intent(mContext, MainActivity.class);
+                    mContext.startActivity(intent);
                     break;
 
             }

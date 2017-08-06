@@ -227,30 +227,45 @@ public class AllOrderAdapter extends RecyclerView.Adapter {
 
             mTvPay.setText("￥" + orderInfoBean.getPrice());
             mTvTime.setText(TimeUtil.stampToDate(orderInfoBean.getTime()));
-            Glide.with(mContext).load(Constant.BASE_URL + getImage()).placeholder(R.mipmap.default_pic).into(mIvOrderPic);
+            String image = getImage();
+            if(image!=null){
+
+                Glide.with(mContext).load(Constant.BASE_URL + image).placeholder(R.mipmap.default_pic).into(mIvOrderPic);
+            }
+
+            //notifyDataSetChanged();
         }
 
         public String getImage() {
 
-            Call<OrderDetailBean> call = (Call<OrderDetailBean>) RetrofitFactory.getInstance().listOrdDetail(PreferenceUtils.getUserId(mContext), mOrderListBean.getOrderId());
-            call.enqueue(new Callback<OrderDetailBean>() {
-                @Override
-                public void onResponse(Call<OrderDetailBean> call, Response<OrderDetailBean> response) {
-                    if (response.body().getProductList() != null) {
+                Call<OrderDetailBean> call = (Call<OrderDetailBean>) RetrofitFactory.getInstance().listOrdDetail(PreferenceUtils.getUserId(mContext), mOrderListBean.getOrderId());
+                call.enqueue(new Callback<OrderDetailBean>() {
+                    @Override
+                    public void onResponse(Call<OrderDetailBean> call, Response<OrderDetailBean> response) {
+                            if(response.body() != null){
+
+                                if (response.body().getProductList() != null) {
 //                        Random random = new Random();
 //                        int size = response.body().getProductList().size();
-                        mPic = response.body().getProductList().get(0).getProduct().getPic();
+                                    mPic = response.body().getProductList().get(0).getProduct().getPic();
 
-                    } else {
+//                                    notifyDataSetChanged();
+                                }
+
+                                else {
 //                        Toast.makeText(mContext, response.body().getResponse(), Toast.LENGTH_SHORT).show();
+                                }
+                            }
                     }
-                }
 
-                @Override
-                public void onFailure(Call<OrderDetailBean> call, Throwable t) {
-                    Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<OrderDetailBean> call, Throwable t) {
+                        Log.d(TAG, "onFailure: " + t.getLocalizedMessage());
+                    }
+                });
+
+
+
             return mPic;
         }
     }

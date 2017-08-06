@@ -4,11 +4,19 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-    <com.young.jdmall.ui.view.RecyclerLoadMoreView
-        android:id="@+id/rv_home"
-        android:background="#faf7f7"
+    <com.young.jdmall.ui.view.RecyclerRefreshLayout
+        android:id="@+id/refresh"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent">
+
+        <com.young.jdmall.ui.view.RecyclerLoadMoreView
+            android:id="@+id/rv_home"
+            android:background="#faf7f7"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </com.young.jdmall.ui.view.RecyclerRefreshLayout>
+
 
     <LinearLayout
         android:id="@+id/top_container"

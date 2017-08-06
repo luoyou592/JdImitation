@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="horizontal"
+            android:layout_marginLeft="2dp"
+              android:layout_marginRight="2dp"
+              android:layout_width="match_parent"
+              android:background="@mipmap/ace"
+              android:layout_height="90dp">
+
+    <ImageView
+        android:layout_margin="10dp"
+        android:id="@+id/goods_images_pic"
+        android:layout_width="0dp"
+        android:layout_weight="1.5"
+        android:src="@color/colorPrimary"
+        android:layout_height="match_parent"/>
+
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"
+     android:gravity="center_vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_marginBottom="20dp"
+            android:gravity="center"
+            android:id="@+id/goods_images_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black"
+            android:textSize="14sp"
+            android:text="泰国进口 休闲零食"
+            />
+
+        <TextView
+            android:id="@+id/goods_images_price"
+            android:text="￥14.90"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
+
+</LinearLayout>

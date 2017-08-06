@@ -54,7 +54,7 @@
                     android:id="@+id/tv_buy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="gouwu"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
 
@@ -83,7 +83,7 @@
                     android:id="@+id/tv_way"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="peisong"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
 
@@ -114,7 +114,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
-                    android:text="shouhou"
+                    android:text=""
                     android:textColor="@android:color/black"/>
 
 
@@ -141,7 +141,7 @@
                     android:id="@+id/tv_update"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="gengxin"
+                    android:text=""
                     android:textColor="@android:color/black"
                     android:layout_centerVertical="true"/>
 

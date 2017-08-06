@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.OrderInfoBean;
@@ -74,7 +73,7 @@ public class TotalOdFragment extends BaseFragment {
 //                    mAllOrderAdapter.setAddressBeanList(response.body().getOrderList());
                     getOneMonthII(response.body().getOrderList(), page);
                 } else {
-                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
                 }
             }
 
@@ -110,20 +109,22 @@ public class TotalOdFragment extends BaseFragment {
             }
         });
     }
-
     public void getOneMonthII(final List<OrderInfoBean.OrderListBean> orderList, int page) {
-        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(PreferenceUtils.getUserId(getActivity()), 2, page, 10);
+        String userId = PreferenceUtils.getUserId(getActivity());
+        Log.d(TAG, "getOneMonthII: "+userId);
+        Call<OrderInfoBean> call = (Call<OrderInfoBean>) RetrofitFactory.getInstance().listOrderInfo(userId, 2, page, 10);
         call.enqueue(new Callback<OrderInfoBean>() {
             @Override
             public void onResponse(Call<OrderInfoBean> call, Response<OrderInfoBean> response) {
-                if (response.body().getOrderList() != null) {
+                if (response.body().getOrderList() != null && response.body().getOrderList().size() != 0) {
 
                     Log.d(TAG, "onResponse: " + response.body().getResponse());
 //                    Toast.makeText(getActivity(), "获取2订单", Toast.LENGTH_SHORT).show();
                     orderList.addAll(response.body().getOrderList());
                     mAllOrderAdapter.setAddressBeanList(orderList);
+
                 } else {
-                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
                 }
             }
 
