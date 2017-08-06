@@ -4,10 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.View;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
@@ -19,6 +21,7 @@ import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 /**
@@ -65,13 +68,14 @@ public class OrderDetailsActivity extends BaseActivity {
     TextView mOrderAllPay1;
 
 
-
     @BindView(R.id.order_type)
     TextView mOrderType;
     @BindView(R.id.ll_goods_details)
     LinearLayout mLlGoodsDetails;
     @BindView(R.id.textView)
     TextView mTextView;
+    @BindView(R.id.again_buy)
+    TextView mAgainBuy;
 
     private OrderDetailBean mOrderDetailBean;
     private int mType = 0;
@@ -175,7 +179,7 @@ public class OrderDetailsActivity extends BaseActivity {
 
     private void setData(OrderDetailBean orderDetailBean) {
         mOrderUserName1.setText(orderDetailBean.getAddressInfo().getName());
-        mOrderAddress1.setText("地址"+ orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
+        mOrderAddress1.setText("地址" + orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
         mOrderTime1.setText(orderDetailBean.getOrderInfo().getTime());
         mOrderAllPay1.setText("￥" + orderDetailBean.getCheckoutAddup().getTotalPrice());
         mOrderNumber1.setText("" + orderDetailBean.getOrderInfo().getOrderId());
@@ -191,4 +195,18 @@ public class OrderDetailsActivity extends BaseActivity {
 
     }
 
+    @OnClick({R.id.order_back_icon1, R.id.delete_button, R.id.again_buy})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.order_back_icon1:
+                finish();
+                break;
+            case R.id.delete_button:
+                Toast.makeText(mContext, "该商品已过期，无法删除", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.again_buy:
+                Toast.makeText(mContext, "该商品已下架，无法购买", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }
