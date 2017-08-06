@@ -149,17 +149,17 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
                     CartDao.updateCart(goodsOrderInfoBeanMinus);
                     ((MainActivity)mContext).updataCount();
                     int minusPrice = mList.getCart().get(getAdapterPosition()).getProduct().getPrice();
-                    ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).setminPrice(minusPrice);
+                    ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).setminPrice(minusPrice);
 
                     break;
                 case R.id.goods_add:
                     if (!mGoodsCheckbox.isChecked()){
                         mGoodsCheckbox.setChecked(true);
                         int firstPrice = (mNumber+1)*mList.getCart().get(getAdapterPosition()).getProduct().getPrice();
-                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).setFirstPrice(firstPrice);
+                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).setFirstPrice(firstPrice);
                     }else{
                         int addPrice = mList.getCart().get(getAdapterPosition()).getProduct().getPrice();
-                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).setPrice(addPrice);
+                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).setPrice(addPrice);
                     }
                     if (mNumber > 0) {
                         mDeleteClick.setVisibility(View.VISIBLE);
@@ -200,13 +200,13 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
                     if (isChecked){
                         int firstPrice = currentCount*mList.getCart().get(getAdapterPosition()).getProduct().getPrice();
                         Log.d("luoyou", "onchecked");
-                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).setFirstPrice(firstPrice);
+                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).setFirstPrice(firstPrice);
                     }else{
                         Log.d("luoyou", "nochecked");
                         int firstPrice = currentCount*mList.getCart().get(getAdapterPosition()).getProduct().getPrice();
-                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).setFirstPrice(-firstPrice);
+                        ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).setFirstPrice(-firstPrice);
                     }
-                    ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).isAllselect(getTotalMoney());
+                    ((ShopCartFragment)((MainActivity)mContext).mFragments.get(3)).isAllselect(getTotalMoney());
                 }
             });
 

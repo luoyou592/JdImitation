@@ -57,13 +57,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void processIntent() {
-        if (getIntent()!=null){
+        if (getIntent() != null) {
             String page = getIntent().getStringExtra("page");
             Log.d("luoyou", "intent");
             //判断是否详情页跳转过来的，是则切换到购物车
-            if ("detail".equals(page)){
+            if ("detail".equals(page)) {
                 /*getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());*/
-                selectedTab(2);
+                selectedTab(3);
             }
         }
     }
@@ -86,12 +86,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mMainNavigation.getChildCount(); i++) {
             View view = mMainNavigation.getChildAt(i);
             if (i == index) {
-                if (view instanceof RelativeLayout){
+                if (view instanceof RelativeLayout) {
                     ((RelativeLayout) view).getChildAt(0).setEnabled(false);
                 }
                 view.setEnabled(false);
             } else {
-                if (view instanceof RelativeLayout){
+                if (view instanceof RelativeLayout) {
                     ((RelativeLayout) view).getChildAt(0).setEnabled(true);
                 }
                 view.setEnabled(true);
@@ -111,14 +111,13 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CategoryFragment();
                     break;
                 case 2:
-                    fragment = new ShopCartFragment();
-
+                    fragment = new SettingFragment();
                     break;
                 case 3:
-                    fragment = new MyFragment();
+                    fragment = new ShopCartFragment();
                     break;
                 case 4:
-                    fragment = new SettingFragment();
+                    fragment = new MyFragment();
                     break;
             }
             mFragments.put(index, fragment);
@@ -146,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
             mTvCount.setVisibility(View.INVISIBLE);
         }
     }
-    public void updataCount(){
+
+    public void updataCount() {
         onStart();
     }
 }
