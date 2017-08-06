@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
+    android:layout_width="180dp"
+    android:layout_height="376dp"
     android:orientation="vertical"
     android:padding="8dp">
 
@@ -13,7 +13,7 @@
         android:layout_width="180dp"
         android:layout_height="230dp"/>
     <TextView
-        android:textSize="16dp"
+        android:textSize="18sp"
         android:id="@+id/type_water_name"
         android:text="名字一定要常常常常常常常常常常常常常常常常常常常常"
         android:maxLines="1"
