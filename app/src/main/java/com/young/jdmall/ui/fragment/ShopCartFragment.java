@@ -1,6 +1,7 @@
 package com.young.jdmall.ui.fragment;
 
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
@@ -63,6 +64,9 @@ public class ShopCartFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View shopCarView = inflater.inflate(R.layout.fragment_shop_car, null);
         ButterKnife.bind(this, shopCarView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(0xAA000000);
+        }
         mGoodsShowAdapter = new GoodsShowAdapter(getActivity());
         mShoppingCarFragmentAdapter = new ShoppingCarFragmentAdapter(getActivity());
         initView();

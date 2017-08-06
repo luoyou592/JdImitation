@@ -2,7 +2,9 @@ package com.young.jdmall.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -26,6 +28,7 @@ import com.young.jdmall.ui.activity.ProductDetaiActivity;
 import com.young.jdmall.ui.activity.SearchActivity;
 import com.young.jdmall.ui.adapter.HomeAdapter;
 import com.young.jdmall.ui.view.RecyclerLoadMoreView;
+import com.young.jdmall.ui.view.RecyclerRefreshLayout;
 
 import java.util.List;
 
@@ -52,6 +55,8 @@ public class HomeFragment extends BaseFragment {
     LinearLayout mTopContainer;
     @BindView(R.id.rv_home)
     RecyclerLoadMoreView mRvHome;
+    @BindView(R.id.refresh)
+    RecyclerRefreshLayout mRefresh;
 
     private View mHomeView;
     private HomeAdapter mHomeRvAdapter;
@@ -70,6 +75,9 @@ public class HomeFragment extends BaseFragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         mHomeView = inflater.inflate(R.layout.fragment_home, null);
         ButterKnife.bind(this, mHomeView);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            getActivity().getWindow().setStatusBarColor(0xAA000000);
+        }
         initView();
         initData();
         statusBarAplaChange();
@@ -84,6 +92,23 @@ public class HomeFragment extends BaseFragment {
 
             }
         });*/
+
+        mRefresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        mRefresh.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRefresh.closeRefresh();
+                            }
+                        },2000);
+                    }
+                }).start();
+            }
+        });
     }
 
     private void initView() {
@@ -257,4 +282,5 @@ public class HomeFragment extends BaseFragment {
             }
         }
     }
+
 }
