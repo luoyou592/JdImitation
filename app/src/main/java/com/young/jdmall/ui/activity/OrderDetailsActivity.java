@@ -3,21 +3,20 @@ package com.young.jdmall.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.GoodsDetailsImages;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -53,7 +52,7 @@ public class OrderDetailsActivity extends BaseActivity {
     @BindView(R.id.textView1)
     TextView mTextView1;
     @BindView(R.id.goods_details1)
-    HorizontalScrollView mGoodsDetails1;
+    ScrollView mGoodsDetails1;
     @BindView(R.id.order_number1)
     TextView mOrderNumber1;
     @BindView(R.id.order_time1)
@@ -137,13 +136,18 @@ public class OrderDetailsActivity extends BaseActivity {
     private void setPic(OrderDetailBean orderDetailBean) {
         if (orderDetailBean != null) {
             for (int i = 0; i < orderDetailBean.getProductList().size(); i++) {
-                String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
+            /*    String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
                 Log.e(TAG, "setPic: " + pic);
                 ImageView imageView = new ImageView(mContext);
                 Glide.with(mContext).load(pic).into(imageView);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dp_180), getResources().getDimensionPixelSize(R.dimen.dp_180));
-                mLlGoodsDetails.addView(imageView, layoutParams);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dp_180), getResources().getDimensionPixelSize(R.dimen.dp_180));*/
+               // mLlGoodsDetails.addView(imageView, layoutParams);
+                String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
+                String name = orderDetailBean.getProductList().get(i).getProduct().getName();
+                int price = orderDetailBean.getProductList().get(i).getProduct().getPrice();
+                GoodsDetailsImages goodsDetailsImages = new GoodsDetailsImages(mContext,null,pic,name,"￥"+price);
+                mLlGoodsDetails.addView(goodsDetailsImages );
 
             }
         }
