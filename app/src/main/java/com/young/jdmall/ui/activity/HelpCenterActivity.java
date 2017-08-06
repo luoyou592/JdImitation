@@ -6,7 +6,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.HelpInfoBean;
@@ -74,11 +73,11 @@ public class HelpCenterActivity extends BaseActivity {
             @Override
             protected void onHandleSuccess(HelpInfoBean helpInfoBean) {
                 if (helpInfoBean.getHelpList() != null) {
-                    Toast.makeText(HelpCenterActivity.this, "获取titile", Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(HelpCenterActivity.this, "获取titile", Toast.LENGTH_SHORT).show();
                     mHelpList = helpInfoBean.getHelpList();
                     setHelpTitle(mHelpList);
                 }else {
-                    Toast.makeText(HelpCenterActivity.this, helpInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(HelpCenterActivity.this, helpInfoBean.getResponse(), Toast.LENGTH_SHORT).show();
                 }
 
 

@@ -16,6 +16,7 @@ import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.utils.TimeUtil;
 import com.young.jdmall.ui.view.GoodsDetailsImages;
 
 import butterknife.BindView;
@@ -73,8 +74,6 @@ public class OrderDetailsActivity extends BaseActivity {
     LinearLayout mLlGoodsDetails;
     @BindView(R.id.textView)
     TextView mTextView;
-    @BindView(R.id.again_buy)
-    TextView mAgainBuy;
 
     private OrderDetailBean mOrderDetailBean;
     private int mType = 0;
@@ -183,8 +182,10 @@ public class OrderDetailsActivity extends BaseActivity {
 
     private void setData(OrderDetailBean orderDetailBean) {
         mOrderUserName1.setText(orderDetailBean.getAddressInfo().getName());
-        mOrderAddress1.setText("地址" + orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
-        mOrderTime1.setText(orderDetailBean.getOrderInfo().getTime());
+        mOrderAddress1.setText("地址"+ orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
+        String time = orderDetailBean.getOrderInfo().getTime();
+        String result = TimeUtil.stampToDate(time);
+        mOrderTime1.setText(result);
         mOrderAllPay1.setText("￥" + orderDetailBean.getCheckoutAddup().getTotalPrice());
         mOrderNumber1.setText("" + orderDetailBean.getOrderInfo().getOrderId());
         mOrderPhone1.setText("" + orderDetailBean.getAddressInfo().getId());
