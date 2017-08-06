@@ -1,10 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            >
-
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical">
 
     <RelativeLayout
         android:id="@+id/rl_signOrReg"
@@ -12,16 +10,13 @@
         android:layout_height="160dp"
         android:background="@mipmap/b0z">
 
-
         <ImageView
-
             android:id="@+id/iv_signOrReg"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="50dp"
-            android:background="@mipmap/b0q"
-            />
+            android:background="@mipmap/b0q"/>
 
 
         <TextView
@@ -55,8 +50,8 @@
             android:background="@drawable/level_bg"
             android:gravity="center"
             android:text="会员等级"
-            android:textSize="10sp"
             android:textColor="@android:color/white"
+            android:textSize="10sp"
             android:visibility="invisible"/>
 
         <ImageView
@@ -171,11 +166,10 @@
 
 
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        >
+        android:background="@color/white"
+        android:orientation="horizontal">
 
         <LinearLayout
 
@@ -206,154 +200,160 @@
 
         <LinearLayout
 
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_fav"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
-            <TextView
-                android:textColor="@android:color/black"
 
-                android:textSize="10sp"
+            <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="喜欢"/>
+                android:text="喜欢"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"/>
         </LinearLayout>
 
         <LinearLayout
             android:id="@+id/ll_order"
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_order_num"
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="0"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
-            <TextView
-                android:textColor="@android:color/black"
 
-                android:textSize="10sp"
+            <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="订单"/>
+                android:text="订单"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"/>
         </LinearLayout>
 
         <LinearLayout
 
-            android:orientation="vertical"
-            android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:gravity="center">
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="vertical">
+
             <TextView
-                android:padding="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:padding="10dp"
                 android:text="0.00"
                 android:textColor="@android:color/black"
                 android:textSize="12sp"/>
-            <TextView
-                android:textColor="@android:color/black"
 
-                android:textSize="10sp"
+            <TextView
                 android:layout_width="wrap_content"
+
                 android:layout_height="wrap_content"
-                android:text="京东E卡"/>
+                android:text="京东E卡"
+                android:textColor="@android:color/black"
+                android:textSize="10sp"/>
         </LinearLayout>
 
         <TextView
-            android:textColor="@android:color/holo_red_dark"
-
-            android:textSize="10sp"
-            android:drawablePadding="5dp"
-            android:gravity="center"
-            android:padding="10dp"
-            android:drawableTop="@mipmap/my_wallet"
             android:layout_width="0dp"
+
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:drawablePadding="5dp"
+            android:drawableTop="@mipmap/my_wallet"
+            android:gravity="center"
+            android:padding="10dp"
             android:text="我的钱包"
+            android:textColor="@android:color/holo_red_dark"
+            android:textSize="10sp"
             />
     </LinearLayout>
 
-       <!-- <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@android:color/white"/>
+    <!-- <ImageView
+         android:layout_width="match_parent"
+         android:layout_height="8dp"
+         android:background="@android:color/white"/>
 -->
     <LinearLayout
-        android:background="@color/white"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/white"
         android:orientation="horizontal"
         >
 
         <TextView
             android:id="@+id/tv_gouwu"
-            android:layout_marginRight="10dp"
-            android:layout_marginLeft="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
             android:drawableTop="@mipmap/mine_cart"
             android:gravity="center"
             android:padding="4dp"
-            android:textSize="16sp"
-            android:text="购物记录"/>
+            android:text="购物记录"
+            android:textSize="16sp"/>
 
         <TextView
-            android:layout_marginRight="10dp"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
             android:drawableTop="@mipmap/mine_footmark"
             android:gravity="center"
 
             android:padding="4dp"
-            android:textSize="16sp"
-            android:text="浏览足迹"/>
+            android:text="浏览足迹"
+            android:textSize="16sp"/>
 
         <TextView
-            android:layout_marginRight="10dp"
             android:id="@+id/tv_collection"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
             android:drawableTop="@mipmap/mine_collect"
             android:gravity="center"
             android:padding="4dp"
-            android:textSize="16sp"
-            android:text="收藏宝贝"/>
+            android:text="收藏宝贝"
+            android:textSize="16sp"/>
 
         <TextView
-            android:layout_marginRight="10dp"
             android:id="@+id/tv_address_manage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
             android:layout_weight="1"
             android:drawablePadding="10dp"
             android:drawableTop="@mipmap/mine_address"
             android:gravity="center"
             android:padding="4dp"
-            android:textSize="16sp"
-            android:text="地址管理"/>
+            android:text="地址管理"
+            android:textSize="16sp"/>
         <!--<TextView
             android:textColor="@android:color/black"
             android:textSize="10sp"
@@ -423,112 +423,110 @@
     </LinearLayout>
 
     <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:background="@android:color/white"/>
-        <LinearLayout
-            android:background="@color/white"
-            
-            android:layout_width="match_parent"
-            android:layout_height="95dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            >
+        android:layout_width="match_parent"
+        android:layout_height="8dp"
+        android:background="@android:color/white"/>
 
-            <ImageView
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:id="@+id/imageView2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@mipmap/mine_list1"/>
+    <LinearLayout
+        android:layout_width="match_parent"
 
-            <ImageView
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine_list2"/>
-            <ImageView
-                android:id="@+id/tv_kefu"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine_list4"/>
-            <ImageView
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:background="@mipmap/mine_list5"/>
-<!--
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/akf"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="商品关注"
-                android:textColor="@android:color/black"
-                android:textSize="10sp"/>
-
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/akf"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="店铺关注"
-                android:textColor="@android:color/black"
-                android:textSize="10sp"/>
-
-
-
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/akf"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="内容关注"
-                android:textColor="@android:color/black"
-                android:textSize="10sp"/>
-
-            <TextView
-
-                android:layout_width="0dp"
-                android:layout_height="70dp"
-                android:layout_weight="1"
-                android:drawablePadding="5dp"
-                android:drawableTop="@mipmap/akf"
-                android:gravity="center"
-                android:padding="12dp"
-                android:text="浏览记录"
-                android:textColor="@android:color/black"
-                android:textSize="10sp"/>-->
-        </LinearLayout>
+        android:layout_height="95dp"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
 
         <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="@android:color/darker_gray"/>
+            android:id="@+id/imageView2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@mipmap/mine_list1"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@mipmap/mine_list2"/>
+
+        <ImageView
+            android:id="@+id/tv_kefu"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@mipmap/mine_list4"/>
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="10dp"
+            android:layout_weight="1"
+            android:background="@mipmap/mine_list5"/>
+        <!--
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/akf"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="商品关注"
+                        android:textColor="@android:color/black"
+                        android:textSize="10sp"/>
+
+                    <TextView
+
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/akf"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="店铺关注"
+                        android:textColor="@android:color/black"
+                        android:textSize="10sp"/>
 
 
 
+                    <TextView
 
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/akf"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="内容关注"
+                        android:textColor="@android:color/black"
+                        android:textSize="10sp"/>
 
+                    <TextView
 
-
+                        android:layout_width="0dp"
+                        android:layout_height="70dp"
+                        android:layout_weight="1"
+                        android:drawablePadding="5dp"
+                        android:drawableTop="@mipmap/akf"
+                        android:gravity="center"
+                        android:padding="12dp"
+                        android:text="浏览记录"
+                        android:textColor="@android:color/black"
+                        android:textSize="10sp"/>-->
     </LinearLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@android:color/darker_gray"/>
+
+
+</LinearLayout>
 
