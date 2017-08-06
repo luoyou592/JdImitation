@@ -148,7 +148,7 @@ public interface JDMallService {
     Call<MessageInfoBean> listMessage(@Body RequestBody body);
 
     @GET("product/favorites")
-    Observable<CollectInfoBean> listCollect(@Query("pId") int id);
+    Observable<CollectInfoBean> listCollect(@Header("userid") String userid,@Query("pId") int id);
 
     @GET("orderlist")
     Call<OrderInfoBean> listOrderInfo(@Header("userid") String userid, @Query("type") int type, @Query("page") int page, @Query("pageNum") int pageNum);

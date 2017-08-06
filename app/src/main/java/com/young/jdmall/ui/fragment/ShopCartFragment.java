@@ -52,7 +52,7 @@ public class ShopCartFragment extends BaseFragment {
     LinearLayout mBottom;
     @BindView(R.id.total_money)
     TextView mTotalMoney;
-    private ShoppingCarFragmentAdapter mShoppingCarFragmentAdapter;
+    public ShoppingCarFragmentAdapter mShoppingCarFragmentAdapter;
     private boolean mIsCheckedAll = false;
     private GoodsShowAdapter mGoodsShowAdapter;
     private int mMoney;
@@ -74,7 +74,16 @@ public class ShopCartFragment extends BaseFragment {
         mRvShopcar.setAdapter(mShoppingCarFragmentAdapter);
         initListener();
         return shopCarView;
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        List<GoodsOrderInfoBean> goodsOrderInfoBeen = CartDao.queryAll();
+        if (goodsOrderInfoBeen.size()==0){
+            mCartInfoBean = null;
+            mShoppingCarFragmentAdapter.setList(mCartInfoBean);
+        }
     }
 
     private void initListener() {

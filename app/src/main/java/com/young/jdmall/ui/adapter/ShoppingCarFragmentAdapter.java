@@ -18,7 +18,10 @@ import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.CartInfoBean;
 import com.young.jdmall.bean.RecommendInfoBean;
+import com.young.jdmall.ui.activity.CollectionActivity;
 import com.young.jdmall.ui.activity.LoginActivity;
+import com.young.jdmall.ui.activity.SecKillActivity;
+import com.young.jdmall.ui.utils.PreferenceUtils;
 
 import java.util.List;
 
@@ -47,7 +50,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
         notifyDataSetChanged();
     }
 
-    private CartInfoBean mList;
+    public CartInfoBean mList;
 
     public void setList(CartInfoBean list) {
         mList = list;
@@ -123,7 +126,7 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
     }
 
 
-    class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder {
         @BindView(R.id.login)
         Button mLogin;
         @BindView(R.id.sencond_kill)
@@ -151,21 +154,35 @@ public class ShoppingCarFragmentAdapter extends RecyclerView.Adapter {
                 @Override
                 public void onClick(View v) {
                     Log.d("shopcar", "点击了SencondKill");
+                    Intent intent = new Intent(mContext, SecKillActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
             mCheck.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Log.d("shopcar", "点击了mCheck");
+                    if (PreferenceUtils.getUserId(mContext).length()!=0){
+                        Intent intent = new Intent(mContext,LoginActivity.class);
+                        mContext.startActivity(intent);
+                    }
+                    Intent intent = new Intent(mContext, CollectionActivity.class);
+                    mContext.startActivity(intent);
                 }
             });
         }
-
+        public void showSeckill(){
+            mVisibleTable.setVisibility(View.VISIBLE);
+        }
+        public void hideSeckill(){
+            mVisibleTable.setVisibility(View.GONE);
+        }
 
         public void setData() {
             if (mList != null) {
                 mGoodsShow.setVisibility(View.VISIBLE);
                 mVisibleTable.setVisibility(View.GONE);
+
             } else {
                 mGoodsShow.setVisibility(View.GONE);
                 mVisibleTable.setVisibility(View.VISIBLE);
