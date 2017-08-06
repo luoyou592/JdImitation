@@ -19,13 +19,15 @@
 
     <Button
         android:id="@+id/btn_splash_start"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="320dp"
+        android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="500dp"
+        android:layout_marginTop="510dp"
         android:gravity="center"
-        android:text="开始"
-        android:textSize="14sp"
+        android:textAllCaps="false"
+        android:background="#00E099"
+        android:text="Let's  go!"
+        android:textSize="18sp"
         />
 
 </FrameLayout>

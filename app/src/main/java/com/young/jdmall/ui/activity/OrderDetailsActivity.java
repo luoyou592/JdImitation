@@ -3,22 +3,24 @@ package com.young.jdmall.ui.activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.util.Log;
-import android.widget.HorizontalScrollView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
+import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.young.jdmall.R;
 import com.young.jdmall.app.Constant;
 import com.young.jdmall.bean.OrderDetailBean;
 import com.young.jdmall.network.BaseObserver;
 import com.young.jdmall.network.RetrofitFactory;
 import com.young.jdmall.ui.utils.PreferenceUtils;
+import com.young.jdmall.ui.view.GoodsDetailsImages;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 import io.reactivex.Observable;
 
 /**
@@ -50,7 +52,7 @@ public class OrderDetailsActivity extends BaseActivity {
     @BindView(R.id.textView1)
     TextView mTextView1;
     @BindView(R.id.goods_details1)
-    HorizontalScrollView mGoodsDetails1;
+    ScrollView mGoodsDetails1;
     @BindView(R.id.order_number1)
     TextView mOrderNumber1;
     @BindView(R.id.order_time1)
@@ -65,13 +67,14 @@ public class OrderDetailsActivity extends BaseActivity {
     TextView mOrderAllPay1;
 
 
-
     @BindView(R.id.order_type)
     TextView mOrderType;
     @BindView(R.id.ll_goods_details)
     LinearLayout mLlGoodsDetails;
     @BindView(R.id.textView)
     TextView mTextView;
+    @BindView(R.id.again_buy)
+    TextView mAgainBuy;
 
     private OrderDetailBean mOrderDetailBean;
     private int mType = 0;
@@ -133,13 +136,18 @@ public class OrderDetailsActivity extends BaseActivity {
     private void setPic(OrderDetailBean orderDetailBean) {
         if (orderDetailBean != null) {
             for (int i = 0; i < orderDetailBean.getProductList().size(); i++) {
-                String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
+            /*    String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
                 Log.e(TAG, "setPic: " + pic);
                 ImageView imageView = new ImageView(mContext);
                 Glide.with(mContext).load(pic).into(imageView);
                 imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dp_180), getResources().getDimensionPixelSize(R.dimen.dp_180));
-                mLlGoodsDetails.addView(imageView, layoutParams);
+                LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(getResources().getDimensionPixelSize(R.dimen.dp_180), getResources().getDimensionPixelSize(R.dimen.dp_180));*/
+               // mLlGoodsDetails.addView(imageView, layoutParams);
+                String pic = Constant.IMAGE_URL + orderDetailBean.getProductList().get(i).getProduct().getPic();
+                String name = orderDetailBean.getProductList().get(i).getProduct().getName();
+                int price = orderDetailBean.getProductList().get(i).getProduct().getPrice();
+                GoodsDetailsImages goodsDetailsImages = new GoodsDetailsImages(mContext,null,pic,name,"￥"+price);
+                mLlGoodsDetails.addView(goodsDetailsImages );
 
             }
         }
@@ -175,7 +183,7 @@ public class OrderDetailsActivity extends BaseActivity {
 
     private void setData(OrderDetailBean orderDetailBean) {
         mOrderUserName1.setText(orderDetailBean.getAddressInfo().getName());
-        mOrderAddress1.setText("地址"+ orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
+        mOrderAddress1.setText("地址" + orderDetailBean.getAddressInfo().getAddressArea() + orderDetailBean.getAddressInfo().getAddressDetail());
         mOrderTime1.setText(orderDetailBean.getOrderInfo().getTime());
         mOrderAllPay1.setText("￥" + orderDetailBean.getCheckoutAddup().getTotalPrice());
         mOrderNumber1.setText("" + orderDetailBean.getOrderInfo().getOrderId());
@@ -191,4 +199,18 @@ public class OrderDetailsActivity extends BaseActivity {
 
     }
 
+    @OnClick({R.id.order_back_icon1, R.id.delete_button, R.id.again_buy})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.order_back_icon1:
+                finish();
+                break;
+            case R.id.delete_button:
+                Toast.makeText(mContext, "该商品已过期，无法删除", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.again_buy:
+                Toast.makeText(mContext, "该商品已下架，无法购买", Toast.LENGTH_SHORT).show();
+                break;
+        }
+    }
 }
