@@ -25,6 +25,7 @@ public class PreferenceUtils {
     private static final String KEY_USER_ID = "user_id";
     private static final String KEY_REGIST_SUCCESS = "regist_success";
     private static final String KEY_SEARCH_LIST = "search_list";
+    private static final String KEY_ISFIRST_SUCCESS = "isfirst";
 
     public static void setUserName(Context context, String value) {
         SharedPreferences sp = getPreference(context);
@@ -113,4 +114,12 @@ public class PreferenceUtils {
         pf.edit().putString(KEY_SEARCH_LIST, "").commit();
     }
 
+    public static void setIsFirstRed(Context context, boolean b) {
+        SharedPreferences sp = getPreference(context);
+        sp.edit().putBoolean(KEY_ISFIRST_SUCCESS, b).commit();
+    }
+    public static boolean getIsFirstRed(Context context){
+        SharedPreferences sp = getPreference(context);
+        return sp.getBoolean(KEY_ISFIRST_SUCCESS, false);
+    }
 }

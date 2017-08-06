@@ -104,8 +104,9 @@ public class ItemRecommendGoodsAdapter extends BaseAdapter {
             convertView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    SexGirlPagerDialog girlPagerDialog = new SexGirlPagerDialog(context);
+                    SexGirlPagerDialog girlPagerDialog = new SexGirlPagerDialog(context,R.style.Dialog);
                     girlPagerDialog.setData(imgUrls,0);
+
                     girlPagerDialog.show();
                 }
             });

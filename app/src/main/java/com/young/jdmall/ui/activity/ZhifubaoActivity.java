@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.young.jdmall.R;
+import com.young.jdmall.bean.GoodsOrderInfoBean;
+import com.young.jdmall.dao.CartDao;
 import com.young.jdmall.ui.utils.PayResult;
 import com.young.jdmall.ui.utils.SignUtils;
 
@@ -21,6 +23,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Random;
 
@@ -57,6 +60,11 @@ public class ZhifubaoActivity extends FragmentActivity {
             String resultStatus = payResult.getResultStatus();
             if (TextUtils.equals(resultStatus, "9000")) {
                 Toast.makeText(ZhifubaoActivity.this, "支付成功", Toast.LENGTH_SHORT).show();
+                List<GoodsOrderInfoBean> goodsOrderInfoBeen = CartDao.queryAll();
+                for (GoodsOrderInfoBean goodsOrderInfoBean : goodsOrderInfoBeen) {
+                    long goodsId = goodsOrderInfoBean.getGoodsId();
+                    CartDao.deleteCart(goodsId);
+                }
                 finish();
                 FillingOrderActivity.instance.finish();
             } else {

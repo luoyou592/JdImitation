@@ -229,7 +229,11 @@ public class GoodsShowAdapter extends RecyclerView.Adapter {
                                     CartInfoBean.CartBean cartBean = mList.getCart().get(mPosition);
                                     CartDao.deleteCart(cartBean.getProduct().getId());
                                     mList.getCart().remove(mPosition);
+
+                                    ((MainActivity)mContext).updataCount();
                                     notifyDataSetChanged();
+                                    ((ShopCartFragment)((MainActivity)mContext).mFragments.get(2)).mShoppingCarFragmentAdapter.notifyDataSetChanged();
+
                                 }
                             })
                             .setNegativeButton("取消", new DialogInterface.OnClickListener() {

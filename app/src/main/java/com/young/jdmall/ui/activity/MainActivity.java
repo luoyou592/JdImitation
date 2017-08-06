@@ -25,8 +25,6 @@ import com.young.jdmall.ui.widget.RedPacketDialog;
 
 import java.util.List;
 
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -49,22 +47,25 @@ public class MainActivity extends AppCompatActivity {
         mFragments = new SparseArray<>();
         setListener();
         selectedTab(0);
-        processIntent();
 
-        RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
-        redPacketDialog.create();
-        redPacketDialog.show();
+        if (getIntent()!=null){
+            processIntent();
+        }else {
+            RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
+            redPacketDialog.create();
+            redPacketDialog.show();
+        }
+
     }
 
     private void processIntent() {
-        if (getIntent()!=null){
+
             String page = getIntent().getStringExtra("page");
             Log.d("luoyou", "intent");
             //判断是否详情页跳转过来的，是则切换到购物车
             if ("detail".equals(page)){
                 /*getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());*/
                 selectedTab(2);
-            }
         }
     }
 

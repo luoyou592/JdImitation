@@ -259,6 +259,7 @@ public class ProductDetaiActivity extends BaseActivity {
                     mTvConcern.setText("关注");
                     isConcern = true;
                 }
+
                 break;
             case R.id.tv_cart:
                 Intent intent = new Intent(this, MainActivity.class);
@@ -273,6 +274,7 @@ public class ProductDetaiActivity extends BaseActivity {
                     @Override
                     public void onDismiss(DialogInterface dialog) {
                         mGoodsInfo = mDialogView.getGoodsInfo();
+                        Log.d("luoyou", "dismiss");
                         onResume();
                     }
                 });
@@ -281,7 +283,8 @@ public class ProductDetaiActivity extends BaseActivity {
     }
 
     private void requestAddCollect() {
-        Observable<CollectInfoBean> collectObservable = RetrofitFactory.getInstance().listCollect(mProductInfoBean.getProduct().getId());
+        String userId = PreferenceUtils.getUserId(this);
+        Observable<CollectInfoBean> collectObservable = RetrofitFactory.getInstance().listCollect(userId,mProductInfoBean.getProduct().getId());
         collectObservable.compose(compose(this.<CollectInfoBean>bindToLifecycle())).subscribe(new BaseObserver<CollectInfoBean>(this) {
             @Override
             protected void onHandleSuccess(CollectInfoBean collectInfoBean) {
@@ -289,6 +292,7 @@ public class ProductDetaiActivity extends BaseActivity {
                 if ("1533".equals(collectInfoBean.getError_code())) {
                     Toast.makeText(ProductDetaiActivity.this, "使用关注功能需要先进行登录", Toast.LENGTH_SHORT).show();
                 }
+
                 //已添加
                /*if ("1535".equals(collectInfoBean.getError_code())){
                    Toast.makeText(ProductDetaiActivity.this,"关注成功",Toast.LENGTH_SHORT).show();
