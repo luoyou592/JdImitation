@@ -47,25 +47,23 @@ public class MainActivity extends AppCompatActivity {
         mFragments = new SparseArray<>();
         setListener();
         selectedTab(0);
-
-        if (getIntent()!=null){
-            processIntent();
-        }else {
-            RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
-            redPacketDialog.create();
-            redPacketDialog.show();
-        }
+        processIntent();
 
     }
 
     private void processIntent() {
+        if (getIntent() != null) {
 
             String page = getIntent().getStringExtra("page");
-            Log.d("luoyou", "intent");
             //判断是否详情页跳转过来的，是则切换到购物车
-            if ("detail".equals(page)){
-                /*getFragmentManager().beginTransaction().replace(R.id.container_fragment,new ShopCartFragment());*/
-                selectedTab(2);
+            if ("detail".equals(page)) {
+                selectedTab(3);
+
+            } else {
+                RedPacketDialog redPacketDialog = new RedPacketDialog(this, R.style.Dialog);
+                redPacketDialog.create();
+                redPacketDialog.show();
+            }
         }
     }
 
@@ -87,12 +85,12 @@ public class MainActivity extends AppCompatActivity {
         for (int i = 0; i < mMainNavigation.getChildCount(); i++) {
             View view = mMainNavigation.getChildAt(i);
             if (i == index) {
-                if (view instanceof RelativeLayout){
+                if (view instanceof RelativeLayout) {
                     ((RelativeLayout) view).getChildAt(0).setEnabled(false);
                 }
                 view.setEnabled(false);
             } else {
-                if (view instanceof RelativeLayout){
+                if (view instanceof RelativeLayout) {
                     ((RelativeLayout) view).getChildAt(0).setEnabled(true);
                 }
                 view.setEnabled(true);
@@ -147,7 +145,8 @@ public class MainActivity extends AppCompatActivity {
             mTvCount.setVisibility(View.INVISIBLE);
         }
     }
-    public void updataCount(){
+
+    public void updataCount() {
         onStart();
     }
 }
