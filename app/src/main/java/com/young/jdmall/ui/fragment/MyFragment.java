@@ -96,6 +96,23 @@ public class MyFragment extends BaseFragment {
                 }
             }
         });
+        mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
+            @Override
+            public void OnRefresh() {
+                new Thread(new Runnable() {
+                    @Override
+                    public void run() {
+                        SystemClock.sleep(2000);
+                        mRvFresh.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                mRvFresh.closeRefresh();
+                            }
+                        });
+                    }
+                }).start();
+            }
+        });
         return view;
     }
 
@@ -273,24 +290,9 @@ public class MyFragment extends BaseFragment {
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
         if(!"".equals(PreferenceUtils.getUserId(getActivity()))){
-
-            mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
-                @Override
-                public void OnRefresh() {
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            SystemClock.sleep(2000);
-                            mRvFresh.post(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mRvFresh.closeRefresh();
-                                }
-                            });
-                        }
-                    }).start();
-                }
-            });
+            mRvFresh.setToggle(true);
+        }else{
+            mRvFresh.setToggle(false);
         }
         mMyRvAdapter.setUsers(userName);
 //        String userid = JDMallApplication.sLoginInfoBean.getUserInfo().getUserid();
