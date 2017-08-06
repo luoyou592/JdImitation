@@ -449,6 +449,7 @@ public class TypeActivity extends BaseActivity {
     //PopupWindow处理事件
     @OnClick({R.id.type_btn_1, R.id.type_btn_2, R.id.type_btn_3, R.id.type_btn_4})
     public void onViewClicked(View view) {
+        Log.d(TAG, "onViewClicked: aaa");
         switch (view.getId()) {
             case R.id.type_btn_1:
                 View pop1 = LayoutInflater.from(this).inflate(R.layout.type_popup_window1, null);

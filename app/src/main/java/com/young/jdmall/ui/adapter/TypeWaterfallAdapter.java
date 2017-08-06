@@ -132,8 +132,8 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
             String imageUrl = Constant.IMAGE_URL + productListBean.getPic();
             Glide.with(mTypeWaterIcon.getContext())
                     .load(imageUrl)
-                    .error(R.mipmap.test_image)
-                    .fallback(R.mipmap.test_image)
+                    .error(R.mipmap.default_pic)
+                    .fallback(R.mipmap.default_pic)
                     .dontAnimate()
                     .into(mTypeWaterIcon);
 

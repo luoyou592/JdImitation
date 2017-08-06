@@ -53,8 +53,8 @@ class CategoryBaseRightItemInfoView extends LinearLayout {
         String imageUrl = Constant.IMAGE_URL + data.getPic();
         Glide.with(getContext())
                 .load(imageUrl)
-                .error(R.mipmap.test_image)
-                .fallback( R.mipmap.test_image)
+                .error(R.mipmap.default_pic)
+                .fallback( R.mipmap.default_pic)
                 .bitmapTransform(new CropCircleTransformation(getContext()))
                 .override(200,200)
                 .dontAnimate()
