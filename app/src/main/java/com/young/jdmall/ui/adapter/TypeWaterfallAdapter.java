@@ -9,7 +9,6 @@ import android.text.Spanned;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.ForegroundColorSpan;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -55,9 +54,9 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
 
     public void addData(List<ProductBean.ProductListBean> productList) {
         mData.addAll(productList);
-        Log.d(TAG, "addData: 添加数据" + mData.size());
         notifyDataSetChanged();
     }
+
 
 
     @Override
@@ -141,7 +140,7 @@ public class TypeWaterfallAdapter extends RecyclerLoadMoreView.Adapter {
             mTypeWaterName.setText(productListBean.getName());
 
             SpannableString spannableString = new SpannableString(PriceFormater.format(productListBean.getMarketPrice()));
-            spannableString.setSpan(new AbsoluteSizeSpan(80), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            spannableString.setSpan(new AbsoluteSizeSpan(40), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             spannableString.setSpan(new ForegroundColorSpan(Color.RED), 0, spannableString.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
 
             mTypeWaterMoney.setText(spannableString);

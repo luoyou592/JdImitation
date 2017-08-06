@@ -13,7 +13,7 @@
         android:background="@color/white">
     </com.young.jdmall.ui.widget.ViewTypeHeader>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
@@ -48,10 +48,11 @@
         </LinearLayout>
 
         <com.young.jdmall.ui.view.RecyclerLoadMoreView
+            android:layout_below="@id/type_ll_btn"
             android:id="@+id/recycle_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"/>
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </com.young.jdmall.ui.view.HideHeadView>
