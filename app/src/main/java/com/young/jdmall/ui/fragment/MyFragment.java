@@ -2,7 +2,6 @@ package com.young.jdmall.ui.fragment;
 
 import android.animation.ArgbEvaluator;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -203,20 +202,14 @@ public class MyFragment extends BaseFragment {
 
                 if (sumY <= 0) {
                     bgColor = start;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        getActivity().getWindow().setStatusBarColor(Color.TRANSPARENT);
-                    }
+
                 } else if (sumY >= distance) {
                     bgColor = end;
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        getActivity().getWindow().setStatusBarColor(Color.GRAY);
-                    }
+
                 } else {
 
                     bgColor = (int) mArgbEvaluator.evaluate(sumY / distance, start, end);
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-                        getActivity().getWindow().setStatusBarColor(Color.GRAY);
-                    }
+
                 }
                 mLlTitleContainer.setBackgroundColor(bgColor);
                 if (bgColor == (int) mArgbEvaluator.evaluate(1, start, end)) {
@@ -279,7 +272,7 @@ public class MyFragment extends BaseFragment {
         initReco();
         Log.d(TAG, "onStart: ++++++++++++++++++++++++");
         String userName = PreferenceUtils.getUserName(getActivity());
-        if(!"".equals(userName)){
+        if(!"".equals(PreferenceUtils.getUserId(getActivity()))){
 
             mRvFresh.setOnRefreshListener(new RecyclerRefreshLayout.OnRefreshListener() {
                 @Override

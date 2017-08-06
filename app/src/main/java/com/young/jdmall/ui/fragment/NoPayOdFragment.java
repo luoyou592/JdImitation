@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import com.young.jdmall.R;
 import com.young.jdmall.bean.OrderInfoBean;
@@ -87,7 +86,7 @@ public class NoPayOdFragment extends Fragment {
                     mAllOrderAdapter.setAddressBeanList(response.body().getOrderList());
 
                 } else {
-                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
+//                    Toast.makeText(getActivity(), response.body().getResponse(), Toast.LENGTH_SHORT).show();
                 }
             }
 
