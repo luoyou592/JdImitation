@@ -108,4 +108,10 @@ public class CountDownView extends RelativeLayout {
         String strtime = hour+"："+minute+"："+second;
         return strtime;
     }
+
+    @Override
+    protected void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        mHandler.removeCallbacks(runnable);
+    }
 }

@@ -1,5 +1,7 @@
 package com.young.jdmall.ui.activity;
 
+import android.app.ProgressDialog;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
@@ -19,6 +21,9 @@ import io.reactivex.schedulers.Schedulers;
  */
 
 public class BaseActivity extends RxAppCompatActivity {
+
+    private ProgressDialog mDialog;
+
     /**
      * 线程调度
      */
@@ -28,9 +33,11 @@ public class BaseActivity extends RxAppCompatActivity {
             public ObservableSource<T> apply(Observable<T> observable) {
                 return observable
                         .subscribeOn(Schedulers.io())
+
                         .doOnSubscribe(new Consumer<Disposable>() {
                             @Override
                             public void accept(Disposable disposable) throws Exception {
+                                Log.d("luoyou", "doonsubscribe"+Thread.currentThread().getName());
                                 // 可添加网络连接判断等
                                 if (!JudgeNetwork.isNetworkAvailable(BaseActivity.this)) {
                                     Toast.makeText(BaseActivity.this, "网络连接异常，请检查网络", Toast.LENGTH_SHORT).show();
@@ -39,6 +46,7 @@ public class BaseActivity extends RxAppCompatActivity {
                         })
                         .observeOn(AndroidSchedulers.mainThread())
                         .compose(lifecycle);
+
             }
         };
     }

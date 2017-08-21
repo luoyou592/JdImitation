@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         selectedTab(0);
         processIntent();
 
+
     }
 
     private void processIntent() {
@@ -110,14 +111,14 @@ public class MainActivity extends AppCompatActivity {
                     fragment = new CategoryFragment();
                     break;
                 case 2:
-                    fragment = new ShopCartFragment();
+                    fragment = new SettingFragment();
 
                     break;
                 case 3:
-                    fragment = new MyFragment();
+                    fragment = new ShopCartFragment();
                     break;
                 case 4:
-                    fragment = new SettingFragment();
+                    fragment = new MyFragment();
                     break;
             }
             mFragments.put(index, fragment);
