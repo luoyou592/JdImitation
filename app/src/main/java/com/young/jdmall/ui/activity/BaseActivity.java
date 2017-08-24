@@ -50,4 +50,11 @@ public class BaseActivity extends RxAppCompatActivity {
             }
         };
     }
+
+   /* @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = JDMallApplication.getRefWatcher(this);
+        refWatcher.watch(this);
+    }*/
 }

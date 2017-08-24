@@ -4,7 +4,6 @@ import android.animation.ArgbEvaluator;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -125,6 +124,7 @@ public class HomeFragment extends BaseFragment {
 //        mHomeRvAdapter = new HomeRvAdapter(getActivity());
         mRvHome.setAdapter(mHomeRvAdapter);
         mEvaluator = new ArgbEvaluator();
+
 
 
         mTvMsg.setOnClickListener(new View.OnClickListener() {

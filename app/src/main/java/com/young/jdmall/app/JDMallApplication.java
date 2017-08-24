@@ -2,8 +2,8 @@ package com.young.jdmall.app;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.DisplayMetrics;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.DisplayMetrics;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.Volley;
@@ -37,6 +37,18 @@ public class JDMallApplication extends Application {
         initScreenSize();
         initVolley();
     }
+       /* //初始化leakcanary
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        refWatcher = LeakCanary.install(this);
+    }
+    public static RefWatcher getRefWatcher(Context context) {
+        JDMallApplication application = (JDMallApplication) context.getApplicationContext();
+        return application.refWatcher;
+    }
+
+    private RefWatcher refWatcher;*/
 
     public void initVolley() {
         sRequestQueue = Volley.newRequestQueue(getApplicationContext());

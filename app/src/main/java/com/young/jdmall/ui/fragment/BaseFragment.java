@@ -42,4 +42,11 @@ public abstract class BaseFragment extends RxFragment {
             }
         };
     }
+
+    /*@Override
+    public void onDestroy() {
+        super.onDestroy();
+        RefWatcher refWatcher = JDMallApplication.getRefWatcher(getActivity());
+        refWatcher.watch(getActivity());
+    }*/
 }

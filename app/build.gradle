@@ -73,4 +73,8 @@ dependencies {
     compile files('libs/alipaysdk.jar')
     compile files('libs/alipaysecsdk.jar')
     compile files('libs/alipayutdid.jar')
+
+    /*debugCompile 'com.squareup.leakcanary:leakcanary-android:1.5.1'
+    releaseCompile 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.2'*/
+
 }
